@@ -5,5 +5,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "types": ["astro/client"],
+    "paths": {
+      "@layouts/*": ["src/layouts/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"],
+      "@content/*": ["src/content/*"],
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/styles/*"]
+    }
   }
 }

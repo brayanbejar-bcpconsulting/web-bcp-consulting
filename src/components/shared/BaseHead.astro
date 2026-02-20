@@ -1,65 +1,63 @@
 ---
+import { SITE_INFO } from "@utils/site-config";
+
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   canonical?: string;
   image?: string;
 }
 
 const {
   title,
-  description,
+  description = SITE_INFO.description,
   canonical = Astro.url.href,
-  image = "/og-default.jpg"
+  image = SITE_INFO.image,
 } = Astro.props;
 
-const siteName = "BCP Consulting E.I.R.L.";
-const fullTitle = `${title} | ${siteName}`;
+// Lógica de título: Si no hay title o es "Inicio", usa el base. 
+// Si hay title, concatena "Título | Empresa"
+const fullTitle = title 
+  ? `${title} | ${SITE_INFO.title}` 
+  : SITE_INFO.title;
 ---
 
-<!-- Charset & Viewport -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Primary SEO -->
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 
-<!-- Robots -->
 <meta name="robots" content="index, follow" />
 
-<!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-<meta property="og:image" content={image} />
-<meta property="og:site_name" content={siteName} />
+<meta property="og:image" content={new URL(image, SITE_INFO.url)} />
+<meta property="og:site_name" content={SITE_INFO.title} />
+<meta property="og:locale" content={SITE_INFO.language} />
 
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={new URL(image, SITE_INFO.url)} />
 
-<!-- Preload Critical Fonts -->
 <link
   rel="preload"
   href="/fonts/Inter-Variable.woff2"
   as="font"
   type="font/woff2"
-  crossorigin
+  crossorigin="anonymous"
 />
-
-<!-- Solo si H1 visible above-the-fold -->
 <link
   rel="preload"
   href="/fonts/Montserrat-Variable.woff2"
   as="font"
   type="font/woff2"
-  crossorigin
+  crossorigin="anonymous"
 />
 
-<!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
