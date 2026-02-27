@@ -1,0 +1,53 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion, Button } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El sistema funciona para flotas mixtas de vehículos ligeros y pesados?",
+    answer:
+      "Sí. Cada vehículo tiene su propia ficha configurable con tipo, capacidad de carga, documentación y mantenimiento. El sistema gestiona camionetas, camiones, furgones y cualquier unidad de forma independiente, permitiendo reportes filtrados por categoría o tipo de servicio.",
+  },
+  {
+    question: "¿Cómo se registra el consumo de combustible por unidad?",
+    answer:
+      "Los conductores o el personal de patio registran cada carga directamente en el módulo de flota, vinculando el abastecimiento a la unidad, fecha, kilómetro y servicio correspondiente. El sistema calcula automáticamente el rendimiento por unidad y genera alertas si el consumo supera el umbral histórico.",
+  },
+  {
+    question: "¿Qué información muestra el panel de seguimiento de conductores?",
+    answer:
+      "El panel incluye: número de servicios completados, puntualidad promedio, kilómetros recorridos por período, incidencias reportadas y comparativa con el equipo. Esta información permite evaluaciones objetivas y detectar patrones de bajo rendimiento sin depender de percepciones.",
+  },
+  {
+    question: "¿La integración GPS requiere hardware especial?",
+    answer:
+      "El módulo GPS (disponible como módulo avanzado) es compatible con los principales rastreadores del mercado peruano. En el levantamiento inicial evaluamos los dispositivos que ya tienes instalados y definimos la integración más adecuada. También podemos recomendar proveedores de hardware según el tamaño de tu flota.",
+  },
+  {
+    question: "¿Cuánto tiempo toma la implementación del sistema?",
+    answer:
+      "Una implementación con los módulos MVP toma entre 3 y 8 semanas, dependiendo del tamaño de la flota, el número de zonas operativas y la complejidad de las rutas. El proceso incluye carga inicial de vehículos y conductores, configuración de rutas base, capacitación al equipo y soporte post-lanzamiento.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software de Logística"
+      description="Lo que más nos consultan antes de implementar el sistema en una empresa de transporte."
+      align="center"
+    />
+
+    <FaqAccordion faqs={faqs} class="mt-10" />
+
+    <p class="mt-10 text-center">
+      <span class="block text-sm text-neutral-500 mb-3">
+        ¿Tu operación tiene características particulares? Cuéntanos.
+      </span>
+      <Button href="#contacto" variant="secondary" size="md">
+        Hablar con un especialista
+      </Button>
+    </p>
+  </div>
+</MainContainer>

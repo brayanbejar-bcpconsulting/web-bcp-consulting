@@ -1,0 +1,55 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Optimización de Rutas con IA",
+    description: "Algoritmos que calculan en segundos la ruta más eficiente considerando tráfico, capacidad de carga y ventanas horarias del cliente. Menos kilómetros, menor combustible.",
+    icon: "brain",
+  },
+  {
+    title: "Monitoreo en Tiempo Real (GPS Integrado)",
+    description: "Seguimiento continuo de todas las unidades en un mapa unificado. Recibe alertas de desvíos, paradas no programadas o tiempos de espera fuera de rango.",
+    icon: "map-pin",
+  },
+  {
+    title: "Análisis Predictivo de Mantenimiento",
+    description: "El sistema cruza el historial de mantenimiento con el kilometraje y las alertas del vehículo para anticipar fallas mecánicas antes de que ocurran en ruta.",
+    icon: "wrench",
+  },
+  {
+    title: "Integración con Sistemas ERP",
+    description: "Sincronización automática con tu sistema contable y financiero. Costos por servicio, facturas de proveedores y liquidaciones de conductores fluyen sin re-digitación.",
+    icon: "link-chain",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para una Logística Inteligente"
+    description="Cuando tu operación base esté bajo control, estos módulos convierten tu empresa de transporte en una organización que compite con datos."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Necesitas alguno de estos módulos desde el arranque? Lo evaluamos juntos.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>

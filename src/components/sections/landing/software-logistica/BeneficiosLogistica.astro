@@ -1,0 +1,101 @@
+---
+import { MainContainer, HeadingSection, FeatureList, Button } from "@components/ui";
+
+const beneficios = [
+  "Reducción significativa de costos operativos por optimización de rutas y menor consumo de combustible.",
+  "Mayor puntualidad en entregas que mejora la satisfacción del cliente y reduce la tasa de reclamos.",
+  "Control financiero detallado por unidad, ruta y conductor en tiempo real, sin reportes manuales.",
+  "Visibilidad operativa completa sin depender de llamadas ni hojas de cálculo actualizadas a mano.",
+  "Capacidad de escalar la flotilla sin perder el control ni incrementar el personal administrativo.",
+];
+
+const stats = [
+  { dt: "Vehículos activos", dd: "24" },
+  { dt: "Entregas del mes", dd: "312" },
+  { dt: "Eficiencia de rutas", dd: "87%" },
+  { dt: "Costo/km promedio", dd: "S/1.42" },
+];
+---
+
+<MainContainer id="beneficios" bgColor="bg-white">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+    <!-- Texto y lista -->
+    <div>
+      <HeadingSection
+        tagline="Resultados reales"
+        title="Beneficios Estratégicos para tu Empresa de Transporte"
+        description="Una plataforma que convierte tu operación logística en una ventaja competitiva medible y sostenible."
+        align="left"
+      />
+
+      <FeatureList features={beneficios} class="mt-8 mb-8" />
+
+      <Button href="#contacto" variant="primary" size="lg">
+        Quiero Reducir mis Costos Operativos
+      </Button>
+    </div>
+
+    <!-- Dashboard simulado -->
+    <figure aria-label="Panel de control del software de logística con métricas operativas en tiempo real" class="relative">
+      <div class="bg-neutral-900 rounded-2xl overflow-hidden shadow-2xl">
+        <!-- Barra superior -->
+        <div class="bg-neutral-800 px-5 py-3 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400" aria-hidden="true"></span>
+          <span class="ml-4 text-xs text-neutral-400">Panel Operativo — Logística</span>
+        </div>
+
+        <!-- Cuerpo del dashboard -->
+        <div class="p-5 space-y-5">
+          <dl class="grid grid-cols-2 gap-3">
+            {
+              stats.map(({ dt, dd }) => (
+                <div class="bg-neutral-800 rounded-xl p-4">
+                  <dt class="text-xs text-neutral-400 mb-1">{dt}</dt>
+                  <dd class="text-2xl font-bold text-white">{dd}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <!-- Estado de flota visual -->
+          <div class="bg-neutral-800 rounded-xl p-4 space-y-3">
+            <p class="text-xs text-neutral-400 uppercase tracking-wider">Estado de flota por zona</p>
+            <ol class="space-y-2" aria-label="Distribución de vehículos por zona de entrega">
+              {[
+                { zona: "Lima Norte", pct: 38, color: "bg-primary-400" },
+                { zona: "Lima Centro", pct: 29, color: "bg-primary-500" },
+                { zona: "Lima Sur", pct: 22, color: "bg-secondary-400" },
+                { zona: "Callao", pct: 11, color: "bg-complementary-400" },
+              ].map(({ zona, pct, color }) => (
+                <li class="flex items-center gap-3">
+                  <span class="text-xs text-neutral-300 w-28 shrink-0">{zona}</span>
+                  <div class="flex-1 h-2 bg-neutral-700 rounded-full overflow-hidden">
+                    <div
+                      class={`h-full rounded-full ${color}`}
+                      style={`width:${pct}%`}
+                      role="img"
+                      aria-label={`${pct}%`}
+                    />
+                  </div>
+                  <span class="text-xs text-neutral-400 w-8 text-right">{pct}%</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <figcaption class="mt-3 text-center text-xs text-neutral-500">
+        Vista representativa del panel operativo en tiempo real
+      </figcaption>
+
+      <!-- Glow decorativo -->
+      <div
+        class="absolute -inset-4 bg-primary-500/10 rounded-3xl blur-2xl -z-10 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+    </figure>
+  </div>
+</MainContainer>

@@ -1,0 +1,60 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const problemas = [
+  {
+    title: "Rutas Poco Optimizadas",
+    description: "Los conductores recorren más kilómetros de los necesarios por falta de planificación estructurada, elevando costos y tiempos de entrega sin control.",
+    icon: "route",
+  },
+  {
+    title: "Alto Consumo de Combustible",
+    description: "Sin trazabilidad por unidad ni análisis de eficiencia, el combustible se convierte en un gasto opaco que escala con la operación sin que nadie lo detecte a tiempo.",
+    icon: "coins",
+  },
+  {
+    title: "Sin Monitoreo en Tiempo Real",
+    description: "La ubicación de los vehículos se conoce por llamadas o mensajes. Ante una demora o incidente, la reacción es lenta y la información llega tarde al cliente.",
+    icon: "map-pin",
+  },
+  {
+    title: "Sin Medición del Desempeño por Conductor",
+    description: "No hay datos objetivos de puntualidad, consumo ni incidentes por operador. Evaluar al equipo o tomar decisiones de reasignación resulta subjetivo y conflictivo.",
+    icon: "chart-bar",
+  },
+  {
+    title: "Información Operativa Desordenada",
+    description: "Órdenes de transporte en hojas de cálculo, historial de mantenimiento en papel y reportes gerenciales construidos a mano cada semana. La operación crece sin estructura.",
+    icon: "layers",
+  },
+];
+---
+
+<MainContainer id="problemas" bgColor="bg-white">
+  <HeadingSection
+    tagline="El problema de fondo"
+    title="Problemas Frecuentes en Empresas de Transporte"
+    description="Si tu empresa de logística gestiona su flota con planillas y grupos de WhatsApp, estos escenarios te resultarán muy familiares."
+    align="center"
+  />
+
+  <Carousel data={problemas} visibleDesktop={3}>
+    {
+      problemas.map((p) => (
+        <FeatureCard title={p.title} description={p.description} icon={p.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      En logística, cada minuto y cada kilómetro sin control es rentabilidad perdida.
+    </span>
+    <a
+      href="#funcionalidades"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Ver cómo lo resolvemos →
+    </a>
+  </p>
+</MainContainer>

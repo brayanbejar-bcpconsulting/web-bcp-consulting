@@ -1,0 +1,54 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel, Button } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Gestión de Flotas",
+    description: "Registro centralizado de todos los vehículos con ficha técnica, historial de mantenimiento, documentos de circulación y alertas de vencimiento automáticas.",
+    icon: "truck",
+  },
+  {
+    title: "Planificación de Rutas",
+    description: "Asignación estructurada de recorridos por zona, cliente o tipo de carga. Visualiza la carga de trabajo por conductor y distribuye de forma equitable y eficiente.",
+    icon: "route",
+  },
+  {
+    title: "Control de Órdenes de Transporte",
+    description: "Seguimiento completo del ciclo de cada servicio: desde la orden inicial hasta la confirmación de entrega, con trazabilidad por cliente y fecha de compromiso.",
+    icon: "package",
+  },
+  {
+    title: "Reportes de Desempeño Operativo",
+    description: "Indicadores clave por unidad y conductor: entregas realizadas, tiempo en ruta, incidencias y puntualidad. Comparativas semanales y mensuales disponibles al instante.",
+    icon: "chart-bar",
+  },
+  {
+    title: "Control de Costos por Servicio",
+    description: "Análisis de rentabilidad por ruta, cliente y tipo de carga. Detecta qué servicios generan mayor margen y cuáles están consumiendo recursos sin justificación.",
+    icon: "coins",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Lo esencial, bien hecho"
+    title="Funcionalidades Principales del Software de Logística"
+    description="El núcleo operativo que toda empresa de transporte necesita para digitalizar su gestión sin complejidad."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <Button href="#contacto" variant="secondary" size="md">
+      Solicitar Demo del MVP
+    </Button>
+  </p>
+</MainContainer>
