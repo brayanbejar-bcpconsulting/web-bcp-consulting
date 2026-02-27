@@ -4,10 +4,12 @@ import { Logotipo, Button } from "@components";
 import NavMobile from "./NavMobile.astro";
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="header-container">
     <div class="flex items-center gap-8">
-      <Logotipo />
+      <div class="scale-75 origin-left md:scale-100">
+        <Logotipo />
+      </div>
       <nav
         class="hidden md:flex items-center gap-6"
         aria-label="Navegación principal"
@@ -57,10 +59,17 @@ import NavMobile from "./NavMobile.astro";
         }
       </nav>
     </div>
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3">
+      <!-- CTA solo escritorio -->
       <div class="hidden md:block">
         <Button href="/contacto" variant="whatsapp" icon="user">
           Agenda una reunión
+        </Button>
+      </div>
+      <!-- CTA móvil -->
+      <div class="md:hidden">
+        <Button href="/contacto" variant="whatsapp" size="sm">
+          Reunión
         </Button>
       </div>
       <NavMobile />
@@ -72,13 +81,79 @@ import NavMobile from "./NavMobile.astro";
   @reference "../../styles/global.css";
 
   .site-header {
-    @apply fixed top-0 left-0 right-0 z-50
-           bg-primary-500/90 backdrop-blur-md
+    /*
+      Por defecto: absolute, flota sobre el hero sin ocupar espacio en el flujo.
+      El hero no necesita compensar nada.
+    */
+    @apply absolute top-0 left-0 right-0 z-50
            border-b border-primary-700/50
-           transition-all duration-300;
+           transition-colors duration-300;
+    /* Sin fondo en el hero para que la imagen se vea completa */
+    background: transparent;
+  }
+
+  /*
+    Estado sticky: se activa con JS al salir del hero.
+    - translate-y empieza en -100% (fuera de pantalla) y va a 0 (slide down).
+    - La transición de transform da el efecto de entrada desde arriba.
+  */
+  .site-header.is-sticky {
+    @apply fixed bg-primary-500/90 backdrop-blur-md;
+    animation: header-slide-down 0.35s ease-out forwards;
+  }
+
+  @keyframes header-slide-down {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(0); }
   }
 
   .header-container {
     @apply max-w-350 mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4;
   }
 </style>
+
+<script>
+  const initStickyHeader = () => {
+    const header = document.querySelector<HTMLElement>("[data-site-header]");
+    if (!header) return;
+
+    /*
+      Usamos un sentinel: un div invisible al final del hero.
+      Cuando sale del viewport → header se vuelve fixed (is-sticky).
+      Cuando entra de nuevo  → header vuelve a absolute (sin fondo).
+      
+      Esto es más preciso que escuchar scroll porque usa IntersectionObserver,
+      que no bloquea el hilo principal.
+    */
+    const sentinel = document.querySelector<HTMLElement>("[data-hero-sentinel]");
+
+    if (!sentinel) {
+      // Fallback: si no hay hero en esta página, el header arranca sticky directamente
+      header.classList.add("is-sticky");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // El sentinel es visible → estamos en el hero → absolute, sin fondo
+          header.classList.remove("is-sticky");
+        } else {
+          // El sentinel salió → estamos fuera del hero → fixed con slide-down
+          header.classList.add("is-sticky");
+        }
+      },
+      {
+        // Activar cuando el sentinel esté al 100% fuera del viewport
+        threshold: 0,
+        // Un margen negativo del alto del header evita el flash en el punto exacto
+        rootMargin: "0px 0px 0px 0px",
+      }
+    );
+
+    observer.observe(sentinel);
+  };
+
+  initStickyHeader();
+  document.addEventListener("astro:after-swap", initStickyHeader);
+</script>

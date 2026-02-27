@@ -14,81 +14,84 @@ import { Logotipo, Button, Icon } from "@components";
   <Icon name="menu" size="28" />
 </button>
 
-{/* Panel off-canvas */}
-<div class="nav-mobile-backdrop" data-mobile-backdrop aria-hidden="true"></div>
-<nav
-  class="nav-mobile"
-  data-mobile-nav
-  aria-label="Menú principal"
-  aria-hidden="true"
->
-  <div class="nav-mobile__header">
-    <Logotipo />
-    <button
-      class="nav-mobile__close"
-      data-mobile-close
-      aria-label="Cerrar menú"
-      type="button"
-    >
-      <Icon name="x" size="24" />
-    </button>
-  </div>
+{/* Portal: el backdrop y el nav se teletransportan al <body> via JS para escapar del stacking context del header */}
+<div id="nav-mobile-portal">
+  {/* Panel off-canvas */}
+  <div class="nav-mobile-backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav
+    class="nav-mobile"
+    data-mobile-nav
+    aria-label="Menú principal"
+    aria-hidden="true"
+  >
+    <div class="nav-mobile__header">
+      <Logotipo />
+      <button
+        class="nav-mobile__close"
+        data-mobile-close
+        aria-label="Cerrar menú"
+        type="button"
+      >
+        <Icon name="x" size="24" />
+      </button>
+    </div>
 
-  <ul class="nav-mobile__links">
-    {
-      NAVIGATION.main.map((item) => (
-        <li class="border-b border-primary-800/50 last:border-none border-solid">
-          {item.children && item.children.length > 0 ? (
-            <details class="nav-mobile-dropdown group">
-              <summary class="flex justify-between items-center py-4 px-4 text-neutral-200 font-medium text-lg cursor-pointer hover:bg-primary-800 hover:text-white rounded-lg transition-colors list-none">
+    <ul class="nav-mobile__links">
+      {
+        NAVIGATION.main.map((item) => (
+          <li class="border-b border-primary-800/50 last:border-none border-solid">
+            {item.children && item.children.length > 0 ? (
+              <details class="nav-mobile-dropdown group">
+                <summary class="flex justify-between items-center py-4 px-4 text-neutral-200 font-medium text-lg cursor-pointer hover:bg-primary-800 hover:text-white rounded-lg transition-colors list-none">
+                  {item.title}
+                  <svg
+                    class="w-4 h-4 transition-transform group-open:rotate-180"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 4.5l3 3 3-3" />
+                  </svg>
+                </summary>
+                <ul class="flex flex-col ml-4 border-l-2 border-primary-800 list-none mb-3 py-1">
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        href={child.path}
+                        class="block py-2 px-4 text-neutral-400 text-base no-underline transition-colors hover:text-primary-300"
+                        data-mobile-link
+                      >
+                        {child.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : (
+              <a href={item.path} class="nav-mobile__link" data-mobile-link>
                 {item.title}
-                <svg
-                  class="w-4 h-4 transition-transform group-open:rotate-180"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M3 4.5l3 3 3-3" />
-                </svg>
-              </summary>
-              <ul class="flex flex-col ml-4 border-l-2 border-primary-800 list-none mb-3 py-1">
-                {item.children.map((child) => (
-                  <li>
-                    <a
-                      href={child.path}
-                      class="block py-2 px-4 text-neutral-400 text-base no-underline transition-colors hover:text-primary-300"
-                      data-mobile-link
-                    >
-                      {child.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ) : (
-            <a href={item.path} class="nav-mobile__link" data-mobile-link>
-              {item.title}
-            </a>
-          )}
-        </li>
-      ))
-    }
-  </ul>
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
 
-  <div class="nav-mobile__cta">
-    <Button
-      href="/contacto"
-      variant="whatsapp"
-      size="lg"
-      class="w-full justify-center"
-    >
-      Agenda una reunión
-    </Button>
-  </div>
-</nav>
+    <div class="nav-mobile__cta">
+      <Button
+        href="/contacto"
+        variant="whatsapp"
+        size="lg"
+        class="w-full justify-center"
+      >
+        Agenda una reunión
+      </Button>
+    </div>
+  </nav>
+</div>
 
 <style>
   @reference "../../styles/global.css";
@@ -107,7 +110,12 @@ import { Logotipo, Button, Icon } from "@components";
   }
 
   .nav-mobile {
-    @apply fixed top-0 right-0 z-50 w-[85%] max-w-sm h-full
+    /*
+      h-dvh en lugar de h-full:
+      - h-full en un fixed depende del containing block, que era el <header>
+      - h-dvh siempre es el viewport real, incluyendo la barra del navegador móvil
+    */
+    @apply fixed top-0 right-0 z-50 w-[85%] max-w-sm h-dvh
            bg-primary-950 flex flex-col
            transform translate-x-full transition-transform duration-300 ease-out
            overflow-y-auto;
@@ -169,6 +177,18 @@ import { Logotipo, Button, Icon } from "@components";
 
     if (!toggle || !nav || !backdrop) return;
 
+    /*
+      Fix del stacking context:
+      El header usa backdrop-blur, lo que en muchos browsers crea un nuevo
+      stacking context que "atrapa" a los hijos fixed dentro de sus límites.
+      Mover el portal al <body> garantiza que nav y backdrop sean hijos
+      directos del stacking context raíz.
+    */
+    const portal = document.getElementById("nav-mobile-portal");
+    if (portal && portal.parentElement !== document.body) {
+      document.body.appendChild(portal);
+    }
+
     const open = () => {
       nav.classList.add("open");
       backdrop.classList.add("open");
@@ -192,7 +212,6 @@ import { Logotipo, Button, Icon } from "@components";
     backdrop.addEventListener("click", close);
     links.forEach((link) => link.addEventListener("click", close));
 
-    // Escape key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && nav.classList.contains("open")) close();
     });
