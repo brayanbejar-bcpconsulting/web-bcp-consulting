@@ -1,0 +1,52 @@
+---
+title: "Nitroos — BarberShop"
+description: "App de reserva de turnos para barberías con gestión de clientes, historial de servicios y pagos integrados."
+category: "app"
+client: "Nitroos"
+role: "Desarrollo Móvil y Panel Admin Web"
+duration: "2 meses"
+year: 2023
+technologies: ["React Native", "Express", "MongoDB"]
+coverImage: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&h=600&fit=crop"
+url: "https://nitrosbarberia.com/"
+results:
+  - "Reducción de no-shows en un 35%"
+  - "Optimización de agenda de los barberos"
+---
+
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+
+<ProblemSolution>
+  <div slot="problem">
+    <p>
+      Antes de la app, los clientes llamaban repetidamente o escribían por redes
+      sociales. Esta falta de automatización causaba errores en las agendas y
+      una alta tasa de *no-shows* (clientes que faltan a su cita).
+    </p>
+  </div>
+  <div slot="solution">
+    <p>Implementamos un ecosistema completo:</p>
+    <ul>
+      <li>
+        <strong>App para el cliente:</strong> Donde puede ver barberos
+        disponibles, reservar turnos 24/7 y recibir recordatorios automáticos.
+      </li>
+      <li>
+        <strong>Panel Web Administrativo:</strong> Donde el dueño del local
+        controla inventario, ingresos diarios y comisiones por barbero.
+      </li>
+    </ul>
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "-35%", label: "Tasa de ausencias" },
+    { value: "24/7", label: "Recepción de citas automáticas" },
+  ]}
+/>
+
+## Resultado Impactante
+
+La aplicación no solo modernizó la imagen del salón, sino que al introducir un pequeño botón para dejar _reviews_ post-corte, la calificación de Google Maps de la empresa explotó, atrayendo aún más flujo presencial.

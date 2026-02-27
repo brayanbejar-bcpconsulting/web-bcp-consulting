@@ -1,0 +1,55 @@
+---
+title: "Cirugía 24 Horas"
+description: "Plataforma de telemedicina y gestión de citas médicas para centros de salud con monitoreo continuo de pacientes."
+category: "app"
+client: "Clínica Privada"
+role: "Consultoría, UX/UI y Desarrollo Híbrido"
+duration: "6 meses"
+year: 2023
+technologies: ["Flutter", "Firebase", "Node.js"]
+coverImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=600&fit=crop"
+results:
+  - "Atención remota disponible 24/7"
+---
+
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<ProblemSolution>
+  <div slot="problem">
+    <p>
+      La clínica necesitaba digitalizar sus atenciones post-operatorias para
+      pacientes de áreas remotas que no podían viajar regularmente a controles
+      físicos, colapsando su call-center con emergencias menores.
+    </p>
+  </div>
+  <div slot="solution">
+    <p>
+      Diseñamos una plataforma que conecta pacientes con los cirujanos
+      directamente:
+    </p>
+    <ul>
+      <li>Integración con videoconsultas cifradas end-to-end.</li>
+      <li>Módulo de carga de foto-evolución (heridas post-quirúrgicas).</li>
+      <li>
+        Integración completa con el ERP y la historia clínica electrónica de la
+        clínica matriz.
+      </li>
+    </ul>
+  </div>
+</ProblemSolution>
+
+## Videollamadas seguras
+
+Para asegurar la continuidad del servicio incluso con bajo acho de banda en zonas rurales, integramos algoritmos de compresión de video.
+
+<TechStack
+  stack={[
+    {
+      name: "Node.js + WebRTC",
+      description:
+        "Manejo eficiente de conexiones de videollamada y chat garantizando muy baja latencia.",
+    },
+  ]}
+/>

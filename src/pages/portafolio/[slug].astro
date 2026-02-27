@@ -1,0 +1,189 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@layouts/MainLayout.astro";
+import { Button, MainContainer } from "@components";
+import Breadcrumbs from "@components/ui/Breadcrumbs.astro";
+
+// Para generar todas las rutas estáticas basadas en los archivos .mdx
+export async function getStaticPaths() {
+  const allProjects = await getCollection("projects");
+  return allProjects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const schemaType =
+  project.data.category === "app" || project.data.category === "software"
+    ? "SoftwareApplication"
+    : "CreativeWork";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": schemaType,
+  name: project.data.title,
+  description: project.data.description,
+  image: project.data.coverImage,
+  creator: {
+    "@type": "Organization",
+    name: "BCP Consulting",
+  },
+};
+---
+
+<MainLayout
+  title={`Caso de Éxito: ${project.data.title}`}
+  description={project.data.description}
+  image={project.data.coverImage}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  {/* Header del proyecto */}
+  <header class="project-hero">
+    <div class="project-hero__bg">
+      <img
+        src={project.data.coverImage}
+        alt={`Portada de ${project.data.title}`}
+      />
+      <div class="project-hero__overlay"></div>
+    </div>
+    <div class="project-hero__content max-w-200 mx-auto px-[5%]">
+      <div class="mb-2">
+        <Breadcrumbs
+          items={[
+            { label: "Inicio", href: "/" },
+            { label: "Portafolio", href: "/portafolio" },
+            { label: project.data.title },
+          ]}
+        />
+      </div>
+      <h1 class="text-white font-extrabold text-balance mb-4 drop-shadow-lg">
+        {project.data.title}
+      </h1>
+      <p class="text-white/90 text-xl max-w-2xl drop-shadow">
+        {project.data.description}
+      </p>
+    </div>
+  </header>
+
+  {/* Contenido a 2 columnas */}
+  <MainContainer bgColor="bg-white">
+    <div class="project-grid">
+      {/* Columna Izquierda: Sticky Sidebar "Key Facts" */}
+      <aside class="project-sidebar">
+        <div class="project-sidebar__sticky text-sm md:text-base">
+          <h2
+            class="font-bold text-primary-950 text-xl border-b border-neutral-200 pb-4 mb-6"
+          >
+            Detalles del Proyecto
+          </h2>
+
+          <dl class="space-y-6">
+            <div>
+              <dt class="text-neutral-500 font-medium mb-1">Cliente</dt>
+              <dd class="font-bold text-neutral-800">{project.data.client}</dd>
+            </div>
+
+            <div>
+              <dt class="text-neutral-500 font-medium mb-1">Nuestro Rol</dt>
+              <dd class="font-bold text-neutral-800">{project.data.role}</dd>
+            </div>
+
+            <div>
+              <dt class="text-neutral-500 font-medium mb-1">Duración</dt>
+              <dd class="font-bold text-neutral-800">
+                {project.data.duration}
+              </dd>
+            </div>
+
+            <div>
+              <dt class="text-neutral-500 font-medium mb-1">Año</dt>
+              <dd class="font-bold text-neutral-800">{project.data.year}</dd>
+            </div>
+
+            {
+              project.data.url && (
+                <div class="pt-4 mt-6 border-t border-neutral-100">
+                  <Button
+                    href={project.data.url}
+                    target="_blank"
+                    variant="secondary"
+                    class="w-full justify-center"
+                  >
+                    Visitar sitio web
+                  </Button>
+                </div>
+              )
+            }
+          </dl>
+        </div>
+      </aside>
+
+      {/* Columna Derecha: Contenido MDX */}
+      <article
+        class="project-content prose prose-lg prose-neutral prose-headings:font-bold prose-headings:text-primary-900 prose-a:text-secondary-600 hover:prose-a:text-secondary-700 max-w-none"
+      >
+        <Content />
+      </article>
+    </div>
+  </MainContainer>
+
+  {/* CTA Final */}
+  <section
+    class="py-20 px-[5%] bg-primary-50 border-t border-primary-100 text-center"
+  >
+    <h2 class="text-3xl md:text-4xl font-black text-primary-950 mb-4">
+      ¿Buscas un impacto similar?
+    </h2>
+    <p class="text-neutral-600 text-lg mb-8 max-w-xl mx-auto">
+      Conversa con nuestro equipo sobre los retos de tu empresa y descubramos
+      cómo la tecnología puede resolverlos.
+    </p>
+    <Button href="/contacto" size="lg" variant="primary"
+      >Cotizar mi proyecto</Button
+    >
+  </section>
+</MainLayout>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .project-hero {
+    @apply relative pt-40 pb-20 md:pt-48 md:pb-28 overflow-hidden mt-0;
+  }
+
+  .project-hero__bg {
+    @apply absolute inset-0 z-0;
+  }
+
+  .project-hero__bg img {
+    @apply w-full h-full object-cover;
+  }
+
+  .project-hero__overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-primary-950/90 to-primary-900/60 mix-blend-multiply;
+  }
+
+  .project-hero__content {
+    @apply relative z-10;
+  }
+
+  .project-grid {
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start;
+  }
+
+  .project-sidebar {
+    @apply lg:col-span-4 lg:order-last;
+  }
+
+  .project-sidebar__sticky {
+    @apply p-8 bg-neutral-50 border border-neutral-200 rounded-3xl lg:sticky lg:top-32;
+  }
+
+  .project-content {
+    @apply lg:col-span-8 lg:order-first;
+  }
+</style>

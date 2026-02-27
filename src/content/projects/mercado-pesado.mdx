@@ -1,0 +1,79 @@
+---
+title: "Mercado Pesado"
+description: "Plataforma de cotización masiva: una solicitud llega a múltiples proveedores. Compara precios, plazos y lleva historial completo de pedidos."
+category: "app"
+client: "Mercado Pesado SAC"
+role: "Diseño UX/UI y Desarrollo End-to-End"
+duration: "5 meses"
+year: 2024
+technologies: ["Flutter", "Django", "PostgreSQL"]
+coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=600&fit=crop"
+url: "https://mercadopesado.com/"
+results:
+  - "Decisiones de compra más rápidas y transparentes"
+  - "Más de 500 proveedores registrados"
+---
+
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<ProblemSolution>
+  <div slot="problem">
+    <p>
+      La industria pesada enfrentaba un proceso de cotización fragmentado en
+      decenas de correos electrónicos y mensajes de WhatsApp. Las empresas
+      constructoras y logísticas demoraban días en conseguir una cotización
+      competitiva.
+    </p>
+  </div>
+  <div slot="solution">
+    <p>
+      Creamos el primer <strong>marketplace de licitación inversa (B2B)</strong>{" "}
+      para maquinaria y equipos en la región:
+    </p>
+    <ul>
+      <li>
+        Un usuario sube un requerimiento y este dispara alertas push a todos los
+        proveedores compatibles.
+      </li>
+      <li>
+        Dashboard consolidado donde el comprador compara cotizaciones lado a
+        lado.
+      </li>
+      <li>Sistema de rating de proveedores para asegurar la confianza.</li>
+    </ul>
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "-75%", label: "Reducción de tiempo cotizando" },
+    { value: "500+", label: "Proveedores integrados" },
+    { value: "S/2M+", label: "Transaccionados el primer mes" },
+  ]}
+/>
+
+## Arquitectura de Alta Disponibilidad
+
+El sistema requiere manejar miles de transacciones, presupuestos e historiales de precios. Se diseñó en un entorno en la nube usando balanceadores de carga para mantener estabilidad bajo demanda.
+
+<TechStack
+  stack={[
+    {
+      name: "Flutter",
+      description:
+        "Código único para Web, iOS y Android, vital para un modelo B2B donde conviven gerentes en escritorio e ingenieros en campo.",
+    },
+    {
+      name: "Django (Python)",
+      description:
+        "Backend robusto que nos permitió construir un motor de búsqueda y notificaciones complejo de forma madura y rápida.",
+    },
+    {
+      name: "PostgreSQL",
+      description:
+        "Base de datos relacional para garantizar la integridad ACID en transacciones B2B con altos volúmenes de datos financieros.",
+    },
+  ]}
+/>

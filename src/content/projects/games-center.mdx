@@ -1,0 +1,42 @@
+---
+title: "Games Center"
+description: "Plataforma de gestión para centros de entretenimiento con control de máquinas, membresías y reportes de ingresos."
+category: "software"
+client: "Games Center"
+role: "Desarrollo Intranet"
+duration: "3 meses"
+year: 2024
+technologies: ["React", "Node.js", "MySQL"]
+coverImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=600&fit=crop"
+results:
+  - "Eliminación completa del robo de tokens"
+  - "Aumento en fidelidad mensual mediante planes VIP"
+---
+
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+
+<ProblemSolution>
+  <div slot="problem">
+    <p>
+      La operación mediante tokens físicos generaba diferencias de caja
+      constantes, fraude y desgaste de inventario, además de imposibilitar la
+      analítica: el dueño no sabía qué máquina generaba más facturación y a qué
+      hora.
+    </p>
+  </div>
+  <div slot="solution">
+    <p>Construimos un ERP enfocado al mundo arcade:</p>
+    <ul>
+      <li>
+        Migración a tarjetas RFID vinculadas al saldo y cuenta del cliente.
+      </li>
+      <li>
+        Dashboard analítico que reporta el uso de cada máquina por minuto.
+      </li>
+      <li>
+        Módulo de promociones automáticas en "horas valle" para incentivar el
+        flujo peatonal.
+      </li>
+    </ul>
+  </div>
+</ProblemSolution>

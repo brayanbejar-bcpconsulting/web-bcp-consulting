@@ -1,0 +1,70 @@
+---
+title: "Market Dollar"
+description: "Sistema de tipo de cambio en tiempo real con operaciones seguras, seguimiento de transacciones y notificaciones automáticas."
+category: "software"
+client: "Casa de Cambio Privada"
+role: "Despliegue e Integración Financiera"
+duration: "4 meses"
+year: 2023
+technologies: ["Next.js", "Node.js", "PostgreSQL"]
+coverImage: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=600&fit=crop"
+url: "https://marketdollar.com/"
+results:
+  - "Más de 10,000 operaciones procesadas"
+  - "$50M+ intercambiados en el primer año"
+---
+
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<ProblemSolution>
+  <div slot="problem">
+    <p>
+      El mercado de cambio de divisas es altamente sensible al tiempo y la
+      seguridad. El cliente operaba mediante transferencias manuales validadas
+      por WhatsApp, lo cual era lento y susceptible a errores humanos o fraude.
+    </p>
+  </div>
+  <div slot="solution">
+    <p>
+      Desarrollamos un <strong>Core Bancario ligero</strong> para automatizar el
+      100% de las operativas cambiarias:
+    </p>
+    <ul>
+      <li>
+        Integración de Webhooks con bancos principales (BCP, Interbank) para
+        verificación automática de depósitos.
+      </li>
+      <li>
+        Módulo de Anti-Lavado de Activos (AML/KYC) con biometría integrada.
+      </li>
+      <li>
+        Cotizador dinámico conectado a la SBS y Reuters con spread configurable
+        por el administrador.
+      </li>
+    </ul>
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "0%", label: "Fraudes en 18 meses" },
+    { value: "< 5m", label: "Tiempo promedio de operación" },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "PostgreSQL",
+      description:
+        "Esquema robusto y transacciones ACID que garantizan la integridad contable en cada décima de centavo.",
+    },
+    {
+      name: "Next.js",
+      description:
+        "Permitió un frontend muy reactivo y optimizado en SEO para captar tráfico orgánico de 'tipo de cambio hoy'.",
+    },
+  ]}
+/>

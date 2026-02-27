@@ -1,0 +1,49 @@
+---
+title: "Sumaq Park"
+description: "Web corporativa para empresa turística con diseño premium, reservas online y optimización SEO para el mercado europeo."
+category: "web"
+client: "Sumaq Park Tur."
+role: "UI/UX, Desarrollo Frontend, Integración SEO/Payments"
+duration: "2.5 meses"
+year: 2024
+technologies: ["Astro", "Tailwind CSS", "Stripe"]
+coverImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&h=600&fit=crop"
+url: "https://sumaqpark.es/"
+results:
+  - "+300% reservas orgánicas internacionales"
+  - "Aumento en velocidad y WPO en PageSpeed (95+)"
+---
+
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+
+<ProblemSolution>
+  <div slot="problem">
+    <p>
+      El cliente era invisible en búsquedas orgánicas europeas a causa de una
+      web en WordPress obsoleta, lenta (más de 6 segundos de carga) e incapaz de
+      cerrar transacciones multi-moneda.
+    </p>
+  </div>
+  <div slot="solution">
+    <p>Rediseñamos la experiencia enfocado al turismo de élite:</p>
+    <ul>
+      <li>Migración total de WordPress al ecosistema *Astro*.</li>
+      <li>
+        Optimización de imágenes WebP para garantizar tiempos de carga
+        sub-secundarios en dispositivos móviles roaming (3G de viaje).
+      </li>
+      <li>
+        Integración de Stripe para pagos internacionales fluidos en Euros y
+        Dólares con Apple Pay / Google Pay.
+      </li>
+    </ul>
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "< 1.5s", label: "Velocidad de carga inicial" },
+    { value: "+300%", label: "Visitas procedentes de la UE" },
+  ]}
+/>

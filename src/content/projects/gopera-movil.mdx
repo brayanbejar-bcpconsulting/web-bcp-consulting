@@ -1,0 +1,75 @@
+---
+title: "Gopera Móvil"
+description: "Sistema de gestión con catálogo digital, compras en segundos y notificaciones push para promociones directas al celular del cliente."
+category: "app"
+client: "Gopera SAC"
+role: "Desarrollo Nativo y Backend"
+duration: "4 meses"
+year: 2024
+technologies: ["React Native", "Node.js", "Firebase"]
+coverImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop"
+results:
+  - "Atención más ágil y ventas digitales activas"
+  - "+150% de incremento en recompras"
+---
+
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<ProblemSolution>
+  <div slot="problem">
+    <p>
+      El cliente contaba con un modelo de ventas tradicional, donde los pedidos
+      se tomaban por WhatsApp o llamadas telefónicas. Esto generaba:
+    </p>
+    <ul>
+      <li>Cuellos de botella en la atención durante horas pico.</li>
+      <li>Pérdida de historial de compras para fidelización.</li>
+      <li>Limitada capacidad para comunicar nuevas ofertas rápidamente.</li>
+    </ul>
+  </div>
+  <div slot="solution">
+    <p>
+      Desarrollamos una <strong>aplicación móvil nativa</strong> centrada en la
+      experiencia de compra repetitiva, que incluye:
+    </p>
+    <ul>
+      <li>
+        Catálogo de productos siempre actualizado con sincronización
+        offline-first.
+      </li>
+      <li>Checkout en 3 clics con historial de tarjetas y direcciones.</li>
+      <li>
+        Motor de notificaciones push segmentadas para impulsar ofertas flash.
+      </li>
+    </ul>
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "3x", label: "Velocidad de procesamiento" },
+    { value: "+30%", label: "Ventas móviles en 2 meses" },
+    { value: "4.8", label: "Estrellas en App Store/Play Store" },
+  ]}
+/>
+
+## El Desarrollo
+
+Implementamos una arquitectura _serverless_ para el backend, garantizando que el sistema escale automáticamente durante los picos de pedidos (ej. promociones de fin de mes o feriados) sin que Gopera deba incurrir en altos costos fijos de infraestructura.
+
+<TechStack
+  stack={[
+    {
+      name: "React Native",
+      description:
+        "Permitió lanzar tanto en iOS como en Android en tiempo récord manteniendo rendimiento nativo.",
+    },
+    {
+      name: "Firebase",
+      description:
+        "Infraestructura robusta para autenticación segura en tiempo real y notificaciones Push masivas sin latencia.",
+    },
+  ]}
+/>
