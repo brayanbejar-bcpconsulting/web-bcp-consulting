@@ -1,0 +1,56 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  icon: string;
+  class?: string;
+}
+
+const { title, description, icon, class: className } = Astro.props;
+---
+
+<div class:list={["feature-card group", className]}>
+  <div class="feature-card__icon">
+    <Icon name={icon} size="32" />
+  </div>
+  <h3 class="feature-card__title">{title}</h3>
+  {description && <p class="feature-card__desc">{description}</p>}
+</div>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .feature-card {
+    @apply relative flex flex-col gap-4 rounded-2xl p-8
+           bg-white border border-neutral-200
+           transition-all duration-500 ease-out h-full;
+  }
+
+  @media (hover: hover) {
+    .feature-card:hover {
+      @apply shadow-2xl shadow-primary-500/10 -translate-y-1 border-secondary-300;
+    }
+  }
+
+  .feature-card__icon {
+    @apply w-14 h-14 flex items-center justify-center rounded-xl
+           bg-secondary-50 text-secondary-600
+           transition-colors duration-300;
+  }
+
+  @media (hover: hover) {
+    .feature-card:hover .feature-card__icon {
+      @apply bg-secondary-500 text-white shadow-lg shadow-secondary-500/30;
+    }
+  }
+
+  .feature-card__title {
+    @apply text-xl font-bold text-neutral-900 leading-tight;
+  }
+
+  .feature-card__desc {
+    @apply text-neutral-600 leading-relaxed flex-grow;
+  }
+</style>

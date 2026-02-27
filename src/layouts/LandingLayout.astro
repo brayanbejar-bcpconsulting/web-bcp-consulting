@@ -1,0 +1,53 @@
+---
+import '@styles/global.css';
+import { BaseHead } from '@components';
+import HeaderLanding from '@components/shared/HeaderLanding.astro';
+import FooterLanding from '@components/shared/FooterLanding.astro';
+import type { LandingNavItem } from '@components/shared/HeaderLanding.astro';
+import type { LandingPageInteres } from '@components/shared/FooterLanding.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  navItems: LandingNavItem[];
+  pagesInteres?: LandingPageInteres[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  navItems,
+  pagesInteres = [],
+  ctaLabel = 'Solicitar Demo',
+  ctaHref = '#contacto',
+  image,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+    <slot name="head" />
+  </head>
+  <body>
+    <HeaderLanding navItems={navItems} ctaLabel={ctaLabel} ctaHref={ctaHref} />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <FooterLanding navItems={navItems} pagesInteres={pagesInteres} />
+  </body>
+</html>
+
+<style is:global>
+  @reference "../styles/global.css";
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

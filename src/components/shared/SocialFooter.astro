@@ -1,0 +1,45 @@
+---
+import { Icon } from "@components/ui";
+import { NAVIGATION } from "@utils/navigation";
+
+interface Props {
+  variant?: "dark" | "light";
+}
+
+const { variant = "light" } = Astro.props;
+
+const linkClass =
+  variant === "light"
+    ? "text-primary-200 hover:text-white"
+    : "text-primary-600 hover:text-primary-900";
+
+const waPhone = NAVIGATION.contact.phone.replace(/\D/g, "");
+---
+
+<div class="flex items-center gap-3">
+  <a
+    href="https://www.facebook.com/profile.php?id=61555629673170"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+    class:list={["transition-colors duration-200", linkClass]}
+  >
+    <Icon name="facebook" size="20" />
+  </a>
+  <a
+    href={`https://api.whatsapp.com/send/?phone=${waPhone}&text=${encodeURIComponent("Hola, quiero una demo del software")}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp"
+    class:list={["transition-colors duration-200", linkClass]}
+  >
+    <Icon name="whatsapp" size="20" />
+  </a>
+  <a
+    href={`mailto:${NAVIGATION.contact.email}`}
+    aria-label="Correo electrónico"
+    class:list={["transition-colors duration-200", linkClass]}
+  >
+    <Icon name="mail" size="20" />
+  </a>
+</div>
