@@ -8,11 +8,19 @@
     "paths": {
       "@layouts/*": ["src/layouts/*"],
       "@components/*": ["src/components/*"],
+      "@components": ["src/components"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@content/*": ["src/content/*"],
       "@pages/*": ["src/pages/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@ui/*": ["src/components/ui/*"],
+      "@page-inicio": ["src/components/sections/page-inicio/"],
+      "@page-servicios": ["src/components/sections/page-servicios/"],
+      "@page-portafolio": ["src/components/sections/page-portafolio/"],
+      "@page-nosotros": ["src/components/sections/page-nosotros/"],
+      "@page-contacto": ["src/components/sections/page-contacto/"],
+      "@data/*": ["src/data/*"],
     }
   }
 }
