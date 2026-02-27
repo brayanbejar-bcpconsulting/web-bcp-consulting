@@ -1,0 +1,56 @@
+---
+import { Button, Badge } from "@components/ui";
+---
+
+<section id="hero" class="relative py-20 lg:py-28 overflow-hidden bg-primary-600 text-white">
+  <!-- Ruido de fondo decorativo -->
+  <div class="absolute inset-0 bg-gradient-to-br from-primary-500/80 via-primary-600 to-primary-800 pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute -top-24 -right-24 w-96 h-96 bg-secondary-400/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-complementary-400/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-350 mx-auto px-[5%]">
+    <div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-5">
+
+      <Badge variant="secondary" class="animate-fade-in-up">
+        Software para Restaurantes en Perú
+      </Badge>
+
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-tight animate-fade-in-up animate-delay-100">
+        Software para Restaurantes que Transforma tu Operación en un Negocio{" "}
+        <span class="text-complementary-300">Controlado y Rentable</span>
+      </h1>
+
+      <p class="text-sm md:text-base text-white/90 max-w-3xl leading-relaxed animate-fade-in-up animate-delay-200">
+        Administrar un restaurante en Perú implica mucho más que vender platos. Implica controlar mermas, supervisar personal, optimizar tiempos de atención y garantizar rentabilidad diaria.
+      </p>
+
+      <p class="text-xs md:text-sm text-white/75 max-w-3xl leading-relaxed animate-fade-in-up animate-delay-300">
+        Nuestro software está diseñado para dueños y administradores que necesitan tener el{" "}
+        <strong class="text-white font-semibold">control real de su operación</strong>, reducir pérdidas invisibles y tomar decisiones basadas en información precisa.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mt-4 w-full justify-center animate-fade-in-up animate-delay-400">
+        <Button href="#contacto" variant="complementary" size="lg" class="w-full sm:w-auto">
+          Solicitar Demo Gratuita
+        </Button>
+        <a
+          href="#funcionalidades"
+          class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3.5 text-lg font-bold rounded-full border-2 border-white/50 text-white hover:bg-white/10 hover:border-white transition-all duration-300"
+        >
+          Ver Funcionalidades
+        </a>
+      </div>
+
+      <!-- Trust signals -->
+      <div class="flex flex-wrap items-center justify-center gap-5 pt-5 border-t border-white/20 w-full animate-fade-in-up animate-delay-400">
+        {
+          ["✓ Sin costos ocultos", "✓ Soporte en español", "✓ Implementación rápida"].map(
+            (item) => <span class="text-xs text-white/75 font-medium">{item}</span>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+

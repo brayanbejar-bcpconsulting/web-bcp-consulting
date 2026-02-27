@@ -1,0 +1,56 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroRestaurantes,
+  ProblemasRestaurantes,
+  FuncionalidadesMVP,
+  FuncionalidadesOpcionales,
+  BeneficiosRestaurantes,
+  FaqRestaurantes,
+  CtaRestaurantes
+} from "@components/sections/landing/software-restaurantes";
+
+const navItems = [
+  { label: "Problemas", href: "#problemas" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Módulos Avanzados", href: "#evolucion" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  {
+    title: "Software para Hoteles",
+    href: "/landing/software-hoteles",
+    tagline: "Control total de habitaciones y reservas.",
+  },
+  {
+    title: "Software para Retail",
+    href: "/landing/software-retail",
+    tagline: "Gestión eficiente de tiendas y stock.",
+  },
+  {
+    title: "Software para Clínicas",
+    href: "/landing/software-clinicas",
+    tagline: "Administra citas, pacientes y facturación.",
+  },
+];
+---
+
+<LandingLayout
+  title="Software para Restaurantes en Perú | Control y Rentabilidad | BCP Consulting"
+  description="Software para restaurantes en Perú que controla mermas, inventarios, caja y personal. Toma decisiones basadas en datos reales. Solicita tu demo gratuita."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+  ctaLabel="Solicitar Demo Gratis"
+  ctaHref="#contacto"
+>
+  <HeroRestaurantes />
+  <ProblemasRestaurantes />
+  <FuncionalidadesMVP />
+  <FuncionalidadesOpcionales />
+  <BeneficiosRestaurantes />
+  <FaqRestaurantes />
+  <CtaRestaurantes />
+</LandingLayout>

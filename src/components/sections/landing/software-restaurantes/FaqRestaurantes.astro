@@ -1,0 +1,52 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El sistema funciona si se corta el internet?",
+    answer: "Sí, nuestro Punto de Venta (POS) cuenta con un modo offline que te permite seguir registrando ventas. Una vez que vuelva la conexión, los datos se sincronizarán automáticamente con la nube."
+  },
+  {
+    question: "¿Puedo ver los reportes desde mi celular?",
+    answer: "Absolutamente. El sistema está basado en la nube, lo que significa que puedes acceder a los reportes gerenciales en tiempo real desde cualquier dispositivo con internet, estés donde estés."
+  },
+  {
+    question: "¿Cuánto tiempo toma implementar el software en mi restaurante?",
+    answer: "La implementación estándar (MVP) suele tomar entre 3 a 7 días, dependiendo del tamaño de tu carta y la cantidad de insumos. Incluimos capacitación para todo tu personal."
+  },
+  {
+    question: "¿Se integra con facturación electrónica de SUNAT?",
+    answer: "Sí, el sistema está completamente integrado con la facturación electrónica exigida por SUNAT, emitiendo boletas y facturas de manera automática y sin doble digitación."
+  },
+  {
+    question: "¿Es adecuado para un solo local o solo para cadenas?",
+    answer: "Está diseñado para escalar. Funciona perfectamente para un solo local que busca orden, y cuenta con un panel multisede corporativo si decides abrir más sucursales o franquicias en el futuro."
+  }
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software para Restaurantes"
+      description="Estas son las preguntas más comunes antes de implementar el sistema."
+      align="center"
+    />
+
+    <div class="mt-8">
+      <FaqAccordion faqs={faqs} />
+    </div>
+
+    <!-- CTA bajo FAQ -->
+    <div class="mt-10 text-center">
+      <p class="text-xs md:text-sm text-neutral-500 mb-3">¿Tienes más preguntas? Escríbenos directamente.</p>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors duration-200"
+      >
+        Hablar con un asesor
+      </a>
+    </div>
+  </div>
+</MainContainer>
