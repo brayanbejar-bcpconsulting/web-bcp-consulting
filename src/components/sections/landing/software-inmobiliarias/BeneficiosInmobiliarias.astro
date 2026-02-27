@@ -1,0 +1,101 @@
+---
+import { MainContainer, HeadingSection, FeatureList, Button } from "@components/ui";
+
+const beneficios = [
+  "Mayor tasa de cierre: seguimiento automático y scoring de leads concentra el esfuerzo en los prospectos más calientes.",
+  "Control total del proceso comercial: cada acción queda registrada desde el primer contacto hasta la firma.",
+  "Información centralizada por proyecto: disponibilidad, cotizaciones y reservas en tiempo real para todo el equipo.",
+  "Escalabilidad inmediata: lanzar un nuevo proyecto no requiere reinventar la operación.",
+  "Decisiones basadas en datos reales: reportes de conversión por asesor, proyecto y canal sin informes manuales.",
+];
+
+const stats = [
+  { dt: "Leads activos", dd: "148" },
+  { dt: "Cierres del mes", dd: "23" },
+  { dt: "Tasa de conversión", dd: "15.5%" },
+  { dt: "Proyectos activos", dd: "4" },
+];
+---
+
+<MainContainer id="beneficios" bgColor="bg-white">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+    <!-- Texto y lista -->
+    <div>
+      <HeadingSection
+        tagline="Resultados reales"
+        title="Beneficios Directos para tu Inmobiliaria"
+        description="Una plataforma que convierte tu proceso comercial en una ventaja competitiva sostenible."
+        align="left"
+      />
+
+      <FeatureList features={beneficios} class="mt-8 mb-8" />
+
+      <Button href="#contacto" variant="primary" size="lg">
+        Quiero Transformar mi Gestión Comercial
+      </Button>
+    </div>
+
+    <!-- Dashboard simulado -->
+    <figure aria-label="Panel de control del software de inmobiliarias con métricas comerciales en tiempo real" class="relative">
+      <div class="bg-neutral-900 rounded-2xl overflow-hidden shadow-2xl">
+        <!-- Barra superior -->
+        <div class="bg-neutral-800 px-5 py-3 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400" aria-hidden="true"></span>
+          <span class="ml-4 text-xs text-neutral-400">Panel Comercial — Inmobiliaria</span>
+        </div>
+
+        <!-- Cuerpo del dashboard -->
+        <div class="p-5 space-y-5">
+          <dl class="grid grid-cols-2 gap-3">
+            {
+              stats.map(({ dt, dd }) => (
+                <div class="bg-neutral-800 rounded-xl p-4">
+                  <dt class="text-xs text-neutral-400 mb-1">{dt}</dt>
+                  <dd class="text-2xl font-bold text-white">{dd}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <!-- Barra de pipeline visual -->
+          <div class="bg-neutral-800 rounded-xl p-4 space-y-3">
+            <p class="text-xs text-neutral-400 uppercase tracking-wider">Pipeline por etapa</p>
+            <ol class="space-y-2" aria-label="Distribución de leads por etapa del pipeline">
+              {[
+                { etapa: "Prospecto inicial", pct: 40, color: "bg-primary-400" },
+                { etapa: "Visita agendada", pct: 25, color: "bg-primary-500" },
+                { etapa: "Cotización enviada", pct: 20, color: "bg-secondary-400" },
+                { etapa: "Reserva / Cierre", pct: 15, color: "bg-complementary-400" },
+              ].map(({ etapa, pct, color }) => (
+                <li class="flex items-center gap-3">
+                  <span class="text-xs text-neutral-300 w-36 shrink-0">{etapa}</span>
+                  <div class="flex-1 h-2 bg-neutral-700 rounded-full overflow-hidden">
+                    <div
+                      class={`h-full rounded-full ${color}`}
+                      style={`width:${pct}%`}
+                      role="img"
+                      aria-label={`${pct}%`}
+                    />
+                  </div>
+                  <span class="text-xs text-neutral-400 w-8 text-right">{pct}%</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <figcaption class="mt-3 text-center text-xs text-neutral-500">
+        Vista representativa del panel comercial en tiempo real
+      </figcaption>
+
+      <!-- Glow decorativo -->
+      <div
+        class="absolute -inset-4 bg-primary-500/10 rounded-3xl blur-2xl -z-10 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+    </figure>
+  </div>
+</MainContainer>

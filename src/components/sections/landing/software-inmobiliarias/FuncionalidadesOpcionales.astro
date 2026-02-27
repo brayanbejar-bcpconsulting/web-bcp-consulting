@@ -1,0 +1,55 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "IA para Scoring de Leads",
+    description: "Priorización automática de prospectos con mayor probabilidad de cierre según comportamiento, perfil y etapa del funnel. Tu equipo enfoca el esfuerzo donde más rinde.",
+    icon: "target",
+  },
+  {
+    title: "Integración con Portales Inmobiliarios",
+    description: "Sincronización automática del inventario de unidades con los principales portales del mercado. Un solo sistema para publicar, actualizar y retirar propiedades.",
+    icon: "globe",
+  },
+  {
+    title: "Dashboard Ejecutivo Predictivo",
+    description: "Proyección de ventas por proyecto y trimestre basada en el pipeline actual. Identifica proyectos en riesgo antes del cierre de período.",
+    icon: "brain",
+  },
+  {
+    title: "Automatización de Campañas de Seguimiento",
+    description: "Correos y mensajes automatizados según la etapa del cliente: recordatorios de cita, envío de brochure, actualizaciones de avance de obra y post-venta.",
+    icon: "megaphone",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para una Inmobiliaria Inteligente"
+    description="Cuando tu operación comercial esté centralizada, estos módulos convierten a tu inmobiliaria en una organización que vende con datos, no con intuición."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Te interesa alguno de estos módulos desde el inicio? Lo planificamos juntos.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>

@@ -1,0 +1,57 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "CRM Inmobiliario Especializado",
+    description: "Gestión de prospectos por etapa de venta con historial de interacciones, seguimiento automatizado y recordatorios para que ningún lead quede sin atender.",
+    icon: "funnel",
+  },
+  {
+    title: "Gestión de Proyectos y Unidades",
+    description: "Control de disponibilidad, precios, tipologías y estado de cada unidad en tiempo real. Vista de planta interactiva para el equipo comercial y gerencia.",
+    icon: "building",
+  },
+  {
+    title: "Seguimiento Comercial por Asesor",
+    description: "Medición de productividad individual: leads atendidos, citas realizadas, ratio de conversión y ventas cerradas por asesor, proyecto y período.",
+    icon: "users-group",
+  },
+  {
+    title: "Reportes de Ventas y Proyecciones",
+    description: "Pipeline actualizado en tiempo real con proyección de ingresos por trimestre. Reportes exportables para gerencia, directorio e inversores.",
+    icon: "trending-up",
+  },
+  {
+    title: "Gestión de Reservas y Separaciones",
+    description: "Registro estructurado del proceso comercial: separación, reserva, firma de contrato y entrega. Elimina la doble venta y centraliza la documentación por cliente.",
+    icon: "key",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-white">
+  <HeadingSection
+    tagline="Lo que incluye"
+    title="Funcionalidades Principales del Software Inmobiliario"
+    description="Herramientas diseñadas para que tu equipo comercial venda más, tu gerencia decida mejor y tus clientes vivan una experiencia de compra profesional."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary-500 text-white text-sm font-semibold hover:bg-secondary-600 transition-colors duration-200 shadow"
+    >
+      Quiero este sistema para mi inmobiliaria
+    </a>
+  </p>
+</MainContainer>

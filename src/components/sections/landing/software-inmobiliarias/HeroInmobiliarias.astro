@@ -1,0 +1,78 @@
+---
+import { Button, Badge } from "@components/ui";
+---
+
+<section
+  id="hero"
+  class="relative py-20 lg:py-28 overflow-hidden bg-primary-600 text-white"
+  aria-labelledby="hero-heading"
+>
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-primary-500/80 via-primary-600 to-primary-800 pointer-events-none"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute -top-24 -right-24 w-96 h-96 bg-secondary-400/10 rounded-full blur-3xl pointer-events-none"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute -bottom-24 -left-24 w-80 h-80 bg-complementary-400/10 rounded-full blur-3xl pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 max-w-350 mx-auto px-[5%]">
+    <div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-5">
+
+      <Badge variant="secondary" class="animate-fade-in-up">
+        CRM e Software Inmobiliario para Empresas en Perú
+      </Badge>
+
+      <h1
+        id="hero-heading"
+        class="text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-tight animate-fade-in-up animate-delay-100"
+      >
+        Software para Inmobiliarias que Centraliza{" "}
+        <span class="text-complementary-300">Ventas, Clientes y Proyectos</span>{" "}
+        en una Sola Plataforma
+      </h1>
+
+      <p class="text-sm md:text-base text-white/90 max-w-3xl leading-relaxed animate-fade-in-up animate-delay-200">
+        El mercado inmobiliario exige velocidad, seguimiento comercial constante y control financiero riguroso. Sin un sistema especializado, los leads se pierden, los cierres se retrasan y la información se fragmenta entre asesores.
+      </p>
+
+      <p class="text-xs md:text-sm text-white/75 max-w-3xl leading-relaxed animate-fade-in-up animate-delay-300">
+        Nuestra plataforma permite gestionar propiedades, prospectos y proyectos con{" "}
+        <strong class="text-white font-semibold">trazabilidad completa desde el primer contacto hasta el cierre</strong>{" "}
+        y más allá.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mt-4 w-full justify-center animate-fade-in-up animate-delay-400">
+        <Button href="#contacto" variant="complementary" size="lg" class="w-full sm:w-auto">
+          Solicitar Demo Gratuita
+        </Button>
+        <a
+          href="#funcionalidades"
+          class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3.5 text-lg font-bold rounded-full border-2 border-white/50 text-white hover:bg-white/10 hover:border-white transition-all duration-300"
+        >
+          Ver Funcionalidades
+        </a>
+      </div>
+
+      <ul
+        role="list"
+        class="flex flex-wrap items-center justify-center gap-5 pt-5 border-t border-white/20 w-full animate-fade-in-up animate-delay-400"
+        aria-label="Garantías del sistema"
+      >
+        {
+          [
+            "✓ CRM especializado en inmobiliarias",
+            "✓ Pipeline de ventas en tiempo real",
+            "✓ Soporte técnico local",
+          ].map((item) => (
+            <li class="text-xs text-white/75 font-medium">{item}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

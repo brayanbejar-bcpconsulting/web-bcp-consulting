@@ -1,0 +1,53 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion, Button } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El CRM funciona para múltiples proyectos inmobiliarios simultáneos?",
+    answer:
+      "Sí. La plataforma está diseñada para gestionar múltiples proyectos en paralelo, cada uno con su propia cartera de unidades, asesores asignados, pipeline de ventas y reportes independientes. Puedes tener una vista consolidada o filtrar por proyecto según la necesidad.",
+  },
+  {
+    question: "¿Cómo evita el sistema la doble venta de una unidad?",
+    answer:
+      "Cada unidad tiene un único estado en tiempo real: disponible, reservada o vendida. Cuando un asesor registra una reserva, la unidad cambia de estado automáticamente y deja de mostrarse como disponible para el resto del equipo, eliminando el riesgo de duplicidades.",
+  },
+  {
+    question: "¿Se puede asignar leads automáticamente a los asesores?",
+    answer:
+      "Sí, la plataforma permite configurar reglas de asignación automática por proyecto, zona geográfica, perfil del prospecto o turno del asesor. También soporta asignación manual por parte del coordinador o gerente comercial.",
+  },
+  {
+    question: "¿Qué portales inmobiliarios tienen integración disponible?",
+    answer:
+      "El módulo de integración con portales (disponible como módulo avanzado) permite sincronizar el inventario con Urbania, Adondevivir, LaEncontre y portales propios vía API. La disponibilidad de cada integración se evalúa en el levantamiento inicial del proyecto.",
+  },
+  {
+    question: "¿Cuánto tiempo toma la implementación?",
+    answer:
+      "La implementación estándar toma entre 3 y 6 semanas, con carga inicial de proyectos, configuración del pipeline, capacitación del equipo y acompañamiento post-lanzamiento. El tiempo varía según el número de proyectos activos y los módulos contratados.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software para Inmobiliarias"
+      description="Todo lo que necesitas saber antes de tomar una decisión."
+      align="center"
+    />
+
+    <FaqAccordion faqs={faqs} class="mt-10" />
+
+    <p class="mt-10 text-center">
+      <span class="block text-sm text-neutral-500 mb-3">
+        ¿Tienes una pregunta específica de tu operación?
+      </span>
+      <Button href="#contacto" variant="secondary" size="md">
+        Hablar con un especialista
+      </Button>
+    </p>
+  </div>
+</MainContainer>
