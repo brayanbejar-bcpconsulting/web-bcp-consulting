@@ -14,6 +14,7 @@ export { default as StatCounter } from './StatCounter.astro';
 export { default as ContactForm } from './ContactForm.astro';
 export { default as FaqAccordion } from './FaqAccordion.astro';
 export { default as FeatureList } from './FeatureList.astro';
+export { default as FeatureCard } from './FeatureCard.astro';
 export { default as HeroPage } from './HeroPage.astro';
 export { default as BlogCard } from './BlogCard.astro';
 export { default as Breadcrumbs } from './Breadcrumbs.astro';
