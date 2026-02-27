@@ -1,0 +1,79 @@
+---
+import { MainContainer, Button, Icon, Badge } from "@components/ui";
+import { NAVIGATION } from "@utils/navigation";
+
+const phone = NAVIGATION.contact.phone;
+const waNumber = phone.replace(/\D/g, "");
+const waMsg = encodeURIComponent("Hola, quiero una demo del software financiero para empresas");
+---
+
+<section
+  id="hero"
+  aria-labelledby="hero-heading"
+  class="relative overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 py-20 md:py-28"
+>
+  <!-- Fondo decorativo -->
+  <div class="pointer-events-none absolute inset-0 opacity-10" aria-hidden="true">
+    <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-complementary-300 blur-3xl"></div>
+    <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-primary-300 blur-3xl"></div>
+  </div>
+
+  <div class="max-w-350 mx-auto px-[5%] relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="animate-fade-in-up animate-duration-700 animate-delay-100">
+        <Badge variant="complementary" class="mb-5">
+          Software Financiero para Empresas y Cajas Municipales en Perú
+        </Badge>
+      </div>
+
+      <h1
+        id="hero-heading"
+        class="animate-fade-in-up animate-duration-700 animate-delay-200 text-4xl md:text-5xl xl:text-6xl font-bold text-white leading-tight"
+      >
+        Sistema Financiero Empresarial que Fortalece el{" "}
+        <span class="text-complementary-300">Control, Riesgo y Rentabilidad</span>
+      </h1>
+
+      <p class="animate-fade-in-up animate-duration-700 animate-delay-300 mt-6 text-lg md:text-xl text-primary-100 max-w-2xl mx-auto">
+        La gestión financiera exige precisión, trazabilidad y seguridad. Nuestro sistema
+        permite administrar créditos, cartera y operaciones con información estructurada
+        y confiable.
+      </p>
+
+      <!-- Trust signals -->
+      <ul
+        role="list"
+        aria-label="Ventajas del software financiero"
+        class="animate-fade-in-up animate-duration-700 animate-delay-400 mt-8 flex flex-wrap justify-center gap-3"
+      >
+        {
+          [
+            "✓ Gestión de cartera y créditos integrada",
+            "✓ Control de riesgo en tiempo real",
+            "✓ Soporte técnico local en Perú",
+          ].map((item) => (
+            <li class="flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1.5 text-sm text-white">
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="animate-fade-in-up animate-duration-700 animate-delay-400 mt-10 flex flex-col sm:flex-row justify-center gap-4">
+        <Button
+          href={`https://wa.me/${waNumber}?text=${waMsg}`}
+          variant="complementary"
+          size="lg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="whatsapp" size={20} aria-hidden="true" />
+          Solicitar Demo Gratis
+        </Button>
+        <Button href="#funcionalidades" variant="outline-white" size="lg">
+          Ver Funcionalidades
+        </Button>
+      </p>
+    </div>
+  </div>
+</section>

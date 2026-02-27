@@ -1,0 +1,53 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion, Button } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El sistema es adecuado tanto para empresas como para Cajas Municipales?",
+    answer:
+      "Sí. La plataforma está diseñada para adaptarse al modelo operativo de cada entidad: empresas con cartera crediticia interna, Cajas Municipales de Ahorro y Crédito (CMACs), financieras y cooperativas. Los módulos se configuran según el tipo de operaciones, productos financieros y estructura organizacional de la entidad.",
+  },
+  {
+    question: "¿Cómo se gestiona la clasificación regulatoria de la cartera?",
+    answer:
+      "El sistema permite configurar los criterios de clasificación según la normativa vigente de la SBS: normal, con problemas potenciales, deficiente, dudoso y pérdida. La clasificación es automática según los días de atraso y puede ajustarse por criterio del analista con trazabilidad completa de cada cambio.",
+  },
+  {
+    question: "¿Qué nivel de seguridad tiene el sistema para operaciones sensibles?",
+    answer:
+      "El sistema implementa control de acceso por roles con permisos granulares: visualización, edición, aprobación y auditoría. Todas las operaciones quedan registradas en un log inmutable con usuario, fecha, IP y tipo de acción. Las operaciones críticas requieren doble confirmación según el nivel del usuario.",
+  },
+  {
+    question: "¿Es posible migrar la cartera actual desde nuestro sistema anterior?",
+    answer:
+      "Sí, el proceso de migración forma parte de la implementación. Realizamos el mapeo de campos, validación de integridad y carga controlada de la cartera histórica. La migración se planifica en etapas para minimizar el riesgo operativo y garantizar la continuidad de la atención a clientes durante la transición.",
+  },
+  {
+    question: "¿El sistema genera reportes para la SBS u otros organismos reguladores?",
+    answer:
+      "Sí. El módulo de reportes regulatorios genera los reportes estructurados requeridos por la SBS y otros organismos en los formatos estándar exigidos. También soporta reportes personalizados para auditorías internas, directorio e inversionistas, exportables en Excel, PDF y formatos de transmisión electrónica.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software Financiero"
+      description="Lo que más nos consultan antes de implementar el sistema en una entidad financiera o Caja Municipal."
+      align="center"
+    />
+
+    <FaqAccordion faqs={faqs} class="mt-10" />
+
+    <p class="mt-10 text-center">
+      <span class="block text-sm text-neutral-500 mb-3">
+        ¿Tu entidad tiene requerimientos normativos específicos? Los evaluamos juntos.
+      </span>
+      <Button href="#contacto" variant="secondary" size="md">
+        Hablar con un especialista
+      </Button>
+    </p>
+  </div>
+</MainContainer>

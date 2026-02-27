@@ -1,0 +1,54 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel, Button } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Gestión de Créditos",
+    description: "Registro y seguimiento completo del ciclo crediticio: solicitud, evaluación, desembolso, cuotas y cancelación. Historial trazable por operación, analista y cliente.",
+    icon: "credit-card",
+  },
+  {
+    title: "Control de Cartera",
+    description: "Panel de vencimientos en tiempo real con clasificación por estado: al día, en riesgo, vencido y en cobranza. Alerta automática al responsable antes de que la mora escale.",
+    icon: "chart-bar",
+  },
+  {
+    title: "Gestión de Clientes y Evaluación",
+    description: "Perfilamiento crediticio con datos financieros, referencias y documentación adjunta. Ficha consolidada por cliente con historial de todas sus operaciones en la entidad.",
+    icon: "users-group",
+  },
+  {
+    title: "Reportes Regulatorios",
+    description: "Generación automática de reportes estructurados para supervisión interna y externa: SBS, auditorías y directorio. Información consolidada con un clic, no en horas de trabajo.",
+    icon: "file-text",
+  },
+  {
+    title: "Seguridad y Control de Accesos",
+    description: "Niveles jerárquicos definidos por rol: analista, jefe de créditos, gerencia y auditor. Cada acción queda registrada con usuario, fecha y tipo de operación en el log del sistema.",
+    icon: "shield-check",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Lo esencial, bien hecho"
+    title="Funcionalidades Principales del Software Financiero"
+    description="El núcleo operativo que toda entidad financiera necesita para gestionar su cartera con precisión y control."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <Button href="#contacto" variant="secondary" size="md">
+      Solicitar Demo del MVP
+    </Button>
+  </p>
+</MainContainer>

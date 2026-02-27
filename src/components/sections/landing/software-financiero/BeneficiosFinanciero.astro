@@ -1,0 +1,101 @@
+---
+import { MainContainer, HeadingSection, FeatureList, Button } from "@components/ui";
+
+const beneficios = [
+  "Reducción del riesgo financiero gracias a alertas de mora tempranas y clasificación automática de cartera.",
+  "Mayor velocidad en evaluaciones crediticias con flujos digitalizados que eliminan el papel y el correo interno.",
+  "Control total de cartera en un solo panel: vencimientos, estados, analistas responsables y proyección de cobros.",
+  "Decisiones basadas en datos reales: indicadores actualizados al instante disponibles para gerencia y directorio.",
+  "Auditabilidad completa de cada operación: quién hizo qué, cuándo y con qué autorización, trazable en segundos.",
+];
+
+const stats = [
+  { dt: "Créditos activos", dd: "1,248" },
+  { dt: "Tasa de mora", dd: "3.2%" },
+  { dt: "Desembolsos del mes", dd: "S/842K" },
+  { dt: "Cartera total", dd: "S/12.4M" },
+];
+---
+
+<MainContainer id="beneficios" bgColor="bg-white">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+    <!-- Texto y lista -->
+    <div>
+      <HeadingSection
+        tagline="Resultados reales"
+        title="Beneficios Estratégicos para tu Entidad Financiera"
+        description="Una plataforma que fortalece el control operativo y convierte la gestión financiera en una ventaja competitiva medible."
+        align="left"
+      />
+
+      <FeatureList features={beneficios} class="mt-8 mb-8" />
+
+      <Button href="#contacto" variant="primary" size="lg">
+        Quiero Fortalecer el Control de mi Cartera
+      </Button>
+    </div>
+
+    <!-- Dashboard simulado -->
+    <figure aria-label="Panel de control del software financiero con indicadores de cartera y riesgo crediticio" class="relative">
+      <div class="bg-neutral-900 rounded-2xl overflow-hidden shadow-2xl">
+        <!-- Barra superior -->
+        <div class="bg-neutral-800 px-5 py-3 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400" aria-hidden="true"></span>
+          <span class="ml-4 text-xs text-neutral-400">Panel de Cartera — Entidad Financiera</span>
+        </div>
+
+        <!-- Cuerpo del dashboard -->
+        <div class="p-5 space-y-5">
+          <dl class="grid grid-cols-2 gap-3">
+            {
+              stats.map(({ dt, dd }) => (
+                <div class="bg-neutral-800 rounded-xl p-4">
+                  <dt class="text-xs text-neutral-400 mb-1">{dt}</dt>
+                  <dd class="text-2xl font-bold text-white">{dd}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <!-- Distribución por tipo de crédito -->
+          <div class="bg-neutral-800 rounded-xl p-4 space-y-3">
+            <p class="text-xs text-neutral-400 uppercase tracking-wider">Cartera por tipo de crédito</p>
+            <ol class="space-y-2" aria-label="Distribución de cartera por tipo de crédito">
+              {[
+                { tipo: "Crédito personal", pct: 45, color: "bg-primary-400" },
+                { tipo: "Microempresa", pct: 30, color: "bg-primary-500" },
+                { tipo: "Hipotecario", pct: 15, color: "bg-secondary-400" },
+                { tipo: "Consumo", pct: 10, color: "bg-complementary-400" },
+              ].map(({ tipo, pct, color }) => (
+                <li class="flex items-center gap-3">
+                  <span class="text-xs text-neutral-300 w-32 shrink-0">{tipo}</span>
+                  <div class="flex-1 h-2 bg-neutral-700 rounded-full overflow-hidden">
+                    <div
+                      class={`h-full rounded-full ${color}`}
+                      style={`width:${pct}%`}
+                      role="img"
+                      aria-label={`${pct}%`}
+                    />
+                  </div>
+                  <span class="text-xs text-neutral-400 w-8 text-right">{pct}%</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <figcaption class="mt-3 text-center text-xs text-neutral-500">
+        Vista representativa del panel de cartera en tiempo real
+      </figcaption>
+
+      <!-- Glow decorativo -->
+      <div
+        class="absolute -inset-4 bg-primary-500/10 rounded-3xl blur-2xl -z-10 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+    </figure>
+  </div>
+</MainContainer>

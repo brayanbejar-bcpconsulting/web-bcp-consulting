@@ -1,0 +1,60 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const problemas = [
+  {
+    title: "Gestión Manual de Cartera",
+    description: "El seguimiento de créditos activos, vencimientos y pagos se hace en planillas que nadie mantiene al día. La cartera crece y el control se fragmenta en archivos de cada analista.",
+    icon: "file-text",
+  },
+  {
+    title: "Sin Visibilidad del Riesgo Crediticio",
+    description: "No hay indicadores consolidados de mora, concentración de cartera ni alertas tempranas. La gerencia toma decisiones sin información clara sobre la exposición real del portafolio.",
+    icon: "shield-alert",
+  },
+  {
+    title: "Procesos Lentos en Aprobación de Créditos",
+    description: "Las evaluaciones dependen de documentos físicos, correos y aprobaciones no estructuradas. El cliente espera días por una respuesta que debería tardar horas.",
+    icon: "clock-check",
+  },
+  {
+    title: "Información Financiera Fragmentada",
+    description: "Los datos de créditos, cobranzas, clientes y reportes regulatorios viven en sistemas distintos o en archivos locales, sin trazabilidad ni consolidación automática.",
+    icon: "layers",
+  },
+  {
+    title: "Alto Riesgo Operativo",
+    description: "Sin controles de acceso por rol ni trazabilidad de operaciones, cualquier modificación o error impacta silenciosamente los registros sin posibilidad de auditoría.",
+    icon: "alert-triangle",
+  },
+];
+---
+
+<MainContainer id="problemas" bgColor="bg-white">
+  <HeadingSection
+    tagline="El problema de fondo"
+    title="Desafíos Comunes en Entidades Financieras"
+    description="Si tu entidad financiera opera con planillas y procesos manuales, estos escenarios son parte de tu día a día."
+    align="center"
+  />
+
+  <Carousel data={problemas} visibleDesktop={3}>
+    {
+      problemas.map((p) => (
+        <FeatureCard title={p.title} description={p.description} icon={p.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      En finanzas, la imprecisión no solo cuesta dinero: genera riesgo regulatorio y legal.
+    </span>
+    <a
+      href="#funcionalidades"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Ver cómo lo resolvemos →
+    </a>
+  </p>
+</MainContainer>

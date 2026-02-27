@@ -1,0 +1,55 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Scoring Crediticio con IA",
+    description: "Evaluación automática del riesgo del solicitante cruzando variables financieras, comportamiento histórico y factores externos. Decisiones más rápidas con menor exposición al riesgo.",
+    icon: "brain",
+  },
+  {
+    title: "Automatización de Recordatorios de Pago",
+    description: "Notificaciones inteligentes por SMS, correo o WhatsApp según la etapa de la cuota: preventiva antes del vencimiento, de cobro al vencer y de gestión de cobranza al incumplir.",
+    icon: "bell",
+  },
+  {
+    title: "Integración con Centrales de Riesgo",
+    description: "Consulta automática del historial crediticio del solicitante en Equifax, Sentinel u otras centrales durante el proceso de evaluación, sin salir del sistema.",
+    icon: "link-chain",
+  },
+  {
+    title: "Análisis Predictivo de Morosidad",
+    description: "Modelos de alerta temprana que identifican clientes con alta probabilidad de incumplimiento antes de que venzan, permitiendo acciones preventivas en lugar de reactivas.",
+    icon: "percent",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para una Gestión Financiera Inteligente"
+    description="Cuando el control base esté consolidado, estos módulos convierten tu entidad en una organización que anticipa el riesgo en lugar de reaccionar ante él."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Necesitas alguno de estos módulos desde el inicio? Lo planificamos juntos.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>
