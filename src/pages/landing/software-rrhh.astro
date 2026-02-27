@@ -1,0 +1,56 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroRRHH,
+  ProblemasRRHH,
+  FuncionalidadesMVPRRHH,
+  FuncionalidadesOpcionalesRRHH,
+  BeneficiosRRHH,
+  FaqRRHH,
+  CtaRRHH,
+} from "@components/sections/landing/software-rrhh";
+
+const navItems = [
+  { label: "Problemas", href: "#problemas" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Módulos Avanzados", href: "#evolucion" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  {
+    title: "Software para Clínicas",
+    href: "/landing/software-clinicas",
+    tagline: "Historia clínica electrónica, agenda médica y facturación SUNAT",
+  },
+  {
+    title: "Software para Restaurantes",
+    href: "/landing/software-restaurantes",
+    tagline: "Control integral de ventas, inventarios y operación gastronómica",
+  },
+  {
+    title: "Software para Retail",
+    href: "/landing/software-retail",
+    tagline: "Punto de venta, stock y cadena de tiendas bajo control",
+  },
+];
+---
+
+<LandingLayout
+  title="Software de Gestión de RRHH para Empresas en Perú | BCP Consulting"
+  description="Sistema corporativo para automatizar recursos humanos: control de asistencia, planillas, gestión documentaria y evaluación de desempeño. Cumplimiento MINTRA. Soporte en Perú."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+  ctaLabel="Solicitar Demo"
+  ctaHref="#contacto"
+>
+  <HeroRRHH />
+  <ProblemasRRHH />
+  <FuncionalidadesMVPRRHH />
+  <FuncionalidadesOpcionalesRRHH />
+  <BeneficiosRRHH />
+  <FaqRRHH />
+  <CtaRRHH />
+</LandingLayout>

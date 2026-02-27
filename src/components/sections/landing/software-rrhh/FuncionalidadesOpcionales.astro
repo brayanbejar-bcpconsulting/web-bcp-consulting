@@ -1,0 +1,54 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "IA para Análisis de Rotación y Clima Laboral",
+    description: "Identifica patrones de riesgo de renuncia, detecta equipos con bajo compromiso y sugiere acciones preventivas antes de perder talento clave.",
+    icon: "brain",
+  },
+  {
+    title: "Portal del Colaborador",
+    description: "Acceso propio para cada trabajador: descarga de boletas, solicitud de vacaciones, consulta de marcaciones y comunicados internos desde cualquier dispositivo.",
+    icon: "globe",
+  },
+  {
+    title: "Integración con ERP Contable",
+    description: "Sincronización automática de planillas, provisiones y asientos contables con tu sistema ERP. Sin doble digitación, sin errores de traspaso.",
+    icon: "link-chain",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para una RRHH Estratégica"
+    description="Una vez consolidada la operación básica, estas capacidades convierten al área de personas en un motor de decisiones para la empresa."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((func) => (
+        <FeatureCard
+          title={func.title}
+          description={func.description}
+          icon={func.icon}
+        />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Te interesa alguno de estos módulos? Podemos incluirlos desde el inicio del proyecto.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>

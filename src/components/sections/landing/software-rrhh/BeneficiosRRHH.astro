@@ -1,0 +1,58 @@
+---
+import { MainContainer, HeadingSection, FeatureList, Button } from "@components/ui";
+
+const beneficios = [
+  "Reducción de errores legales en planillas, contratos y liquidaciones.",
+  "Hasta un 40% menos de tiempo invertido en tareas administrativas del área.",
+  "Trazabilidad completa de asistencia, documentos y evaluaciones para auditorías.",
+  "Toma de decisiones basada en datos reales de personas, no en suposiciones.",
+  "Escalabilidad para empresas en crecimiento: áreas, sedes y cargos ilimitados.",
+];
+---
+
+<MainContainer id="beneficios" bgColor="bg-white">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+    <div>
+      <HeadingSection
+        tagline="Por qué elegirnos"
+        title="Beneficios Estratégicos para tu Área de Recursos Humanos"
+        description="Más que digitalizar procesos: transformar el área de RRHH en una función estratégica que impulsa el crecimiento empresarial."
+        align="left"
+      />
+
+      <FeatureList features={beneficios} class="mb-8" />
+
+      <Button href="#contacto" variant="primary" size="lg">
+        Quiero Transformar mi Área de RRHH
+      </Button>
+    </div>
+
+    <!-- Dashboard simulado — figure aporta semántica de contenido ilustrativo -->
+    <figure class="relative rounded-2xl overflow-hidden bg-gradient-to-br from-primary-700 to-primary-900 aspect-video flex items-center justify-center shadow-2xl" aria-label="Vista previa del panel de control de RRHH">
+      <div class="bg-white/10 border border-white/20 rounded-xl p-6 text-white text-center w-72">
+        <p class="text-xs text-white/60 mb-1">Asistencia hoy</p>
+        <p class="text-3xl font-extrabold">124 <span class="text-lg font-normal text-white/50">/ 130</span></p>
+        <p class="text-xs text-green-300 mt-1">↑ 95.4% de puntualidad</p>
+
+        <!-- Stats con dl/dt/dd: semánticamente describe pares término-valor -->
+        <dl class="mt-4 grid grid-cols-3 gap-2">
+          <div class="bg-white/10 rounded-lg p-2">
+            <dt class="text-xs text-white/60 leading-tight">Planilla</dt>
+            <dd class="text-sm font-bold">S/ 48k</dd>
+          </div>
+          <div class="bg-white/10 rounded-lg p-2">
+            <dt class="text-xs text-white/60 leading-tight">Contratos</dt>
+            <dd class="text-sm font-bold">3 <span class="text-xs text-yellow-300">venc.</span></dd>
+          </div>
+          <div class="bg-white/10 rounded-lg p-2">
+            <dt class="text-xs text-white/60 leading-tight">Desempeño</dt>
+            <dd class="text-sm font-bold">87%</dd>
+          </div>
+        </dl>
+      </div>
+      <figcaption class="absolute bottom-3 right-4 text-xs text-white/30">
+        Dashboard en tiempo real
+      </figcaption>
+    </figure>
+  </div>
+</MainContainer>

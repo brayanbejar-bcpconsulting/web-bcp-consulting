@@ -1,0 +1,58 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El sistema cumple con la normativa laboral del Ministerio de Trabajo del Perú?",
+    answer:
+      "Sí. El sistema está configurado para cumplir con la legislación laboral vigente en Perú: cálculo de CTS, gratificaciones, vacaciones truncas, AFP/ONP, SCTR y asignación familiar según las tablas del Ministerio de Trabajo. Actualizamos los parámetros ante cualquier cambio normativo sin costo adicional.",
+  },
+  {
+    question: "¿Se puede exportar la planilla directamente al sistema contable?",
+    answer:
+      "Sí. El módulo de planillas genera exportaciones en formatos compatibles con los principales ERP contables del mercado. También ofrecemos el módulo de integración automática para sincronización en tiempo real sin digitación manual.",
+  },
+  {
+    question: "¿Cuánto tiempo toma la implementación en mi empresa?",
+    answer:
+      "Una implementación estándar con los cuatro módulos MVP toma entre 7 y 14 días hábiles, dependiendo del tamaño de la plantilla y la complejidad organizacional. Incluimos capacitación al equipo de RRHH y acompañamiento en las primeras semanas de lanzamiento.",
+  },
+  {
+    question: "¿Los colaboradores pueden ver sus propios datos y documentos?",
+    answer:
+      "Con el módulo Portal del Colaborador (opcional), cada trabajador tiene acceso a su propio perfil: boletas de pago, constancias, marcaciones, saldo de vacaciones y solicitudes de permiso. El acceso es por credenciales individuales con contraseña propia.",
+  },
+  {
+    question: "¿Funciona para empresas con múltiples sedes o áreas?",
+    answer:
+      "Sí. El sistema está diseñado para estructuras organizacionales complejas: múltiples sedes, unidades de negocio, centros de costo y jerarquías de aprobación. Los reportes se pueden filtrar por sede, área, cargo o cualquier combinación de variables.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software de RRHH"
+      description="Estas son las preguntas más comunes que recibimos de gerentes y directores de recursos humanos antes de implementar el sistema."
+      align="center"
+    />
+
+    <div class="mt-8">
+      <FaqAccordion faqs={faqs} />
+    </div>
+
+    <p class="mt-10 text-center">
+      <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+        ¿Tienes más preguntas? Nuestro equipo te responde en menos de 24 horas.
+      </span>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors duration-200"
+      >
+        Hablar con un asesor
+      </a>
+    </p>
+  </div>
+</MainContainer>

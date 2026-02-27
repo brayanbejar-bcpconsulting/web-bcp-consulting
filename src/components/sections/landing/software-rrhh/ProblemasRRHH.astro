@@ -1,0 +1,72 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const problemas = [
+  {
+    title: "Errores en Planillas",
+    description: "Cálculos manuales de remuneraciones, descuentos y beneficios sociales generan inconsistencias que derivan en reclamos o sanciones laborales.",
+    icon: "coins",
+  },
+  {
+    title: "Sin Indicadores de Desempeño",
+    description: "Evaluar el rendimiento de los colaboradores de forma subjetiva o esporádica impide identificar quién aporta valor y quién necesita refuerzo.",
+    icon: "chart-bar",
+  },
+  {
+    title: "Sobrecarga Administrativa",
+    description: "El área de RRHH dedica la mayor parte de su tiempo a tareas repetitivas como imprimir contratos, enviar recordatorios o preparar reportes en Excel.",
+    icon: "clock-check",
+  },
+  {
+    title: "Documentación Dispersa",
+    description: "Contratos, renovaciones, liquidaciones y legajos físicos almacenados en carpetas sin trazabilidad ni control de vencimientos.",
+    icon: "file-text",
+  },
+  {
+    title: "Falta de Trazabilidad en Asistencia",
+    description: "Sin un registro digital unificado, es imposible auditar tardanzas, ausencias o horas extra de forma confiable y sin conflictos.",
+    icon: "users-group",
+  },
+];
+---
+
+<MainContainer id="problemas" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="El Desafío"
+    title="Problemas Comunes en la Gestión de RRHH"
+    description="Si tu área de RR.HH. opera de esta forma, está consumiendo más tiempo y recursos del que debería, y exponiendo a la empresa a riesgos innecesarios."
+    align="center"
+  />
+
+  <Carousel data={problemas} visibleDesktop={3}>
+    {
+      problemas.map((problema) => (
+        <FeatureCard
+          title={problema.title}
+          description={problema.description}
+          icon={problema.icon}
+        />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <a
+      href="#funcionalidades"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors duration-200 shadow"
+    >
+      Ver cómo lo resolvemos
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-4 w-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </a>
+  </p>
+</MainContainer>

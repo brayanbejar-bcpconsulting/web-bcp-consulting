@@ -1,0 +1,56 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Control Digital de Asistencia",
+    description: "Registro automatizado de ingresos, salidas, tardanzas y permisos. Reportes por área, cargo o período exportables al instante.",
+    icon: "clock-check",
+  },
+  {
+    title: "Gestión de Planillas",
+    description: "Cálculo preciso de remuneraciones, gratificaciones, CTS y descuentos. Exportación directa al sistema contable en un clic.",
+    icon: "coins",
+  },
+  {
+    title: "Gestión Documentaria",
+    description: "Contratos digitales, renovaciones automáticas y alertas de vencimiento para evitar el riesgo de omisión en plazos legales.",
+    icon: "file-text",
+  },
+  {
+    title: "Evaluación de Desempeño",
+    description: "Indicadores de rendimiento personalizados por puesto. Seguimiento objetivo del avance individual y por equipo.",
+    icon: "chart-bar",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-white">
+  <HeadingSection
+    tagline="Lo que incluye"
+    title="Funcionalidades Principales del Sistema de RRHH"
+    description="Herramientas diseñadas para reducir la carga operativa del área y garantizar cumplimiento legal sin esfuerzo manual."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((func) => (
+        <FeatureCard
+          title={func.title}
+          description={func.description}
+          icon={func.icon}
+        />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary-500 text-white text-sm font-semibold hover:bg-secondary-600 transition-colors duration-200 shadow"
+    >
+      Quiero este sistema para mi empresa
+    </a>
+  </p>
+</MainContainer>
