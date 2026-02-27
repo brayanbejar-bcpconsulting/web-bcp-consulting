@@ -1,0 +1,60 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "IA para Análisis de Flujo de Pacientes",
+    description: "Predicción de demanda por especialidad, identificación de cuellos de botella y sugerencias automáticas para optimizar la programación de citas.",
+    icon: "brain",
+  },
+  {
+    title: "Portal Web para Pacientes",
+    description: "Permite que los pacientes agenden citas en línea, descarguen sus resultados, accedan a su historial y se comuniquen con el personal desde cualquier dispositivo.",
+    icon: "globe",
+  },
+  {
+    title: "Integración con Laboratorios y Sistemas Externos",
+    description: "Recibe resultados de laboratorio directamente en la historia clínica del paciente y conecta con otras plataformas de salud o seguros mediante API.",
+    icon: "flask",
+  },
+  {
+    title: "Dashboard Gerencial Predictivo",
+    description: "Proyecciones de ingresos, tendencias de atención, KPIs por médico o especialidad y alertas tempranas de baja ocupación para decisiones proactivas.",
+    icon: "trending-up",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos Avanzados para Escalar tu Centro Médico"
+    description="Cuando tu clínica esté estabilizada operativamente, estos módulos te llevan al siguiente nivel de eficiencia y competitividad."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((func) => (
+        <FeatureCard
+          title={func.title}
+          description={func.description}
+          icon={func.icon}
+        />
+      ))
+    }
+  </Carousel>
+
+  <!-- CTA texto -->
+  <div class="mt-10 text-center">
+    <p class="text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Te interesa alguno de estos módulos? Podemos planificarlo desde el inicio.
+    </p>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </div>
+</MainContainer>

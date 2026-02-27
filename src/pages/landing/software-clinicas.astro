@@ -1,0 +1,56 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroClinicas,
+  ProblemasClinicas,
+  FuncionalidadesMVPClinicas,
+  FuncionalidadesOpcionalesClinicas,
+  BeneficiosClinicas,
+  FaqClinicas,
+  CtaClinicas,
+} from "@components/sections/landing/software-clinicas";
+
+const navItems = [
+  { label: "Problemas", href: "#problemas" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Módulos Avanzados", href: "#evolucion" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  {
+    title: "Software para Restaurantes",
+    href: "/landing/software-restaurantes",
+    tagline: "Control total de ventas, inventarios y operación gastronómica",
+  },
+  {
+    title: "Software para Hoteles",
+    href: "/landing/software-hoteles",
+    tagline: "Gestión de reservas, huéspedes y ocupación hotelera",
+  },
+  {
+    title: "Software para Retail",
+    href: "/landing/software-retail",
+    tagline: "Punto de venta, inventarios y cadena de tiendas bajo control",
+  },
+];
+---
+
+<LandingLayout
+  title="Software para Clínicas y Centros Médicos en Perú | BCP Consulting"
+  description="Plataforma integral para clínicas: historia clínica electrónica, agenda médica, facturación SUNAT y gestión de pacientes. Digitaliza tu centro médico con soporte local en Perú."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+  ctaLabel="Solicitar Demo"
+  ctaHref="#contacto"
+>
+  <HeroClinicas />
+  <ProblemasClinicas />
+  <FuncionalidadesMVPClinicas />
+  <FuncionalidadesOpcionalesClinicas />
+  <BeneficiosClinicas />
+  <FaqClinicas />
+  <CtaClinicas />
+</LandingLayout>

@@ -1,0 +1,57 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Historia Clínica Electrónica Segura",
+    description: "Registra, actualiza y consulta el historial completo de cada paciente en segundos. Con control de acceso por rol y respaldo automático en la nube.",
+    icon: "clipboard-medical",
+  },
+  {
+    title: "Agenda Médica Inteligente",
+    description: "Gestión de citas por especialidad, médico y consultorio. Confirmaciones automáticas, recordatorios y vista de disponibilidad en tiempo real.",
+    icon: "calendar-check",
+  },
+  {
+    title: "Facturación y Gestión Administrativa",
+    description: "Emite boletas y facturas electrónicas integradas con SUNAT, gestiona cobranza, convenios con seguros y cierres de caja sin errores.",
+    icon: "credit-card",
+  },
+  {
+    title: "Base de Datos Centralizada de Pacientes",
+    description: "Toda la información del paciente en un solo lugar: datos personales, diagnósticos, tratamientos, medicamentos y documentos adjuntos.",
+    icon: "database",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-white">
+  <HeadingSection
+    tagline="Lo que incluye"
+    title="Funcionalidades Esenciales del Sistema para Clínicas"
+    description="Todo lo que necesitas para digitalizar la gestión de tu clínica y ofrecer una atención más ágil y profesional desde el día uno."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((func) => (
+        <FeatureCard
+          title={func.title}
+          description={func.description}
+          icon={func.icon}
+        />
+      ))
+    }
+  </Carousel>
+
+  <!-- CTA intermedio -->
+  <div class="mt-10 text-center">
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary-500 text-white text-sm font-semibold hover:bg-secondary-600 transition-colors duration-200 shadow"
+    >
+      Quiero este sistema para mi clínica
+    </a>
+  </div>
+</MainContainer>

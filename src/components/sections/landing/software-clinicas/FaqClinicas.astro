@@ -1,0 +1,59 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿Cómo se protege la información confidencial de los pacientes?",
+    answer:
+      "El sistema utiliza cifrado en tránsito y en reposo para todos los datos clínicos. El acceso está controlado por roles (médico, enfermero, administrativo, gerencia) de forma que cada usuario solo ve la información que corresponde a su función. Además, se generan auditorías automáticas de cada acceso e integramos respaldo diario en la nube.",
+  },
+  {
+    question: "¿Puedo gestionar varias especialidades y médicos desde el mismo sistema?",
+    answer:
+      "Sí. El sistema permite configurar múltiples especialidades, consultorios y médicos de forma independiente. Cada médico tiene su propia agenda, historia clínica y reportes de productividad. Puedes ver en un solo panel el rendimiento de toda la clínica o filtrar por especialidad o profesional.",
+  },
+  {
+    question: "¿El sistema emite facturas electrónicas según lo exige SUNAT?",
+    answer:
+      "Sí. La facturación electrónica está integrada de fábrica: boletas, facturas y notas de crédito se emiten automáticamente al cerrar cada atención. Soportamos diferentes modalidades de pago y el registro contable se actualiza en tiempo real, sin digitación doble.",
+  },
+  {
+    question: "¿Cuánto tiempo toma implementar el software en mi clínica?",
+    answer:
+      "Una implementación estándar (módulos MVP) toma entre 5 y 10 días hábiles. Esto incluye configuración del sistema, migración de datos existentes, capacitación al personal administrativo y clínico, y acompañamiento durante las primeras semanas en producción.",
+  },
+  {
+    question: "¿Funciona si el internet se cae en la clínica?",
+    answer:
+      "Los módulos de atención inmediata (registro de consulta, signos vitales, despacho de medicamentos) tienen modo sin conexión que sincroniza automáticamente al restablecerse la red. La historia clínica electrónica garantiza continuidad operativa incluso en cortes de conectividad.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software para Clínicas"
+      description="Estas son las consultas más comunes que recibimos antes de iniciar la implementación."
+      align="center"
+    />
+
+    <div class="mt-8">
+      <FaqAccordion faqs={faqs} />
+    </div>
+
+    <!-- CTA bajo FAQ -->
+    <div class="mt-10 text-center">
+      <p class="text-xs md:text-sm text-neutral-500 mb-3">
+        ¿Tienes más preguntas? Escríbenos directamente y te respondemos en menos de 24 horas.
+      </p>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors duration-200"
+      >
+        Hablar con un asesor
+      </a>
+    </div>
+  </div>
+</MainContainer>
