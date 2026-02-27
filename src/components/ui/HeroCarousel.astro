@@ -27,14 +27,12 @@ import { Image } from "astro:assets";
 const { slides, headlineIndex = 0 } = Astro.props;
 const hasMultiple = slides.length > 1;
 
-/** Mapeo de clases para alineación */
 const alignClasses = {
   left: "items-start text-left",
   center: "items-center text-center",
   right: "items-end text-right",
 };
 
-/** Mapeo de estilos para el overlay */
 const overlayClasses = {
   'none': "hidden",
   'light': "bg-black/20",
@@ -62,7 +60,7 @@ const overlayClasses = {
             aria-hidden={i !== 0 ? "true" : "false"}
             data-slide
           >
-            {/* CAPA 0: Imagen optimizada */}
+            {/* CAPA 0: Imagen de fondo */}
             <div class="hero-media">
               {typeof slide.image === "string" ? (
                 <img
@@ -84,10 +82,10 @@ const overlayClasses = {
               )}
             </div>
 
-            {/* CAPA 1: Overlay Personalizable */}
+            {/* CAPA 1: Overlay */}
             <div class:list={["hero-overlay", overlayClasses[overlay]]} aria-hidden="true" />
 
-            {/* CAPA 2: Contenido con Posicionamiento */}
+            {/* CAPA 2: Contenido */}
             <div class:list={["hero-content", alignClasses[align]]}>
               <div class="hero-text-wrapper">
                 {isHeadline ? (
@@ -144,6 +142,13 @@ const overlayClasses = {
       </div>
     </>
   )}
+
+  {/*
+    Sentinel invisible al final del hero.
+    El Header lo observa con IntersectionObserver para saber
+    cuándo salimos del hero y activar el modo sticky.
+  */}
+  <div data-hero-sentinel aria-hidden="true" class="hero-sentinel" />
 </section>
 
 <style>
@@ -151,59 +156,94 @@ const overlayClasses = {
 
   .hero-carousel {
     @apply relative w-full overflow-hidden bg-black;
-    height: clamp(500px, 85vh, 900px);
+    /*
+      min-height en lugar de height fijo:
+      - En desktop tiene un mínimo agradable de 600px y un máximo de 900px.
+      - En móvil (debajo de md) usa fit-content via min-h-0 implícito:
+        si el contenido necesita más espacio, el hero crece. Nunca corta.
+    */
+    min-height: 100dvh;
+    max-height: 900px;
+  }
+
+  /* En móvil removemos el max-height para que el contenido no se corte nunca */
+  @media (max-width: 767px) {
+    .hero-carousel {
+      max-height: none;
+    }
   }
 
   .hero-track {
     @apply flex h-full w-full;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .hero-track {
-    @apply flex h-full w-full;
-    /* Añadimos estas 3 líneas clave */
-    overflow-x: hidden; 
+    overflow-x: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    
     scrollbar-width: none;
     -ms-overflow-style: none;
+    /*
+      min-height heredado para que los slides llenen el carousel
+      cuando el contenido dicta la altura en móvil
+    */
+    min-height: inherit;
   }
 
   .hero-slide {
-    @apply relative flex-none w-full h-full overflow-hidden;
-    /* Aseguramos que el slide se alinee correctamente */
+    @apply relative flex-none w-full overflow-hidden;
     scroll-snap-align: start;
+    /*
+      En desktop: ocupa el 100% del carousel (que tiene max-height).
+      En móvil: min-height igual al viewport, pero puede crecer con el contenido.
+    */
+    min-height: 100dvh;
+  }
+
+  @media (min-width: 768px) {
+    .hero-slide {
+      height: 100%;
+      min-height: unset;
+    }
   }
 
   /* Capas */
-  .hero-media { @apply absolute inset-0 z-0; }
-  
-  /* Corregido duration-[3000ms] por duration-3000 */
-  .hero-img { 
-    @apply w-full h-full object-cover transition-transform duration-3000 ease-out; 
-  }
-  
-  .hero-overlay { @apply absolute inset-0 z-10 pointer-events-none; }
-  
-  .hero-content {
-    @apply absolute inset-0 z-20 flex flex-col justify-center px-8 md:px-20 lg:px-32;
+  .hero-media {
+    /*
+      La imagen siempre cubre todo el slide con absolute + inset-0.
+      No importa si el slide creció por contenido: la imagen se estira.
+    */
+    @apply absolute inset-0 z-0;
   }
 
-  .hero-text-wrapper { @apply max-w-[750px]; }
+  .hero-img {
+    @apply w-full h-full object-cover transition-transform duration-3000 ease-out;
+  }
+
+  .hero-overlay { @apply absolute inset-0 z-10 pointer-events-none; }
+
+  .hero-content {
+    /*
+      relative en lugar de absolute para que en móvil el contenido
+      empuje el alto del slide hacia abajo si es necesario.
+      En desktop volvemos a absolute para centrado vertical perfecto.
+    */
+    @apply relative z-20 flex flex-col w-full min-h-dvh
+           justify-center px-8 py-24
+           md:absolute md:inset-0 md:py-0 md:px-20
+           lg:px-32;
+  }
+
+  .hero-text-wrapper { @apply max-w-187.5; }
 
   /* Efecto Zoom Activo */
-  .hero-slide[aria-hidden="false"] .hero-img { transform: scale(1.1); }
+  .hero-slide[aria-hidden="false"] .hero-img { transform: scale(1.05); }
 
-  /* Reinicio de Animaciones */
-  .hero-slide[aria-hidden="true"] .hero-content { display: none; }
-  .hero-slide[aria-hidden="false"] .hero-content { display: flex; }
+  /* Animaciones solo en slide activo */
+  .hero-slide[aria-hidden="true"] .hero-content { @apply hidden; }
+  .hero-slide[aria-hidden="false"] .hero-content { @apply flex; }
 
-  /* Tipografía y Botones */
+  /* Tipografía */
   .hero-title {
     @apply text-white font-bold leading-[1.1] mb-6;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2rem, 6vw, 4.5rem);
   }
   .hero-description {
     @apply text-white/90 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl;
@@ -221,6 +261,13 @@ const overlayClasses = {
   .hero-dots { @apply absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-30; }
   .hero-dot { @apply w-3 h-3 rounded-full bg-white/30 transition-all cursor-pointer border-none; }
   .hero-dot.active { @apply bg-white w-10; }
+
+  /* Sentinel: invisible, solo sirve como punto de observación */
+  .hero-sentinel {
+    @apply absolute bottom-0 left-0 w-full;
+    height: 1px;
+    pointer-events: none;
+  }
 </style>
 
 <script>
@@ -239,57 +286,43 @@ const overlayClasses = {
       const update = (index: number) => {
         current = index;
         slides.forEach((s, i) => {
-          const isActive = i === index;
-          s.setAttribute("aria-hidden", isActive ? "false" : "true");
+          s.setAttribute("aria-hidden", i === index ? "false" : "true");
         });
-        
         dots.forEach((d, i) => {
           d.classList.toggle("active", i === index);
           d.setAttribute("aria-selected", i === index ? "true" : "false");
         });
-
         if (prev) prev.disabled = index === 0;
         if (next) next.disabled = index === slides.length - 1;
       };
 
       const goTo = (i: number) => {
         if (!track || !slides[i]) return;
-        // Método ultra-preciso para carruseles
-        const targetX = slides[i].offsetLeft;
-        track.scrollTo({ left: targetX, behavior: "smooth" });
+        track.scrollTo({ left: slides[i].offsetLeft, behavior: "smooth" });
       };
 
-      // El Observer detecta cuando el slide cambia para actualizar los dots
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const index = slides.indexOf(e.target as HTMLElement);
-            if (index !== -1) update(index);
-          }
-        });
-      }, { root: track, threshold: 0.6 });
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const index = slides.indexOf(e.target as HTMLElement);
+              if (index !== -1) update(index);
+            }
+          });
+        },
+        { root: track, threshold: 0.6 }
+      );
 
-      slides.forEach(s => obs.observe(s));
-      
-      prev?.addEventListener("click", () => {
-        if (current > 0) goTo(current - 1);
-      });
+      slides.forEach((s) => obs.observe(s));
 
-      next?.addEventListener("click", () => {
-        if (current < slides.length - 1) goTo(current + 1);
-      });
-      
-      dots.forEach(d => {
-        d.addEventListener("click", () => {
-          const index = Number(d.getAttribute('data-index'));
-          goTo(index);
-        });
+      prev?.addEventListener("click", () => { if (current > 0) goTo(current - 1); });
+      next?.addEventListener("click", () => { if (current < slides.length - 1) goTo(current + 1); });
+      dots.forEach((d) => {
+        d.addEventListener("click", () => goTo(Number(d.getAttribute("data-index"))));
       });
     });
   };
 
-  // Ejecución inicial
   init();
-  // Reiniciar tras navegación en Astro (View Transitions)
   document.addEventListener("astro:after-swap", init);
 </script>
