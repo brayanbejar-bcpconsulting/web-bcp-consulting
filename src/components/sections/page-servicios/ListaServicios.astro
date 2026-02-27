@@ -1,0 +1,95 @@
+---
+import {
+  MainContainer,
+  HeadingSection,
+  ServiceCard,
+  Icon,
+  FeatureList,
+} from "@components";
+import { SERVICES } from "@data/services";
+---
+
+<MainContainer
+  id="lista-servicios"
+  bgColor="bg-neutral-50"
+  ariaLabelledby="lista-servicios-titulo"
+>
+  {
+    SERVICES.map((service, idx) => (
+      <div class:list={["service-detail", idx > 0 && "mt-20"]} id={service.id}>
+        <div class="service-detail__grid">
+          <div
+            class:list={["service-detail__info", idx % 2 !== 0 && "lg:order-2"]}
+          >
+            <div class="service-detail__icon-wrapper">
+              <Icon name={service.icon} size="36" />
+            </div>
+            <h2 class="service-detail__title" id={`service-${service.id}`}>
+              {service.title}
+            </h2>
+            <p class="service-detail__tagline">{service.tagline}</p>
+            <p class="service-detail__desc">{service.description}</p>
+          </div>
+          <div
+            class:list={[
+              "service-detail__features",
+              idx % 2 !== 0 && "lg:order-1",
+            ]}
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {service.features.map((f) => (
+                <div class="feature-card">
+                  <h3 class="feature-card__title">{f.title}</h3>
+                  <p class="feature-card__desc">{f.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</MainContainer>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .service-detail__grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-12 items-start;
+  }
+
+  .service-detail__info {
+    @apply flex flex-col gap-4;
+  }
+
+  .service-detail__icon-wrapper {
+    @apply w-16 h-16 flex items-center justify-center rounded-2xl
+           bg-secondary-50 text-secondary-600;
+  }
+
+  .service-detail__title {
+    @apply text-primary-700 font-extrabold;
+    font-size: clamp(1.5rem, 2vw + 0.5rem, 2.2rem);
+  }
+
+  .service-detail__tagline {
+    @apply text-secondary-600 font-semibold text-lg;
+  }
+
+  .service-detail__desc {
+    @apply text-neutral-600 leading-relaxed text-base;
+  }
+
+  .feature-card {
+    @apply p-6 rounded-xl bg-white border border-neutral-200 transition-all duration-300
+           hover:shadow-lg hover:shadow-primary-500/5 hover:-translate-y-0.5;
+  }
+
+  .feature-card__title {
+    @apply text-primary-700 font-bold text-base mb-2;
+  }
+
+  .feature-card__desc {
+    @apply text-neutral-600 text-sm leading-relaxed;
+  }
+</style>

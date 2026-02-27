@@ -1,0 +1,130 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import {
+  HeroPage,
+  MainContainer,
+  HeadingSection,
+  FeatureList,
+  Button,
+  Icon,
+} from "@components";
+import { SERVICES } from "@data/services";
+
+const service = SERVICES.find((s) => s.id === "software")!;
+
+const sectors = [
+  {
+    name: "Clínicas y Consultorios",
+    desc: "Citas médicas, historiales clínicos, recetas digitales y telemedicina.",
+  },
+  {
+    name: "Gimnasios y Fitness",
+    desc: "Reserva de clases, seguimiento de rutinas, control de membresías.",
+  },
+  {
+    name: "Restaurantes y Delivery",
+    desc: "Pedidos en línea, menú digital interactivo y sistema de delivery.",
+  },
+  {
+    name: "E-commerce",
+    desc: "Catálogo digital, carrito de compras, pasarelas de pago seguras.",
+  },
+  {
+    name: "Academias y Educación",
+    desc: "Cursos online, evaluaciones automáticas y comunicación con padres.",
+  },
+  {
+    name: "Logística y Transporte",
+    desc: "Trazabilidad, control de almacenes, rutas de despacho y gestión de flotas.",
+  },
+];
+---
+
+<MainLayout
+  title={`${service.title} en Perú`}
+  description={`${service.description} Software empresarial a medida para pymes y startups en Perú.`}
+>
+  <HeroPage
+    title={service.title}
+    description={service.description}
+    breadcrumbs={[
+      { label: "Inicio", href: "/" },
+      { label: "Servicios", href: "/servicios" },
+      { label: service.title },
+    ]}
+  />
+
+  <MainContainer bgColor="bg-neutral-50" id="features-software">
+    <HeadingSection
+      tagline={service.tagline}
+      title="¿Qué Podemos Desarrollar para Ti?"
+      description="Cada sistema es diseñado específicamente para tus procesos, integrando las funcionalidades exactas que tu negocio necesita."
+      badgeVariant="secondary"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        service.features.map((f) => (
+          <div class="p-6 rounded-xl bg-white border border-neutral-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+            <h3 class="text-primary-700 font-bold text-lg mb-2">{f.title}</h3>
+            <p class="text-neutral-600 text-sm leading-relaxed">
+              {f.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </MainContainer>
+
+  <MainContainer bgColor="bg-white" id="sectores-software">
+    <HeadingSection
+      tagline="Software por Sector"
+      title="Soluciones Especializadas por Industria"
+      description="Hemos desarrollado software para múltiples sectores. Conocemos los procesos de cada industria y los optimizamos con tecnología."
+      badgeVariant="complementary"
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        sectors.map((s) => (
+          <div class="p-6 rounded-xl bg-neutral-50 border border-neutral-200 hover:border-secondary-300 hover:shadow-md transition-all duration-300">
+            <h3 class="text-primary-700 font-bold text-base mb-1">{s.name}</h3>
+            <p class="text-neutral-600 text-sm">{s.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </MainContainer>
+
+  <section
+    class="py-20 px-[5%]"
+    style="background: linear-gradient(135deg, var(--color-primary-700), var(--color-secondary-800));"
+  >
+    <div class="max-w-200 mx-auto text-center flex flex-col items-center gap-6">
+      <h2
+        class="text-white font-extrabold text-balance"
+        style="font-size: clamp(1.75rem, 3vw + 0.5rem, 2.8rem);"
+      >
+        ¿Necesitas un Sistema a Medida?
+      </h2>
+      <p class="text-white/80 text-lg max-w-xl leading-relaxed">
+        Cuéntanos qué procesos quieres optimizar y diseñamos la solución ideal
+        para tu empresa. Asesoría gratuita.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center gap-4 mt-2">
+        <Button
+          href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20necesito%20un%20software%20a%20medida%20para%20mi%20empresa"
+          target="_blank"
+          variant="whatsapp"
+          size="lg"
+          icon="whatsapp"
+        >
+          Cotizar mi sistema
+        </Button>
+        <Button href="/contacto" variant="secondary" size="lg">
+          Formulario de contacto
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

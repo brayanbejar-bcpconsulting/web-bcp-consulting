@@ -1,0 +1,57 @@
+---
+import { Button } from "@components";
+---
+
+<section class="cta-servicios" aria-label="Llamada a la acción servicios">
+  <div class="cta-servicios__container">
+    <h2 class="cta-servicios__title">¿No sabes qué servicio necesitas?</h2>
+    <p class="cta-servicios__desc">
+      No te preocupes. Cuéntanos sobre tu negocio y nosotros te asesoramos para
+      encontrar la solución ideal. Primera consulta 100% gratuita.
+    </p>
+    <div class="cta-servicios__buttons">
+      <Button
+        href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20necesito%20asesor%C3%ADa%20para%20elegir%20el%20servicio%20adecuado"
+        target="_blank"
+        variant="whatsapp"
+        size="lg"
+        icon="whatsapp"
+      >
+        Asesórate gratis por WhatsApp
+      </Button>
+      <Button href="/contacto" variant="secondary" size="lg">
+        Formulario de contacto
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .cta-servicios {
+    @apply py-20 lg:py-28 px-[5%];
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-700),
+      var(--color-secondary-800)
+    );
+  }
+
+  .cta-servicios__container {
+    @apply max-w-200 mx-auto text-center flex flex-col items-center gap-6;
+  }
+
+  .cta-servicios__title {
+    @apply text-white font-extrabold text-balance;
+    font-size: clamp(1.75rem, 3vw + 0.5rem, 2.8rem);
+  }
+
+  .cta-servicios__desc {
+    @apply text-white/80 text-lg max-w-xl leading-relaxed;
+  }
+
+  .cta-servicios__buttons {
+    @apply flex flex-col sm:flex-row items-center gap-4 mt-2;
+  }
+</style>

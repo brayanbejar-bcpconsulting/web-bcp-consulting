@@ -1,0 +1,53 @@
+---
+import { Button } from "@components";
+---
+
+<section class="cta-portafolio" aria-label="Llamada a la acción portafolio">
+  <div class="cta-portafolio__container">
+    <h2 class="cta-portafolio__title">¿Quieres un Proyecto Como Estos?</h2>
+    <p class="cta-portafolio__desc">
+      Cuéntanos tu idea y diseñemos juntos la solución digital ideal para tu
+      negocio. Sin compromiso, con asesoría gratuita.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center gap-4 mt-2">
+      <Button
+        href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20vi%20su%20portafolio%20y%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto"
+        target="_blank"
+        variant="whatsapp"
+        size="lg"
+        icon="whatsapp"
+      >
+        Cotizar mi proyecto
+      </Button>
+      <Button href="/contacto" variant="secondary" size="lg">
+        Contactar
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .cta-portafolio {
+    @apply py-20 lg:py-28 px-[5%];
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-800),
+      var(--color-secondary-700)
+    );
+  }
+
+  .cta-portafolio__container {
+    @apply max-w-200 mx-auto text-center flex flex-col items-center gap-6;
+  }
+
+  .cta-portafolio__title {
+    @apply text-white font-extrabold text-balance;
+    font-size: clamp(1.75rem, 3vw + 0.5rem, 2.8rem);
+  }
+
+  .cta-portafolio__desc {
+    @apply text-white/80 text-lg max-w-xl leading-relaxed;
+  }
+</style>

@@ -1,0 +1,141 @@
+---
+import { MainContainer, ProjectCard } from "@components";
+import { getCollection } from "astro:content";
+
+const PROJECTS = await getCollection("projects");
+
+const categories: Array<{
+  key: "all" | "web" | "app" | "software";
+  label: string;
+}> = [
+  { key: "all", label: "Todos" },
+  { key: "web", label: "Páginas Web" },
+  { key: "app", label: "Apps Móviles" },
+  { key: "software", label: "Software" },
+];
+
+const CATEGORY_LABELS: Record<string, string> = {
+  web: "Página Web",
+  app: "App Móvil",
+  software: "Software",
+};
+---
+
+<MainContainer
+  id="galeria-portafolio"
+  bgColor="bg-neutral-50"
+  ariaLabelledby="galeria-titulo"
+>
+  <div class="galeria-header">
+    <h2 id="galeria-titulo" class="sr-only">Galería de proyectos</h2>
+    <div class="galeria-filters" data-portfolio-filters>
+      {
+        categories.map((cat) => (
+          <button
+            class:list={["galeria-filter", cat.key === "all" && "active"]}
+            data-filter={cat.key}
+            type="button"
+          >
+            {cat.label}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="galeria-grid" data-portfolio-grid>
+    {
+      PROJECTS.map((project) => (
+        <div class="galeria-item" data-category={project.data.category}>
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            category={project.data.category}
+            categoryLabel={CATEGORY_LABELS[project.data.category]}
+            image={project.data.coverImage}
+            slug={project.slug}
+            result={project.data.results?.[0]}
+            technologies={project.data.technologies}
+          />
+        </div>
+      ))
+    }
+  </div>
+</MainContainer>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .galeria-header {
+    @apply mb-10;
+  }
+
+  .galeria-filters {
+    @apply flex flex-wrap justify-center gap-3;
+  }
+
+  .galeria-filter {
+    @apply px-5 py-2.5 rounded-full text-sm font-semibold
+           border border-neutral-300 bg-white text-neutral-600
+           transition-all duration-300 cursor-pointer
+           hover:border-secondary-400 hover:text-secondary-600;
+  }
+
+  .galeria-filter.active {
+    @apply bg-secondary-500 text-white border-secondary-500;
+  }
+
+  .galeria-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .galeria-item {
+    @apply transition-all duration-500;
+  }
+
+  .galeria-item.hidden-item {
+    @apply opacity-0 scale-95 pointer-events-none absolute;
+  }
+</style>
+
+<script>
+  const initPortfolioFilters = () => {
+    const container = document.querySelector("[data-portfolio-filters]");
+    const grid = document.querySelector("[data-portfolio-grid]");
+    if (!container || !grid) return;
+
+    const buttons =
+      container.querySelectorAll<HTMLButtonElement>("[data-filter]");
+    const items = grid.querySelectorAll<HTMLElement>("[data-category]");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
+
+        // Update active state
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Filter items
+        items.forEach((item) => {
+          const category = item.dataset.category;
+          if (filter === "all" || category === filter) {
+            item.classList.remove("hidden-item");
+            item.style.display = "";
+          } else {
+            item.classList.add("hidden-item");
+            // Delay display:none for animation
+            setTimeout(() => {
+              if (item.classList.contains("hidden-item")) {
+                item.style.display = "none";
+              }
+            }, 300);
+          }
+        });
+      });
+    });
+  };
+
+  initPortfolioFilters();
+  document.addEventListener("astro:after-swap", initPortfolioFilters);
+</script>

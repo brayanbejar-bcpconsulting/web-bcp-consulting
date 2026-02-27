@@ -1,0 +1,59 @@
+---
+import { MainContainer, HeadingSection, Icon } from "@components";
+import { COMPANY_VALUES } from "@data/team";
+---
+
+<MainContainer
+  id="valores"
+  bgColor="bg-neutral-50"
+  ariaLabelledby="valores-titulo"
+>
+  <HeadingSection
+    tagline="Lo que Nos Define"
+    title="Nuestros Valores"
+    description="Los principios que guían cada proyecto, cada línea de código y cada relación con nuestros clientes."
+    id="valores-titulo"
+    badgeVariant="secondary"
+  />
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    {
+      COMPANY_VALUES.map((value) => (
+        <div class="valor-card group">
+          <div class="valor-card__icon">
+            <Icon name={value.icon} size="28" />
+          </div>
+          <h3 class="valor-card__title">{value.title}</h3>
+          <p class="valor-card__desc">{value.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</MainContainer>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .valor-card {
+    @apply flex flex-col items-center text-center gap-4 p-8
+           rounded-2xl bg-white border border-neutral-200
+           transition-all duration-500 ease-out
+           hover:shadow-xl hover:shadow-secondary-500/10
+           hover:-translate-y-1 hover:border-secondary-300;
+  }
+
+  .valor-card__icon {
+    @apply w-14 h-14 flex items-center justify-center rounded-xl
+           bg-secondary-50 text-secondary-600
+           transition-colors duration-300
+           group-hover:bg-secondary-500 group-hover:text-white;
+  }
+
+  .valor-card__title {
+    @apply text-primary-700 font-bold text-lg;
+  }
+
+  .valor-card__desc {
+    @apply text-neutral-600 text-sm leading-relaxed;
+  }
+</style>

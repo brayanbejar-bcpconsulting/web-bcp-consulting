@@ -1,0 +1,51 @@
+---
+import { HeroCarousel } from "@components";
+import type { HeroSlide } from "@ui/HeroCarousel.astro";
+import imagenConsultoria from "@assets/image/pages/hero-1.webp";
+
+const slides: HeroSlide[] = [
+  {
+    title: "Transformamos Ideas en Software que Impulsa Negocios",
+    description:
+      "Más de 15 años diseñando sistemas web, apps móviles y plataformas digitales que optimizan operaciones y multiplican resultados en Perú y Latinoamérica.",
+    image: imagenConsultoria,
+    config: {
+      align: "left",
+      overlay: "gradient-right",
+    },
+    cta: [
+      { label: "Agenda tu asesoría gratuita", href: "/contacto" },
+      { label: "Ver portafolio", href: "/portafolio", variant: "secondary" },
+    ],
+  },
+  {
+    title: "Software a Medida para Empresas que Quieren Crecer",
+    description:
+      "ERPs, CRMs, plataformas SaaS y automatización de procesos. Soluciones empresariales a la medida de tus necesidades, presupuesto y plazos.",
+    image:
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&h=1080&fit=crop",
+    config: {
+      align: "left",
+      overlay: "gradient-right",
+    },
+    cta: [{ label: "Conoce nuestros servicios", href: "/servicios" }],
+  },
+  {
+    title: "Apps Móviles y Sitios Web de Alto Impacto",
+    description:
+      "Llevamos tu empresa al bolsillo de tus clientes con aplicaciones nativas y webs optimizadas para SEO que generan confianza y ventas.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop",
+    config: {
+      align: "center",
+      overlay: "dark",
+    },
+    cta: [
+      { label: "Cotizar mi proyecto", href: "/contacto" },
+      { label: "Nosotros", href: "/nosotros", variant: "secondary" },
+    ],
+  },
+];
+---
+
+<HeroCarousel slides={slides} headlineIndex={0} />

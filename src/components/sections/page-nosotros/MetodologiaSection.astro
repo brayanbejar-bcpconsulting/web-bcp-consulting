@@ -1,0 +1,83 @@
+---
+import { MainContainer, HeadingSection, Icon } from "@components";
+import { METHODOLOGY_STEPS } from "@data/team";
+---
+
+<MainContainer
+  id="metodologia"
+  bgColor="bg-white"
+  ariaLabelledby="metodologia-titulo"
+>
+  <HeadingSection
+    tagline="Cómo Trabajamos"
+    title="Nuestra Metodología"
+    description="Aplicamos metodologías ágiles que garantizan resultados rápidos, eficientes y adaptados a tus necesidades."
+    id="metodologia-titulo"
+    badgeVariant="complementary"
+  />
+
+  <div class="metodo-timeline">
+    {
+      METHODOLOGY_STEPS.map((step, idx) => (
+        <div class="metodo-item">
+          <div class="metodo-item__marker">
+            <div class="metodo-item__number">{step.step}</div>
+            {idx < METHODOLOGY_STEPS.length - 1 && (
+              <div class="metodo-item__connector" aria-hidden="true" />
+            )}
+          </div>
+          <div class="metodo-item__content">
+            <div class="metodo-item__icon">
+              <Icon name={step.icon} size="24" />
+            </div>
+            <h3 class="metodo-item__title">{step.title}</h3>
+            <p class="metodo-item__desc">{step.description}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</MainContainer>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .metodo-timeline {
+    @apply flex flex-col gap-0;
+  }
+
+  .metodo-item {
+    @apply flex gap-8;
+  }
+
+  .metodo-item__marker {
+    @apply flex flex-col items-center;
+  }
+
+  .metodo-item__number {
+    @apply w-12 h-12 rounded-full bg-secondary-500 text-white
+           flex items-center justify-center font-bold text-lg flex-shrink-0;
+  }
+
+  .metodo-item__connector {
+    @apply w-0.5 flex-1 bg-secondary-200 my-2;
+    min-height: 2rem;
+  }
+
+  .metodo-item__content {
+    @apply pb-10 flex flex-col gap-3;
+  }
+
+  .metodo-item__icon {
+    @apply w-12 h-12 flex items-center justify-center rounded-xl
+           bg-primary-50 text-primary-600;
+  }
+
+  .metodo-item__title {
+    @apply text-primary-700 font-bold text-lg;
+  }
+
+  .metodo-item__desc {
+    @apply text-neutral-600 leading-relaxed max-w-lg;
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import {
+  MainContainer,
+  HeadingSection,
+  TestimonialCard,
+  Carousel,
+} from "@components";
+import { TESTIMONIALS } from "@data/testimonials";
+---
+
+<MainContainer
+  id="testimonios-inicio"
+  bgColor="bg-neutral-100"
+  ariaLabelledby="testimonios-titulo"
+>
+  <HeadingSection
+    tagline="Testimonios"
+    title="Lo que Dicen Nuestros Clientes"
+    description="La confianza de quienes ya transformaron sus negocios con nuestra tecnología es nuestro mejor respaldo."
+    id="testimonios-titulo"
+    badgeVariant="primary"
+  />
+
+  <Carousel data={TESTIMONIALS} visibleDesktop={3}>
+    {
+      TESTIMONIALS.map((t) => (
+        <TestimonialCard quote={t.quote} name={t.name} role={t.role} />
+      ))
+    }
+  </Carousel>
+</MainContainer>

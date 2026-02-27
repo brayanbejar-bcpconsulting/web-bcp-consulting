@@ -1,0 +1,54 @@
+---
+import {
+  MainContainer,
+  HeadingSection,
+  StatCounter,
+  Button,
+} from "@components";
+import { COMPANY_INFO, COMPANY_STATS } from "@data/team";
+---
+
+<MainContainer
+  id="quienes-somos-inicio"
+  bgColor="bg-primary-600"
+  textColor="text-neutral-100"
+  ariaLabelledby="nosotros-titulo"
+>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div>
+      <HeadingSection
+        tagline="Sobre Nosotros"
+        title="Tu Socio Tecnológico de Confianza"
+        description={COMPANY_INFO.about}
+        align="left"
+        id="nosotros-titulo"
+        badgeVariant="secondary"
+        titleColor="text-white"
+        descColor="text-neutral-300"
+      />
+
+      <Button
+        href="/nosotros"
+        variant="secondary"
+        size="lg"
+        icon="arrow-right"
+        iconSide="right"
+      >
+        Conocer más sobre BCP Consulting
+      </Button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-8">
+      {
+        COMPANY_STATS.map((stat) => (
+          <StatCounter
+            value={stat.value}
+            label={stat.label}
+            suffix={stat.suffix}
+            class="border-2 rounded-2xl py-4"
+          />
+        ))
+      }
+    </div>
+  </div>
+</MainContainer>

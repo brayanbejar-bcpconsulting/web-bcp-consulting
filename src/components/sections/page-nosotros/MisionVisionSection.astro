@@ -1,0 +1,53 @@
+---
+import { MainContainer, HeadingSection } from "@components";
+import { COMPANY_INFO } from "@data/team";
+---
+
+<MainContainer
+  id="mision-vision"
+  bgColor="bg-white"
+  ariaLabelledby="mision-vision-titulo"
+>
+  <HeadingSection
+    tagline="Nuestro Propósito"
+    title="Misión y Visión"
+    id="mision-vision-titulo"
+    badgeVariant="primary"
+  />
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="mv-card">
+      <div class="mv-card__label">Misión</div>
+      <p class="mv-card__text">{COMPANY_INFO.mission}</p>
+    </div>
+    <div class="mv-card mv-card--vision">
+      <div class="mv-card__label">Visión</div>
+      <p class="mv-card__text">{COMPANY_INFO.vision}</p>
+    </div>
+  </div>
+</MainContainer>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .mv-card {
+    @apply p-8 rounded-2xl border border-neutral-200 bg-neutral-50
+           transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .mv-card--vision {
+    @apply bg-primary-950 border-primary-800;
+  }
+
+  .mv-card__label {
+    @apply text-secondary-500 font-bold text-sm uppercase tracking-wider mb-4;
+  }
+
+  .mv-card__text {
+    @apply text-neutral-600 leading-relaxed;
+  }
+
+  .mv-card--vision .mv-card__text {
+    @apply text-neutral-300;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+interface TechItem {
+  name: string;
+  description: string;
+}
+
+interface Props {
+  stack: TechItem[];
+}
+
+const { stack } = Astro.props;
+---
+
+<div class="tech-stack my-12">
+  <h3 class="mb-6 font-bold text-xl text-primary-700">
+    Por qué elegimos esta tecnología
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {
+      stack.map((tech) => (
+        <div class="tech-card">
+          <div class="tech-card__name">{tech.name}</div>
+          <p class="tech-card__desc">{tech.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .tech-card {
+    @apply p-5 rounded-xl border border-neutral-200 bg-white shadow-sm;
+  }
+
+  .tech-card__name {
+    @apply inline-block px-3 py-1 bg-primary-50 text-primary-700 rounded-lg text-sm font-bold mb-3;
+  }
+
+  .tech-card__desc {
+    @apply text-sm text-neutral-600 leading-relaxed m-0;
+  }
+</style>

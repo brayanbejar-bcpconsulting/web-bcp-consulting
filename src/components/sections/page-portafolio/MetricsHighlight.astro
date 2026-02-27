@@ -1,0 +1,43 @@
+---
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  metrics: Metric[];
+}
+
+const { metrics } = Astro.props;
+---
+
+<div class="metrics-grid">
+  {
+    metrics.map((metric) => (
+      <div class="metric-card">
+        <div class="metric-card__value">{metric.value}</div>
+        <div class="metric-card__label">{metric.label}</div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .metrics-grid {
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-6 my-12;
+  }
+
+  .metric-card {
+    @apply p-6 rounded-2xl bg-secondary-50 border border-secondary-100 text-center;
+  }
+
+  .metric-card__value {
+    @apply text-3xl md:text-4xl font-black text-secondary-600 mb-2 font-heading;
+  }
+
+  .metric-card__label {
+    @apply text-sm text-secondary-900 font-medium;
+  }
+</style>

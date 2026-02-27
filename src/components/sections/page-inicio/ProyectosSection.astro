@@ -1,0 +1,63 @@
+---
+import {
+  MainContainer,
+  HeadingSection,
+  ProjectCard,
+  Button,
+} from "@components";
+import { getCollection } from "astro:content";
+
+const allProjects = await getCollection("projects");
+const FEATURED_PROJECTS = allProjects.slice(0, 6); // O puedes filtrar por algún criterio de frontmatter mas adelante
+
+const CATEGORY_LABELS: Record<string, string> = {
+  web: "Página Web",
+  app: "App Móvil",
+  software: "Software",
+};
+---
+
+<MainContainer
+  id="proyectos-inicio"
+  bgColor="bg-neutral-100"
+  ariaLabelledby="proyectos-titulo"
+>
+  <HeadingSection
+    tagline="Portafolio"
+    title="Proyectos que Generan Resultados Reales"
+    description="Cada proyecto refleja nuestro compromiso con la calidad, la innovación y el impacto tangible en el negocio del cliente."
+    id="proyectos-titulo"
+    badgeVariant="complementary"
+  />
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+    {
+      FEATURED_PROJECTS.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          category={project.data.category}
+          categoryLabel={
+            CATEGORY_LABELS[project.data.category] || project.data.category
+          }
+          image={project.data.coverImage}
+          slug={project.slug}
+          result={project.data.results?.[0]}
+          technologies={project.data.technologies}
+        />
+      ))
+    }
+  </div>
+
+  <div class="text-center">
+    <Button
+      href="/portafolio"
+      variant="outline"
+      size="lg"
+      icon="arrow-right"
+      iconSide="right"
+    >
+      Ver todo el portafolio
+    </Button>
+  </div>
+</MainContainer>

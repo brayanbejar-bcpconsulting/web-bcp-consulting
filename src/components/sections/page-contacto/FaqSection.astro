@@ -1,0 +1,18 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion } from "@components";
+import { FAQS } from "@data/faqs";
+---
+
+<MainContainer id="faq-contacto" bgColor="bg-white" ariaLabelledby="faq-titulo">
+  <HeadingSection
+    tagline="Preguntas Frecuentes"
+    title="Resolvemos tus Dudas"
+    description="Las respuestas a las preguntas más comunes de nuestros clientes antes de iniciar un proyecto."
+    id="faq-titulo"
+    badgeVariant="primary"
+  />
+
+  <div class="max-w-3xl mx-auto">
+    <FaqAccordion faqs={FAQS} />
+  </div>
+</MainContainer>

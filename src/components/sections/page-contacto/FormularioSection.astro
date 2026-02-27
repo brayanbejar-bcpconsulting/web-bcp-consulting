@@ -1,0 +1,146 @@
+---
+import { MainContainer, ContactForm, Icon, Button } from "@components";
+import { NAVIGATION } from "@utils/navigation";
+
+const contactChannels = [
+  {
+    icon: "whatsapp",
+    title: "WhatsApp",
+    value: NAVIGATION.contact.phone,
+    href: `https://api.whatsapp.com/send/?phone=51929772711&text=${encodeURIComponent("Hola, quiero conversar sobre mi proyecto")}`,
+    target: "_blank",
+    desc: "Respuesta inmediata en horario laboral.",
+  },
+  {
+    icon: "mail",
+    title: "Correo Electrónico",
+    value: NAVIGATION.contact.email,
+    href: `mailto:${NAVIGATION.contact.email}`,
+    desc: "Para consultas detalladas y documentos.",
+  },
+  {
+    icon: "phone",
+    title: "Teléfono",
+    value: NAVIGATION.contact.phone,
+    href: `tel:${NAVIGATION.contact.phone.replace(/\s/g, "")}`,
+    desc: "Llámanos de lunes a viernes, 9am - 6pm.",
+  },
+  {
+    icon: "map-pin",
+    title: "Ubicación",
+    value: "Lima, Perú",
+    desc: "Trabajamos de forma remota con clientes en todo Latinoamérica.",
+  },
+];
+---
+
+<MainContainer
+  id="formulario-contacto"
+  bgColor="bg-neutral-50"
+  ariaLabelledby="formulario-titulo"
+>
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+    {/* Formulario - ocupa 3 columnas */}
+    <div class="lg:col-span-3">
+      <h2 id="formulario-titulo" class="text-primary-700 mb-2">
+        Envíanos un Mensaje
+      </h2>
+      <p class="text-neutral-600 mb-8">
+        Déjanos un mensaje y te brindaremos una asesoría personalizada con las
+        mejores promociones disponibles.
+      </p>
+      <ContactForm />
+    </div>
+
+    {/* Canales de contacto - ocupa 2 columnas */}
+    <div class="lg:col-span-2">
+      <h3 class="text-primary-700 font-bold text-xl mb-6">
+        Otros canales de contacto
+      </h3>
+      <div class="flex flex-col gap-6">
+        {
+          contactChannels.map((ch) => (
+            <div class="contact-channel">
+              <div class="contact-channel__icon">
+                <Icon name={ch.icon} size="22" />
+              </div>
+              <div class="flex-1">
+                <h4 class="contact-channel__title">{ch.title}</h4>
+                {ch.href ? (
+                  <a
+                    href={ch.href}
+                    target={ch.target}
+                    rel={ch.target ? "noopener noreferrer" : undefined}
+                    class="contact-channel__value"
+                  >
+                    {ch.value}
+                  </a>
+                ) : (
+                  <span class="contact-channel__value contact-channel__value--static">
+                    {ch.value}
+                  </span>
+                )}
+                <p class="contact-channel__desc">{ch.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-8 p-6 rounded-2xl bg-primary-950 text-center">
+        <p
+          class="text-complementary-400 font-bold text-sm uppercase tracking-wider mb-2"
+        >
+          ¡Aprovecha Ahora!
+        </p>
+        <p class="text-white font-bold text-lg mb-1">
+          Recibe hasta un 20% de Dscto
+        </p>
+        <p class="text-neutral-400 text-sm mb-4">
+          en tu primer proyecto con nosotros.
+        </p>
+        <Button
+          href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20quiero%20aprovechar%20el%20descuento%20en%20mi%20primer%20proyecto"
+          target="_blank"
+          variant="whatsapp"
+          size="md"
+          icon="whatsapp"
+          class="w-full justify-center"
+        >
+          Cotizar con descuento
+        </Button>
+      </div>
+    </div>
+  </div>
+</MainContainer>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .contact-channel {
+    @apply flex items-start gap-4 p-4 rounded-xl bg-white border border-neutral-200
+           transition-all duration-300 hover:shadow-md hover:border-secondary-300;
+  }
+
+  .contact-channel__icon {
+    @apply w-11 h-11 flex items-center justify-center rounded-xl
+           bg-secondary-50 text-secondary-600 flex-shrink-0;
+  }
+
+  .contact-channel__title {
+    @apply text-primary-700 font-bold text-sm;
+  }
+
+  .contact-channel__value {
+    @apply text-secondary-600 font-semibold text-sm no-underline
+           hover:text-secondary-500 transition-colors;
+  }
+
+  .contact-channel__value--static {
+    @apply text-neutral-700;
+  }
+
+  .contact-channel__desc {
+    @apply text-neutral-500 text-xs mt-0.5;
+  }
+</style>

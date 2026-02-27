@@ -1,0 +1,78 @@
+---
+import { Button, Icon } from "@components";
+---
+
+<section class="cta-section" id="cta-inicio" aria-label="Llamada a la acción">
+  <div class="cta-container">
+    <div class="cta-content">
+      <h2 class="cta-title">¿Listo para Impulsar tu Negocio con Tecnología?</h2>
+      <p class="cta-desc">
+        Conversemos sobre tu proyecto. Te brindamos una asesoría gratuita y un
+        presupuesto personalizado, sin compromiso.
+      </p>
+      <div class="cta-buttons">
+        <Button
+          href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20quiero%20conversar%20sobre%20mi%20proyecto"
+          target="_blank"
+          variant="whatsapp"
+          size="lg"
+          icon="whatsapp"
+        >
+          Escríbenos por WhatsApp
+        </Button>
+        <Button
+          href="/contacto"
+          variant="outline"
+          size="lg"
+          class="border-white text-neutral-400 hover:bg-white hover:text-primary-950"
+        >
+          Formulario de contacto
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .cta-section {
+    @apply relative overflow-hidden py-20 lg:py-28 px-[5%];
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-600),
+      var(--color-primary-800) 50%,
+      var(--color-secondary-700)
+    );
+  }
+
+  .cta-section::before {
+    content: "";
+    @apply absolute inset-0 opacity-10;
+    background-image:
+      radial-gradient(circle at 20% 50%, white 1px, transparent 1px),
+      radial-gradient(circle at 80% 50%, white 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .cta-container {
+    @apply max-w-200 mx-auto relative z-10;
+  }
+
+  .cta-content {
+    @apply text-center flex flex-col items-center gap-6;
+  }
+
+  .cta-title {
+    @apply text-white font-extrabold text-balance;
+    font-size: clamp(1.75rem, 3vw + 0.5rem, 3rem);
+  }
+
+  .cta-desc {
+    @apply text-white/80 text-lg max-w-xl leading-relaxed;
+  }
+
+  .cta-buttons {
+    @apply flex flex-col sm:flex-row items-center gap-4 mt-4;
+  }
+</style>

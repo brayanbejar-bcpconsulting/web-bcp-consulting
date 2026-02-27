@@ -1,0 +1,80 @@
+---
+import { MainContainer, HeadingSection, Icon } from "@components";
+import { METHODOLOGY_STEPS } from "@data/team";
+---
+
+<MainContainer
+  id="proceso-servicios"
+  bgColor="bg-white"
+  ariaLabelledby="proceso-titulo"
+>
+  <HeadingSection
+    tagline="Metodología"
+    title="Cómo Trabajamos"
+    description="Aplicamos metodologías ágiles para garantizar entregas rápidas, transparentes y con los más altos estándares de calidad."
+    id="proceso-titulo"
+    badgeVariant="complementary"
+  />
+
+  <div class="proceso-timeline">
+    {
+      METHODOLOGY_STEPS.map((step, idx) => (
+        <div class="proceso-step">
+          <div class="proceso-step__number">
+            <span>{step.step}</span>
+          </div>
+          {idx < METHODOLOGY_STEPS.length - 1 && (
+            <div class="proceso-step__line" aria-hidden="true" />
+          )}
+          <div class="proceso-step__content">
+            <div class="proceso-step__icon">
+              <Icon name={step.icon} size="24" />
+            </div>
+            <h3 class="proceso-step__title">{step.title}</h3>
+            <p class="proceso-step__desc">{step.description}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</MainContainer>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .proceso-timeline {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+  }
+
+  .proceso-step {
+    @apply relative flex flex-col items-center text-center;
+  }
+
+  .proceso-step__number {
+    @apply w-12 h-12 rounded-full bg-secondary-500 text-white
+           flex items-center justify-center font-bold text-lg
+           mb-6 relative z-10;
+  }
+
+  .proceso-step__line {
+    @apply hidden lg:block absolute top-6 left-[calc(50%+24px)] w-[calc(100%-48px)]
+           h-0.5 bg-secondary-200;
+  }
+
+  .proceso-step__content {
+    @apply flex flex-col items-center gap-3;
+  }
+
+  .proceso-step__icon {
+    @apply w-12 h-12 flex items-center justify-center rounded-xl
+           bg-primary-50 text-primary-600;
+  }
+
+  .proceso-step__title {
+    @apply text-primary-700 font-bold text-lg;
+  }
+
+  .proceso-step__desc {
+    @apply text-neutral-600 text-sm leading-relaxed max-w-xs;
+  }
+</style>

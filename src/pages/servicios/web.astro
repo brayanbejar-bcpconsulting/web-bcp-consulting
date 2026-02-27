@@ -1,0 +1,120 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import {
+  HeroPage,
+  MainContainer,
+  HeadingSection,
+  Button,
+  ProjectCard,
+} from "@components";
+import { SERVICES } from "@data/services";
+import { getCollection } from "astro:content";
+
+const service = SERVICES.find((s) => s.id === "web")!;
+const allProjects = await getCollection("projects");
+const webProjects = allProjects.filter((p) => p.data.category === "web");
+
+const CATEGORY_LABELS: Record<string, string> = {
+  web: "Página Web",
+  app: "App Móvil",
+  software: "Software",
+};
+---
+
+<MainLayout
+  title={`${service.title} para Empresas`}
+  description={`Diseño y desarrollo de páginas web empresariales en Perú. ${service.tagline}. Sitios rápidos, seguros y optimizados para SEO.`}
+>
+  <HeroPage
+    title={service.title}
+    description={service.description}
+    bgClass="hero-page--complementary"
+    breadcrumbs={[
+      { label: "Inicio", href: "/" },
+      { label: "Servicios", href: "/servicios" },
+      { label: service.title },
+    ]}
+  />
+
+  <MainContainer bgColor="bg-neutral-50" id="features-web">
+    <HeadingSection
+      tagline={service.tagline}
+      title="¿Qué Tipo de Web Necesitas?"
+      description="Desde sitios corporativos hasta tiendas online, creamos la presencia digital que tu marca merece."
+      badgeVariant="secondary"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        service.features.map((f) => (
+          <div class="p-6 rounded-xl bg-white border border-neutral-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+            <h3 class="text-primary-700 font-bold text-lg mb-2">{f.title}</h3>
+            <p class="text-neutral-600 text-sm leading-relaxed">
+              {f.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </MainContainer>
+
+  {
+    webProjects.length > 0 && (
+      <MainContainer bgColor="bg-white" id="webs-desarrolladas">
+        <HeadingSection
+          tagline="Portafolio Web"
+          title="Páginas Web que Hemos Desarrollado"
+          description="Desde tiendas online hasta páginas corporativas optimizadas para SEO."
+          badgeVariant="complementary"
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {webProjects.map((project) => (
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              category={project.data.category}
+              categoryLabel={CATEGORY_LABELS[project.data.category]}
+              image={project.data.coverImage}
+              slug={project.slug}
+              result={project.data.results?.[0]}
+              technologies={project.data.technologies}
+            />
+          ))}
+        </div>
+      </MainContainer>
+    )
+  }
+
+  <section
+    class="py-20 px-[5%]"
+    style="background: linear-gradient(135deg, var(--color-primary-950), var(--color-complementary-900));"
+  >
+    <div class="max-w-200 mx-auto text-center flex flex-col items-center gap-6">
+      <h2
+        class="text-white font-extrabold text-balance"
+        style="font-size: clamp(1.75rem, 3vw + 0.5rem, 2.8rem);"
+      >
+        ¿Necesitas una Web Profesional?
+      </h2>
+      <p class="text-white/80 text-lg max-w-xl leading-relaxed">
+        Creamos tu presencia online con diseño premium, velocidad de carga y
+        optimización SEO para que Google te encuentre.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center gap-4 mt-2">
+        <Button
+          href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20necesito%20una%20p%C3%A1gina%20web%20para%20mi%20empresa"
+          target="_blank"
+          variant="whatsapp"
+          size="lg"
+          icon="whatsapp"
+        >
+          Cotizar mi Web
+        </Button>
+        <Button href="/contacto" variant="secondary" size="lg">
+          Formulario de contacto
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>
