@@ -1,0 +1,55 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Analítica Académica con IA",
+    description: "Identificación temprana de alumnos en riesgo de bajo rendimiento o deserción basada en tendencias de notas y asistencia. El sistema alerta al tutor antes de que el problema escale.",
+    icon: "brain",
+  },
+  {
+    title: "Aula Virtual Integrada",
+    description: "Soporte para clases híbridas y remotas: carga de materiales, tareas en línea, videoconferencia integrada y seguimiento de participación desde el mismo entorno de la plataforma.",
+    icon: "book-open",
+  },
+  {
+    title: "Dashboard Directivo Predictivo",
+    description: "Proyección de matrícula para el siguiente ciclo, análisis de tendencias de deserción por grado y alertas de capacidad docente. La dirección toma decisiones con datos, no con intuición.",
+    icon: "trending-up",
+  },
+  {
+    title: "Integración con Sistemas Contables",
+    description: "Centralización financiera que conecta los pagos de pensiones, ingresos por matrícula y egresos operativos con el sistema contable de la institución sin re-digitación manual.",
+    icon: "link-chain",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para una Institución Educativa Inteligente"
+    description="Cuando la gestión base esté digitalizada, estos módulos convierten tu institución en un entorno educativo que anticipa necesidades y toma decisiones con datos."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Necesitas alguno de estos módulos desde el inicio? Lo planificamos juntos.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>

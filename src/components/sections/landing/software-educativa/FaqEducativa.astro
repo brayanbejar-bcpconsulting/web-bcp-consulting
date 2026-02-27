@@ -1,0 +1,53 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion, Button } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El sistema funciona para colegios con inicial, primaria y secundaria a la vez?",
+    answer:
+      "Sí. La plataforma está diseñada para gestionar múltiples niveles educativos dentro de una misma institución, cada uno con su propia estructura de grados, secciones, cursos y docentes. La dirección puede ver el consolidado institucional o filtrar por nivel, grado o sección según lo necesite.",
+  },
+  {
+    question: "¿Cómo acceden los padres de familia a la información de sus hijos?",
+    answer:
+      "Los padres acceden a través de un portal web o aplicación móvil con credenciales únicas. Desde allí pueden consultar el registro de notas y asistencia, recibir comunicados institucionales, ver el estado de pago de pensiones y enviar mensajes al docente del aula, todo en un entorno oficial y ordenado.",
+  },
+  {
+    question: "¿Los docentes pueden registrar notas desde el celular?",
+    answer:
+      "Sí. El módulo docente es completamente responsivo y funciona desde cualquier dispositivo con navegador. El registro de notas y asistencia se puede realizar en tiempo real desde el aula, sin depender de una computadora de escritorio ni de conexión a una red interna específica.",
+  },
+  {
+    question: "¿El sistema es compatible con la escala de calificación peruana?",
+    answer:
+      "Sí. La plataforma se configura según la escala de calificación vigente en el sistema educativo peruano (AD, A, B, C para primaria; escala numérica 0-20 para secundaria), así como con las áreas curriculares y competencias del currículo nacional. También admite configuraciones personalizadas para instituciones con modelos educativos propios.",
+  },
+  {
+    question: "¿Cuánto tiempo toma implementar el sistema en un colegio?",
+    answer:
+      "Una implementación con los módulos MVP (gestión académica, comunicación con padres, matrículas y reportes) toma entre 4 y 8 semanas, incluyendo la carga inicial de datos (alumnos, docentes, cursos y horarios), la configuración del año escolar y la capacitación del personal administrativo y docente.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software para Instituciones Educativas"
+      description="Lo que más nos preguntan los directores y administradores antes de implementar la plataforma en su colegio."
+      align="center"
+    />
+
+    <FaqAccordion faqs={faqs} class="mt-10" />
+
+    <p class="mt-10 text-center">
+      <span class="block text-sm text-neutral-500 mb-3">
+        ¿Tu institución tiene un modelo educativo particular? Lo evaluamos juntos.
+      </span>
+      <Button href="#contacto" variant="secondary" size="md">
+        Hablar con un especialista
+      </Button>
+    </p>
+  </div>
+</MainContainer>

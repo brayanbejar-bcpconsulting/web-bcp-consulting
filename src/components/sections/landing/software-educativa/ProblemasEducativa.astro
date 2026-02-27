@@ -1,0 +1,60 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const problemas = [
+  {
+    title: "Gestión Manual de Notas y Asistencia",
+    description: "Los docentes registran notas en cuadernos o planillas individuales que luego deben consolidarse a mano. El cierre de período se convierte en días de trabajo extraordinario sin garantía de exactitud.",
+    icon: "file-text",
+  },
+  {
+    title: "Comunicación Ineficiente con Padres",
+    description: "Las circulares en papel se pierden, los grupos de WhatsApp se mezclan con lo personal y los padres no tienen forma de consultar el progreso académico de sus hijos de forma ordenada.",
+    icon: "bell",
+  },
+  {
+    title: "Procesos Administrativos Lentos",
+    description: "Matrículas, pagos de pensiones y emisión de constancias se gestionan con formularios físicos y hojas de cálculo. Cada proceso consume tiempo del personal que podría dedicarse a la comunidad educativa.",
+    icon: "clock-check",
+  },
+  {
+    title: "Sin Indicadores Académicos Consolidados",
+    description: "La dirección no tiene acceso a un panel con datos de rendimiento por grado, sección o curso. Detectar alumnos en riesgo o tendencias de bajo desempeño requiere cruzar datos a mano.",
+    icon: "chart-bar",
+  },
+  {
+    title: "Información Académica Dispersa",
+    description: "Notas, asistencia, pagos y comunicaciones viven en sistemas distintos o en archivos locales de cada docente. No existe una fuente única de verdad para la institución.",
+    icon: "layers",
+  },
+];
+---
+
+<MainContainer id="problemas" bgColor="bg-white">
+  <HeadingSection
+    tagline="El problema de fondo"
+    title="Problemas Comunes en Instituciones Educativas"
+    description="Si tu colegio o institución aún gestiona la información académica y administrativa con papel y planillas, estos escenarios te resultarán muy familiares."
+    align="center"
+  />
+
+  <Carousel data={problemas} visibleDesktop={3}>
+    {
+      problemas.map((p) => (
+        <FeatureCard title={p.title} description={p.description} icon={p.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      La modernización educativa no es opcional: es lo que los padres y docentes esperan hoy.
+    </span>
+    <a
+      href="#funcionalidades"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Ver cómo lo resolvemos →
+    </a>
+  </p>
+</MainContainer>

@@ -1,0 +1,49 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel, Button } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Gestión Académica",
+    description: "Registro digital de notas, asistencia y cursos por docente, grado y sección. Consolidación automática al cierre de período y acceso instantáneo al historial de cada alumno.",
+    icon: "graduation-cap",
+  },
+  {
+    title: "Plataforma de Comunicación con Padres",
+    description: "Portal y aplicación para padres con acceso al boletín de notas, registro de asistencia, comunicados institucionales y mensajería directa con los docentes del aula.",
+    icon: "bell",
+  },
+  {
+    title: "Gestión de Matrículas y Pagos",
+    description: "Control administrativo del proceso de matrícula con seguimiento del estado de pago de pensiones, emisión de recibos y alertas automáticas de cuotas pendientes.",
+    icon: "credit-card",
+  },
+  {
+    title: "Reportes Académicos y Administrativos",
+    description: "Indicadores por grado, sección y curso: rendimiento promedio, tasa de asistencia, alumnos en riesgo y recaudación mensual. Disponibles en tiempo real para dirección y docentes.",
+    icon: "chart-bar",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Lo esencial, bien hecho"
+    title="Funcionalidades Principales de la Plataforma Educativa"
+    description="El núcleo digital que toda institución educativa necesita para operar con orden, transparencia y eficiencia."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <Button href="#contacto" variant="secondary" size="md">
+      Solicitar Demo del MVP
+    </Button>
+  </p>
+</MainContainer>

@@ -1,0 +1,97 @@
+---
+import { MainContainer, HeadingSection, FeatureList, Button } from "@components/ui";
+
+const beneficios = [
+  "Mayor organización institucional con toda la información académica y administrativa centralizada en una sola plataforma accesible para docentes, administración y dirección.",
+  "Mejor comunicación con padres de familia a través de un canal oficial, ordenado y trazable que reemplaza los grupos de mensajería y las circulares en papel.",
+  "Información académica clara y en tiempo real: rendimiento por alumno, grado y sección disponible para docentes y dirección sin esperar el cierre de período.",
+  "Capacidad de crecimiento estructurado: incorporar nuevos grados, secciones o sedes sin perder el control ni duplicar los procesos administrativos.",
+  "Reducción de carga operativa del personal administrativo al automatizar matrículas, cobros, recordatorios y generación de reportes periódicos.",
+];
+
+const stats = [
+  { dt: "Alumnos registrados", dd: "1,240" },
+  { dt: "Asistencia promedio", dd: "94.2%" },
+  { dt: "Pagos al día", dd: "88%" },
+  { dt: "Docentes activos", dd: "48" },
+];
+---
+
+<MainContainer id="beneficios" bgColor="bg-white">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+    <div>
+      <HeadingSection
+        tagline="Resultados reales"
+        title="Beneficios Estratégicos para tu Institución Educativa"
+        description="Una plataforma que transforma la gestión de tu colegio y le da a dirección, docentes y padres la información que necesitan, cuando la necesitan."
+        align="left"
+      />
+
+      <FeatureList features={beneficios} class="mt-8 mb-8" />
+
+      <Button href="#contacto" variant="primary" size="lg">
+        Quiero Modernizar mi Institución
+      </Button>
+    </div>
+
+    <!-- Dashboard simulado -->
+    <figure aria-label="Panel de control del software educativo con indicadores académicos y administrativos en tiempo real" class="relative">
+      <div class="bg-neutral-900 rounded-2xl overflow-hidden shadow-2xl">
+        <div class="bg-neutral-800 px-5 py-3 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400" aria-hidden="true"></span>
+          <span class="ml-4 text-xs text-neutral-400">Panel Directivo — Institución Educativa</span>
+        </div>
+
+        <div class="p-5 space-y-5">
+          <dl class="grid grid-cols-2 gap-3">
+            {
+              stats.map(({ dt, dd }) => (
+                <div class="bg-neutral-800 rounded-xl p-4">
+                  <dt class="text-xs text-neutral-400 mb-1">{dt}</dt>
+                  <dd class="text-2xl font-bold text-white">{dd}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <!-- Rendimiento por nivel -->
+          <div class="bg-neutral-800 rounded-xl p-4 space-y-3">
+            <p class="text-xs text-neutral-400 uppercase tracking-wider">Promedio de notas por nivel</p>
+            <ol class="space-y-2" aria-label="Promedio académico por nivel educativo">
+              {[
+                { nivel: "Inicial", pct: 91, color: "bg-complementary-400" },
+                { nivel: "Primaria", pct: 78, color: "bg-primary-400" },
+                { nivel: "Secundaria", pct: 72, color: "bg-primary-500" },
+                { nivel: "Alumnos en riesgo", pct: 12, color: "bg-red-400" },
+              ].map(({ nivel, pct, color }) => (
+                <li class="flex items-center gap-3">
+                  <span class="text-xs text-neutral-300 w-32 shrink-0">{nivel}</span>
+                  <div class="flex-1 h-2 bg-neutral-700 rounded-full overflow-hidden">
+                    <div
+                      class={`h-full rounded-full ${color}`}
+                      style={`width:${pct}%`}
+                      role="img"
+                      aria-label={`${pct}%`}
+                    />
+                  </div>
+                  <span class="text-xs text-neutral-400 w-8 text-right">{pct}%</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <figcaption class="mt-3 text-center text-xs text-neutral-500">
+        Vista representativa del panel directivo en tiempo real
+      </figcaption>
+
+      <div
+        class="absolute -inset-4 bg-primary-500/10 rounded-3xl blur-2xl -z-10 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+    </figure>
+  </div>
+</MainContainer>
