@@ -1,0 +1,43 @@
+---
+interface Props {
+  bgColor?: string;
+  textColor?: string;
+  ariaLabelledby?: string;
+  id?: string;
+  class?: string;          // Para la sección exterior
+  classContainer?: string; // Para el div interior
+  maxWidth?: string;
+}
+
+const {
+  bgColor = "bg-neutral-50",
+  textColor = "text-neutral-900", // Es mejor tener un default para evitar herencias inesperadas
+  ariaLabelledby,
+  id,
+  class: className,
+  classContainer,
+  maxWidth = "max-w-350",
+  ...rest // Para capturar otros atributos como data-attributes
+} = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={ariaLabelledby}
+  class:list={[
+    "py-10 lg:py-15 px-[5%]", 
+    bgColor, 
+    textColor, 
+    className
+  ]}
+  {...rest}
+>
+  <div 
+    class:list={[
+      `${maxWidth} mx-auto`, 
+      classContainer
+    ]}
+  >
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,97 @@
+---
+import type { Faq } from "@data/faqs";
+
+interface Props {
+  faqs: Faq[];
+  class?: string;
+}
+
+const { faqs, class: className } = Astro.props;
+---
+
+<div class:list={["faq-accordion", className]}>
+  {
+    faqs.map((faq, i) => (
+      <details class="faq-accordion__item" data-faq-item>
+        <summary class="faq-accordion__question">
+          <span>{faq.question}</span>
+          <svg
+            class="faq-accordion__chevron"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </summary>
+        <div class="faq-accordion__answer">
+          <p>{faq.answer}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+{/* Schema FAQPage para SEO */}
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  })}
+/>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .faq-accordion {
+    @apply flex flex-col gap-3;
+  }
+
+  .faq-accordion__item {
+    @apply rounded-xl border border-neutral-200 bg-white
+           transition-all duration-300
+           hover:border-secondary-300;
+  }
+
+  .faq-accordion__item[open] {
+    @apply border-secondary-300 shadow-md shadow-secondary-500/5;
+  }
+
+  .faq-accordion__question {
+    @apply flex items-center justify-between gap-4 px-6 py-5
+           cursor-pointer font-semibold text-primary-700
+           list-none select-none;
+    font-size: clamp(0.95rem, 1vw + 0.3rem, 1.1rem);
+  }
+
+  .faq-accordion__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-accordion__chevron {
+    @apply flex-shrink-0 text-neutral-400 transition-transform duration-300;
+  }
+
+  .faq-accordion__item[open] .faq-accordion__chevron {
+    transform: rotate(180deg);
+    @apply text-secondary-500;
+  }
+
+  .faq-accordion__answer {
+    @apply px-6 pb-5 text-neutral-600 leading-relaxed text-base;
+  }
+</style>

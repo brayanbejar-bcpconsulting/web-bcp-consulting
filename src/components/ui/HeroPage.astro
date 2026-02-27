@@ -1,0 +1,92 @@
+---
+import Breadcrumbs from "./Breadcrumbs.astro";
+
+/**
+ * Hero interno para la página de Servicios.
+ * Reutilizable como patrón para todas las páginas internas.
+ */
+interface Props {
+  title: string;
+  description: string;
+  bgClass?: string;
+  breadcrumbs?: Array<{ label: string; href?: string }>;
+}
+
+const {
+  title,
+  description,
+  bgClass = "hero-page--primary",
+  breadcrumbs,
+} = Astro.props;
+---
+
+<section class:list={["hero-page", bgClass]}>
+  <div class="hero-page__container">
+    <div class="flex justify-center animate-fade-in-up">
+      {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    </div>
+    <h1 class="hero-page__title animate-fade-in-up animate-duration-700">
+      {title}
+    </h1>
+    <p
+      class="hero-page__desc animate-fade-in-up animate-delay-200 animate-duration-700"
+    >
+      {description}
+    </p>
+  </div>
+</section>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .hero-page {
+    @apply relative pt-32 pb-20 lg:pt-40 lg:pb-28 px-[5%] overflow-hidden;
+  }
+
+  .hero-page--primary {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-950),
+      var(--color-primary-700)
+    );
+  }
+
+  .hero-page--secondary {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-950),
+      var(--color-secondary-800)
+    );
+  }
+
+  .hero-page--complementary {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-800),
+      var(--color-complementary-900)
+    );
+  }
+
+  .hero-page::before {
+    content: "";
+    @apply absolute inset-0 opacity-5;
+    background-image: radial-gradient(
+      circle at 30% 40%,
+      white 1px,
+      transparent 1px
+    );
+    background-size: 30px 30px;
+  }
+
+  .hero-page__container {
+    @apply max-w-200 mx-auto text-center relative z-10;
+  }
+
+  .hero-page__title {
+    @apply text-white font-extrabold mb-6 text-balance;
+  }
+
+  .hero-page__desc {
+    @apply text-neutral-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed;
+  }
+</style>

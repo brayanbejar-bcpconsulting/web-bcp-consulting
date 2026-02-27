@@ -1,0 +1,31 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+  size?: number | string;
+}
+
+const { name, class: className, size = 20 } = Astro.props;
+
+// Cache busting: En desarrollo cambia siempre, en build se mantiene fijo
+const v = import.meta.env.DEV ? Date.now() : '1.0'; 
+const spritePath = `/icons/sprite.svg?v=${v}#${name}`;
+---
+
+<svg 
+  class={className} 
+  width={size} 
+  height={size} 
+  aria-hidden="true" 
+  fill="currentColor"
+>
+  <use xlink:href={spritePath}></use>
+</svg>
+
+<style>
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+</style>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
+@import "tailwind-animations";
 
-/* Opcional pero recomendado para Markdown/MDX */
-@plugin "@tailwindcss/typography";
+/* Registramos el plugin de animaciones */
 
 /* =====================
    Fonts (Self Hosted)
@@ -107,39 +107,37 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
-  /* Headings — escala fluida basada en tu H1 */
+  /* ratio modular = 1.333 (Perfect Fourth) */
   --text-h1: clamp(2.25rem, 4vw + 1rem, 5rem);
   --text-h1--line-height: 1.05;
   --text-h1--letter-spacing: -0.02em;
   --text-h1--font-weight: 800;
 
-  /* ratio modular = 1.25 */
-  --text-h2: clamp(calc(2.25rem / (1.25)), calc((4vw + 1rem) / (1.25)), calc(5rem / (1.25)));
+  --text-h2: clamp(calc(2.25rem / 1.333), calc((4vw + 1rem) / 1.333), calc(5rem / 1.333));
   --text-h2--line-height: 1.10;
   --text-h2--letter-spacing: -0.020em;
   --text-h2--font-weight: 800;
 
-  --text-h3: clamp(calc(2.25rem / (1.25 * 1.25)), calc((4vw + 1rem) / (1.25 * 1.25)), calc(5rem / (1.25 * 1.25)));
+  --text-h3: clamp(calc(2.25rem / (1.333 * 1.333)), calc((4vw + 1rem) / (1.333 * 1.333)), calc(5rem / (1.333 * 1.333)));
   --text-h3--line-height: 1.15;
   --text-h3--letter-spacing: -0.015em;
   --text-h3--font-weight: 700;
 
-  --text-h4: clamp(calc(2.25rem / (1.25 * 1.25 * 1.25)), calc((4vw + 1rem) / (1.25 * 1.25 * 1.25)), calc(5rem / (1.25 * 1.25 * 1.25)));
+  --text-h4: clamp(calc(2.25rem / (1.333 * 1.333 * 1.333)), calc((4vw + 1rem) / (1.333 * 1.333 * 1.333)), calc(5rem / (1.333 * 1.333 * 1.333)));
   --text-h4--line-height: 1.20;
   --text-h4--letter-spacing: -0.010em;
   --text-h4--font-weight: 700;
 
-  --text-h5: clamp(calc(2.25rem / (1.25 * 1.25 * 1.25 * 1.25)), calc((4vw + 1rem) / (1.25 * 1.25 * 1.25 * 1.25)), calc(5rem / (1.25 * 1.25 * 1.25 * 1.25)));
+  --text-h5: clamp(calc(2.25rem / (1.333 * 1.333 * 1.333 * 1.333)), calc((4vw + 1rem) / (1.333 * 1.333 * 1.333 * 1.333)), calc(5rem / (1.333 * 1.333 * 1.333 * 1.333)));
   --text-h5--line-height: 1.25;
   --text-h5--letter-spacing: -0.005em;
   --text-h5--font-weight: 600;
 
-  --text-h6: clamp(calc(2.25rem / (1.25 * 1.25 * 1.25 * 1.25 * 1.25)), calc((4vw + 1rem) / (1.25 * 1.25 * 1.25 * 1.25 * 1.25)), calc(5rem / (1.25 * 1.25 * 1.25 * 1.25 * 1.25)));
+  --text-h6: clamp(calc(2.25rem / (1.333 * 1.333 * 1.333 * 1.333 * 1.333)), calc((4vw + 1rem) / (1.333 * 1.333 * 1.333 * 1.333 * 1.333)), calc(5rem / (1.333 * 1.333 * 1.333 * 1.333 * 1.333)));
   --text-h6--line-height: 1.30;
   --text-h6--letter-spacing: 0.000em;
   --text-h6--font-weight: 600;
 
-  /* Body defaults (también te crea utility text-body) */
   --text-body: 1rem;
   --text-body--line-height: 1.6;
 }
@@ -158,7 +156,7 @@
   }
 
   body {
-    background: var(--color-bg);
+    background-color: var(--color-primary);
     color: var(--color-fg);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);

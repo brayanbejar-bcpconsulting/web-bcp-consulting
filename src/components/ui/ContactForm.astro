@@ -1,0 +1,285 @@
+---
+import { NAVIGATION } from "@utils/navigation";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const serviceOptions = [
+  "Software a Medida",
+  "Aplicación Móvil",
+  "Página Web",
+  "Consultoría",
+  "Otro",
+];
+---
+
+<form
+  id="contact-form"
+  class:list={["contact-form", className]}
+  data-contact-form
+  novalidate
+>
+  <div class="contact-form__grid">
+    <div class="contact-form__field">
+      <label for="cf-name" class="contact-form__label">Nombre completo *</label>
+      <input
+        type="text"
+        id="cf-name"
+        name="nombre"
+        required
+        placeholder="Tu nombre"
+        class="contact-form__input"
+        autocomplete="name"
+      />
+      <span class="contact-form__error" data-error="nombre"></span>
+    </div>
+
+    <div class="contact-form__field">
+      <label for="cf-email" class="contact-form__label"
+        >Correo electrónico *</label
+      >
+      <input
+        type="email"
+        id="cf-email"
+        name="email"
+        required
+        placeholder="tu@email.com"
+        class="contact-form__input"
+        autocomplete="email"
+      />
+      <span class="contact-form__error" data-error="email"></span>
+    </div>
+
+    <div class="contact-form__field">
+      <label for="cf-phone" class="contact-form__label"
+        >Teléfono / WhatsApp</label
+      >
+      <input
+        type="tel"
+        id="cf-phone"
+        name="telefono"
+        placeholder="+51 999 999 999"
+        class="contact-form__input"
+        autocomplete="tel"
+      />
+    </div>
+
+    <div class="contact-form__field">
+      <label for="cf-service" class="contact-form__label"
+        >¿Qué servicio necesitas? *</label
+      >
+      <select
+        id="cf-service"
+        name="servicio"
+        required
+        class="contact-form__input"
+      >
+        <option value="" disabled selected>Selecciona un servicio</option>
+        {serviceOptions.map((opt) => <option value={opt}>{opt}</option>)}
+      </select>
+      <span class="contact-form__error" data-error="servicio"></span>
+    </div>
+  </div>
+
+  <div class="contact-form__field">
+    <label for="cf-message" class="contact-form__label"
+      >Cuéntanos sobre tu proyecto *</label
+    >
+    <textarea
+      id="cf-message"
+      name="mensaje"
+      rows="5"
+      required
+      placeholder="Describe brevemente lo que necesitas..."
+      class="contact-form__input contact-form__textarea"></textarea>
+    <span class="contact-form__error" data-error="mensaje"></span>
+  </div>
+
+  <button type="submit" class="contact-form__submit" id="cf-submit">
+    <span class="contact-form__submit-text">Enviar mensaje</span>
+    <span class="contact-form__submit-loading hidden">Enviando...</span>
+  </button>
+
+  <div id="cf-response" class="contact-form__response hidden"></div>
+</form>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .contact-form {
+    @apply flex flex-col gap-6;
+  }
+
+  .contact-form__grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+  }
+
+  .contact-form__field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .contact-form__label {
+    @apply text-sm font-semibold text-primary-700;
+  }
+
+  .contact-form__input {
+    @apply w-full px-4 py-3 rounded-xl border border-neutral-300
+           bg-white text-neutral-800 text-base
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-secondary-400 focus:border-secondary-400
+           placeholder:text-neutral-400;
+  }
+
+  .contact-form__textarea {
+    @apply resize-y min-h-[120px];
+  }
+
+  .contact-form__error {
+    @apply text-xs text-red-500 min-h-[1rem];
+  }
+
+  .contact-form__submit {
+    @apply w-full md:w-auto md:self-start px-8 py-3.5 rounded-full
+           bg-linear-to-r from-secondary-500 to-secondary-600 text-white font-bold
+           shadow-lg shadow-secondary-500/30
+           transition-all duration-300
+           hover:from-secondary-400 hover:to-secondary-500 hover:shadow-secondary-500/40
+           active:scale-95 cursor-pointer
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .contact-form__response {
+    @apply p-4 rounded-xl text-center font-medium;
+  }
+
+  .contact-form__response.success {
+    @apply bg-success-50 text-success-700 border border-success-200;
+  }
+
+  .contact-form__response.error {
+    @apply bg-red-50 text-red-700 border border-red-200;
+  }
+</style>
+
+<script>
+  const initForm = () => {
+    const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+    if (!form || form.dataset.init === "1") return;
+    form.dataset.init = "1";
+
+    // TODO: Reemplazar con tu Google Apps Script URL
+    const SCRIPT_URL = "";
+
+    const showError = (field: string, msg: string) => {
+      const el = form.querySelector<HTMLElement>(`[data-error="${field}"]`);
+      if (el) el.textContent = msg;
+    };
+
+    const clearErrors = () => {
+      form.querySelectorAll<HTMLElement>("[data-error]").forEach((el) => {
+        el.textContent = "";
+      });
+    };
+
+    const validate = (): boolean => {
+      clearErrors();
+      let valid = true;
+
+      const nombre = (
+        form.elements.namedItem("nombre") as HTMLInputElement
+      )?.value.trim();
+      const email = (
+        form.elements.namedItem("email") as HTMLInputElement
+      )?.value.trim();
+      const servicio = (
+        form.elements.namedItem("servicio") as HTMLSelectElement
+      )?.value;
+      const mensaje = (
+        form.elements.namedItem("mensaje") as HTMLTextAreaElement
+      )?.value.trim();
+
+      if (!nombre) {
+        showError("nombre", "El nombre es obligatorio");
+        valid = false;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError("email", "Ingresa un correo válido");
+        valid = false;
+      }
+      if (!servicio) {
+        showError("servicio", "Selecciona un servicio");
+        valid = false;
+      }
+      if (!mensaje) {
+        showError("mensaje", "Cuéntanos sobre tu proyecto");
+        valid = false;
+      }
+
+      return valid;
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!validate()) return;
+
+      const submitBtn = form.querySelector<HTMLButtonElement>("#cf-submit");
+      const textEl = form.querySelector<HTMLElement>(
+        ".contact-form__submit-text",
+      );
+      const loadingEl = form.querySelector<HTMLElement>(
+        ".contact-form__submit-loading",
+      );
+      const responseEl = form.querySelector<HTMLElement>("#cf-response");
+
+      if (submitBtn) submitBtn.disabled = true;
+      if (textEl) textEl.classList.add("hidden");
+      if (loadingEl) loadingEl.classList.remove("hidden");
+
+      try {
+        if (!SCRIPT_URL) {
+          // Simulación cuando no hay endpoint
+          await new Promise((r) => setTimeout(r, 1000));
+          if (responseEl) {
+            responseEl.textContent =
+              "¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.";
+            responseEl.className = "contact-form__response success";
+          }
+          form.reset();
+        } else {
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+
+          const res = await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          if (responseEl) {
+            responseEl.textContent =
+              "¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.";
+            responseEl.className = "contact-form__response success";
+          }
+          form.reset();
+        }
+      } catch {
+        if (responseEl) {
+          responseEl.textContent =
+            "Error al enviar el mensaje. Inténtalo de nuevo o contáctanos por WhatsApp.";
+          responseEl.className = "contact-form__response error";
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (textEl) textEl.classList.remove("hidden");
+        if (loadingEl) loadingEl.classList.add("hidden");
+      }
+    });
+  };
+
+  initForm();
+  document.addEventListener("astro:after-swap", initForm);
+</script>

@@ -1,0 +1,58 @@
+---
+import Icon from "./Icon.astro";
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+  <ol class="flex items-center gap-2 flex-wrap">
+    {
+      items.map((item, index) => {
+        const isLast = index === items.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {item.href && !isLast ? (
+              <a href={item.href} class="breadcrumbs__link">
+                {item.label}
+              </a>
+            ) : (
+              <span class="breadcrumbs__current" aria-current="page">
+                {item.label}
+              </span>
+            )}
+            {!isLast && (
+              <span class="text-white/40">
+                <Icon name="chevron-right" size="14" />
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .breadcrumbs {
+    @apply text-sm mb-6;
+  }
+
+  .breadcrumbs__link {
+    @apply text-white/70 hover:text-white transition-colors underline-offset-4 hover:underline;
+  }
+
+  .breadcrumbs__current {
+    @apply text-white font-medium;
+  }
+</style>

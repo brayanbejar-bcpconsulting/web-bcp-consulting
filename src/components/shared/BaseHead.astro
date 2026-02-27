@@ -1,5 +1,6 @@
 ---
 import { SITE_INFO } from "@utils/site-config";
+import { getOrganizationSchema, getLocalBusinessSchema } from "@utils/seo";
 
 interface Props {
   title?: string;
@@ -15,11 +16,12 @@ const {
   image = SITE_INFO.image,
 } = Astro.props;
 
-// Lógica de título: Si no hay title o es "Inicio", usa el base. 
+// Lógica de título: Si no hay title o es "Inicio", usa el base.
 // Si hay title, concatena "Título | Empresa"
-const fullTitle = title 
-  ? `${title} | ${SITE_INFO.title}` 
-  : SITE_INFO.title;
+const fullTitle = title ? `${title} | ${SITE_INFO.title}` : SITE_INFO.title;
+
+const orgSchema = getOrganizationSchema();
+const localSchema = getLocalBusinessSchema();
 ---
 
 <meta charset="UTF-8" />
@@ -61,3 +63,7 @@ const fullTitle = title
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+{/* JSON-LD Schemas */}
+<script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(localSchema)} />

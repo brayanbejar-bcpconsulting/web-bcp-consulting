@@ -1,0 +1,81 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  href: string;
+  class?: string;
+}
+
+const { title, description, icon, href, class: className } = Astro.props;
+---
+
+<a href={href} class:list={["service-card group", className]} data-service-card>
+  <div class="service-card__icon">
+    <Icon name={icon} size="32" />
+  </div>
+  <h3 class="service-card__title">{title}</h3>
+  <p class="service-card__desc">{description}</p>
+  <span class="service-card__cta">
+    Conocer más
+    <Icon name="arrow-right" size="16" />
+  </span>
+</a>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .service-card {
+    @apply relative flex flex-col gap-4 rounded-2xl p-8
+           bg-white border border-neutral-200
+           transition-all duration-500 ease-out
+           no-underline cursor-pointer;
+  }
+
+  @media (hover: hover) {
+    .service-card:hover {
+      @apply shadow-2xl shadow-primary-500/10 -translate-y-1 border-secondary-300;
+    }
+  }
+
+  .service-card__icon {
+    @apply w-14 h-14 flex items-center justify-center rounded-xl
+           bg-secondary-50 text-secondary-600
+           transition-colors duration-300;
+  }
+
+  @media (hover: hover) {
+    .service-card:hover .service-card__icon {
+      @apply bg-secondary-500 text-white;
+    }
+  }
+
+  .service-card__title {
+    @apply text-primary-700 font-bold text-xl leading-tight
+           transition-colors duration-300;
+    font-size: clamp(1.1rem, 1.2vw + 0.5rem, 1.35rem);
+  }
+
+  @media (hover: hover) {
+    .service-card:hover .service-card__title {
+      @apply text-primary-600;
+    }
+  }
+
+  .service-card__desc {
+    @apply text-neutral-600 leading-relaxed text-sm flex-1;
+  }
+
+  .service-card__cta {
+    @apply inline-flex items-center gap-2 text-secondary-600 font-semibold text-sm
+           transition-all duration-300 mt-auto pt-2;
+  }
+
+  @media (hover: hover) {
+    .service-card:hover .service-card__cta {
+      @apply gap-3 text-secondary-500;
+    }
+  }
+</style>

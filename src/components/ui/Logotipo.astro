@@ -1,0 +1,18 @@
+---
+import { Image } from "astro:assets";
+
+import logo from "@assets/image/logo-bcp.png";
+---
+
+<a href="/">
+  <Image
+    src={logo}
+    alt="Logo"
+    width={250}
+    height={250}
+    format="webp"
+    loading={"eager"}
+    fetchpriority={"high"}
+    class="w-24 lg:w-32 h-auto object-cover"
+  />
+</a>

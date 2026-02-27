@@ -1,0 +1,84 @@
+---
+import { NAVIGATION } from "@utils/navigation";
+import { Logotipo, Button } from "@components";
+import NavMobile from "./NavMobile.astro";
+---
+
+<header class="site-header">
+  <div class="header-container">
+    <div class="flex items-center gap-8">
+      <Logotipo />
+      <nav
+        class="hidden md:flex items-center gap-6"
+        aria-label="Navegación principal"
+      >
+        {
+          NAVIGATION.main.map((item) =>
+            item.children ? (
+              <div class="relative group">
+                <Button
+                  href={item.path}
+                  variant="underline"
+                  size="none"
+                  class="flex items-center gap-1"
+                >
+                  {item.title}
+                  <svg
+                    class="w-3 h-3 transition-transform group-hover:rotate-180"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 4.5l3 3 3-3" />
+                  </svg>
+                </Button>
+                <div class="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div class="bg-white rounded-xl shadow-xl border border-neutral-100 p-2 min-w-[220px] flex flex-col gap-1 relative before:absolute before:-top-2 before:left-4 before:w-4 before:h-4 before:bg-white before:border-l before:border-t before:border-neutral-100 before:rotate-45">
+                    {item.children.map((child) => (
+                      <a
+                        href={child.path}
+                        class="px-3 py-2 text-sm text-neutral-600 hover:text-primary-600 font-medium hover:bg-primary-50 rounded-lg transition-colors relative z-10"
+                      >
+                        {child.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Button href={item.path} variant="underline" size="none">
+                {item.title}
+              </Button>
+            ),
+          )
+        }
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="hidden md:block">
+        <Button href="/contacto" variant="whatsapp" icon="user">
+          Agenda una reunión
+        </Button>
+      </div>
+      <NavMobile />
+    </div>
+  </div>
+</header>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .site-header {
+    @apply fixed top-0 left-0 right-0 z-50
+           bg-primary-500/90 backdrop-blur-md
+           border-b border-primary-700/50
+           transition-all duration-300;
+  }
+
+  .header-container {
+    @apply max-w-350 mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4;
+  }
+</style>

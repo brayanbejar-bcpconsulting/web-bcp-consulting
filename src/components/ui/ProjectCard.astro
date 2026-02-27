@@ -1,0 +1,137 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  category: "web" | "app" | "software";
+  categoryLabel: string;
+  image: string;
+  slug: string;
+  result?: string;
+  technologies?: string[];
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  category,
+  categoryLabel,
+  image,
+  slug,
+  result,
+  technologies = [],
+  class: className,
+} = Astro.props;
+---
+
+<a
+  href={`/portafolio/${slug}`}
+  class:list={["project-card group block", className]}
+>
+  <div class="project-card__image-wrapper">
+    <img
+      src={image}
+      alt={title}
+      class="project-card__image"
+      loading="lazy"
+      width="600"
+      height="400"
+    />
+    <div class="project-card__overlay">
+      <span class="project-card__category">{categoryLabel}</span>
+      {
+        technologies.length > 0 && (
+          <div class="project-card__techs">
+            {technologies.map((tech) => (
+              <span class="project-card__tech">{tech}</span>
+            ))}
+          </div>
+        )
+      }
+      <span class="project-card__link"> Ver caso de estudio → </span>
+    </div>
+  </div>
+  <div class="project-card__body">
+    <h3 class="project-card__title">{title}</h3>
+    <p class="project-card__desc">{description}</p>
+    {
+      result && (
+        <p class="project-card__result">
+          <svg
+            class="inline-block w-4 h-4 mr-1 text-success-500 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          {result}
+        </p>
+      )
+    }
+  </div>
+</a>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .project-card {
+    @apply rounded-2xl overflow-hidden bg-white border border-neutral-200
+           transition-all duration-500 ease-out
+           hover:shadow-2xl hover:shadow-primary-500/10
+           hover:-translate-y-1;
+  }
+
+  .project-card__image-wrapper {
+    @apply relative aspect-[3/2] overflow-hidden;
+  }
+
+  .project-card__image {
+    @apply w-full h-full object-cover transition-transform duration-700 ease-out
+           group-hover:scale-110;
+  }
+
+  .project-card__overlay {
+    @apply absolute inset-0 bg-primary-950/80 flex flex-col items-center justify-center gap-3
+           opacity-0 transition-opacity duration-500
+           group-hover:opacity-100 p-6;
+  }
+
+  .project-card__category {
+    @apply px-3 py-1 rounded-full bg-secondary-500 text-white text-xs font-bold uppercase tracking-wider;
+  }
+
+  .project-card__techs {
+    @apply flex flex-wrap gap-2 justify-center;
+  }
+
+  .project-card__tech {
+    @apply px-2 py-0.5 rounded-full bg-white/10 text-white/80 text-xs;
+  }
+
+  .project-card__link {
+    @apply mt-2 text-white font-semibold underline underline-offset-4
+           hover:text-secondary-300 transition-colors duration-300;
+  }
+
+  .project-card__body {
+    @apply p-6;
+  }
+
+  .project-card__title {
+    @apply text-primary-700 font-bold text-lg mb-2;
+  }
+
+  .project-card__desc {
+    @apply text-neutral-600 text-sm leading-relaxed;
+  }
+
+  .project-card__result {
+    @apply mt-3 text-sm font-medium text-success-700 flex items-center;
+  }
+</style>

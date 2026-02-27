@@ -1,0 +1,48 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  features: string[];
+  columns?: 1 | 2;
+  class?: string;
+}
+
+const { features, columns = 1, class: className } = Astro.props;
+---
+
+<ul
+  class:list={[
+    "feature-list",
+    columns === 2 && "feature-list--two-cols",
+    className,
+  ]}
+>
+  {
+    features.map((feature) => (
+      <li class="feature-list__item">
+        <Icon name="check-circle" size="20" class="feature-list__icon" />
+        <span>{feature}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .feature-list {
+    @apply flex flex-col gap-3 list-none p-0 m-0;
+  }
+
+  .feature-list--two-cols {
+    @apply md:grid md:grid-cols-2 md:gap-x-8;
+  }
+
+  .feature-list__item {
+    @apply flex items-start gap-3 text-neutral-700 leading-relaxed;
+  }
+
+  .feature-list__icon {
+    @apply text-success-500 flex-shrink-0 mt-0.5;
+  }
+</style>

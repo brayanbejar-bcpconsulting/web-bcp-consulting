@@ -1,0 +1,157 @@
+---
+import { Icon } from "@components";
+
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  type: string;
+  date: Date;
+  author: string;
+  coverImage: string;
+  slug: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  category,
+  type,
+  date,
+  author,
+  coverImage,
+  slug,
+  class: className,
+} = Astro.props;
+
+const LABELS: Record<string, string> = {
+  "inteligencia-artificial": "Inteligencia Artificial",
+  "desarrollo-web": "Desarrollo Web",
+  "software-empresarial": "Software Empresarial",
+  "apps-moviles": "Apps Móviles",
+  noticia: "Noticia",
+  guia: "Guía",
+  "caso-de-estudio": "Caso de Estudio",
+  opinion: "Opinión",
+  ranking: "Ranking",
+};
+
+const formattedDate = date.toLocaleDateString("es-PE", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<a
+  href={`/blog/${slug}`}
+  class:list={["blog-card group block", className]}
+  data-blog-card
+  data-title={title.toLowerCase()}
+  data-desc={description.toLowerCase()}
+  data-date={date.getTime()}
+>
+  <div class="blog-card__image-wrapper">
+    <img src={coverImage} alt={title} class="blog-card__image" loading="lazy" />
+    <span class="blog-card__type">
+      {LABELS[type]}
+    </span>
+  </div>
+  <div class="blog-card__content">
+    <div class="blog-card__meta">
+      <span
+        class="blog-card__category text-secondary-600 font-bold text-xs uppercase tracking-wider"
+        >{LABELS[category]}</span
+      >
+      <span class="blog-card__date text-neutral-400 text-sm"
+        >{formattedDate}</span
+      >
+    </div>
+    <h3 class="blog-card__title">{title}</h3>
+    <p class="blog-card__desc">{description}</p>
+    <div class="blog-card__footer">
+      <span
+        class="blog-card__author flex items-center gap-2 text-sm font-medium text-neutral-700"
+      >
+        <div
+          class="w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-xs"
+        >
+          {author.charAt(0)}
+        </div>
+        {author}
+      </span>
+      <span class="blog-card__read-more">
+        Leer más <Icon name="arrow-right" size="16" />
+      </span>
+    </div>
+  </div>
+</a>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .blog-card {
+    @apply relative flex flex-col bg-white rounded-2xl overflow-hidden border border-neutral-200 transition-all duration-300;
+  }
+
+  @media (hover: hover) {
+    .blog-card:hover {
+      @apply shadow-xl shadow-primary-900/5 -translate-y-1 border-secondary-300;
+    }
+  }
+
+  .blog-card__image-wrapper {
+    @apply relative aspect-video overflow-hidden;
+  }
+
+  .blog-card__image {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  @media (hover: hover) {
+    .blog-card:hover .blog-card__image {
+      @apply scale-105;
+    }
+  }
+
+  .blog-card__type {
+    @apply absolute top-4 left-4 bg-white/90 backdrop-blur text-primary-900 font-bold text-xs px-2.5 py-1 rounded-md shadow-sm;
+  }
+
+  .blog-card__content {
+    @apply p-6 flex flex-col flex-1;
+  }
+
+  .blog-card__meta {
+    @apply flex justify-between items-center mb-3;
+  }
+
+  .blog-card__title {
+    @apply text-xl font-bold text-primary-900 mb-2 leading-tight transition-colors;
+  }
+
+  @media (hover: hover) {
+    .blog-card:hover .blog-card__title {
+      @apply text-primary-600;
+    }
+  }
+
+  .blog-card__desc {
+    @apply text-neutral-600 text-sm leading-relaxed mb-6 flex-1 line-clamp-3;
+  }
+
+  .blog-card__footer {
+    @apply flex justify-between items-center pt-4 border-t border-neutral-100 mt-auto;
+  }
+
+  .blog-card__read-more {
+    @apply inline-flex items-center gap-1 text-sm font-bold text-secondary-600 transition-colors;
+  }
+
+  @media (hover: hover) {
+    .blog-card:hover .blog-card__read-more {
+      @apply text-secondary-500 gap-2;
+    }
+  }
+</style>

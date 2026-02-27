@@ -1,0 +1,203 @@
+---
+import { NAVIGATION } from "@utils/navigation";
+import { Logotipo, Button, Icon } from "@components";
+---
+
+{/* Botón hamburguesa (fuera del panel) */}
+<button
+  class="nav-mobile-toggle md:hidden"
+  data-mobile-toggle
+  aria-label="Abrir menú"
+  aria-expanded="false"
+  type="button"
+>
+  <Icon name="menu" size="28" />
+</button>
+
+{/* Panel off-canvas */}
+<div class="nav-mobile-backdrop" data-mobile-backdrop aria-hidden="true"></div>
+<nav
+  class="nav-mobile"
+  data-mobile-nav
+  aria-label="Menú principal"
+  aria-hidden="true"
+>
+  <div class="nav-mobile__header">
+    <Logotipo />
+    <button
+      class="nav-mobile__close"
+      data-mobile-close
+      aria-label="Cerrar menú"
+      type="button"
+    >
+      <Icon name="x" size="24" />
+    </button>
+  </div>
+
+  <ul class="nav-mobile__links">
+    {
+      NAVIGATION.main.map((item) => (
+        <li class="border-b border-primary-800/50 last:border-none border-solid">
+          {item.children && item.children.length > 0 ? (
+            <details class="nav-mobile-dropdown group">
+              <summary class="flex justify-between items-center py-4 px-4 text-neutral-200 font-medium text-lg cursor-pointer hover:bg-primary-800 hover:text-white rounded-lg transition-colors list-none">
+                {item.title}
+                <svg
+                  class="w-4 h-4 transition-transform group-open:rotate-180"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 4.5l3 3 3-3" />
+                </svg>
+              </summary>
+              <ul class="flex flex-col ml-4 border-l-2 border-primary-800 list-none mb-3 py-1">
+                {item.children.map((child) => (
+                  <li>
+                    <a
+                      href={child.path}
+                      class="block py-2 px-4 text-neutral-400 text-base no-underline transition-colors hover:text-primary-300"
+                      data-mobile-link
+                    >
+                      {child.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ) : (
+            <a href={item.path} class="nav-mobile__link" data-mobile-link>
+              {item.title}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="nav-mobile__cta">
+    <Button
+      href="/contacto"
+      variant="whatsapp"
+      size="lg"
+      class="w-full justify-center"
+    >
+      Agenda una reunión
+    </Button>
+  </div>
+</nav>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .nav-mobile-toggle {
+    @apply p-2 text-neutral-200 hover:text-white transition-colors cursor-pointer;
+  }
+
+  .nav-mobile-backdrop {
+    @apply fixed inset-0 z-40 bg-black/60 opacity-0 pointer-events-none
+           transition-opacity duration-300;
+  }
+
+  .nav-mobile-backdrop.open {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  .nav-mobile {
+    @apply fixed top-0 right-0 z-50 w-[85%] max-w-sm h-full
+           bg-primary-950 flex flex-col
+           transform translate-x-full transition-transform duration-300 ease-out
+           overflow-y-auto;
+  }
+
+  .nav-mobile.open {
+    @apply translate-x-0;
+  }
+
+  .nav-mobile__header {
+    @apply flex items-center justify-between p-6 border-b border-primary-800;
+  }
+
+  .nav-mobile__close {
+    @apply p-2 text-neutral-300 hover:text-white transition-colors cursor-pointer;
+  }
+
+  .nav-mobile__links {
+    @apply flex flex-col p-6 gap-1 list-none m-0;
+  }
+
+  .nav-mobile__link {
+    @apply block py-3 px-4 text-neutral-200 font-medium text-lg
+           no-underline rounded-lg
+           transition-colors duration-200
+           hover:bg-primary-800 hover:text-white;
+  }
+
+  .nav-mobile__sublinks {
+    @apply flex flex-col ml-4 list-none m-0 p-0;
+  }
+
+  .nav-mobile__sublink {
+    @apply block py-2 px-4 text-neutral-400 text-base
+           no-underline rounded-lg
+           transition-colors duration-200
+           hover:bg-primary-800 hover:text-neutral-200;
+  }
+
+  .nav-mobile__cta {
+    @apply mt-auto p-6 border-t border-primary-800;
+  }
+</style>
+
+<script>
+  const initMobileNav = () => {
+    const toggle = document.querySelector<HTMLButtonElement>(
+      "[data-mobile-toggle]",
+    );
+    const nav = document.querySelector<HTMLElement>("[data-mobile-nav]");
+    const backdrop = document.querySelector<HTMLElement>(
+      "[data-mobile-backdrop]",
+    );
+    const closeBtn = document.querySelector<HTMLButtonElement>(
+      "[data-mobile-close]",
+    );
+    const links =
+      document.querySelectorAll<HTMLAnchorElement>("[data-mobile-link]");
+
+    if (!toggle || !nav || !backdrop) return;
+
+    const open = () => {
+      nav.classList.add("open");
+      backdrop.classList.add("open");
+      nav.setAttribute("aria-hidden", "false");
+      backdrop.setAttribute("aria-hidden", "false");
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    };
+
+    const close = () => {
+      nav.classList.remove("open");
+      backdrop.classList.remove("open");
+      nav.setAttribute("aria-hidden", "true");
+      backdrop.setAttribute("aria-hidden", "true");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    };
+
+    toggle.addEventListener("click", open);
+    closeBtn?.addEventListener("click", close);
+    backdrop.addEventListener("click", close);
+    links.forEach((link) => link.addEventListener("click", close));
+
+    // Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nav.classList.contains("open")) close();
+    });
+  };
+
+  initMobileNav();
+  document.addEventListener("astro:after-swap", initMobileNav);
+</script>

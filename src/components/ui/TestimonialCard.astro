@@ -1,0 +1,68 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  quote: string;
+  name: string;
+  role: string;
+  company?: string;
+  class?: string;
+}
+
+const { quote, name, role, company, class: className } = Astro.props;
+---
+
+<blockquote class:list={["testimonial-card", className]}>
+  <div class="testimonial-card__quote-icon" aria-hidden="true">
+    <Icon name="quote" size="28" />
+  </div>
+  <p class="testimonial-card__text">{quote}</p>
+  <footer class="testimonial-card__footer">
+    <div class="testimonial-card__avatar" aria-hidden="true">
+      {name.charAt(0)}
+    </div>
+    <div>
+      <cite class="testimonial-card__name">{name}</cite>
+      <p class="testimonial-card__role">
+        {role}{company && ` · ${company}`}
+      </p>
+    </div>
+  </footer>
+</blockquote>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .testimonial-card {
+    @apply relative flex flex-col gap-5 rounded-2xl p-8
+           bg-white border border-neutral-200
+           transition-all duration-500 ease-out
+           hover:shadow-xl hover:shadow-secondary-500/10
+           hover:-translate-y-1;
+  }
+
+  .testimonial-card__quote-icon {
+    @apply text-secondary-200;
+  }
+
+  .testimonial-card__text {
+    @apply text-neutral-700 leading-relaxed text-base italic flex-1;
+  }
+
+  .testimonial-card__footer {
+    @apply flex items-center gap-3 pt-4 border-t border-neutral-100;
+  }
+
+  .testimonial-card__avatar {
+    @apply w-10 h-10 rounded-full bg-primary-600 text-white
+           flex items-center justify-center font-bold text-sm flex-shrink-0;
+  }
+
+  .testimonial-card__name {
+    @apply text-primary-700 font-bold text-sm not-italic block;
+  }
+
+  .testimonial-card__role {
+    @apply text-neutral-500 text-xs;
+  }
+</style>

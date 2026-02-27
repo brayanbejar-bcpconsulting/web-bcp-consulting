@@ -1,0 +1,208 @@
+---
+import { NAVIGATION } from "@utils/navigation";
+import { SERVICES } from "@data/services";
+import { Logotipo, Icon } from "@components";
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-main">
+    <div class="footer-container">
+      {/* Col 1: Logo y descripción */}
+      <div class="footer-col footer-col--brand">
+        <Logotipo />
+        <p class="footer-brand-desc">
+          Más de 15 años impulsando negocios con software a medida, apps móviles
+          y sitios web empresariales en Perú y Latinoamérica.
+        </p>
+        <div class="footer-social">
+          <a
+            href="https://www.facebook.com/profile.php?id=61555629673170"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            class="footer-social__link"
+          >
+            <Icon name="facebook" size="20" />
+          </a>
+          <a
+            href={`https://api.whatsapp.com/send/?phone=51929772711&text=${encodeURIComponent("Hola, quiero conversar sobre mi proyecto")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            class="footer-social__link"
+          >
+            <Icon name="whatsapp" size="20" />
+          </a>
+          <a
+            href={`mailto:${NAVIGATION.contact.email}`}
+            aria-label="Correo electrónico"
+            class="footer-social__link"
+          >
+            <Icon name="mail" size="20" />
+          </a>
+        </div>
+      </div>
+
+      {/* Col 2: Servicios */}
+      <div class="footer-col">
+        <h3 class="footer-col__title">Servicios</h3>
+        <ul class="footer-links">
+          {
+            SERVICES.map((s) => (
+              <li>
+                <a href={s.href} class="footer-link">
+                  {s.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {/* Col 3: Empresa */}
+      <div class="footer-col">
+        <h3 class="footer-col__title">Empresa</h3>
+        <ul class="footer-links">
+          {
+            NAVIGATION.main
+              .filter((n) => n.path !== "/")
+              .map((item) => (
+                <li>
+                  <a href={item.path} class="footer-link">
+                    {item.title}
+                  </a>
+                </li>
+              ))
+          }
+        </ul>
+      </div>
+
+      {/* Col 4: Contacto */}
+      <div class="footer-col">
+        <h3 class="footer-col__title">Contacto</h3>
+        <ul class="footer-links footer-links--contact">
+          <li class="footer-contact-item">
+            <Icon name="phone" size="16" />
+            <a
+              href={`tel:${NAVIGATION.contact.phone.replace(/\s/g, "")}`}
+              class="footer-link"
+            >
+              {NAVIGATION.contact.phone}
+            </a>
+          </li>
+          <li class="footer-contact-item">
+            <Icon name="whatsapp" size="16" />
+            <a
+              href={`https://api.whatsapp.com/send/?phone=51929772711&text=${encodeURIComponent("Hola, quiero conversar sobre mi proyecto")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-link"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li class="footer-contact-item">
+            <Icon name="mail" size="16" />
+            <a href={`mailto:${NAVIGATION.contact.email}`} class="footer-link">
+              {NAVIGATION.contact.email}
+            </a>
+          </li>
+          <li class="footer-contact-item">
+            <Icon name="map-pin" size="16" />
+            <span class="footer-link">Lima, Perú</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom bar */}
+  <div class="footer-bottom">
+    <div class="footer-bottom__inner">
+      <p>
+        © {new Date().getFullYear()} BCP Consulting E.I.R.L. — RUC: {
+          NAVIGATION.contact.ruc
+        }
+      </p>
+      <div class="footer-bottom__links">
+        {
+          NAVIGATION.footer.map((link) => (
+            <a href={link.path} class="footer-link footer-link--small">
+              {link.title}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .site-footer {
+    @apply bg-primary-950 text-neutral-300;
+  }
+
+  .footer-main {
+    @apply py-16 px-[5%];
+  }
+
+  .footer-container {
+    @apply max-w-350 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12;
+  }
+
+  .footer-col--brand {
+    @apply flex flex-col gap-5;
+  }
+
+  .footer-brand-desc {
+    @apply text-sm text-neutral-400 leading-relaxed;
+  }
+
+  .footer-social {
+    @apply flex items-center gap-3;
+  }
+
+  .footer-social__link {
+    @apply w-10 h-10 rounded-full bg-primary-800 text-neutral-300
+           flex items-center justify-center
+           transition-all duration-300
+           hover:bg-secondary-500 hover:text-white hover:scale-110;
+  }
+
+  .footer-col__title {
+    @apply text-white font-bold text-base mb-5 uppercase tracking-wider;
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    @apply flex flex-col gap-3 list-none p-0 m-0;
+  }
+
+  .footer-link {
+    @apply text-neutral-400 text-sm no-underline transition-colors duration-300
+           hover:text-secondary-400;
+  }
+
+  .footer-contact-item {
+    @apply flex items-center gap-3 text-neutral-400;
+  }
+
+  .footer-bottom {
+    @apply border-t border-primary-800 py-6 px-[5%];
+  }
+
+  .footer-bottom__inner {
+    @apply max-w-350 mx-auto flex flex-col md:flex-row items-center justify-between gap-4
+           text-xs text-neutral-500;
+  }
+
+  .footer-bottom__links {
+    @apply flex items-center gap-4;
+  }
+
+  .footer-link--small {
+    @apply text-xs;
+  }
+</style>
