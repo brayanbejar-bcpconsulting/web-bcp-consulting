@@ -1,0 +1,50 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Dashboard Predictivo con IA",
+    description: "Proyección de sobrecostos y retrasos basada en el comportamiento histórico del proyecto. Identifica partidas en riesgo antes de que el desvío sea irreversible.",
+    icon: "brain",
+  },
+  {
+    title: "App Móvil para Supervisores",
+    description: "Registro de avance, consumo de materiales e incidencias directamente desde campo. Fotos, firmas y reportes enviados al sistema central sin necesidad de ir a oficina.",
+    icon: "smartphone",
+  },
+  {
+    title: "Integración con ERP Financiero",
+    description: "Centralización automática de ordenes de compra, facturas y pagos en el sistema contable. Sin re-digitación y con los costos de cada obra imputados al proyecto correcto.",
+    icon: "link-chain",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para una Gestión de Obras Predictiva"
+    description="Una vez que tengas el control operativo básico, estos módulos convierten tu constructora en una organización que anticipa problemas en lugar de reaccionar a ellos."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Necesitas alguno de estos módulos desde el inicio? Lo contemplamos en la primera fase.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>

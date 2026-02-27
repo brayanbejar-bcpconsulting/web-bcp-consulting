@@ -1,0 +1,58 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El sistema maneja varios proyectos simultáneos con presupuestos independientes?",
+    answer:
+      "Sí. Cada proyecto tiene su propio presupuesto, cronograma, equipo y centro de costo. Puedes ver el estado de todos los proyectos en un panel consolidado o ingresar al detalle de cada uno por separado. Los reportes gerenciales comparan el desempeño entre proyectos.",
+  },
+  {
+    question: "¿Cómo se registra el consumo de materiales desde obra?",
+    answer:
+      "Los supervisores pueden registrar consumos directamente desde el módulo web o desde la app móvil (opcional). Cada salida de material se vincula a una partida presupuestal específica, lo que actualiza automáticamente el saldo disponible y genera alertas si se acerca al límite.",
+  },
+  {
+    question: "¿El sistema contempla el control de subcontratistas con porcentajes de avance?",
+    answer:
+      "Sí. Cada subcontratista tiene su propio contrato con hitos o partidas pactadas. El sistema registra el avance acreditado, calcula el monto a valorizarse y controla los pagos realizados vs. los pendientes. Esto evita sobrepagos y mantiene la trazabilidad contractual completa.",
+  },
+  {
+    question: "¿Se puede integrar con el sistema de facturación o contabilidad que ya uso?",
+    answer:
+      "El sistema tiene módulo de integración con los principales ERP contables del mercado. Las órdenes de compra, facturas y pagos se sincronizan automáticamente, imputando cada gasto al proyecto y partida correspondiente sin re-digitación.",
+  },
+  {
+    question: "¿Cuánto tiempo toma implementar el sistema en mi constructora?",
+    answer:
+      "Una implementación con los cuatro módulos MVP toma entre 7 y 15 días hábiles, dependiendo del número de proyectos activos y la complejidad del presupuesto inicial. Incluye carga de datos, configuración de partidas y capacitación al equipo de obra y gerencia.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Software para Constructoras"
+      description="Estas son las preguntas más comunes de gerentes generales, jefes de proyecto y área de costos antes de implementar el sistema."
+      align="center"
+    />
+
+    <div class="mt-8">
+      <FaqAccordion faqs={faqs} />
+    </div>
+
+    <p class="mt-10 text-center">
+      <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+        ¿Tienes una operación particular? Cuéntanos y te proponemos la solución adecuada.
+      </span>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors duration-200"
+      >
+        Hablar con un asesor
+      </a>
+    </p>
+  </div>
+</MainContainer>

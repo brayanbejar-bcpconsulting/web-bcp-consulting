@@ -1,0 +1,52 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Control Presupuestal por Proyecto",
+    description: "Comparación en tiempo real entre el presupuesto aprobado y el gasto ejecutado. Alertas automáticas ante desviaciones para actuar antes de que escalen.",
+    icon: "compass",
+  },
+  {
+    title: "Gestión de Avance de Obra",
+    description: "Seguimiento por etapas, partidas y responsables. Valorizaciones automáticas y cronograma actualizado con el porcentaje real de avance en cada frente.",
+    icon: "clipboard-list",
+  },
+  {
+    title: "Control de Materiales",
+    description: "Registro de ingresos, salidas y consumos en tiempo real por obra. Trazabilidad entre el pedido de compra, la guía de remisión y el uso en campo.",
+    icon: "package",
+  },
+  {
+    title: "Gestión de Subcontratistas",
+    description: "Control contractual, avance por partida y pagos a subcontratistas. Evita pagos en exceso y garantiza que los entregables estén acreditados antes de liberar fondos.",
+    icon: "hammer",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-white">
+  <HeadingSection
+    tagline="Lo que incluye"
+    title="Funcionalidades Principales del Sistema para Constructoras"
+    description="Herramientas diseñadas para que la gerencia y los jefes de obra compartan la misma información y tomen decisiones en el momento correcto."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary-500 text-white text-sm font-semibold hover:bg-secondary-600 transition-colors duration-200 shadow"
+    >
+      Quiero este sistema para mi constructora
+    </a>
+  </p>
+</MainContainer>

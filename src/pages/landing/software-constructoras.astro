@@ -1,0 +1,56 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroConstructoras,
+  ProblemasConstructoras,
+  FuncionalidadesMVPConstructoras,
+  FuncionalidadesOpcionalesConstructoras,
+  BeneficiosConstructoras,
+  FaqConstructoras,
+  CtaConstructoras,
+} from "@components/sections/landing/software-constructoras";
+
+const navItems = [
+  { label: "Problemas", href: "#problemas" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Módulos Avanzados", href: "#evolucion" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  {
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
+  },
+  {
+    title: "Software de RRHH",
+    href: "/landing/software-rrhh",
+    tagline: "Planillas, asistencia, contratos y evaluaciones automatizadas",
+  },
+  {
+    title: "Software para Clínicas",
+    href: "/landing/software-clinicas",
+    tagline: "Historia clínica electrónica, agenda médica y facturación SUNAT",
+  },
+];
+---
+
+<LandingLayout
+  title="Software para Constructoras e Inmobiliarias en Perú | BCP Consulting"
+  description="Plataforma de gestión integral para constructoras: control presupuestal, avance de obra, materiales y subcontratistas en tiempo real. Reduce sobrecostos. Soporte en Perú."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+  ctaLabel="Solicitar Demo"
+  ctaHref="#contacto"
+>
+  <HeroConstructoras />
+  <ProblemasConstructoras />
+  <FuncionalidadesMVPConstructoras />
+  <FuncionalidadesOpcionalesConstructoras />
+  <BeneficiosConstructoras />
+  <FaqConstructoras />
+  <CtaConstructoras />
+</LandingLayout>
