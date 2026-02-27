@@ -1,93 +1,280 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import MainLayout from "@layouts/MainLayout.astro";
+import { HeroPage, MainContainer, BlogCard, Icon } from "@components";
 import { getCollection } from "astro:content";
-import BaseHead from "../../components/shared/BaseHead.astro";
 
-const PAGE_SIZE = 10;
-
-// Obtener posts
 const allPosts = await getCollection("blog");
 
-// Filtrar drafts y ordenar por fecha
-const posts: CollectionEntry<"blog">[] = allPosts
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+// Sort by date descending
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 
-// Paginación
-const pageParam = Astro.url.searchParams.get("page");
-const currentPage = pageParam ? Number(pageParam) : 1;
+const featuredPosts = sortedPosts
+  .filter((post) => post.data.isFeatured)
+  .sort((a, b) => (a.data.featuredOrder || 99) - (b.data.featuredOrder || 99));
 
-const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
-const safePage = Math.min(Math.max(currentPage, 1), totalPages);
-
-const start = (safePage - 1) * PAGE_SIZE;
-const paginatedPosts = posts.slice(start, start + PAGE_SIZE);
-
-// Canonical limpio (sin query params)
-const canonical = new URL("/blog", Astro.site!).toString();
+const categories = [
+  { id: "all", label: "Todas las categorías" },
+  { id: "inteligencia-artificial", label: "Inteligencia Artificial" },
+  { id: "desarrollo-web", label: "Desarrollo Web" },
+  { id: "software-empresarial", label: "Software Empresarial" },
+  { id: "apps-moviles", label: "Apps Móviles" },
+];
 ---
 
-<html lang="es">
-  <head>
-    <BaseHead
-      title="Blog"
-      description="Artículos sobre desarrollo de software, consultoría tecnológica y buenas prácticas."
-      canonical={canonical}
-    />
-  </head>
+<MainLayout
+  title="Blog BCP Consulting | Tecnología, IA y Software"
+  description="Noticias, guías y tendencias sobre el desarrollo de software, inteligencia artificial y tecnología empresarial en el Perú."
+>
+  <HeroPage
+    title="Recursos, Tendencias y Guías"
+    description="Mantente a la vanguardia. Aprende cómo la tecnología, la Inteligencia Artificial y el Software a medida están transformando los negocios."
+    bgClass="hero-page--primary"
+    breadcrumbs={[{ label: "Inicio", href: "/" }, { label: "Blog" }]}
+  />
 
-  <body>
-    <main class="mx-auto w-full max-w-5xl px-4 py-10">
-      <header class="mb-8">
-        <h1>Blog</h1>
-        <p class="mt-3 opacity-80">
-          Contenido para ayudarte a tomar mejores decisiones en software.
-        </p>
-      </header>
+  <MainContainer bgColor="bg-neutral-50" class="!pt-8">
+    <div class="blog-controls">
+      {/* Buscador */}
+      <div class="blog-search">
+        <Icon name="search" size="20" class="text-neutral-400" />
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar artículos por título o término..."
+          class="blog-search__input"
+        />
+      </div>
 
-      <section class="grid gap-6">
-        {paginatedPosts.map((p) => (
-          <a
-            class="rounded-2xl border border-border p-6 hover:shadow-sm transition"
-            href={`/blog/${p.slug}`}
+      {/* Tabs Principales */}
+      <div class="blog-tabs" role="tablist">
+        <button
+          class="blog-tab active"
+          role="tab"
+          aria-selected="true"
+          data-tab="all"
+        >
+          Todos
+        </button>
+        <button
+          class="blog-tab"
+          role="tab"
+          aria-selected="false"
+          data-tab="featured"
+        >
+          Destacados
+        </button>
+      </div>
+    </div>
+
+    {/* Categorías */}
+    <div class="blog-categories">
+      {
+        categories.map((cat) => (
+          <button
+            class="blog-category-btn"
+            data-category={cat.id}
+            class:list={{ active: cat.id === "all" }}
           >
-            <p class="text-sm opacity-70">
-              {p.data.date.toLocaleDateString("es-PE")}
-            </p>
+            {cat.label}
+          </button>
+        ))
+      }
+    </div>
 
-            <h2 class="mt-2">{p.data.title}</h2>
+    {/* Grid de Artículos */}
+    <div class="blog-grid" id="blogGrid">
+      {
+        sortedPosts.map((post) => (
+          <div
+            class="blog-grid__item"
+            data-featured={post.data.isFeatured ? "true" : "false"}
+            data-category={post.data.category}
+          >
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              category={post.data.category}
+              type={post.data.type}
+              date={post.data.date}
+              author={post.data.author}
+              coverImage={post.data.coverImage}
+              slug={post.slug}
+            />
+          </div>
+        ))
+      }
+    </div>
 
-            <p class="mt-2 opacity-80">
-              {p.data.description}
-            </p>
-          </a>
-        ))}
-      </section>
+    {/* Mensaje de no resultados */}
+    <div id="noResults" class="hidden text-center py-20">
+      <div
+        class="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4 text-neutral-400"
+      >
+        <Icon name="search" size="32" />
+      </div>
+      <h3 class="text-xl font-bold text-primary-900 mb-2">
+        No encontramos resultados
+      </h3>
+      <p class="text-neutral-500">
+        Intenta buscar con otros términos o cambia de categoría.
+      </p>
+    </div>
+  </MainContainer>
+</MainLayout>
 
-      {/* Navegación */}
-      <nav class="mt-10 flex items-center justify-between">
-        <a
-          class={`rounded-xl border px-4 py-2 ${
-            safePage <= 1 ? "pointer-events-none opacity-50" : ""
-          }`}
-          href={`/blog?page=${safePage - 1}`}
-        >
-          Anterior
-        </a>
+<style>
+  @reference "../../styles/global.css";
 
-        <span class="text-sm opacity-70">
-          Página {safePage} de {totalPages}
-        </span>
+  .blog-controls {
+    @apply flex flex-col md:flex-row justify-between items-center gap-4 mb-8;
+  }
 
-        <a
-          class={`rounded-xl border px-4 py-2 ${
-            safePage >= totalPages ? "pointer-events-none opacity-50" : ""
-          }`}
-          href={`/blog?page=${safePage + 1}`}
-        >
-          Siguiente
-        </a>
-      </nav>
-    </main>
-  </body>
-</html>
+  .blog-search {
+    @apply flex items-center gap-3 bg-white border border-neutral-200 rounded-full px-5 py-3 w-full md:w-96 shadow-sm focus-within:border-secondary-500 focus-within:ring-2 focus-within:ring-secondary-500/20 transition-all;
+  }
+
+  .blog-search__input {
+    @apply w-full bg-transparent border-none outline-none text-neutral-800 placeholder:text-neutral-400 disabled:opacity-50;
+  }
+
+  .blog-tabs {
+    @apply flex items-center bg-neutral-200/50 p-1 rounded-full w-full md:w-auto overflow-x-auto;
+  }
+
+  .blog-tab {
+    @apply flex-1 md:flex-none px-6 py-2.5 rounded-full text-sm font-semibold text-neutral-600 transition-all;
+  }
+
+  .blog-tab.active {
+    @apply bg-white text-primary-900 shadow-sm pointer-events-none;
+  }
+
+  .blog-categories {
+    @apply flex flex-wrap items-center gap-3 mb-10;
+  }
+
+  .blog-category-btn {
+    @apply px-4 py-2 rounded-lg border border-neutral-200 bg-white text-neutral-600 text-sm font-medium transition-colors hover:border-secondary-300 hover:text-secondary-600 cursor-pointer;
+  }
+
+  .blog-category-btn.active {
+    @apply bg-primary-900 text-white border-primary-900 pointer-events-none;
+  }
+
+  .blog-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .blog-grid__item {
+    @apply transition-all duration-500;
+  }
+</style>
+
+<script>
+  function initBlogFilters() {
+    const grid = document.getElementById("blogGrid");
+    const searchInput = document.getElementById(
+      "searchInput",
+    ) as HTMLInputElement;
+    const items = document.querySelectorAll(
+      ".blog-grid__item",
+    ) as NodeListOf<HTMLElement>;
+    const tabBtns = document.querySelectorAll(".blog-tab");
+    const categoryBtns = document.querySelectorAll(".blog-category-btn");
+    const noResults = document.getElementById("noResults");
+
+    if (!grid || !searchInput || !noResults) return;
+
+    let currentTab = "all";
+    let currentCategory = "all";
+    let searchTerm = "";
+
+    function filterPosts() {
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const card = item.querySelector("[data-blog-card]");
+        if (!card) return;
+
+        const title = card.getAttribute("data-title") || "";
+        const desc = card.getAttribute("data-desc") || "";
+        const category = item.getAttribute("data-category") || "";
+        const isFeatured = item.getAttribute("data-featured") === "true";
+
+        // Tab filter logic
+        const matchesTab =
+          currentTab === "all" || (currentTab === "featured" && isFeatured);
+
+        // Category filter logic
+        const matchesCategory =
+          currentCategory === "all" || category === currentCategory;
+
+        // Search logic
+        const matchesSearch =
+          searchTerm === "" ||
+          title.includes(searchTerm) ||
+          desc.includes(searchTerm);
+
+        if (matchesTab && matchesCategory && matchesSearch) {
+          item.style.display = "block";
+          visibleCount++;
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      if (visibleCount === 0) {
+        grid.style.display = "none";
+        noResults.classList.remove("hidden");
+      } else {
+        grid.style.display = "grid";
+        noResults.classList.add("hidden");
+      }
+    }
+
+    // Event Listeners for tabs
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const tab = target.getAttribute("data-tab");
+        if (tab) {
+          currentTab = tab;
+          tabBtns.forEach((b) => {
+            b.classList.remove("active");
+            b.setAttribute("aria-selected", "false");
+          });
+          target.classList.add("active");
+          target.setAttribute("aria-selected", "true");
+          filterPosts();
+        }
+      });
+    });
+
+    // Event Listeners for categories
+    categoryBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const category = target.getAttribute("data-category");
+        if (category) {
+          currentCategory = category;
+          categoryBtns.forEach((b) => b.classList.remove("active"));
+          target.classList.add("active");
+          filterPosts();
+        }
+      });
+    });
+
+    // Event Listener for search
+    searchInput.addEventListener("input", (e) => {
+      const target = e.target as HTMLInputElement;
+      searchTerm = target.value.toLowerCase().trim();
+      filterPosts();
+    });
+  }
+
+  // Initialize on full load and Astro page transitions
+  initBlogFilters();
+  document.addEventListener("astro:after-swap", initBlogFilters);
+</script>
