@@ -1,0 +1,97 @@
+---
+import { MainContainer, HeadingSection, FeatureList, Button } from "@components/ui";
+
+const beneficios = [
+  "Mayor conversión online gracias a una experiencia de compra fluida, rápida y adaptada al usuario peruano.",
+  "Control integral del canal digital: inventario, pagos, pedidos y análisis en una sola plataforma sin dependencias externas.",
+  "Escalabilidad tecnológica para crecer sin cambiar de plataforma: más productos, más canales, más volumen sin fricción técnica.",
+  "Independencia de plataformas limitadas: el equipo de negocio puede actualizar catálogos, precios y promociones sin necesidad de un desarrollador.",
+  "Visibilidad comercial en tiempo real: métricas de conversión, ticket promedio y comportamiento de compra accesibles cuando las necesitas.",
+];
+
+const stats = [
+  { dt: "Pedidos del mes", dd: "1,840" },
+  { dt: "Tasa de conversión", dd: "4.7%" },
+  { dt: "Ticket promedio", dd: "S/187" },
+  { dt: "Ingresos del mes", dd: "S/344K" },
+];
+---
+
+<MainContainer id="beneficios" bgColor="bg-white">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+    <div>
+      <HeadingSection
+        tagline="Resultados reales"
+        title="Beneficios Estratégicos para tu Negocio Digital"
+        description="Una plataforma propia no es un gasto de tecnología: es la infraestructura que sostiene tu crecimiento digital sin depender de nadie."
+        align="left"
+      />
+
+      <FeatureList features={beneficios} class="mt-8 mb-8" />
+
+      <Button href="#contacto" variant="primary" size="lg">
+        Quiero Escalar mis Ventas Digitales
+      </Button>
+    </div>
+
+    <!-- Dashboard simulado -->
+    <figure aria-label="Panel de control de la plataforma ecommerce con métricas comerciales en tiempo real" class="relative">
+      <div class="bg-neutral-900 rounded-2xl overflow-hidden shadow-2xl">
+        <div class="bg-neutral-800 px-5 py-3 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400" aria-hidden="true"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400" aria-hidden="true"></span>
+          <span class="ml-4 text-xs text-neutral-400">Panel Comercial — Ecommerce</span>
+        </div>
+
+        <div class="p-5 space-y-5">
+          <dl class="grid grid-cols-2 gap-3">
+            {
+              stats.map(({ dt, dd }) => (
+                <div class="bg-neutral-800 rounded-xl p-4">
+                  <dt class="text-xs text-neutral-400 mb-1">{dt}</dt>
+                  <dd class="text-2xl font-bold text-white">{dd}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <!-- Top categorías -->
+          <div class="bg-neutral-800 rounded-xl p-4 space-y-3">
+            <p class="text-xs text-neutral-400 uppercase tracking-wider">Ventas por categoría</p>
+            <ol class="space-y-2" aria-label="Distribución de ventas por categoría de producto">
+              {[
+                { categoria: "Electrónica", pct: 38, color: "bg-primary-400" },
+                { categoria: "Ropa y moda", pct: 27, color: "bg-primary-500" },
+                { categoria: "Hogar", pct: 22, color: "bg-secondary-400" },
+                { categoria: "Otros", pct: 13, color: "bg-complementary-400" },
+              ].map(({ categoria, pct, color }) => (
+                <li class="flex items-center gap-3">
+                  <span class="text-xs text-neutral-300 w-28 shrink-0">{categoria}</span>
+                  <div class="flex-1 h-2 bg-neutral-700 rounded-full overflow-hidden">
+                    <div
+                      class={`h-full rounded-full ${color}`}
+                      style={`width:${pct}%`}
+                      role="img"
+                      aria-label={`${pct}%`}
+                    />
+                  </div>
+                  <span class="text-xs text-neutral-400 w-8 text-right">{pct}%</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <figcaption class="mt-3 text-center text-xs text-neutral-500">
+        Vista representativa del panel comercial en tiempo real
+      </figcaption>
+
+      <div
+        class="absolute -inset-4 bg-primary-500/10 rounded-3xl blur-2xl -z-10 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+    </figure>
+  </div>
+</MainContainer>

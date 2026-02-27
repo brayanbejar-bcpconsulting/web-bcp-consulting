@@ -1,0 +1,53 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion, Button } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿En qué se diferencia una plataforma personalizada de Shopify o WooCommerce?",
+    answer:
+      "Las plataformas genéricas ofrecen soluciones estándar que funciona bien para negocios simples, pero imponen límites en flujos de aprobación, integraciones específicas, reglas de descuento B2B y experiencias de marca avanzadas. Una plataforma personalizada se construye sobre tu proceso comercial real, no al revés, y no cobra comisiones por transacción ni limita el acceso a tu propio código.",
+  },
+  {
+    question: "¿Qué pasarelas de pago son compatibles con la plataforma?",
+    answer:
+      "La plataforma integra las principales pasarelas del mercado peruano: Culqi, Izipay, MercadoPago, PagoEfectivo, así como Yape y Plin mediante sus APIs oficiales. También soporta transferencias bancarias con confirmación manual o automatizada. La selección de pasarelas se define según el volumen y perfil de pagos de tu negocio.",
+  },
+  {
+    question: "¿Cómo se gestiona el inventario si también vendemos en tienda física?",
+    answer:
+      "El módulo de inventario opera como fuente única de stock. Las ventas del ecommerce y de la tienda física (o cualquier otro canal) descuentan del mismo saldo en tiempo real. Esto elimina la doble venta y permite un control centralizado del stock sin necesidad de sincronizaciones manuales entre sistemas.",
+  },
+  {
+    question: "¿El equipo de marketing puede gestionar el catálogo sin depender de desarrollo?",
+    answer:
+      "Sí. El panel administrativo está diseñado para usuarios no técnicos: altas y ediciones de productos, gestión de categorías, precios, descuentos, banners y promociones se gestionan directamente desde la interfaz sin tocar código. El equipo técnico solo interviene en cambios de estructura o integraciones nuevas.",
+  },
+  {
+    question: "¿Cuánto tiempo toma tener la tienda operativa?",
+    answer:
+      "Una implementación MVP con los módulos esenciales (catálogo, carrito, pagos y panel de pedidos) toma entre 6 y 12 semanas según la complejidad del catálogo, las integraciones requeridas y el nivel de personalización visual. Al finalizar, el equipo recibe capacitación completa para gestionar la plataforma de forma autónoma.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre la Plataforma Ecommerce"
+      description="Lo que más nos consultan antes de decidir construir una tienda online personalizada."
+      align="center"
+    />
+
+    <FaqAccordion faqs={faqs} class="mt-10" />
+
+    <p class="mt-10 text-center">
+      <span class="block text-sm text-neutral-500 mb-3">
+        ¿Tu modelo de negocio tiene particularidades? Cuéntanos y lo evaluamos.
+      </span>
+      <Button href="#contacto" variant="secondary" size="md">
+        Hablar con un especialista
+      </Button>
+    </p>
+  </div>
+</MainContainer>

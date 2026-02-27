@@ -1,0 +1,60 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const problemas = [
+  {
+    title: "Ventas e Inventario Desconectados",
+    description: "Cada venta online requiere actualizar el stock manualmente en otro sistema. El resultado: ventas de productos sin existencia, clientes molestos y devoluciones evitables.",
+    icon: "layers",
+  },
+  {
+    title: "Despacho Gestionado a Mano",
+    description: "Las órdenes se procesan por correo, planillas o WhatsApp. Sin un flujo automatizado, el equipo de despacho pierde tiempo coordinando en lugar de ejecutar.",
+    icon: "package",
+  },
+  {
+    title: "Sin Visibilidad del Comportamiento del Cliente",
+    description: "No hay datos de qué productos se ven más, en qué punto se abandona el carrito ni cuál es el perfil del comprador recurrente. Las decisiones comerciales se toman a ciegas.",
+    icon: "mouse-pointer",
+  },
+  {
+    title: "Limitaciones Técnicas de Plataformas Estándar",
+    description: "Shopify, WooCommerce u otras plataformas genéricas no se adaptan del todo al proceso comercial de la empresa: reglas de descuento, aprobaciones internas o flujos B2B.",
+    icon: "code",
+  },
+  {
+    title: "Dependencia de Terceros para Cambios",
+    description: "Cualquier ajuste de catálogo, precio o apariencia requiere esperar a un desarrollador externo. La velocidad del negocio digital no puede depender de tiempos de agencia.",
+    icon: "link-chain",
+  },
+];
+---
+
+<MainContainer id="problemas" bgColor="bg-white">
+  <HeadingSection
+    tagline="El problema de fondo"
+    title="Problemas Comunes en Ecommerce Empresarial"
+    description="Si tu tienda online no crece tan rápido como tu negocio lo necesita, probablemente alguno de estos escenarios te resulta familiar."
+    align="center"
+  />
+
+  <Carousel data={problemas} visibleDesktop={3}>
+    {
+      problemas.map((p) => (
+        <FeatureCard title={p.title} description={p.description} icon={p.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      Un ecommerce limitado no es un problema de ventas: es un problema de plataforma.
+    </span>
+    <a
+      href="#funcionalidades"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Ver cómo lo resolvemos →
+    </a>
+  </p>
+</MainContainer>

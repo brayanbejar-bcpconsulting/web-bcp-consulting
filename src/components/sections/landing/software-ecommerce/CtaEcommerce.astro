@@ -1,0 +1,90 @@
+---
+import { MainContainer, Button, Icon } from "@components/ui";
+import { NAVIGATION } from "@utils/navigation";
+
+const phone = NAVIGATION.contact.phone;
+const email = NAVIGATION.contact.email;
+const waNumber = phone.replace(/\D/g, "");
+const waMsg = encodeURIComponent("Hola, quiero una demo del software de ecommerce personalizado");
+const emailSubject = encodeURIComponent("Demo Plataforma Ecommerce Personalizada");
+
+const trustSignals = [
+  { icon: "🛒", label: "Ecommerce diseñado para tu negocio" },
+  { icon: "📦", label: "Inventario y pedidos integrados" },
+  { icon: "🇵🇪", label: "Soporte técnico local en Perú" },
+];
+---
+
+<MainContainer id="contacto" bgColor="bg-primary-700">
+  <div class="text-center max-w-3xl mx-auto">
+    <h2 class="text-3xl md:text-4xl xl:text-5xl font-bold text-white leading-tight">
+      ¿Listo para Vender Más con una Plataforma Digital que Realmente Escala?
+    </h2>
+    <p class="mt-4 text-lg text-primary-200">
+      Agenda una demo y te mostramos cómo construir tu ecommerce con control total, sin comisiones de plataforma y adaptado a tu proceso comercial.
+    </p>
+
+    <ul
+      role="list"
+      aria-label="Ventajas de la plataforma ecommerce personalizada"
+      class="mt-8 flex flex-wrap justify-center gap-4"
+    >
+      {
+        trustSignals.map(({ icon, label }) => (
+          <li class="flex items-center gap-2 bg-primary-600/60 rounded-full px-4 py-2 text-sm text-white">
+            <span aria-hidden="true">{icon}</span>
+            {label}
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+      <Button
+        href={`https://wa.me/${waNumber}?text=${waMsg}`}
+        variant="complementary"
+        size="lg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="whatsapp" size={20} aria-hidden="true" />
+        Solicitar Demo por WhatsApp
+      </Button>
+      <Button
+        href={`mailto:${email}?subject=${emailSubject}`}
+        variant="outline"
+        size="lg"
+      >
+        <Icon name="mail" size={20} aria-hidden="true" />
+        Enviar Correo
+      </Button>
+    </p>
+
+    <address class="not-italic mt-10 flex flex-col sm:flex-row justify-center gap-6">
+      <p class="flex items-center justify-center gap-2 text-primary-200 text-sm">
+        <Icon name="phone" size={16} aria-hidden="true" />
+        <span class="block">
+          <span class="block text-xs text-primary-300 uppercase tracking-wide">Llámanos</span>
+          <a
+            href={`tel:${waNumber}`}
+            class="text-white font-semibold hover:text-primary-100 transition-colors"
+          >
+            {phone}
+          </a>
+        </span>
+      </p>
+      <p class="flex items-center justify-center gap-2 text-primary-200 text-sm">
+        <Icon name="mail" size={16} aria-hidden="true" />
+        <span class="block">
+          <span class="block text-xs text-primary-300 uppercase tracking-wide">Escríbenos</span>
+          <a
+            href={`mailto:${email}?subject=${emailSubject}`}
+            class="text-white font-semibold hover:text-primary-100 transition-colors"
+          >
+            {email}
+          </a>
+        </span>
+      </p>
+    </address>
+  </div>
+</MainContainer>

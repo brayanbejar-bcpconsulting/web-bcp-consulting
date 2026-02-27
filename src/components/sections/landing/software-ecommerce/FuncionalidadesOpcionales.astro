@@ -1,0 +1,55 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Motor de Recomendaciones con IA",
+    description: "Sugerencias automáticas de productos según el historial de navegación, compras anteriores y patrones de comportamiento de usuarios similares. Mayor ticket promedio por sesión.",
+    icon: "brain",
+  },
+  {
+    title: "Automatización de Marketing Digital",
+    description: "Segmentación inteligente de clientes por comportamiento y ciclo de vida. Campañas de remarketing, carritos abandonados y reactivación automatizadas sin intervención manual.",
+    icon: "megaphone",
+  },
+  {
+    title: "Integración con Marketplaces",
+    description: "Sincronización bidireccional de catálogo, precios y stock con MercadoLibre, Falabella, Ripley y otros canales externos. Una sola fuente de verdad para toda la operación.",
+    icon: "globe",
+  },
+  {
+    title: "Dashboard Predictivo de Ventas",
+    description: "Proyección de ingresos por temporada, tendencias de crecimiento y alertas de quiebre de stock basadas en velocidad de rotación. Anticipar, no reaccionar.",
+    icon: "trending-up",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para un Ecommerce Inteligente"
+    description="Cuando tu operación base esté digitalizada, estos módulos convierten tu tienda en una máquina de ventas que aprende y se optimiza sola."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Necesitas alguno de estos módulos desde el inicio? Lo evaluamos juntos.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>

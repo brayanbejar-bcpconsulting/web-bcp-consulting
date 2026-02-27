@@ -1,0 +1,42 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroEcommerce,
+  ProblemasEcommerce,
+  FuncionalidadesMVPEcommerce,
+  FuncionalidadesOpcionalesEcommerce,
+  BeneficiosEcommerce,
+  FaqEcommerce,
+  CtaEcommerce,
+} from "@components/sections/landing/software-ecommerce";
+
+const navItems = [
+  { label: "Problemas", href: "#problemas" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Módulos Avanzados", href: "#evolucion" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  { label: "Software para Restaurantes", href: "/landing/software-restaurantes/" },
+  { label: "Software para Inmobiliarias", href: "/landing/software-inmobiliarias/" },
+  { label: "Software de Control de Inventarios", href: "/landing/software-inventarios/" },
+];
+---
+
+<LandingLayout
+  title="Ecommerce Personalizado para Empresas en Perú | BCP Consulting"
+  description="Plataforma ecommerce empresarial a medida: catálogo personalizado, inventario integrado, pasarela de pago local y panel comercial. Diseñada para crecer sin límites de plataforma."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+>
+  <HeroEcommerce />
+  <ProblemasEcommerce />
+  <FuncionalidadesMVPEcommerce />
+  <FuncionalidadesOpcionalesEcommerce />
+  <BeneficiosEcommerce />
+  <FaqEcommerce />
+  <CtaEcommerce />
+</LandingLayout>

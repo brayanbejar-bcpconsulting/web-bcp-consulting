@@ -1,0 +1,54 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel, Button } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Plataforma Ecommerce Personalizable",
+    description: "Diseño adaptado a la identidad corporativa: colores, tipografías, estructura de catálogo y flujo de compra según el modelo comercial de la empresa, no al revés.",
+    icon: "store",
+  },
+  {
+    title: "Gestión de Productos e Inventario Integrado",
+    description: "Alta, edición y organización de catálogo con actualización automática de stock. Cuando se confirma una compra, el inventario se descuenta en tiempo real sin intervención manual.",
+    icon: "package",
+  },
+  {
+    title: "Pasarela de Pago Integrada",
+    description: "Procesamiento seguro de transacciones con tarjeta, transferencia, Yape, Plin y otros métodos populares en Perú. Conciliación automática de pagos por orden.",
+    icon: "credit-card",
+  },
+  {
+    title: "Panel Administrativo Comercial",
+    description: "Reportes de ventas por período, producto y cliente. Métricas de conversión, ticket promedio y comportamiento de compra accesibles sin exportar a Excel.",
+    icon: "chart-bar",
+  },
+  {
+    title: "Gestión de Pedidos y Despachos",
+    description: "Flujo completo de órdenes: recepción, confirmación, preparación y despacho. El cliente recibe notificaciones automáticas de cada cambio de estado.",
+    icon: "clipboard-list",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Lo esencial, bien hecho"
+    title="Funcionalidades Principales de la Plataforma Ecommerce"
+    description="El núcleo operativo que tu tienda online necesita para vender, gestionar y escalar sin fricción."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <Button href="#contacto" variant="secondary" size="md">
+      Solicitar Demo del MVP
+    </Button>
+  </p>
+</MainContainer>
