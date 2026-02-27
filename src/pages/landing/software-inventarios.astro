@@ -1,0 +1,56 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroInventarios,
+  ProblemasInventarios,
+  FuncionalidadesMVPInventarios,
+  FuncionalidadesOpcionalesInventarios,
+  BeneficiosInventarios,
+  FaqInventarios,
+  CtaInventarios,
+} from "@components/sections/landing/software-inventarios";
+
+const navItems = [
+  { label: "Problemas", href: "#problemas" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Módulos Avanzados", href: "#evolucion" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  {
+    title: "Software de RRHH",
+    href: "/landing/software-rrhh",
+    tagline: "Planillas, asistencia, contratos y evaluaciones automatizadas",
+  },
+  {
+    title: "Software para Clínicas",
+    href: "/landing/software-clinicas",
+    tagline: "Historia clínica electrónica, agenda médica y facturación SUNAT",
+  },
+  {
+    title: "Software para Restaurantes",
+    href: "/landing/software-restaurantes",
+    tagline: "Control integral de ventas, inventarios y operación gastronómica",
+  },
+];
+---
+
+<LandingLayout
+  title="Software de Control de Inventarios para Empresas en Perú | BCP Consulting"
+  description="Sistema avanzado de control de inventarios: gestión multialmacén, kardex automatizado, alertas de reposición y trazabilidad por lotes. Precisión total. Soporte en Perú."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+  ctaLabel="Solicitar Demo"
+  ctaHref="#contacto"
+>
+  <HeroInventarios />
+  <ProblemasInventarios />
+  <FuncionalidadesMVPInventarios />
+  <FuncionalidadesOpcionalesInventarios />
+  <BeneficiosInventarios />
+  <FaqInventarios />
+  <CtaInventarios />
+</LandingLayout>

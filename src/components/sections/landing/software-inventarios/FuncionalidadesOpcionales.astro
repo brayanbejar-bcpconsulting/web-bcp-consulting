@@ -1,0 +1,50 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "IA para Optimización de Rotación",
+    description: "Proyección de demanda futura basada en historial de ventas, estacionalidad y tendencias. Reduce el exceso de compras y previene quiebres antes de que ocurran.",
+    icon: "brain",
+  },
+  {
+    title: "Integración con Sistema de Ventas",
+    description: "Actualización automática del stock cada vez que se registra una venta. Sin diferencias entre lo que dice el sistema y lo que hay físicamente en almacén.",
+    icon: "link-chain",
+  },
+  {
+    title: "Escaneo con Código de Barras o QR",
+    description: "Digitaliza la recepción, despacho e inventario físico usando lectores o la cámara del celular. Elimina la digitación manual y acelera los conteos.",
+    icon: "barcode",
+  },
+];
+---
+
+<MainContainer id="evolucion" bgColor="bg-neutral-50">
+  <HeadingSection
+    tagline="Crece con nosotros"
+    title="Módulos de Evolución para un Inventario Inteligente"
+    description="Una vez que el control básico esté sólido, estos módulos llevan la gestión de tu almacén a un nivel de automatización y predicción superior."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+      ¿Te interesa alguno de estos módulos? Podemos planificarlos desde el inicio.
+    </span>
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors duration-200"
+    >
+      Consultar sobre módulos avanzados →
+    </a>
+  </p>
+</MainContainer>

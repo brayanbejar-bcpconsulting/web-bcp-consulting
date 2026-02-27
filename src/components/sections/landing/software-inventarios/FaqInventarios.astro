@@ -1,0 +1,58 @@
+---
+import { MainContainer, HeadingSection, FaqAccordion } from "@components/ui";
+
+const faqs = [
+  {
+    question: "¿El sistema funciona para empresas con varios almacenes o sedes?",
+    answer:
+      "Sí. El módulo multialmacén permite gestionar bodegas, sedes o puntos de distribución independientes desde un solo panel centralizado. Puedes ver el stock consolidado o filtrarlo por ubicación, y los traslados entre almacenes quedan registrados con trazabilidad completa.",
+  },
+  {
+    question: "¿Cómo se integra con el sistema de ventas o facturación?",
+    answer:
+      "El sistema se integra con los principales software de ventas y ERP del mercado. Cada vez que se registra una venta o una orden de despacho, el stock se descuenta automáticamente. También ofrecemos API abierta para integraciones personalizadas con sistemas propios.",
+  },
+  {
+    question: "¿Qué pasa si necesito controlar productos con fecha de vencimiento?",
+    answer:
+      "El módulo de control por lotes y series gestiona fechas de vencimiento, fecha de fabricación y lotes de producción. El sistema aplica automáticamente el método FIFO o FEFO para garantizar que los productos más próximos a vencer salgan primero.",
+  },
+  {
+    question: "¿Puedo hacer el inventario físico con el celular?",
+    answer:
+      "Sí. Con el módulo de escaneo por código de barras o QR (opcional), puedes usar la cámara de cualquier smartphone para registrar entradas, salidas y realizar conteos físicos. Los datos se sincronizan en tiempo real con el sistema central.",
+  },
+  {
+    question: "¿Cuánto tiempo toma implementar el sistema en mi empresa?",
+    answer:
+      "Una implementación estándar con los cuatro módulos MVP toma entre 5 y 10 días hábiles. Incluye la carga de productos y saldos iniciales, configuración de almacenes y alertas, capacitación al equipo y acompañamiento en las primeras semanas de operación.",
+  },
+];
+---
+
+<MainContainer id="faq" bgColor="bg-neutral-50">
+  <div class="max-w-3xl mx-auto">
+    <HeadingSection
+      tagline="Resolvemos tus dudas"
+      title="Preguntas Frecuentes sobre el Sistema de Control de Inventarios"
+      description="Estas son las preguntas más comunes que recibimos de gerentes de logística, operaciones y finanzas antes de implementar el sistema."
+      align="center"
+    />
+
+    <div class="mt-8">
+      <FaqAccordion faqs={faqs} />
+    </div>
+
+    <p class="mt-10 text-center">
+      <span class="block text-xs md:text-sm text-neutral-500 mb-3">
+        ¿Tienes una situación específica? Cuéntanosla y te damos una solución concreta.
+      </span>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors duration-200"
+      >
+        Hablar con un asesor
+      </a>
+    </p>
+  </div>
+</MainContainer>

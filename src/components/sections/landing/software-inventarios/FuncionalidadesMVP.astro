@@ -1,0 +1,52 @@
+---
+import { MainContainer, HeadingSection, FeatureCard, Carousel } from "@components/ui";
+
+const funcionalidades = [
+  {
+    title: "Gestión Multialmacén",
+    description: "Control centralizado de todas tus bodegas, sedes o puntos de distribución desde un único panel. Traslados, ajustes y consolidación de stock en tiempo real.",
+    icon: "warehouse",
+  },
+  {
+    title: "Kardex Automatizado",
+    description: "Registro automático de cada entrada y salida con fecha, responsable y documento de origen. Saldo actualizado al instante sin digitación manual.",
+    icon: "layers",
+  },
+  {
+    title: "Control por Lotes y Series",
+    description: "Trazabilidad completa desde la recepción hasta la venta. Ideal para productos con fecha de vencimiento, números de serie o lotes de fabricación.",
+    icon: "barcode",
+  },
+  {
+    title: "Alertas Inteligentes de Reposición",
+    description: "Notificaciones automáticas cuando un producto alcanza el stock mínimo, con sugerencia de cantidad y proveedor basada en el historial de compras.",
+    icon: "bell",
+  },
+];
+---
+
+<MainContainer id="funcionalidades" bgColor="bg-white">
+  <HeadingSection
+    tagline="Lo que incluye"
+    title="Funcionalidades Principales del Sistema de Inventarios"
+    description="Herramientas diseñadas para eliminar errores, automatizar el registro y darte visibilidad total sobre cada unidad en cada almacén."
+    align="center"
+  />
+
+  <Carousel data={funcionalidades} visibleDesktop={3}>
+    {
+      funcionalidades.map((f) => (
+        <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+      ))
+    }
+  </Carousel>
+
+  <p class="mt-10 text-center">
+    <a
+      href="#contacto"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary-500 text-white text-sm font-semibold hover:bg-secondary-600 transition-colors duration-200 shadow"
+    >
+      Quiero este sistema para mi empresa
+    </a>
+  </p>
+</MainContainer>
