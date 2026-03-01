@@ -21,6 +21,7 @@
       "@page-nosotros": ["src/components/sections/page-nosotros/"],
       "@page-contacto": ["src/components/sections/page-contacto/"],
       "@data/*": ["src/data/*"],
+      "@images/*": ["src/assets/images/*"],
     }
   }
 }

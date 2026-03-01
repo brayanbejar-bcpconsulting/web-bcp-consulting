@@ -1,7 +1,7 @@
 ---
 import { HeroCarousel } from "@components";
 import type { HeroSlide } from "@ui/HeroCarousel.astro";
-import imagenConsultoria from "@assets/image/pages/hero-1.webp";
+import imagenConsultoria from "@assets/images/pages/hero-1.webp";
 
 const slides: HeroSlide[] = [
   {
@@ -14,7 +14,7 @@ const slides: HeroSlide[] = [
       overlay: "gradient-right",
     },
     cta: [
-      { label: "Agenda tu asesoría gratuita", href: "/contacto" },
+      { label: "Agenda tu asesoría gratuita", href: "/contacto", variant: 'complementary' },
       { label: "Ver portafolio", href: "/portafolio", variant: "secondary" },
     ],
   },

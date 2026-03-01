@@ -38,6 +38,8 @@ const sectors = [
     desc: "Trazabilidad, control de almacenes, rutas de despacho y gestión de flotas.",
   },
 ];
+
+import bgSoftware from '@images/pages/services/software/bg-image-software.jpg';
 ---
 
 <MainLayout
@@ -52,6 +54,8 @@ const sectors = [
       { label: "Servicios", href: "/servicios" },
       { label: service.title },
     ]}
+    image={bgSoftware}
+    imageAlt="Agencia de Software en Perú, desarrollamos sistemas personalizables a medida."
   />
 
   <MainContainer bgColor="bg-neutral-50" id="features-software">

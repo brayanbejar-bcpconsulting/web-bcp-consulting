@@ -13,7 +13,12 @@ export interface HeroSlide {
   cta?: {
     label: string;
     href: string;
-    variant?: "primary" | "secondary";
+    /** Variante del componente Button. Por defecto: 'primary' */
+    variant?: 'primary' | 'secondary' | 'outline' | 'complementary' | 'whatsapp' | 'ghost';
+    /** Tamaño del componente Button. Por defecto: 'lg' */
+    size?: 'sm' | 'md' | 'lg';
+    icon?: string;
+    iconSide?: 'left' | 'right';
   }[];
 }
 
@@ -23,6 +28,7 @@ interface Props {
 }
 
 import { Image } from "astro:assets";
+import Button from "./Button.astro";
 
 const { slides, headlineIndex = 0 } = Astro.props;
 const hasMultiple = slides.length > 1;
@@ -31,6 +37,12 @@ const alignClasses = {
   left: "items-start text-left",
   center: "items-center text-center",
   right: "items-end text-right",
+};
+
+const ctaAlignClasses = {
+  left: "justify-start",
+  center: "justify-center",
+  right: "justify-end",
 };
 
 const overlayClasses = {
@@ -103,17 +115,17 @@ const overlayClasses = {
                 </p>
 
                 {slide.cta && slide.cta.length > 0 && (
-                  <div class="hero-cta-group animate-fade-in-up animate-delay-500 animate-duration-700">
+                  <div class:list={["hero-cta-group animate-fade-in-up animate-delay-500 animate-duration-700", ctaAlignClasses[align]]}>
                     {slide.cta.map((btn) => (
-                      <a
+                      <Button
                         href={btn.href}
-                        class:list={[
-                          "hero-cta-btn",
-                          btn.variant === "secondary" ? "btn-secondary" : "btn-primary",
-                        ]}
+                        variant={btn.variant ?? "primary"}
+                        size={btn.size ?? "lg"}
+                        icon={btn.icon}
+                        iconSide={btn.iconSide}
                       >
                         {btn.label}
-                      </a>
+                      </Button>
                     ))}
                   </div>
                 )}
@@ -157,35 +169,32 @@ const overlayClasses = {
   .hero-carousel {
     @apply relative w-full overflow-hidden bg-black;
     /*
-      min-height en lugar de height fijo:
-      - En desktop tiene un mínimo agradable de 600px y un máximo de 900px.
-      - En móvil (debajo de md) usa fit-content via min-h-0 implícito:
-        si el contenido necesita más espacio, el hero crece. Nunca corta.
+      height explícito para que los hijos con height:100% resuelvan correctamente.
+      clamp(600px, 100dvh, 900px) = min 600px, ideal viewport completo, max 900px.
     */
-    min-height: 100dvh;
-    max-height: 900px;
+    height: clamp(600px, 100dvh, 900px);
   }
 
-  /* En móvil removemos el max-height para que el contenido no se corte nunca */
+  /* En móvil usamos altura de viewport completa sin restricción superior */
   @media (max-width: 767px) {
     .hero-carousel {
-      max-height: none;
+      height: 100dvh;
     }
   }
 
   .hero-track {
     @apply flex h-full w-full;
-    overflow-x: hidden;
+    /* overflow-x:scroll (no hidden) para que scrollTo() funcione correctamente.
+       El scrollbar se oculta visualmente con scrollbar-width:none */
+    overflow-x: scroll;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    /*
-      min-height heredado para que los slides llenen el carousel
-      cuando el contenido dicta la altura en móvil
-    */
-    min-height: inherit;
   }
+
+  .hero-track::-webkit-scrollbar { display: none; }
 
   .hero-slide {
     @apply relative flex-none w-full overflow-hidden;
@@ -249,12 +258,9 @@ const overlayClasses = {
     @apply text-white/90 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl;
   }
   .hero-cta-group { @apply flex flex-wrap gap-4; }
-  .hero-cta-btn { @apply px-8 py-4 rounded-full font-bold transition-all duration-300 text-base md:text-lg; }
-  .btn-primary { @apply bg-primary-600 text-white hover:bg-primary-700 shadow-xl hover:scale-105; }
-  .btn-secondary { @apply bg-transparent border-2 border-white text-white hover:bg-white hover:text-black; }
 
   /* Navegación */
-  .hero-nav-btn { @apply absolute top-1/2 -translate-y-1/2 z-30 p-4 text-white hover:scale-110 transition-all opacity-50 hover:opacity-100; }
+  .hero-nav-btn { @apply absolute top-1/2 -translate-y-1/2 z-30 p-2 bg-white hover:scale-110 transition-all opacity-75 hover:opacity-100 rounded-full; }
   .hero-nav-btn:disabled { @apply opacity-0 pointer-events-none; }
   .hero-nav-prev { @apply left-4; }
   .hero-nav-next { @apply right-4; }

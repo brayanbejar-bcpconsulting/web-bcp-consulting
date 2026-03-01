@@ -31,6 +31,8 @@ const appTypes = [
     desc: "Rastreo GPS en tiempo real, gestión de flotas y optimización de rutas.",
   },
 ];
+
+import bgAppsMobiles from '@images/pages/services/apps-mobiles/bg-image-apps-mobile.jpg';
 ---
 
 <MainLayout
@@ -46,6 +48,8 @@ const appTypes = [
       { label: "Servicios", href: "/servicios" },
       { label: service.title },
     ]}
+    image={bgAppsMobiles}
+    imageAlt="Aplicaciones móviles para negocios y empresas que necesitan automatizar los procesos."
   />
 
   <MainContainer bgColor="bg-neutral-50" id="features-apps">

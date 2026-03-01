@@ -1,29 +1,46 @@
----
+﻿---
 import { NAVIGATION } from "@utils/navigation";
 import { Logotipo, Button, Icon } from "@components";
+
+const pathname = Astro.url.pathname;
 ---
 
-{/* Botón hamburguesa (fuera del panel) */}
+{/* ── Botón hamburguesa ── */}
 <button
   class="nav-mobile-toggle md:hidden"
   data-mobile-toggle
-  aria-label="Abrir menú"
+  aria-label="Abrir menú de navegación"
   aria-expanded="false"
+  aria-controls="nav-mobile-panel"
   type="button"
 >
-  <Icon name="menu" size="28" />
+  <Icon name="menu" size="24" />
 </button>
 
-{/* Portal: el backdrop y el nav se teletransportan al <body> via JS para escapar del stacking context del header */}
+{/*
+  Portal: backdrop + panel se teletransportan al <body> via JS
+  para escapar del stacking context creado por backdrop-blur del header.
+*/}
 <div id="nav-mobile-portal">
-  {/* Panel off-canvas */}
-  <div class="nav-mobile-backdrop" data-mobile-backdrop aria-hidden="true"></div>
+
+  {/* ── Capa de oscurecimiento ── */}
+  <div
+    class="nav-mobile-backdrop"
+    data-mobile-backdrop
+    aria-hidden="true"
+    role="presentation"
+  ></div>
+
+  {/* ── Panel off-canvas ── */}
   <nav
+    id="nav-mobile-panel"
     class="nav-mobile"
     data-mobile-nav
-    aria-label="Menú principal"
+    aria-label="Menú de navegación principal"
     aria-hidden="true"
   >
+
+    {/* Cabecera del panel */}
     <div class="nav-mobile__header">
       <Logotipo />
       <button
@@ -32,55 +49,95 @@ import { Logotipo, Button, Icon } from "@components";
         aria-label="Cerrar menú"
         type="button"
       >
-        <Icon name="x" size="24" />
+        <Icon name="x" size="20" />
       </button>
     </div>
 
-    <ul class="nav-mobile__links">
+    {/* Lista de enlaces */}
+    <ul class="nav-mobile__links" role="list">
       {
-        NAVIGATION.main.map((item) => (
-          <li class="border-b border-primary-800/50 last:border-none border-solid">
-            {item.children && item.children.length > 0 ? (
-              <details class="nav-mobile-dropdown group">
-                <summary class="flex justify-between items-center py-4 px-4 text-neutral-200 font-medium text-lg cursor-pointer hover:bg-primary-800 hover:text-white rounded-lg transition-colors list-none">
-                  {item.title}
-                  <svg
-                    class="w-4 h-4 transition-transform group-open:rotate-180"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+        NAVIGATION.main.map((item) => {
+          const isActive =
+            item.path === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.path);
+
+          return (
+            <li class="nav-mobile__item">
+              {item.children && item.children.length > 0 ? (
+                /* ── Acordeón de servicios ── */
+                <div class="nav-mobile-accordion" data-accordion>
+                  <button
+                    class={`nav-mobile__accordion-btn ${isActive ? "is-active" : ""}`}
+                    data-accordion-trigger
+                    aria-expanded="false"
+                    type="button"
                   >
-                    <path d="M3 4.5l3 3 3-3" />
-                  </svg>
-                </summary>
-                <ul class="flex flex-col ml-4 border-l-2 border-primary-800 list-none mb-3 py-1">
-                  {item.children.map((child) => (
-                    <li>
-                      <a
-                        href={child.path}
-                        class="block py-2 px-4 text-neutral-400 text-base no-underline transition-colors hover:text-primary-300"
-                        data-mobile-link
-                      >
-                        {child.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            ) : (
-              <a href={item.path} class="nav-mobile__link" data-mobile-link>
-                {item.title}
-              </a>
-            )}
-          </li>
-        ))
+                    <span class="nav-mobile__link-inner">
+                      {item.icon && (
+                        <span class="nav-mobile__icon">
+                          <Icon name={item.icon} size="20" />
+                        </span>
+                      )}
+                      <span>{item.title}</span>
+                    </span>
+                    <span class="nav-mobile__chevron" aria-hidden="true">
+                      <Icon name="chevron-down" size="16" />
+                    </span>
+                  </button>
+
+                  {/* Panel colapsable — animado con CSS Grid trick */}
+                  <div class="nav-mobile__submenu-wrap" data-accordion-panel aria-hidden="true">
+                    <ul class="nav-mobile__submenu" role="list">
+                      {item.children.map((child) => {
+                        const isChildActive = pathname === child.path;
+                        return (
+                          <li>
+                            <a
+                              href={child.path}
+                              class={`nav-mobile__sublink ${isChildActive ? "is-active" : ""}`}
+                              data-mobile-link
+                              aria-current={isChildActive ? "page" : undefined}
+                            >
+                              {child.icon && (
+                                <span class="nav-mobile__icon nav-mobile__icon--sm">
+                                  <Icon name={child.icon} size="17" />
+                                </span>
+                              )}
+                              {child.title}
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                /* ── Enlace simple ── */
+                <a
+                  href={item.path}
+                  class={`nav-mobile__link ${isActive ? "is-active" : ""}`}
+                  data-mobile-link
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  <span class="nav-mobile__link-inner">
+                    {item.icon && (
+                      <span class="nav-mobile__icon">
+                        <Icon name={item.icon} size="20" />
+                      </span>
+                    )}
+                    <span>{item.title}</span>
+                  </span>
+                </a>
+              )}
+            </li>
+          );
+        })
       }
     </ul>
 
-    <div class="nav-mobile__cta">
+    {/* CTA inferior */}
+    <div class="nav-mobile__footer">
       <Button
         href="/contacto"
         variant="whatsapp"
@@ -90,18 +147,29 @@ import { Logotipo, Button, Icon } from "@components";
         Agenda una reunión
       </Button>
     </div>
+
   </nav>
 </div>
 
 <style>
   @reference "../../styles/global.css";
 
+  /* ─────────────────────────────
+     Botón hamburguesa
+  ───────────────────────────── */
   .nav-mobile-toggle {
-    @apply p-2 text-neutral-200 hover:text-white transition-colors cursor-pointer;
+    @apply p-2 rounded-lg text-neutral-200 hover:text-white
+           hover:bg-primary-700/50
+           transition-colors duration-200 cursor-pointer;
   }
 
+  /* ─────────────────────────────
+     Backdrop / overlay
+  ───────────────────────────── */
   .nav-mobile-backdrop {
-    @apply fixed inset-0 z-40 bg-black/60 opacity-0 pointer-events-none
+    @apply fixed inset-0 z-40
+           bg-primary-950/75 backdrop-blur-sm
+           opacity-0 pointer-events-none
            transition-opacity duration-300;
   }
 
@@ -109,86 +177,202 @@ import { Logotipo, Button, Icon } from "@components";
     @apply opacity-100 pointer-events-auto;
   }
 
+  /* ─────────────────────────────
+     Panel off-canvas
+  ───────────────────────────── */
   .nav-mobile {
-    /*
-      h-dvh en lugar de h-full:
-      - h-full en un fixed depende del containing block, que era el <header>
-      - h-dvh siempre es el viewport real, incluyendo la barra del navegador móvil
-    */
-    @apply fixed top-0 right-0 z-50 w-[85%] max-w-sm h-dvh
-           bg-primary-950 flex flex-col
-           transform translate-x-full transition-transform duration-300 ease-out
-           overflow-y-auto;
+    @apply fixed top-0 right-0 z-50
+           w-[85%] max-w-85 h-dvh
+           flex flex-col
+           bg-primary-900
+           border-l border-primary-700/50
+           shadow-2xl
+           translate-x-full
+           transition-transform duration-300 ease-out
+           overflow-y-auto overflow-x-hidden;
   }
 
   .nav-mobile.open {
     @apply translate-x-0;
   }
 
+  /* ─────────────────────────────
+     Cabecera del panel
+  ───────────────────────────── */
   .nav-mobile__header {
-    @apply flex items-center justify-between p-6 border-b border-primary-800;
+    @apply sticky top-0 z-10
+           flex items-center justify-between
+           px-5 py-4
+           bg-primary-900/95 backdrop-blur-md
+           border-b border-primary-700/50;
   }
 
   .nav-mobile__close {
-    @apply p-2 text-neutral-300 hover:text-white transition-colors cursor-pointer;
+    @apply flex items-center justify-center
+           w-9 h-9 rounded-lg
+           text-neutral-400 hover:text-white
+           hover:bg-primary-700/60
+           transition-all duration-200 cursor-pointer;
   }
 
+  /* ─────────────────────────────
+     Lista de enlaces
+  ───────────────────────────── */
   .nav-mobile__links {
-    @apply flex flex-col p-6 gap-1 list-none m-0;
+    @apply flex flex-col px-3 py-4 gap-0.5 list-none m-0;
   }
 
+  .nav-mobile__item {
+    @apply w-full;
+  }
+
+  /* ─────────────────────────────
+     Enlace simple
+  ───────────────────────────── */
   .nav-mobile__link {
-    @apply block py-3 px-4 text-neutral-200 font-medium text-lg
-           no-underline rounded-lg
-           transition-colors duration-200
-           hover:bg-primary-800 hover:text-white;
+    @apply flex items-center
+           w-full px-3 py-3 rounded-xl
+           text-neutral-300 font-medium text-[0.95rem]
+           no-underline
+           transition-all duration-200
+           hover:bg-primary-700/50 hover:text-white;
   }
 
-  .nav-mobile__sublinks {
-    @apply flex flex-col ml-4 list-none m-0 p-0;
+  .nav-mobile__link.is-active {
+    @apply bg-primary-700/60 text-white;
   }
 
+  .nav-mobile__link-inner {
+    @apply flex items-center gap-3;
+  }
+
+  /* ─────────────────────────────
+     Iconos
+  ───────────────────────────── */
+  .nav-mobile__icon {
+    @apply flex items-center justify-center
+           w-8 h-8 rounded-lg shrink-0
+           bg-primary-700/50 text-secondary-400;
+  }
+
+  .nav-mobile__link.is-active .nav-mobile__icon,
+  .nav-mobile__accordion-btn.is-active .nav-mobile__icon {
+    @apply bg-secondary-500/20 text-secondary-400;
+  }
+
+  .nav-mobile__icon--sm {
+    @apply w-7 h-7 rounded-md bg-primary-700/30 text-primary-300;
+  }
+
+  /* ─────────────────────────────
+     Acordeón (Servicios)
+  ───────────────────────────── */
+  .nav-mobile__accordion-btn {
+    @apply flex items-center justify-between
+           w-full px-3 py-3 rounded-xl
+           text-neutral-300 font-medium text-[0.95rem]
+           transition-all duration-200 cursor-pointer
+           hover:bg-primary-700/50 hover:text-white;
+  }
+
+  .nav-mobile__accordion-btn.is-active {
+    @apply bg-primary-700/60 text-white;
+  }
+
+  .nav-mobile__accordion-btn[aria-expanded="true"] {
+    @apply bg-primary-700/40 text-white;
+  }
+
+  .nav-mobile__chevron {
+    @apply shrink-0 text-neutral-500
+           transition-transform duration-300 ease-out;
+  }
+
+  .nav-mobile__accordion-btn[aria-expanded="true"] .nav-mobile__chevron {
+    @apply rotate-180 text-secondary-400;
+  }
+
+  /* ─────────────────────────────
+     Panel de submenu — CSS Grid trick
+     permite animar la altura con transition
+  ───────────────────────────── */
+  .nav-mobile__submenu-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .nav-mobile__submenu-wrap.open {
+    grid-template-rows: 1fr;
+  }
+
+  .nav-mobile__submenu {
+    @apply list-none m-0 overflow-hidden;
+    /* el overflow:hidden interno es necesario para el grid trick */
+  }
+
+  /* Contenedor interno con padding para que no se corte con el clip */
+  .nav-mobile__submenu > li {
+    @apply first:pt-1 last:pb-2;
+  }
+
+  /* ─────────────────────────────
+     Sublínk
+  ───────────────────────────── */
   .nav-mobile__sublink {
-    @apply block py-2 px-4 text-neutral-400 text-base
-           no-underline rounded-lg
-           transition-colors duration-200
-           hover:bg-primary-800 hover:text-neutral-200;
+    @apply flex items-center gap-3
+           mx-2 px-3 py-2.5 rounded-xl
+           text-neutral-400 text-sm
+           no-underline
+           transition-all duration-200
+           hover:bg-primary-700/40 hover:text-white;
   }
 
-  .nav-mobile__cta {
-    @apply mt-auto p-6 border-t border-primary-800;
+  .nav-mobile__sublink.is-active {
+    @apply bg-secondary-500/10 text-secondary-300;
+  }
+
+  .nav-mobile__sublink.is-active .nav-mobile__icon--sm {
+    @apply bg-secondary-500/20 text-secondary-400;
+  }
+
+  /* Línea vertical decorativa del submenu */
+  .nav-mobile-accordion {
+    @apply relative;
+  }
+
+  /* ─────────────────────────────
+     CTA / Footer del panel
+  ───────────────────────────── */
+  .nav-mobile__footer {
+    @apply mt-auto p-4 border-t border-primary-700/50
+           bg-primary-900/80;
   }
 </style>
 
 <script>
   const initMobileNav = () => {
-    const toggle = document.querySelector<HTMLButtonElement>(
-      "[data-mobile-toggle]",
-    );
-    const nav = document.querySelector<HTMLElement>("[data-mobile-nav]");
-    const backdrop = document.querySelector<HTMLElement>(
-      "[data-mobile-backdrop]",
-    );
-    const closeBtn = document.querySelector<HTMLButtonElement>(
-      "[data-mobile-close]",
-    );
-    const links =
-      document.querySelectorAll<HTMLAnchorElement>("[data-mobile-link]");
+    const toggle   = document.querySelector<HTMLButtonElement>("[data-mobile-toggle]");
+    const nav      = document.querySelector<HTMLElement>("[data-mobile-nav]");
+    const backdrop = document.querySelector<HTMLElement>("[data-mobile-backdrop]");
+    const closeBtn = document.querySelector<HTMLButtonElement>("[data-mobile-close]");
+    const links    = document.querySelectorAll<HTMLAnchorElement>("[data-mobile-link]");
 
     if (!toggle || !nav || !backdrop) return;
 
     /*
-      Fix del stacking context:
-      El header usa backdrop-blur, lo que en muchos browsers crea un nuevo
-      stacking context que "atrapa" a los hijos fixed dentro de sus límites.
-      Mover el portal al <body> garantiza que nav y backdrop sean hijos
-      directos del stacking context raíz.
+      Fix del stacking context: el header usa backdrop-blur, lo que en
+      muchos browsers crea un nuevo stacking context que "atrapa" a los
+      hijos fixed. Mover el portal al <body> garantiza que nav y backdrop
+      sean hijos directos del stacking context raíz.
     */
     const portal = document.getElementById("nav-mobile-portal");
     if (portal && portal.parentElement !== document.body) {
       document.body.appendChild(portal);
     }
 
+    // ── Abrir / cerrar panel ──────────────────────────────
     const open = () => {
       nav.classList.add("open");
       backdrop.classList.add("open");
@@ -214,6 +398,42 @@ import { Logotipo, Button, Icon } from "@components";
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && nav.classList.contains("open")) close();
+    });
+
+    // ── Acordeones ───────────────────────────────────────
+    const accordions = document.querySelectorAll<HTMLElement>("[data-accordion]");
+
+    accordions.forEach((accordion) => {
+      const trigger = accordion.querySelector<HTMLButtonElement>("[data-accordion-trigger]");
+      const panel   = accordion.querySelector<HTMLElement>("[data-accordion-panel]");
+
+      if (!trigger || !panel) return;
+
+      trigger.addEventListener("click", () => {
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+
+        if (isOpen) {
+          // Cerrar
+          trigger.setAttribute("aria-expanded", "false");
+          panel.classList.remove("open");
+          panel.setAttribute("aria-hidden", "true");
+        } else {
+          // Abrir — añade clase de animación fade-in-up a los items
+          trigger.setAttribute("aria-expanded", "true");
+          panel.classList.add("open");
+          panel.setAttribute("aria-hidden", "false");
+
+          // Aplicar animación de tailwind-animations a cada sublink
+          const sublinks = panel.querySelectorAll<HTMLElement>("li");
+          sublinks.forEach((li, i) => {
+            li.style.animationDelay = `${i * 50}ms`;
+            li.classList.remove("animate-fade-in-up");
+            // Forzar reflow para reiniciar la animación
+            void li.offsetWidth;
+            li.classList.add("animate-fade-in-up");
+          });
+        }
+      });
     });
   };
 

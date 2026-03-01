@@ -1,15 +1,28 @@
 ---
+import { Image } from "astro:assets";
 import Breadcrumbs from "./Breadcrumbs.astro";
 
 /**
- * Hero interno para la página de Servicios.
- * Reutilizable como patrón para todas las páginas internas.
+ * Hero interno para páginas internas.
+ * Soporta fondo degradado (bgClass) o imagen de fondo optimizada (image).
+ * Cuando se pasa `image`, se renderiza sobre un overlay oscuro para
+ * mantener la legibilidad del texto.
  */
 interface Props {
   title: string;
   description: string;
+  /** Clase de variante de degradado. Se ignora si se pasa `image`. */
   bgClass?: string;
   breadcrumbs?: Array<{ label: string; href?: string }>;
+  /** Imagen de fondo opcional. Acepta import estático o URL string. */
+  image?: ImageMetadata | string;
+  /** Alt descriptivo de la imagen para SEO/accesibilidad. */
+  imageAlt?: string;
+  /**
+   * Intensidad del overlay oscuro sobre la imagen.
+   * Por defecto: 'medium' (bg-black/60).
+   */
+  imageOverlay?: 'light' | 'medium' | 'dark';
 }
 
 const {
@@ -17,10 +30,51 @@ const {
   description,
   bgClass = "hero-page--primary",
   breadcrumbs,
+  image,
+  imageAlt = title,
+  imageOverlay = 'medium',
 } = Astro.props;
+
+const overlayMap = {
+  light:  'bg-black/40',
+  medium: 'bg-black/60',
+  dark:   'bg-black/80',
+} as const;
 ---
 
-<section class:list={["hero-page", bgClass]}>
+<section class:list={["hero-page", !image && bgClass]}>
+
+  {/* Imagen de fondo optimizada — solo cuando se pasa `image` */}
+  {image && (
+    <div class="hero-page__bg-media" aria-hidden="true">
+      {typeof image === 'string' ? (
+        <img
+          src={image}
+          alt=""
+          class="hero-page__bg-img"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      ) : (
+        <Image
+          src={image}
+          alt=""
+          class="hero-page__bg-img"
+          widths={[768, 1280, 1920]}
+          sizes="100vw"
+          format="webp"
+          quality={85}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      )}
+      {/* Overlay sobre la imagen */}
+      <div class:list={["hero-page__bg-overlay", overlayMap[imageOverlay]]} />
+    </div>
+  )}
+
   <div class="hero-page__container">
     <div class="flex justify-center animate-fade-in-up">
       {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
@@ -43,6 +97,7 @@ const {
     @apply relative pt-32 pb-20 lg:pt-40 lg:pb-28 px-[5%] overflow-hidden;
   }
 
+  /* ── Variantes de degradado (solo cuando no hay imagen) ── */
   .hero-page--primary {
     background: linear-gradient(
       135deg,
@@ -67,9 +122,10 @@ const {
     );
   }
 
+  /* Patrón de puntos decorativo */
   .hero-page::before {
     content: "";
-    @apply absolute inset-0 opacity-5;
+    @apply absolute inset-0 opacity-5 pointer-events-none z-1;
     background-image: radial-gradient(
       circle at 30% 40%,
       white 1px,
@@ -78,6 +134,32 @@ const {
     background-size: 30px 30px;
   }
 
+  /* ── Imagen de fondo ── */
+  .hero-page__bg-media {
+    @apply absolute inset-0 z-0;
+  }
+
+  .hero-page__bg-img {
+    @apply w-full h-full object-cover object-center;
+    /*
+      image-rendering crisp + will-change para que el browser
+      evite recompresión y mantenga calidad WebP.
+    */
+    will-change: transform;
+    image-rendering: high-quality;
+  }
+
+  .hero-page__bg-overlay {
+    @apply absolute inset-0;
+    /* Degradado descendente sutil + color sólido para profundidad */
+    background-image: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgb(0 0 0 / 0.3) 100%
+    );
+  }
+
+  /* ── Contenedor de texto ── */
   .hero-page__container {
     @apply max-w-200 mx-auto text-center relative z-10;
   }

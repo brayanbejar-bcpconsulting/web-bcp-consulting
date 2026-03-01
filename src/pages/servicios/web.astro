@@ -19,6 +19,8 @@ const CATEGORY_LABELS: Record<string, string> = {
   app: "App Móvil",
   software: "Software",
 };
+
+import bgWebDesign from '@images/pages/services/web-design/bg-image-web-design.jpg'
 ---
 
 <MainLayout
@@ -34,6 +36,8 @@ const CATEGORY_LABELS: Record<string, string> = {
       { label: "Servicios", href: "/servicios" },
       { label: service.title },
     ]}
+    image={bgWebDesign}
+    imageAlt="Diseño y Desarrollo de páginas web empresariales e informativas en Perú."
   />
 
   <MainContainer bgColor="bg-neutral-50" id="features-web">

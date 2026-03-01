@@ -21,21 +21,22 @@ export interface NavMenu extends NavLink {
 export const NAVIGATION = {
   // Enlaces principales del Header
   main: [
-    { title: 'Inicio', path: '/' },
+    { title: 'Inicio', path: '/', icon: 'home' },
     { 
       title: 'Servicios', 
       path: '/servicios',
+      icon: 'layers',
       children: [
-        { title: 'Diseño Web', path: '/servicios/web' },
-        { title: 'Software a Medida', path: '/servicios/software' },
-        { title: 'Aplicaciones Móviles', path: '/servicios/apps-moviles' },
-        { title: 'Consultoría', path: '/servicios/apps-consultoria' },
+        { title: 'Diseño Web', path: '/servicios/web', icon: 'monitor' },
+        { title: 'Software a Medida', path: '/servicios/software', icon: 'code' },
+        { title: 'Aplicaciones Móviles', path: '/servicios/apps-moviles', icon: 'smartphone' },
+        { title: 'Consultoría', path: '/servicios/apps-consultoria', icon: 'lightbulb' },
       ]
     },
-    { title: 'Portafolio', path: '/portafolio' },
-    { title: 'Nosotros', path: '/nosotros' },
-    { title: 'Contacto', path: '/contacto' },
-    { title: 'Blog', path: '/blog' },
+    { title: 'Portafolio', path: '/portafolio', icon: 'folder-open' },
+    { title: 'Nosotros', path: '/nosotros', icon: 'users' },
+    { title: 'Blog', path: '/blog', icon: 'newspaper' },
+    { title: 'Contacto', path: '/contacto', icon: 'mail' },
   ] as NavMenu[],
 
   // Enlaces secundarios o legales (útil para el Footer)

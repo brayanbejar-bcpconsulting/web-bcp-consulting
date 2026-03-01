@@ -1,10 +1,14 @@
 ---
 import { HeroPage } from "@components";
+
+import bgProjects from '@images/pages/projects/bg-page-projects.jpg'
 ---
 
 <HeroPage
   title="Proyectos que Generan Resultados"
   description="Conoce los sistemas, aplicaciones y sitios web que hemos desarrollado para empresas que confiaron en nosotros."
   bgClass="hero-page--secondary"
+  image={bgProjects}
+  imageAlt="Empresa de Programación en Perú. Proyectos y experiencia"
   breadcrumbs={[{ label: "Inicio", href: "/" }, { label: "Portafolio" }]}
 />
