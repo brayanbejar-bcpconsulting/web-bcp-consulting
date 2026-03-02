@@ -1,0 +1,175 @@
+﻿---
+title: "Publicar una app en Play Store: requisitos, costos y checklist actualizado (2025)"
+description: "Publicar una app en Google Play ya no es “subir el archivo y listo”. Hoy el proceso incluye verificación de cuenta, requisitos de pruebas (en ciertos…"
+date: 2025-12-18
+updatedDate: 2025-12-18
+coverImage: "publicar-una-app-en-play-store-requisitos-costos-y-checklist-actualizado-2025-cover.jpg"
+category: "educacion"
+type: "guia"
+author: "Equipo BCP Consulting"
+isFeatured: false
+wpId: 2617
+---
+
+![](https://bcpconsulting.pe/wp-content/uploads/2025/12/34325105-31402787.jpg)
+
+Publicar una app en Google Play ya no es “subir el archivo y listo”. Hoy el proceso incluye verificación de cuenta, requisitos de pruebas (en ciertos casos), cumplimiento de políticas de datos y un set de activos (ficha, capturas, privacidad) que, si están incompletos, suelen causar rechazos o demoras.
+
+En esta guía encontrarás requisitos, costos reales y un checklist operativo para **publicar una app en Play Store** con menos fricción y mayor probabilidad de aprobación.
+
+---
+
+## Requisitos para publicar una app en Play Store (lo que sí o sí te van a pedir)
+
+### 1) Cuenta de desarrollador y verificación
+
+-   Crear tu cuenta en Google Play Console (personal u organización).
+-   Completar y mantener actualizados los datos de contacto y facturación.
+-   Definir accesos/roles si trabaja un equipo o una agencia.
+
+**Recomendación:** si tu proyecto es empresarial (varias personas, continuidad operativa, propiedad de activos), suele convenir una cuenta de _Organización_ para separar propiedad, permisos y operación.
+
+### 2) Formato de publicación: Android App Bundle (AAB)
+
+Para apps nuevas, el estándar es publicar con **Android App Bundle (.aab)**. Asegúrate de que tu pipeline de compilación y firma esté alineado con esto antes de iniciar el proceso de subida.
+
+### 3) Target API level (requisito “mata-publicación” si no cumples)
+
+Google Play exige un nivel mínimo de **targetSdk** y lo actualiza cada año. Si tu app no cumple, la publicación o actualización puede bloquearse, y en algunos casos la app deja de estar disponible para dispositivos más nuevos.
+
+### 4) Privacidad, datos y “Data safety”
+
+-   Publicar una **Política de Privacidad** en una URL accesible públicamente (idealmente sin restricciones geográficas).
+-   Completar la sección de **Seguridad de datos (Data safety)** con lo que tu app realmente recolecta/usa/comparte.
+-   Alinear lo declarado en Play Console con lo que dices en tu política y con lo que hace la app.
+
+### 5) Testing obligatorio en ciertos casos (planifica el cronograma)
+
+Dependiendo del tipo de cuenta y del historial de publicación, puede requerirse un flujo de pruebas (por ejemplo: pruebas cerradas con testers durante un periodo mínimo) antes de habilitar producción. Esto impacta tiempos, así que conviene considerarlo desde el inicio del proyecto.
+
+## Costos para publicar una app en Play Store (qué pagas y cuándo)
+
+### Costos “obligatorios” (según tu caso)
+
+-   **Registro de cuenta de desarrollador:** normalmente es un pago único al crear la cuenta (puede variar por país/impuestos).
+-   **Comisiones por ventas:** aplican solo si monetizas con apps de pago o compras dentro de la app (bienes/servicios digitales). La tarifa depende del tipo de transacción y programa aplicable.
+
+### Costos “habituales” (no son de Google, pero casi siempre aparecen)
+
+-   **Diseño y contenidos** de la ficha (capturas, ícono, textos persuasivos).
+-   **QA y testing** en dispositivos reales.
+-   **Compliance y legal** (privacidad, permisos, datos) según la categoría.
+-   **Mantenimiento anual** por cambios de políticas, librerías y target API.
+
+**Consejo práctico:** si tu app es para un negocio, el costo real no es solo “publicar”; es _publicar y mantenerla aprobable_ con actualizaciones periódicas.
+
+## Paso a paso para publicar una app en Play Store (proceso recomendado)
+
+### Paso 1: Prepara la base técnica
+
+-   Compila tu **.aab** final.
+-   Confirma que el **package name** (applicationId) será definitivo.
+-   Revisa targetSdk, permisos, compatibilidad y dependencias.
+
+### Paso 2: Define privacidad y declaraciones
+
+-   Publica la **Política de Privacidad** en una URL pública.
+-   Completa **Data safety** con información real y verificable.
+-   Si hay login o contenido restringido, prepara credenciales de prueba o instrucciones para el revisor.
+
+### Paso 3: Configura testing (si aplica)
+
+-   Usa **Internal testing** para validar rápido con tu equipo.
+-   Implementa **Closed testing** si el flujo de tu cuenta lo requiere antes de producción.
+
+### Paso 4: Construye una ficha que convierta (y pase revisión)
+
+-   **Título** claro y descriptivo.
+-   **Descripción corta** orientada a beneficio.
+-   **Descripción larga** con funcionalidades, casos de uso y soporte (sin claims engañosos).
+-   Capturas reales, ícono y recursos visuales consistentes.
+
+### Paso 5: Publica y monitorea calidad
+
+-   Publica en producción cuando la consola indique “listo”.
+-   Monitorea errores (crashes), ANRs, reseñas y métricas de adopción.
+-   Planifica la primera actualización con mejoras y correcciones (reduce riesgo de desinstalaciones y malas reseñas).
+
+## Checklist actualizado 2025 para publicar una app en Play Store
+
+Marca cada ítem antes de enviar a revisión. Esto reduce rechazos y acelera el go-live.
+
+### A. Cuenta y accesos
+
+-   \[ \] Cuenta Play Console creada (Personal u Organización)
+-   \[ \] Datos de contacto y facturación completos y vigentes
+-   \[ \] Roles definidos (owner/admin, equipo interno, agencia)
+
+### B. Build / técnica
+
+-   \[ \] Entregable **.aab** listo
+-   \[ \] versionCode y versionName correctos
+-   \[ \] targetSdk actualizado según exigencia vigente
+-   \[ \] Permisos revisados (solo los necesarios)
+-   \[ \] Flujos críticos probados (login, registro, pagos si aplica, permisos, navegación)
+
+### C. Privacidad y cumplimiento
+
+-   \[ \] URL pública de **Política de Privacidad**
+-   \[ \] Sección **Data safety** completa y coherente
+-   \[ \] Instrucciones para revisor (si hay login/paywall/contenido restringido)
+-   \[ \] Email de soporte operativo
+
+### D. Testing / lanzamiento
+
+-   \[ \] Internal testing configurado
+-   \[ \] Closed testing configurado (si aplica)
+-   \[ \] Criterios de liberación definidos (calidad mínima, bugs críticos, checklist cumplido)
+
+### E. Ficha (SEO + conversión dentro de Play)
+
+-   \[ \] Título y textos optimizados con lenguaje natural y beneficios
+-   \[ \] Capturas reales y actuales
+-   \[ \] Ícono, imágenes y branding consistentes
+-   \[ \] Categoría correcta y etiquetas relevantes
+
+## Errores comunes que causan rechazo o retrasos (y cómo evitarlos)
+
+### Data safety incompleto o inconsistente
+
+Evita plantillas genéricas. Lo que declaras debe coincidir con el comportamiento real de la app y con tu política de privacidad.
+
+### Target API desactualizado
+
+Revisa el targetSdk antes de subir el build. Es una de las causas más frecuentes de bloqueo de publicación/actualización.
+
+### No prever el proceso de testing
+
+Si tu cuenta requiere pruebas antes de producción, esto afecta el cronograma. Integra el testing como parte del plan de lanzamiento.
+
+### Ficha débil (no convierte) o con claims riesgosos
+
+Una ficha incompleta o poco clara reduce instalaciones. Evita afirmaciones exageradas o no comprobables (por ejemplo, “100% seguro”, “garantizado”, etc.).
+
+## Preguntas frecuentes sobre publicar una app en Play Store
+
+### ¿Cuánto tarda publicar una app en Play Store?
+
+Depende del estado de tu cuenta, si requieres testing previo y la carga de revisión. En la práctica, lo que más retrasa es: privacidad mal declarada, ficha incompleta, target API desactualizado y falta de instrucciones para el revisor.
+
+### ¿Puedo publicar sin política de privacidad?
+
+En la mayoría de escenarios no es recomendable y puede bloquearte. Si tu app recopila datos o incluye login, la política y las declaraciones de datos son esenciales.
+
+### ¿Qué es mejor: subir APK o AAB?
+
+Para apps nuevas, lo normal es publicar con **AAB**. Reduce fricción y se alinea con el estándar de distribución actual de Google Play.
+
+## CTA: publica sin rechazos y con un proceso profesional de principio a fin
+
+Si quieres **publicar tu app en Play Store** sin devoluciones, con checklist de cumplimiento, activos completos (ficha, privacidad, declaraciones) y un flujo ordenado para tu equipo o negocio, en **BCP Consulting** podemos implementarlo contigo de forma controlada y documentada.
+
+**Solicita el acompañamiento/implementación desde aquí:**  
+[https://bcpconsulting.pe/](https://bcpconsulting.pe/)
+
+_Nota EEAT:_ Esta guía está enfocada en ayudarte a tomar decisiones correctas y evitar rechazos comunes. Si tu app pertenece a una categoría regulada (finanzas, salud, educación, menores), es recomendable revisar requisitos específicos de políticas y compliance antes del envío.

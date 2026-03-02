@@ -1,0 +1,163 @@
+﻿---
+title: "Core Web Vitals explicado fácil: cómo mejorar la velocidad y subir posiciones en Google"
+description: "Cuando un usuario entra a tu web, decide en segundos si se queda o se va. Si la página carga lento, “salta” mientras se acomoda, o responde tarde cuando…"
+date: 2025-12-18
+updatedDate: 2025-12-18
+coverImage: "core-web-vitals-explicado-facil-como-mejorar-la-velocidad-y-subir-posiciones-en-google-cover.png"
+category: "educacion"
+type: "guia"
+author: "Equipo BCP Consulting"
+isFeatured: false
+wpId: 2630
+---
+
+![](https://bcpconsulting.pe/wp-content/uploads/2025/12/Core-Web-Vitals-todo-lo-que-tienes-que-saber-para-optimizar-tu-sitio-web.png)
+
+Cuando un usuario entra a tu web, decide en segundos si se queda o se va. Si la página carga lento, “salta” mientras se acomoda, o responde tarde cuando hacen clic, pierdes ventas y también oportunidades de posicionamiento. Ahí entran los **Core Web Vitals**: un conjunto de métricas de Google para medir la experiencia real de tus usuarios en velocidad, respuesta y estabilidad visual.
+
+## ¿Qué son los Core Web Vitals?
+
+Los **Core Web Vitals** son métricas que Google usa para evaluar si una página ofrece una buena experiencia de usuario en tres frentes:
+
+-   **Carga (Loading):** qué tan rápido aparece el contenido principal.
+-   **Respuesta (Interactivity/Responsiveness):** qué tan rápido responde la web cuando el usuario interactúa.
+-   **Estabilidad visual (Visual stability):** si el contenido se mueve de forma inesperada mientras carga.
+
+Google recomienda alcanzar buenos Core Web Vitals como parte de la experiencia de página y, sobre todo, para ofrecer una experiencia sólida a los usuarios.
+
+## Las 3 métricas clave y los valores “buenos” que debes alcanzar
+
+### 1) LCP (Largest Contentful Paint): velocidad percibida de carga
+
+Mide cuándo se renderiza el elemento principal visible (por ejemplo, un banner, una imagen destacada o un bloque grande de texto).
+
+-   **Bueno:** ≤ 2.5 s
+
+En negocio: un LCP alto suele significar “se ve lento”, y eso sube el rebote y baja conversiones.
+
+### 2) INP (Interaction to Next Paint): rapidez al responder
+
+Mide la latencia de interacción (clic, tap, teclado) hasta que la pantalla refleja la respuesta. Hoy es la métrica clave de interactividad (reemplazó a FID).
+
+-   **Bueno:** ≤ 200 ms
+-   **Necesita mejora:** 200–500 ms
+-   **Malo:** > 500 ms
+
+### 3) CLS (Cumulative Layout Shift): estabilidad visual
+
+Mide cuánto “salta” el diseño de forma inesperada (botones que se mueven, textos que bajan cuando carga una imagen, etc.).
+
+-   **Bueno:** ≤ 0.1
+-   **Malo:** > 0.25
+
+En negocio: el CLS es el típico responsable de “quise dar clic y se movió el botón”, que mata conversiones.
+
+## Por qué Core Web Vitals puede ayudarte a subir posiciones
+
+Dos ideas clave:
+
+-   **Google quiere premiar resultados que satisfacen al usuario.** Core Web Vitals se alinean con ese objetivo: carga, respuesta y estabilidad.
+-   **Mejor experiencia suele mejorar señales de comportamiento** (menos rebote, más tiempo, más interacción), lo cual tiende a apoyar el rendimiento orgánico cuando compites con webs similares.
+
+Nota realista: mejorar Core Web Vitals no garantiza subir posiciones por sí solo, pero elimina fricción cuando tu competencia es más rápida.
+
+## Cómo mide Google: datos reales vs pruebas de laboratorio
+
+Para Core Web Vitals, lo que más importa es el rendimiento con usuarios reales (field data), especialmente desde **Chrome UX Report (CrUX)** y lo que ves en **Search Console**.
+
+Herramientas como **PageSpeed Insights** combinan:
+
+-   **Field data (CrUX):** experiencia real de usuarios.
+-   **Lab data (Lighthouse):** simulación controlada para diagnosticar.
+
+### El dato clave que debes entender: “p75”
+
+Para “pasar” Core Web Vitals, Google evalúa el **percentil 75 (p75)**: en simple, que la mayoría de experiencias (no solo la mejor) estén en “bueno”.
+
+## Diagnóstico rápido en 15 minutos (sin ser desarrollador)
+
+1.  **Entra a Google Search Console → Core Web Vitals** y revisa qué URLs están “Malas” o “Necesitan mejorar” y qué métrica falla (LCP, INP o CLS).
+2.  **Corre PageSpeed Insights en 3 páginas clave**:
+    
+    -   Home (tráfico alto)
+    -   Página de servicio principal
+    -   Contacto / cotización
+    
+    Prioriza **móvil**.
+3.  **Define una meta medible**, por ejemplo:
+    -   “Bajar LCP móvil de 4.2s a < 2.5s”
+    -   “Reducir CLS de 0.25 a < 0.1”
+    -   “Bajar INP de 450ms a < 200ms”
+
+## Cómo mejorar Core Web Vitals: acciones que más impacto generan
+
+### Cómo mejorar LCP (carga): lo que más suele mover la aguja
+
+Causas típicas de mal LCP: imágenes pesadas en el “hero”, servidor lento (TTFB alto), CSS/JS bloqueando render, fuentes que tardan.
+
+-   **Optimiza la imagen principal**: formato moderno (WebP/AVIF si aplica), tamaño correcto, compresión real.
+-   **Reduce recursos que bloquean el render**: CSS crítico, defer/async para JS no esencial.
+-   **Mejora el tiempo de servidor**: cache, CDN, optimización de hosting/infra, revisión de base de datos (si es CMS).
+
+### Cómo mejorar INP (respuesta): donde se pierden leads “sin que se note”
+
+Causas típicas: demasiado JavaScript, plugins pesados, scripts de terceros, tareas largas en el hilo principal.
+
+-   **Reduce JavaScript no esencial** y elimina scripts que no aportan.
+-   **Divide tareas largas** y carga por demanda lo que no se necesita al inicio.
+-   **Prioriza diagnóstico real**: valida en Search Console/CrUX y luego replica en Lighthouse para encontrar el cuello de botella.
+
+### Cómo mejorar CLS (estabilidad): el “salto” que mata la conversión
+
+Causas típicas: imágenes/iframes sin dimensiones, banners que empujan contenido, fuentes que cambian el tamaño del texto.
+
+-   **Reserva espacio** para imágenes y embeds (definir width/height o ratio).
+-   **Evita insertar elementos** encima del contenido ya cargado (usa overlays bien implementados).
+-   **Controla la carga de fuentes** para evitar cambios bruscos de tipografía.
+
+## Checklist de implementación por sprints
+
+### Sprint 1 (Quick wins)
+
+-   Comprimir y ajustar imágenes clave (especialmente el “hero”).
+-   Revisar scripts de terceros (chat, trackers, widgets).
+-   Corregir CLS por imágenes/iframes sin dimensiones.
+
+### Sprint 2 (Optimización técnica)
+
+-   Mejorar cache y CDN.
+-   Defer/async, reducir bundles, eliminar JS innecesario.
+-   Optimizar CSS crítico y carga de fuentes.
+
+### Sprint 3 (Escalar y mantener)
+
+-   Definir presupuestos de rendimiento (performance budgets).
+-   Monitoreo mensual o quincenal de Core Web Vitals y alertas si caen.
+
+## Preguntas frecuentes sobre Core Web Vitals
+
+### ¿Qué debo priorizar si quiero resultados rápidos en SEO?
+
+Empieza por: **LCP** (carga visible), luego **CLS** (evitar saltos) y finalmente **INP** (respuesta al clic).
+
+### ¿Por qué mi PageSpeed marca bien, pero Search Console marca mal?
+
+Porque PageSpeed (lab) es una simulación, mientras Search Console refleja usuarios reales (field data/CrUX). Si tus usuarios navegan con móviles lentos o redes malas, Search Console mostrará el problema.
+
+### ¿Cuánto demora en reflejarse una mejora?
+
+Las mejoras se ven rápido en laboratorio, pero los datos de campo tardan más porque dependen del tráfico real y la ventana de medición.
+
+### ¿Core Web Vitals reemplaza al contenido?
+
+No. El contenido y la intención de búsqueda siguen siendo base. Pero si tu contenido compite “parejo”, el rendimiento puede inclinar la balanza.
+
+## ¿Quieres mejorar Core Web Vitals y convertir esa velocidad en más leads?
+
+Si buscas que tu web **cargue rápido, responda mejor y se vea estable** (y además quede optimizada para SEO y conversión), en **BCP Consulting** podemos ayudarte con:
+
+-   **Auditoría técnica de Core Web Vitals** (Search Console + PageSpeed + diagnóstico de causas reales).
+-   **Plan de optimización por sprints** con prioridades claras (impacto vs esfuerzo).
+-   **Implementación y soporte** para web corporativa o sistema web a medida, cuidando rendimiento y escalabilidad.
+
+Agenda una asesoría desde **bcpconsulting.pe** y te diremos exactamente qué está frenando tu LCP/INP/CLS y qué acciones te darán el mayor retorno.
