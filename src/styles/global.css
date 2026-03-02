@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tailwind-animations";
+@plugin "@tailwindcss/typography";
 
 /* Registramos el plugin de animaciones */
 
@@ -156,7 +157,7 @@
   }
 
   body {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-800);
     color: var(--color-fg);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);

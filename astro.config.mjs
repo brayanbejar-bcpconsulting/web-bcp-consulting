@@ -3,10 +3,16 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+/** @type {Record<string,string>} */
+const wpRedirects = require('./scripts/wp-redirects.json');
 
 export default defineConfig({
   site: 'https://bcpconsulting.pe',
   output: 'static',
+  redirects: wpRedirects,
   integrations: [
     mdx(),
     sitemap({
