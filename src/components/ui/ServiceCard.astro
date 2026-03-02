@@ -6,13 +6,14 @@ interface Props {
   description: string;
   icon: string;
   href: string;
+  dark?: boolean;
   class?: string;
 }
 
-const { title, description, icon, href, class: className } = Astro.props;
+const { title, description, icon, href, dark = false, class: className } = Astro.props;
 ---
 
-<a href={href} class:list={["service-card group", className]} data-service-card>
+<a href={href} class:list={["service-card group", dark && "service-card--dark", className]} data-service-card>
   <div class="service-card__icon">
     <Icon name={icon} size="32" />
   </div>
@@ -76,6 +77,51 @@ const { title, description, icon, href, class: className } = Astro.props;
   @media (hover: hover) {
     .service-card:hover .service-card__cta {
       @apply gap-3 text-secondary-500;
+    }
+  }
+
+  /* ── Dark variant ──────────────────────────────────────── */
+  .service-card--dark {
+    @apply bg-primary-900/60 border-primary-700;
+  }
+
+  @media (hover: hover) {
+    .service-card--dark:hover {
+      @apply shadow-black/30 border-secondary-500;
+    }
+  }
+
+  .service-card--dark .service-card__icon {
+    @apply bg-primary-800 text-secondary-400;
+  }
+
+  @media (hover: hover) {
+    .service-card--dark:hover .service-card__icon {
+      @apply bg-secondary-600 text-white;
+    }
+  }
+
+  .service-card--dark .service-card__title {
+    @apply text-primary-100;
+  }
+
+  @media (hover: hover) {
+    .service-card--dark:hover .service-card__title {
+      @apply text-white;
+    }
+  }
+
+  .service-card--dark .service-card__desc {
+    @apply text-slate-400;
+  }
+
+  .service-card--dark .service-card__cta {
+    @apply text-secondary-400;
+  }
+
+  @media (hover: hover) {
+    .service-card--dark:hover .service-card__cta {
+      @apply gap-3 text-secondary-300;
     }
   }
 </style>

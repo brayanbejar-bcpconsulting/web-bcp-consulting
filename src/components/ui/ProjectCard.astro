@@ -8,6 +8,7 @@ interface Props {
   slug: string;
   result?: string;
   technologies?: string[];
+  dark?: boolean;
   class?: string;
 }
 
@@ -20,13 +21,14 @@ const {
   slug,
   result,
   technologies = [],
+  dark = false,
   class: className,
 } = Astro.props;
 ---
 
 <a
   href={`/portafolio/${slug}`}
-  class:list={["project-card group block", className]}
+  class:list={["project-card group block", dark && "project-card--dark", className]}
 >
   <div class="project-card__image-wrapper">
     <img
@@ -133,5 +135,28 @@ const {
 
   .project-card__result {
     @apply mt-3 text-sm font-medium text-success-700 flex items-center;
+  }
+
+  /* ── Dark variant ──────────────────────────────────────── */
+  .project-card--dark {
+    @apply bg-primary-900/60 border-primary-700;
+  }
+
+  @media (hover: hover) {
+    .project-card--dark:hover {
+      @apply shadow-black/30 border-secondary-500/50;
+    }
+  }
+
+  .project-card--dark .project-card__title {
+    @apply text-primary-100;
+  }
+
+  .project-card--dark .project-card__desc {
+    @apply text-slate-400;
+  }
+
+  .project-card--dark .project-card__result {
+    @apply text-success-400;
   }
 </style>

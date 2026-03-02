@@ -35,34 +35,34 @@ const { quote, name, role, company, class: className } = Astro.props;
 
   .testimonial-card {
     @apply relative flex flex-col gap-5 rounded-2xl p-8
-           bg-white border border-neutral-200
+           bg-primary-900/60 border border-primary-700
            transition-all duration-500 ease-out
-           hover:shadow-xl hover:shadow-secondary-500/10
+           hover:shadow-xl hover:shadow-black/30
            hover:-translate-y-1;
   }
 
   .testimonial-card__quote-icon {
-    @apply text-secondary-200;
+    @apply text-secondary-500/60;
   }
 
   .testimonial-card__text {
-    @apply text-neutral-700 leading-relaxed text-base italic flex-1;
+    @apply text-slate-300 leading-relaxed text-base italic flex-1;
   }
 
   .testimonial-card__footer {
-    @apply flex items-center gap-3 pt-4 border-t border-neutral-100;
+    @apply flex items-center gap-3 pt-4 border-t border-primary-700;
   }
 
   .testimonial-card__avatar {
-    @apply w-10 h-10 rounded-full bg-primary-600 text-white
+    @apply w-10 h-10 rounded-full bg-primary-700 text-white
            flex items-center justify-center font-bold text-sm flex-shrink-0;
   }
 
   .testimonial-card__name {
-    @apply text-primary-700 font-bold text-sm not-italic block;
+    @apply text-primary-100 font-bold text-sm not-italic block;
   }
 
   .testimonial-card__role {
-    @apply text-neutral-500 text-xs;
+    @apply text-primary-400 text-xs;
   }
 </style>
