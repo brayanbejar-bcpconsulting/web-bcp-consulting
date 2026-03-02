@@ -1,5 +1,8 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import { Icon } from "@components";
+import { CATEGORY_LABELS, TYPE_LABELS, formatDate } from "@utils/blog";
 
 interface Props {
   title: string;
@@ -8,9 +11,10 @@ interface Props {
   type: string;
   date: Date;
   author: string;
-  coverImage: string;
+  coverImage?: string;
   slug: string;
   class?: string;
+  priority?: boolean;
 }
 
 const {
@@ -23,25 +27,22 @@ const {
   coverImage,
   slug,
   class: className,
+  priority = false,
 } = Astro.props;
 
-const LABELS: Record<string, string> = {
-  "inteligencia-artificial": "Inteligencia Artificial",
-  "desarrollo-web": "Desarrollo Web",
-  "software-empresarial": "Software Empresarial",
-  "apps-moviles": "Apps Móviles",
-  noticia: "Noticia",
-  guia: "Guía",
-  "caso-de-estudio": "Caso de Estudio",
-  opinion: "Opinión",
-  ranking: "Ranking",
-};
+const formattedDate = formatDate(date);
 
-const formattedDate = date.toLocaleDateString("es-PE", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
+const isExternalUrl = coverImage?.startsWith("http");
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/blog/**/*"
+);
+
+let imgData: ImageMetadata | null = null;
+if (!isExternalUrl && coverImage) {
+  const loader = allImages[`/src/assets/images/blog/${coverImage}`];
+  if (loader) imgData = (await loader()).default;
+}
 ---
 
 <a
@@ -53,18 +54,32 @@ const formattedDate = date.toLocaleDateString("es-PE", {
   data-date={date.getTime()}
 >
   <div class="blog-card__image-wrapper">
-    <img src={coverImage} alt={title} class="blog-card__image" loading="lazy" />
+    {imgData ? (
+      <Image
+        src={imgData}
+        alt={title}
+        width={640}
+        height={360}
+        class="blog-card__image"
+        loading={priority ? "eager" : "lazy"}
+        fetchpriority={priority ? "high" : "auto"}
+      />
+    ) : isExternalUrl && coverImage ? (
+      <img src={coverImage} alt={title} class="blog-card__image" loading={priority ? "eager" : "lazy"} fetchpriority={priority ? "high" : "auto"} />
+    ) : (
+      <div class="blog-card__image bg-gradient-to-br from-primary-800 to-primary-950" aria-hidden="true" />
+    )}
     <span class="blog-card__type">
-      {LABELS[type]}
+      {TYPE_LABELS[type] ?? type}
     </span>
   </div>
   <div class="blog-card__content">
     <div class="blog-card__meta">
       <span
-        class="blog-card__category text-secondary-600 font-bold text-xs uppercase tracking-wider"
-        >{LABELS[category]}</span
+        class="blog-card__category text-secondary-400 font-bold text-xs uppercase tracking-wider"
+        >{CATEGORY_LABELS[category] ?? category}</span
       >
-      <span class="blog-card__date text-neutral-400 text-sm"
+      <span class="blog-card__date text-primary-400 text-sm"
         >{formattedDate}</span
       >
     </div>
@@ -72,10 +87,10 @@ const formattedDate = date.toLocaleDateString("es-PE", {
     <p class="blog-card__desc">{description}</p>
     <div class="blog-card__footer">
       <span
-        class="blog-card__author flex items-center gap-2 text-sm font-medium text-neutral-700"
+        class="blog-card__author flex items-center gap-2 text-sm font-medium text-primary-200"
       >
         <div
-          class="w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-xs"
+          class="w-6 h-6 rounded-full bg-primary-700 flex items-center justify-center text-primary-200 font-bold text-xs"
         >
           {author.charAt(0)}
         </div>
@@ -92,12 +107,12 @@ const formattedDate = date.toLocaleDateString("es-PE", {
   @reference "../../styles/global.css";
 
   .blog-card {
-    @apply relative flex flex-col bg-white rounded-2xl overflow-hidden border border-neutral-200 transition-all duration-300;
+    @apply relative flex flex-col bg-primary-900/60 rounded-2xl overflow-hidden border border-primary-700 transition-all duration-300;
   }
 
   @media (hover: hover) {
     .blog-card:hover {
-      @apply shadow-xl shadow-primary-900/5 -translate-y-1 border-secondary-300;
+      @apply shadow-xl shadow-black/30 -translate-y-1 border-secondary-500;
     }
   }
 
@@ -116,7 +131,7 @@ const formattedDate = date.toLocaleDateString("es-PE", {
   }
 
   .blog-card__type {
-    @apply absolute top-4 left-4 bg-white/90 backdrop-blur text-primary-900 font-bold text-xs px-2.5 py-1 rounded-md shadow-sm;
+    @apply absolute top-4 left-4 bg-primary-950/80 backdrop-blur text-white font-bold text-xs px-2.5 py-1 rounded-md shadow-sm;
   }
 
   .blog-card__content {
@@ -128,30 +143,30 @@ const formattedDate = date.toLocaleDateString("es-PE", {
   }
 
   .blog-card__title {
-    @apply text-xl font-bold text-primary-900 mb-2 leading-tight transition-colors;
+    @apply text-xl font-bold text-primary-100 mb-2 leading-tight transition-colors;
   }
 
   @media (hover: hover) {
     .blog-card:hover .blog-card__title {
-      @apply text-primary-600;
+      @apply text-white;
     }
   }
 
   .blog-card__desc {
-    @apply text-neutral-600 text-sm leading-relaxed mb-6 flex-1 line-clamp-3;
+    @apply text-slate-400 text-sm leading-relaxed mb-6 flex-1 line-clamp-3;
   }
 
   .blog-card__footer {
-    @apply flex justify-between items-center pt-4 border-t border-neutral-100 mt-auto;
+    @apply flex justify-between items-center pt-4 border-t border-primary-700 mt-auto;
   }
 
   .blog-card__read-more {
-    @apply inline-flex items-center gap-1 text-sm font-bold text-secondary-600 transition-colors;
+    @apply inline-flex items-center gap-1 text-sm font-bold text-secondary-400 transition-colors;
   }
 
   @media (hover: hover) {
     .blog-card:hover .blog-card__read-more {
-      @apply text-secondary-500 gap-2;
+      @apply text-secondary-300 gap-2;
     }
   }
 </style>

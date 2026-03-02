@@ -5,10 +5,10 @@ import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("blog");
 
-// Sort by date descending
-const sortedPosts = allPosts.sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+// Only published posts, sorted by date descending
+const sortedPosts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const featuredPosts = sortedPosts
   .filter((post) => post.data.isFeatured)
@@ -20,6 +20,9 @@ const categories = [
   { id: "desarrollo-web", label: "Desarrollo Web" },
   { id: "software-empresarial", label: "Software Empresarial" },
   { id: "apps-moviles", label: "Apps Móviles" },
+  { id: "seo", label: "SEO" },
+  { id: "educacion", label: "Educación" },
+  { id: "sin-categoria", label: "General" },
 ];
 ---
 
@@ -34,7 +37,7 @@ const categories = [
     breadcrumbs={[{ label: "Inicio", href: "/" }, { label: "Blog" }]}
   />
 
-  <MainContainer bgColor="bg-neutral-50" class="!pt-8">
+  <MainContainer bgColor="bg-primary-800" class="pt-8!">
     <div class="blog-controls">
       {/* Buscador */}
       <div class="blog-search">
@@ -86,11 +89,12 @@ const categories = [
     {/* Grid de Artículos */}
     <div class="blog-grid" id="blogGrid">
       {
-        sortedPosts.map((post) => (
+        sortedPosts.map((post, index) => (
           <div
             class="blog-grid__item"
-            data-featured={post.data.isFeatured ? "true" : "false"}
+            data-featured={post.data.isFeatured}
             data-category={post.data.category}
+            data-index={index}
           >
             <BlogCard
               title={post.data.title}
@@ -101,6 +105,7 @@ const categories = [
               author={post.data.author}
               coverImage={post.data.coverImage}
               slug={post.slug}
+              priority={index === 0}
             />
           </div>
         ))
@@ -110,16 +115,27 @@ const categories = [
     {/* Mensaje de no resultados */}
     <div id="noResults" class="hidden text-center py-20">
       <div
-        class="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4 text-neutral-400"
+        class="w-16 h-16 bg-primary-700 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-400"
       >
         <Icon name="search" size="32" />
       </div>
-      <h3 class="text-xl font-bold text-primary-900 mb-2">
+      <h3 class="text-xl font-bold text-white mb-2">
         No encontramos resultados
       </h3>
-      <p class="text-neutral-500">
+      <p class="text-primary-300">
         Intenta buscar con otros términos o cambia de categoría.
       </p>
+    </div>
+
+    {/* Contador + Ver más */}
+    <div id="loadMoreArea" class="flex flex-col items-center gap-4 mt-12 pb-4">
+      <p id="counterText" class="text-primary-400 text-sm"></p>
+      <button
+        id="loadMoreBtn"
+        class="hidden px-8 py-3 rounded-full bg-secondary-600 hover:bg-secondary-500 text-white font-semibold transition-colors"
+      >
+        Ver más artículos
+      </button>
     </div>
   </MainContainer>
 </MainLayout>
@@ -132,23 +148,23 @@ const categories = [
   }
 
   .blog-search {
-    @apply flex items-center gap-3 bg-white border border-neutral-200 rounded-full px-5 py-3 w-full md:w-96 shadow-sm focus-within:border-secondary-500 focus-within:ring-2 focus-within:ring-secondary-500/20 transition-all;
+    @apply flex items-center gap-3 bg-primary-900/60 border border-primary-600 rounded-full px-5 py-3 w-full md:w-96 shadow-sm focus-within:border-secondary-500 focus-within:ring-2 focus-within:ring-secondary-500/20 transition-all;
   }
 
   .blog-search__input {
-    @apply w-full bg-transparent border-none outline-none text-neutral-800 placeholder:text-neutral-400 disabled:opacity-50;
+    @apply w-full bg-transparent border-none outline-none text-primary-100 placeholder:text-primary-400 disabled:opacity-50;
   }
 
   .blog-tabs {
-    @apply flex items-center bg-neutral-200/50 p-1 rounded-full w-full md:w-auto overflow-x-auto;
+    @apply flex items-center bg-primary-900/60 p-1 rounded-full w-full md:w-auto overflow-x-auto;
   }
 
   .blog-tab {
-    @apply flex-1 md:flex-none px-6 py-2.5 rounded-full text-sm font-semibold text-neutral-600 transition-all;
+    @apply flex-1 md:flex-none px-6 py-2.5 rounded-full text-sm font-semibold text-primary-300 transition-all;
   }
 
   .blog-tab.active {
-    @apply bg-white text-primary-900 shadow-sm pointer-events-none;
+    @apply bg-primary-700 text-white shadow-sm pointer-events-none;
   }
 
   .blog-categories {
@@ -156,11 +172,11 @@ const categories = [
   }
 
   .blog-category-btn {
-    @apply px-4 py-2 rounded-lg border border-neutral-200 bg-white text-neutral-600 text-sm font-medium transition-colors hover:border-secondary-300 hover:text-secondary-600 cursor-pointer;
+    @apply px-4 py-2 rounded-lg border border-primary-600 bg-primary-900/40 text-primary-300 text-sm font-medium transition-colors hover:border-secondary-500 hover:text-secondary-300 cursor-pointer;
   }
 
   .blog-category-btn.active {
-    @apply bg-primary-900 text-white border-primary-900 pointer-events-none;
+    @apply bg-primary-700 text-white border-primary-600 pointer-events-none;
   }
 
   .blog-grid {
@@ -173,6 +189,9 @@ const categories = [
 </style>
 
 <script>
+  const INITIAL_COUNT = 12;
+  const LOAD_MORE_STEP = 6;
+
   function initBlogFilters() {
     const grid = document.getElementById("blogGrid");
     const searchInput = document.getElementById(
@@ -184,53 +203,69 @@ const categories = [
     const tabBtns = document.querySelectorAll(".blog-tab");
     const categoryBtns = document.querySelectorAll(".blog-category-btn");
     const noResults = document.getElementById("noResults");
+    const loadMoreBtn = document.getElementById("loadMoreBtn") as HTMLButtonElement | null;
+    const counterText = document.getElementById("counterText");
 
     if (!grid || !searchInput || !noResults) return;
 
     let currentTab = "all";
     let currentCategory = "all";
     let searchTerm = "";
+    let visibleLimit = INITIAL_COUNT;
 
     function filterPosts() {
-      let visibleCount = 0;
+      // Collect matching items first
+      const matching: HTMLElement[] = [];
 
       items.forEach((item) => {
         const card = item.querySelector("[data-blog-card]");
-        if (!card) return;
+        if (!card) { item.style.display = "none"; return; }
 
         const title = card.getAttribute("data-title") || "";
         const desc = card.getAttribute("data-desc") || "";
         const category = item.getAttribute("data-category") || "";
         const isFeatured = item.getAttribute("data-featured") === "true";
 
-        // Tab filter logic
         const matchesTab =
           currentTab === "all" || (currentTab === "featured" && isFeatured);
-
-        // Category filter logic
         const matchesCategory =
           currentCategory === "all" || category === currentCategory;
-
-        // Search logic
         const matchesSearch =
           searchTerm === "" ||
           title.includes(searchTerm) ||
           desc.includes(searchTerm);
 
         if (matchesTab && matchesCategory && matchesSearch) {
-          item.style.display = "block";
-          visibleCount++;
+          matching.push(item);
         } else {
           item.style.display = "none";
         }
       });
 
-      if (visibleCount === 0) {
+      const total = matching.length;
+      const showing = Math.min(visibleLimit, total);
+
+      matching.forEach((item, i) => {
+        item.style.display = i < visibleLimit ? "block" : "none";
+      });
+
+      if (total === 0) {
         grid.style.display = "none";
         noResults.classList.remove("hidden");
       } else {
         grid.style.display = "grid";
         noResults.classList.add("hidden");
+      }
+
+      if (counterText) {
+        counterText.textContent = total > 0 ? `Mostrando ${showing} de ${total} artículos` : "";
+      }
+      if (loadMoreBtn) {
+        if (showing < total) {
+          loadMoreBtn.classList.remove("hidden");
+        } else {
+          loadMoreBtn.classList.add("hidden");
+        }
       }
     }
 
@@ -241,6 +276,7 @@ const categories = [
         const tab = target.getAttribute("data-tab");
         if (tab) {
           currentTab = tab;
+          visibleLimit = INITIAL_COUNT;
           tabBtns.forEach((b) => {
             b.classList.remove("active");
             b.setAttribute("aria-selected", "false");
@@ -259,6 +295,7 @@ const categories = [
         const category = target.getAttribute("data-category");
         if (category) {
           currentCategory = category;
+          visibleLimit = INITIAL_COUNT;
           categoryBtns.forEach((b) => b.classList.remove("active"));
           target.classList.add("active");
           filterPosts();
@@ -270,8 +307,18 @@ const categories = [
     searchInput.addEventListener("input", (e) => {
       const target = e.target as HTMLInputElement;
       searchTerm = target.value.toLowerCase().trim();
+      visibleLimit = INITIAL_COUNT;
       filterPosts();
     });
+
+    // Ver más
+    loadMoreBtn?.addEventListener("click", () => {
+      visibleLimit += LOAD_MORE_STEP;
+      filterPosts();
+    });
+
+    // Render inicial
+    filterPosts();
   }
 
   // Initialize on full load and Astro page transitions

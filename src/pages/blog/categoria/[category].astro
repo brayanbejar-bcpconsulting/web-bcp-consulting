@@ -2,35 +2,27 @@
 import { getCollection } from "astro:content";
 import MainLayout from "@layouts/MainLayout.astro";
 import { MainContainer, HeroPage, BlogCard, Icon } from "@components";
+import { CATEGORY_LABELS } from "@utils/blog";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  // Extract unique categories
-  const categories = [...new Set(posts.map((post) => post.data.category))];
+  const published = posts.filter((p) => !p.data.draft);
+  const categories = [...new Set(published.map((p) => p.data.category))];
 
-  return categories.map((category) => {
-    return {
-      params: { category },
-      props: {
-        posts: posts.filter((post) => post.data.category === category),
-      },
-    };
-  });
+  return categories.map((category) => ({
+    params: { category },
+    props: {
+      posts: published.filter((p) => p.data.category === category),
+    },
+  }));
 }
 
 const { category } = Astro.params;
 const { posts } = Astro.props;
 
-const LABELS: Record<string, string> = {
-  "inteligencia-artificial": "Inteligencia Artificial",
-  "desarrollo-web": "Desarrollo Web",
-  "software-empresarial": "Software Empresarial",
-  "apps-moviles": "Apps Móviles",
-};
+const title = CATEGORY_LABELS[category] ?? category;
 
-const title = LABELS[category] || category;
-
-const sortedPosts = posts.sort(
+const sortedPosts = [...posts].sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---

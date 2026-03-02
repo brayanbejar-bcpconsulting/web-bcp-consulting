@@ -2,31 +2,82 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
+import SharePostSocial from "@components/blog/SharePostSocial.astro";
+import NavigationPosts from "@components/blog/NavigationPosts.astro";
+import RelatedPosts from "@components/blog/RelatedPosts.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const allPosts = await getCollection("blog");
+  const published = allPosts
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-  return posts
-    .filter((post) => !post.data.draft)
-    .map((post) => ({
+  return published.map((post, idx) => {
+    const prev = published[idx + 1] ?? null;
+    const next = published[idx - 1] ?? null;
+
+    // Related: same category, excluding current, up to 3 (deterministic: by date)
+    const related = published
+      .filter((p) => p.slug !== post.slug && p.data.category === post.data.category)
+      .slice(0, 3);
+
+    return {
       params: { slug: post.slug },
-      props: { post },
-    }));
+      props: { post, prev, next, related },
+    };
+  });
 }
 
 interface Props {
   post: CollectionEntry<"blog">;
+  prev: CollectionEntry<"blog"> | null;
+  next: CollectionEntry<"blog"> | null;
+  related: CollectionEntry<"blog">[];
 }
 
-const { post } = Astro.props as Props;
-
+const { post, prev, next, related } = Astro.props as Props;
 const { Content } = await post.render();
+
+const pageUrl = Astro.url.href;
 ---
 
 <BlogPostLayout
   title={post.data.title}
   description={post.data.description}
   date={post.data.date}
+  updatedDate={post.data.updatedDate}
+  category={post.data.category}
+  author={post.data.author}
+  coverImage={post.data.coverImage}
 >
   <Content />
+
+  <div slot="after-article" class="flex flex-col gap-8">
+    <!-- Compartir en redes -->
+    <SharePostSocial
+      url={pageUrl}
+      title={post.data.title}
+      description={post.data.description}
+    />
+
+    <!-- Navegación anterior / siguiente -->
+    <NavigationPosts
+      prev={prev ? { slug: prev.slug, title: prev.data.title, coverImage: prev.data.coverImage, category: prev.data.category } : undefined}
+      next={next ? { slug: next.slug, title: next.data.title, coverImage: next.data.coverImage, category: next.data.category } : undefined}
+    />
+
+    <!-- Artículos relacionados -->
+    {related.length > 0 && (
+      <RelatedPosts
+        posts={related.map((p) => ({
+          slug: p.slug,
+          title: p.data.title,
+          description: p.data.description,
+          coverImage: p.data.coverImage,
+          category: p.data.category,
+          date: p.data.date,
+        }))}
+      />
+    )}
+  </div>
 </BlogPostLayout>
