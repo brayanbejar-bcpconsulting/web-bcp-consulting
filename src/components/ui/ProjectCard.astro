@@ -8,7 +8,6 @@ interface Props {
   slug: string;
   result?: string;
   technologies?: string[];
-  dark?: boolean;
   class?: string;
 }
 
@@ -21,14 +20,13 @@ const {
   slug,
   result,
   technologies = [],
-  dark = false,
   class: className,
 } = Astro.props;
 ---
 
 <a
   href={`/portafolio/${slug}`}
-  class:list={["project-card group block", dark && "project-card--dark", className]}
+  class:list={["project-card group block", className]}
 >
   <div class="project-card__image-wrapper">
     <img
@@ -83,9 +81,9 @@ const {
   @reference "../../styles/global.css";
 
   .project-card {
-    @apply rounded-2xl overflow-hidden bg-white border border-neutral-200
+    @apply rounded-2xl overflow-hidden bg-theme-card border border-theme-border
            transition-all duration-500 ease-out
-           hover:shadow-2xl hover:shadow-primary-500/10
+           hover:shadow-2xl hover:shadow-black/10
            hover:-translate-y-1;
   }
 
@@ -126,37 +124,14 @@ const {
   }
 
   .project-card__title {
-    @apply text-primary-700 font-bold text-lg mb-2;
+    @apply text-theme-heading font-bold text-lg mb-2;
   }
 
   .project-card__desc {
-    @apply text-neutral-600 text-sm leading-relaxed;
+    @apply text-theme-muted text-sm leading-relaxed;
   }
 
   .project-card__result {
-    @apply mt-3 text-sm font-medium text-success-700 flex items-center;
-  }
-
-  /* ── Dark variant ──────────────────────────────────────── */
-  .project-card--dark {
-    @apply bg-primary-900/60 border-primary-700;
-  }
-
-  @media (hover: hover) {
-    .project-card--dark:hover {
-      @apply shadow-black/30 border-secondary-500/50;
-    }
-  }
-
-  .project-card--dark .project-card__title {
-    @apply text-primary-100;
-  }
-
-  .project-card--dark .project-card__desc {
-    @apply text-slate-400;
-  }
-
-  .project-card--dark .project-card__result {
-    @apply text-success-400;
+    @apply mt-3 text-sm font-medium text-success-600 flex items-center;
   }
 </style>

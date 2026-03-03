@@ -6,14 +6,13 @@ interface Props {
   description: string;
   icon: string;
   href: string;
-  dark?: boolean;
   class?: string;
 }
 
-const { title, description, icon, href, dark = false, class: className } = Astro.props;
+const { title, description, icon, href, class: className } = Astro.props;
 ---
 
-<a href={href} class:list={["service-card group", dark && "service-card--dark", className]} data-service-card>
+<a href={href} class:list={["service-card group", className]} data-service-card>
   <div class="service-card__icon">
     <Icon name={icon} size="32" />
   </div>
@@ -30,7 +29,7 @@ const { title, description, icon, href, dark = false, class: className } = Astro
 
   .service-card {
     @apply relative flex flex-col gap-4 rounded-2xl p-8
-           bg-white border border-neutral-200
+           bg-theme-card border border-theme-border
            transition-all duration-500 ease-out
            no-underline cursor-pointer;
   }
@@ -43,7 +42,7 @@ const { title, description, icon, href, dark = false, class: className } = Astro
 
   .service-card__icon {
     @apply w-14 h-14 flex items-center justify-center rounded-xl
-           bg-secondary-50 text-secondary-600
+           bg-theme-surface text-secondary-600
            transition-colors duration-300;
   }
 
@@ -54,19 +53,19 @@ const { title, description, icon, href, dark = false, class: className } = Astro
   }
 
   .service-card__title {
-    @apply text-primary-700 font-bold text-xl leading-tight
+    @apply text-theme-heading font-bold text-xl leading-tight
            transition-colors duration-300;
     font-size: clamp(1.1rem, 1.2vw + 0.5rem, 1.35rem);
   }
 
   @media (hover: hover) {
     .service-card:hover .service-card__title {
-      @apply text-primary-600;
+      @apply text-secondary-500;
     }
   }
 
   .service-card__desc {
-    @apply text-neutral-600 leading-relaxed text-sm flex-1;
+    @apply text-theme-muted leading-relaxed text-sm flex-1;
   }
 
   .service-card__cta {
@@ -80,48 +79,5 @@ const { title, description, icon, href, dark = false, class: className } = Astro
     }
   }
 
-  /* ── Dark variant ──────────────────────────────────────── */
-  .service-card--dark {
-    @apply bg-primary-900/60 border-primary-700;
-  }
 
-  @media (hover: hover) {
-    .service-card--dark:hover {
-      @apply shadow-black/30 border-secondary-500;
-    }
-  }
-
-  .service-card--dark .service-card__icon {
-    @apply bg-primary-800 text-secondary-400;
-  }
-
-  @media (hover: hover) {
-    .service-card--dark:hover .service-card__icon {
-      @apply bg-secondary-600 text-white;
-    }
-  }
-
-  .service-card--dark .service-card__title {
-    @apply text-primary-100;
-  }
-
-  @media (hover: hover) {
-    .service-card--dark:hover .service-card__title {
-      @apply text-white;
-    }
-  }
-
-  .service-card--dark .service-card__desc {
-    @apply text-slate-400;
-  }
-
-  .service-card--dark .service-card__cta {
-    @apply text-secondary-400;
-  }
-
-  @media (hover: hover) {
-    .service-card--dark:hover .service-card__cta {
-      @apply gap-3 text-secondary-300;
-    }
-  }
 </style>

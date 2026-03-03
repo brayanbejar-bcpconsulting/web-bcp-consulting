@@ -5,7 +5,7 @@ import { SERVICES } from "@data/services";
 
 <MainContainer
   id="servicios-inicio"
-  bgColor="bg-primary-800"
+  bgColor="bg-theme-page"
   ariaLabelledby="servicios-titulo"
 >
   <HeadingSection
@@ -13,8 +13,6 @@ import { SERVICES } from "@data/services";
     title="Soluciones Digitales que Transforman Negocios"
     description="Ofrecemos un ecosistema completo de desarrollo tecnológico: desde la consultoría inicial hasta el soporte post-lanzamiento."
     id="servicios-titulo"
-    titleColor="text-neutral-100"
-    descColor="text-neutral-300"
   />
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -25,7 +23,6 @@ import { SERVICES } from "@data/services";
           description={service.tagline}
           icon={service.icon}
           href={service.href}
-          dark
         />
       ))
     }

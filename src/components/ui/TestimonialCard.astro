@@ -35,9 +35,9 @@ const { quote, name, role, company, class: className } = Astro.props;
 
   .testimonial-card {
     @apply relative flex flex-col gap-5 rounded-2xl p-8
-           bg-primary-900/60 border border-primary-700
+           bg-theme-card border border-theme-border
            transition-all duration-500 ease-out
-           hover:shadow-xl hover:shadow-black/30
+           hover:shadow-xl hover:shadow-black/20
            hover:-translate-y-1;
   }
 
@@ -46,23 +46,23 @@ const { quote, name, role, company, class: className } = Astro.props;
   }
 
   .testimonial-card__text {
-    @apply text-slate-300 leading-relaxed text-base italic flex-1;
+    @apply text-theme-base leading-relaxed text-base italic flex-1;
   }
 
   .testimonial-card__footer {
-    @apply flex items-center gap-3 pt-4 border-t border-primary-700;
+    @apply flex items-center gap-3 pt-4 border-t border-theme-border;
   }
 
   .testimonial-card__avatar {
-    @apply w-10 h-10 rounded-full bg-primary-700 text-white
+    @apply w-10 h-10 rounded-full bg-theme-surface text-theme-heading
            flex items-center justify-center font-bold text-sm flex-shrink-0;
   }
 
   .testimonial-card__name {
-    @apply text-primary-100 font-bold text-sm not-italic block;
+    @apply text-theme-heading font-bold text-sm not-italic block;
   }
 
   .testimonial-card__role {
-    @apply text-primary-400 text-xs;
+    @apply text-theme-muted text-xs;
   }
 </style>

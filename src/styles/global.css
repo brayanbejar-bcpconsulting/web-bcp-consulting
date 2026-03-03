@@ -143,11 +143,69 @@
   --text-body--line-height: 1.6;
 }
 
+/* =====================================================================
+   Theme tokens (light ↔ dark switchable)
+   Cómo funciona:
+   1. @theme inline → registra utilidades Tailwind (bg-theme-*, text-theme-*, etc.)
+      que apuntan a CSS vars runtime en lugar de valores compilados
+   2. :root  → valores del modo CLARO
+   3. html.dark → valores del modo OSCURO (añadido por JS anti-FOUC en <head>)
+   ===================================================================== */
+
+@theme inline {
+  /* Fondos de página */
+  --color-theme-page:    var(--theme-page);
+  --color-theme-surface: var(--theme-surface);
+  --color-theme-card:    var(--theme-card);
+
+  /* Textos */
+  --color-theme-heading: var(--theme-heading);
+  --color-theme-base:    var(--theme-base);
+  --color-theme-muted:   var(--theme-muted);
+  --color-theme-subtle:  var(--theme-subtle);
+
+  /* Bordes e inputs */
+  --color-theme-border:  var(--theme-border);
+  --color-theme-input:   var(--theme-input);
+
+  /* Header sticky */
+  --color-theme-header:  var(--theme-header);
+}
+
+/* ——— Modo claro (valores por defecto) ——— */
+:root {
+  color-scheme: light;
+  accent-color: var(--color-accent);
+
+  --theme-page:    oklch(99% 0 0);
+  --theme-surface: oklch(96.5% 0 0);
+  --theme-card:    oklch(100% 0 0);
+  --theme-heading: var(--color-primary-900);
+  --theme-base:    var(--color-primary-700);
+  --theme-muted:   oklch(46% 0 0);
+  --theme-subtle:  oklch(62% 0 0);
+  --theme-border:  oklch(88% 0 0);
+  --theme-input:   oklch(100% 0 0);
+  --theme-header:  oklch(99% 0 0 / 0.92);
+}
+
+/* ——— Modo oscuro (clase añadida por JS en <html>) ——— */
+html.dark {
+  color-scheme: dark;
+
+  --theme-page:    var(--color-primary-800);
+  --theme-surface: var(--color-primary-900);
+  --theme-card:    oklch(11.452% 0.028 256.5 / 0.6);
+  --theme-heading: oklch(98% 0 0);
+  --theme-base:    var(--color-primary-100);
+  --theme-muted:   var(--color-primary-400);
+  --theme-subtle:  var(--color-primary-300);
+  --theme-border:  var(--color-primary-700);
+  --theme-input:   var(--color-primary-800);
+  --theme-header:  oklch(27.266% 0.0667 256.5 / 0.92);
+}
+
 @layer base {
-  :root {
-    color-scheme: light;
-    accent-color: var(--color-accent);
-  }
 
   html {
     font-family: var(--font-sans);
@@ -157,8 +215,8 @@
   }
 
   body {
-    background-color: var(--color-primary-800);
-    color: var(--color-fg);
+    background-color: var(--theme-page);
+    color: var(--theme-base);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
   }
