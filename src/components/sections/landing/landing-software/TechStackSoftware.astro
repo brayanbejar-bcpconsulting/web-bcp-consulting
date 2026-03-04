@@ -1,0 +1,105 @@
+---
+// Sección F: Seguridad, arquitectura y stack tecnológico (colapsable)
+
+const seguridadItems = [
+  { icon: "🔐", titulo: "Autenticación y roles", desc: "JWT/OAuth2, roles granulares, 2FA opcional y sesiones seguras por defecto." },
+  { icon: "🛡️", titulo: "Cifrado en tránsito y en reposo", desc: "HTTPS/TLS 1.3 obligatorio. Datos sensibles cifrados en base de datos (AES-256)." },
+  { icon: "💾", titulo: "Backups automáticos", desc: "Copias diarias con retención configurable. Restauración probada en staging antes del deploy." },
+  { icon: "📋", titulo: "Logging y auditoría", desc: "Registro de acciones críticas por usuario. Trazabilidad completa para auditorías internos." },
+  { icon: "🚀", titulo: "CI/CD y ambientes separados", desc: "Pipelines automatizados (dev → staging → producción). Nunca se despliega sin pruebas previas." },
+  { icon: "📊", titulo: "Monitoreo y alertas", desc: "Uptime monitoring 24/7, alertas por correo/Slack ante caídas o errores críticos." },
+  { icon: "🌐", titulo: "WAF y protección DDoS", desc: "Cloudflare o equivalente en todos los proyectos de producción. Protección ante ataques comunes (OWASP Top 10)." },
+  { icon: "📝", titulo: "SLA de soporte definido", desc: "Tiempo de respuesta acordado por contrato según plan. Bugs críticos: máx. 4 h. No críticos: 24–48 h." },
+];
+
+const stackTecnologias = [
+  { categoria: "Frontend", techs: ["React", "Next.js", "Angular", "Vue.js", "TypeScript", "React Native"] },
+  { categoria: "Backend", techs: ["Node.js", "NestJS", "Spring Boot", "Java", "Python / FastAPI"] },
+  { categoria: "Base de datos", techs: ["PostgreSQL", "MongoDB", "MySQL", "Redis"] },
+  { categoria: "Infraestructura", techs: ["AWS", "Google Cloud", "Azure", "Firebase", "Cloudflare"] },
+  { categoria: "DevOps", techs: ["Docker", "GitHub Actions", "CI/CD pipelines", "Nginx", "PM2"] },
+];
+---
+
+<section
+  id="tecnologias"
+  aria-labelledby="tecnologias-heading"
+  class="py-16 lg:py-20 bg-primary-900"
+  style="scroll-margin-top: 5rem"
+>
+  <div class="max-w-350 mx-auto px-[5%]">
+    <header class="max-w-2xl mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest text-complementary-300 mb-2">
+        Seguridad y arquitectura
+      </p>
+      <h2 id="tecnologias-heading" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">
+        Lo que hacemos por defecto en cada proyecto
+      </h2>
+      <p class="mt-3 text-sm text-white/70 leading-relaxed">
+        No hay extras de seguridad: estas prácticas son estándar en todos nuestros proyectos.
+        Tu sistema llega listo para producción y para crecer.
+      </p>
+    </header>
+
+    <!-- Grid de seguridad -->
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" role="list" aria-label="Prácticas de seguridad por defecto">
+      {seguridadItems.map((item) => (
+        <li class="flex flex-col gap-2 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/8 transition-colors">
+          <span class="text-2xl" aria-hidden="true">{item.icon}</span>
+          <h3 class="text-sm font-bold text-white leading-snug">{item.titulo}</h3>
+          <p class="text-xs text-white/60 leading-relaxed">{item.desc}</p>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Stack tecnológico colapsable -->
+    <details class="mt-8 group rounded-2xl border border-white/15 bg-white/5 overflow-hidden">
+      <summary class="flex items-center justify-between gap-3 cursor-pointer px-5 py-4 text-sm font-semibold text-white/80 hover:text-white list-none select-none">
+        <span>Ver stack tecnológico completo</span>
+        <svg
+          class="w-4 h-4 shrink-0 transition-transform group-open:rotate-180 text-white/50"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+
+      <div class="px-5 pb-5 pt-2 border-t border-white/10">
+        <p class="text-xs text-white/50 mb-4 leading-relaxed">
+          Seleccionamos el stack más adecuado según los requerimientos funcionales, escalabilidad esperada
+          y ecosistema tecnológico existente de cada cliente.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {stackTecnologias.map((grupo) => (
+            <div>
+              <p class="text-xs font-semibold text-complementary-300 uppercase tracking-wide mb-2">{grupo.categoria}</p>
+              <ul class="flex flex-wrap gap-2" role="list">
+                {grupo.techs.map((t) => (
+                  <li class="px-2.5 py-1 rounded-lg bg-white/8 border border-white/10 text-xs text-white/75 font-medium">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </details>
+
+    <!-- Navegación sección siguiente -->
+    <div class="mt-8 flex flex-wrap gap-3 justify-center">
+      <a
+        href="#estimacion"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-colors min-h-11"
+      >
+        Ver precios ↓
+      </a>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-complementary-500 hover:bg-complementary-400 text-white text-sm font-bold transition-colors min-h-11"
+      >
+        Ir a cotizar ↓
+      </a>
+    </div>
+</section>

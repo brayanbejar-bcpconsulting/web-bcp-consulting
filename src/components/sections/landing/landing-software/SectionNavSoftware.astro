@@ -1,0 +1,97 @@
+---
+// Mini "Section Nav" sticky — aparece solo en mobile después de que el hero sale del viewport
+// Desktop: opcional (se muestra también arriba del main nav como barra discreta)
+---
+
+<!-- ===== SECTION NAV CHIPS (sticky, mobile-first) ===== -->
+<nav
+  id="section-nav-chips"
+  aria-label="Saltar a sección"
+  class="fixed top-0 inset-x-0 z-40 hidden bg-white/95 dark:bg-primary-950/95 backdrop-blur-sm border-b border-gray-200 dark:border-white/10 shadow-sm"
+  style="padding-top: env(safe-area-inset-top);"
+>
+  <div class="flex items-center gap-2 overflow-x-auto px-4 py-2.5 no-scrollbar"
+       style="scrollbar-width: none; -ms-overflow-style: none;">
+    <!-- Label -->
+    <span class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-white/40 shrink-0 mr-1" aria-hidden="true">
+      Ir a:
+    </span>
+
+    <a href="#tipos-software"
+      class="section-chip shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white/80 hover:bg-primary-100 dark:hover:bg-white/20 hover:text-primary-700 dark:hover:text-white border border-transparent hover:border-primary-300 dark:hover:border-white/30 transition-all min-h-[32px] flex items-center"
+    >
+      Tipos
+    </a>
+
+    <a href="#proyectos"
+      class="section-chip shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white/80 hover:bg-primary-100 dark:hover:bg-white/20 hover:text-primary-700 dark:hover:text-white border border-transparent hover:border-primary-300 dark:hover:border-white/30 transition-all min-h-[32px] flex items-center"
+    >
+      Casos
+    </a>
+
+    <a href="#estimacion"
+      class="section-chip shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white/80 hover:bg-primary-100 dark:hover:bg-white/20 hover:text-primary-700 dark:hover:text-white border border-transparent hover:border-primary-300 dark:hover:border-white/30 transition-all min-h-[32px] flex items-center"
+    >
+      Precios
+    </a>
+
+    <a href="#faq"
+      class="section-chip shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white/80 hover:bg-primary-100 dark:hover:bg-white/20 hover:text-primary-700 dark:hover:text-white border border-transparent hover:border-primary-300 dark:hover:border-white/30 transition-all min-h-[32px] flex items-center"
+    >
+      FAQ
+    </a>
+
+    <button
+      type="button"
+      data-open-modal="cotizar"
+      aria-haspopup="dialog"
+      aria-controls="modal-cotizar"
+      class="section-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-bold bg-primary-600 text-white hover:bg-primary-700 transition-colors min-h-[32px] flex items-center border border-transparent"
+    >
+      Cotizar
+    </button>
+  </div>
+</nav>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+</style>
+
+<script>
+  // Mostrar la barra cuando el hero sale del viewport
+  const heroEl = document.getElementById("hero");
+  const navChips = document.getElementById("section-nav-chips");
+
+  if (heroEl && navChips) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          navChips.classList.remove("hidden");
+          navChips.classList.add("flex");
+        } else {
+          navChips.classList.add("hidden");
+          navChips.classList.remove("flex");
+        }
+      },
+      { threshold: 0, rootMargin: "0px 0px 0px 0px" }
+    );
+    observer.observe(heroEl);
+  }
+
+  // Smooth scroll con prefers-reduced-motion respetado
+  document.querySelectorAll<HTMLAnchorElement>(".section-chip[href^='#']").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) return; // scroll nativo sin animación
+      e.preventDefault();
+      const targetId = link.getAttribute("href")!.slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        // foco para accesibilidad
+        target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
+    });
+  });
+</script>

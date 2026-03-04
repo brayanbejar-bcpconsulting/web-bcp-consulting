@@ -1,0 +1,192 @@
+---
+// Sección I: FAQ anti-objeciones con accordion accesible y schema FAQ
+
+const faqs = [
+  {
+    id: "faq-propiedad",
+    question: "¿El código fuente será mío al finalizar el proyecto?",
+    answer: "Sí, absolutamente. Una vez completados los pagos acordados, el 100% del código fuente, activos digitales y documentación técnica son de tu empresa. No hay licencias adicionales ni dependencias contractuales con BCP Consulting para operar el sistema.",
+  },
+  {
+    id: "faq-cambios",
+    question: "¿Puedo pedir cambios durante el desarrollo?",
+    answer: "Sí. Trabajamos en sprints de 1–2 semanas con revisiones al finalizar cada uno. Los cambios menores dentro del alcance acordado no tienen costo adicional. Cambios de alcance significativos se evalúan con un adenda al contrato y nueva estimación.",
+  },
+  {
+    id: "faq-seguridad",
+    question: "¿Cómo garantizan la seguridad del sistema?",
+    answer: "Implementamos por defecto: autenticación JWT/OAuth2 con roles, HTTPS/TLS, cifrado de datos sensibles en reposo (AES-256), protección WAF (Cloudflare), backups automáticos diarios y registro de auditoría. Los proyectos pasan por revisión básica de seguridad (OWASP Top 10) antes del deploy.",
+  },
+  {
+    id: "faq-integraciones",
+    question: "¿Pueden integrar SUNAT, pasarelas de pago o sistemas externos?",
+    answer: "Sí. Integramos SUNAT para facturación electrónica (OSE/directa), pasarelas de pago (Culqi, Mercado Pago, Stripe, Niubiz), sistemas contables, WhatsApp Business API, Google Workspace, y cualquier sistema que exponga una API REST. Si tu sistema actual no tiene API, evaluamos opciones de integración por scraping o conectores.",
+  },
+  {
+    id: "faq-plazo",
+    question: "¿En cuánto tiempo estará listo el sistema?",
+    answer: "Un MVP con 2–3 módulos puede estar listo en 4–8 semanas. Sistemas más complejos (ERP, SaaS, multi-módulo) toman de 2 a 6 meses. El cronograma detallado por fases lo entregamos en la propuesta. Factores que alarguen el plazo: número de integraciones, aprobaciones del cliente, migración de datos.",
+  },
+  {
+    id: "faq-precio",
+    question: "¿Cuánto cuesta? ¿Hay pagos fraccionados?",
+    answer: "El costo depende del alcance (ver sección de estimación orientativa arriba). Sí ofrecemos pagos fraccionados: generalmente 30% al inicio, 40% a la mitad del desarrollo con entrega parcial, y 30% al cierre. Para proyectos grandes podemos acordar un esquema por fases de pago.",
+  },
+  {
+    id: "faq-soporte",
+    question: "¿Qué soporte ofrecen después de la entrega?",
+    answer: "Todos los proyectos incluyen un período de soporte post-lanzamiento de 30 días sin costo. Después, puedes contratar un plan mensual de mantenimiento que incluye: correcciones de bugs, actualizaciones de seguridad, mejoras menores y monitoreo de rendimiento. Los SLA de respuesta son 4 h para bugs críticos y 24–48 h para no críticos.",
+  },
+  {
+    id: "faq-sla",
+    question: "¿Qué pasa si el sistema falla en producción?",
+    answer: "Todos los proyectos en producción cuentan con monitoreo activo de uptime. Ante fallas críticas, nuestro equipo responde en un máximo de 4 h laborables (según plan contratado). Implementamos ambientes separados (staging y prod) para minimizar riesgos en actualizaciones futuras.",
+  },
+  {
+    id: "faq-inicio",
+    question: "¿Cómo es el proceso para iniciar?",
+    answer: "1) Agenda asesoría gratuita por WhatsApp o formulario (sin compromiso). 2) Analizamos tu caso y enviamos propuesta con alcance, cronograma y presupuesto por fases. 3) Aprobada la propuesta y el contrato, comenzamos con la fase de descubrimiento. Acceso al avance en tiempo real desde el primer sprint.",
+  },
+];
+---
+
+<section
+  id="faq"
+  aria-labelledby="faq-heading"
+  class="py-16 lg:py-20 bg-theme-page"
+  style="scroll-margin-top: 5rem"
+>
+  <div class="max-w-350 mx-auto px-[5%]">
+    <header class="max-w-2xl mx-auto text-center mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest text-secondary-500 dark:text-secondary-400 mb-2">
+        Preguntas frecuentes
+      </p>
+      <h2 id="faq-heading" class="text-2xl md:text-3xl font-extrabold text-theme-heading leading-tight">
+        Resolvemos tus dudas antes de empezar
+      </h2>
+      <p class="mt-3 text-sm text-theme-muted leading-relaxed">
+        Estas son las preguntas más comunes sobre propiedad del código, seguridad, plazos, precios y soporte.
+      </p>
+    </header>
+
+    <!-- 4 FAQs principales (objeciones clave) -->
+    <div class="max-w-3xl mx-auto flex flex-col gap-2" id="faq-list">
+      {faqs.slice(0, 4).map((faq) => (
+        <div class="rounded-xl border border-theme-border bg-theme-surface overflow-hidden">
+          <h3>
+            <button
+              type="button"
+              id={`${faq.id}-btn`}
+              aria-expanded="false"
+              aria-controls={`${faq.id}-panel`}
+              class="faq-trigger w-full flex items-center justify-between gap-3 px-5 py-4 text-sm font-semibold text-theme-heading text-left hover:bg-theme-page transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-inset"
+            >
+              <span>{faq.question}</span>
+              <svg
+                class="faq-icon w-4 h-4 shrink-0 text-theme-muted transition-transform duration-200"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h3>
+          <div
+            id={`${faq.id}-panel`}
+            role="region"
+            aria-labelledby={`${faq.id}-btn`}
+            hidden
+            class="faq-panel px-5 pb-5 pt-1 text-sm text-theme-muted leading-relaxed border-t border-theme-border"
+          >
+            {faq.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Acordeón "Ver todas las preguntas" -->
+    <details class="mt-3 max-w-3xl mx-auto group rounded-xl border border-theme-border bg-theme-surface overflow-hidden">
+      <summary class="flex items-center justify-between gap-3 cursor-pointer px-5 py-4 text-sm font-semibold text-theme-heading list-none select-none hover:bg-theme-page transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary-500">
+        <span>Ver todas las preguntas ({faqs.length - 4} más)</span>
+        <svg class="w-4 h-4 shrink-0 transition-transform group-open:rotate-180 text-theme-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+      <div class="px-3 pb-4 pt-2 border-t border-theme-border flex flex-col gap-2">
+        {faqs.slice(4).map((faq) => (
+          <div class="rounded-xl border border-theme-border bg-theme-page overflow-hidden">
+            <h3>
+              <button
+                type="button"
+                id={`${faq.id}-btn`}
+                aria-expanded="false"
+                aria-controls={`${faq.id}-panel`}
+                class="faq-trigger w-full flex items-center justify-between gap-3 px-5 py-4 text-sm font-semibold text-theme-heading text-left hover:bg-theme-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-inset"
+              >
+                <span>{faq.question}</span>
+                <svg class="faq-icon w-4 h-4 shrink-0 text-theme-muted transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </h3>
+            <div
+              id={`${faq.id}-panel`}
+              role="region"
+              aria-labelledby={`${faq.id}-btn`}
+              hidden
+              class="faq-panel px-5 pb-5 pt-1 text-sm text-theme-muted leading-relaxed border-t border-theme-border"
+            >
+              {faq.answer}
+            </div>
+          </div>
+        ))}
+      </div>
+    </details>
+
+    <div class="mt-8 max-w-3xl mx-auto text-center">
+      <p class="text-xs text-theme-muted mb-3">
+        ¿Tienes una pregunta que no está aquí? Escríbenos directamente.
+      </p>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary-600 dark:bg-secondary-500 hover:bg-secondary-500 dark:hover:bg-secondary-400 text-white text-sm font-semibold transition-colors min-h-11"
+      >
+        Hablar con un asesor
+      </a>
+    </div>
+
+    <!-- Navegación sección siguiente -->
+    <div class="mt-8 text-center">
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white text-sm font-bold transition-colors min-h-11"
+      >
+        Cotizar ahora ↓
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Accordion accesible: Enter/Espacio, navegación teclado, foco visible
+  document.querySelectorAll<HTMLButtonElement>(".faq-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      const panelId = btn.getAttribute("aria-controls")!;
+      const panel = document.getElementById(panelId);
+      const icon = btn.querySelector<SVGElement>(".faq-icon");
+
+      btn.setAttribute("aria-expanded", String(!expanded));
+      if (panel) panel.hidden = expanded;
+      if (icon) icon.style.transform = expanded ? "" : "rotate(180deg)";
+    });
+
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+</script>
+

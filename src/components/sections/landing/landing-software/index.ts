@@ -1,0 +1,12 @@
+export { default as HeroSoftware } from "./HeroSoftware.astro";
+export { default as EsParaTiSoftware } from "./EsParaTiSoftware.astro";
+export { default as TiposSoftware } from "./TiposSoftware.astro";
+export { default as ProcesoPhaseSoftware } from "./ProcesoPhaseSoftware.astro";
+export { default as ProyectosSoftware } from "./ProyectosSoftware.astro";
+export { default as TechStackSoftware } from "./TechStackSoftware.astro";
+export { default as EstimacionSoftware } from "./EstimacionSoftware.astro";
+export { default as TestimoniosSoftware } from "./TestimoniosSoftware.astro";
+export { default as FaqSoftware } from "./FaqSoftware.astro";
+export { default as CtaSoftware } from "./CtaSoftware.astro";
+export { default as StickyBarSoftware } from "./StickyBarSoftware.astro";
+export { default as SectionNavSoftware } from "./SectionNavSoftware.astro";
