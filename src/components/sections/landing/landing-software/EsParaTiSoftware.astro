@@ -1,0 +1,150 @@
+---
+import { NAVIGATION } from "@utils/navigation";
+
+const idealPara = [
+  {
+    icon: "🔄",
+    titulo: "Procesos repetitivos que robas tiempo",
+    desc: "Empresas con tareas manuales que podrían automatizarse: cotizaciones, reportes, aprobaciones o seguimiento.",
+  },
+  {
+    icon: "📊",
+    titulo: "Múltiples hojas de cálculo o Excel",
+    desc: "Si tu equipo vive en hojas de Excel desconectadas, un sistema centralizado reduce errores y acelera decisiones.",
+  },
+  {
+    icon: "💬",
+    titulo: "Gestión por WhatsApp u hojas sueltas",
+    desc: "Pedidos, clientes o incidencias coordinados por chat son una señal clara de que necesitas un sistema formal.",
+  },
+  {
+    icon: "🏢",
+    titulo: "Múltiples áreas o equipos desconectados",
+    desc: "Ventas, finanzas, operaciones y RRHH trabajando en silos sin visibilidad común sobre el estado del negocio.",
+  },
+  {
+    icon: "📈",
+    titulo: "Crecimiento sin infraestructura digital",
+    desc: "Startups o empresas en expansión que necesitan una base tecnológica sólida antes de su siguiente etapa.",
+  },
+  {
+    icon: "🔗",
+    titulo: "Integraciones con sistemas externos",
+    desc: "Si usas Sunat, pasarelas de pago, ERPs o APIs de terceros y necesitas conectarlos dentro de un flujo único.",
+  },
+];
+
+const noIdealPara = [
+  {
+    icon: "🌐",
+    titulo: "Solo necesitas una web informativa",
+    desc: "Si buscas presencia digital con páginas estáticas o blog, te redirigimos a nuestro servicio de diseño web.",
+    href: "/servicios/web",
+    ctaLabel: "Ver Diseño Web →",
+  },
+  {
+    icon: "🛒",
+    titulo: "Tienda online estándar sin personalizaciones",
+    desc: "Si tu e-commerce no requiere lógica de negocio especial, plataformas como Shopify pueden ser más ágiles.",
+  },
+];
+---
+
+<section
+  id="es-para-ti"
+  aria-labelledby="es-para-ti-heading"
+  class="py-16 lg:py-20 bg-theme-page"
+  style="scroll-margin-top: 5rem"
+>
+  <div class="max-w-350 mx-auto px-[5%]">
+    <header class="max-w-2xl mx-auto text-center mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest text-secondary-500 dark:text-secondary-400 mb-2">
+        Filtro de proyecto
+      </p>
+      <h2 id="es-para-ti-heading" class="text-2xl md:text-3xl font-extrabold text-theme-heading leading-tight">
+        ¿Este servicio es para ti?
+      </h2>
+      <p class="mt-3 text-sm text-theme-muted leading-relaxed">
+        El software a medida resuelve problemas complejos de gestión y automatización.
+        Identifica si tu situación encaja antes de solicitar cotización.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Ideal para -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500/15 text-green-600 dark:text-green-400" aria-hidden="true">✓</span>
+          <h3 class="text-sm font-bold text-theme-heading uppercase tracking-wide">Ideal si tu empresa…</h3>
+        </div>
+        <ul class="flex flex-col gap-3" role="list">
+          {idealPara.map((item) => (
+            <li class="flex gap-3 p-4 rounded-xl bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800/30">
+              <span class="text-xl shrink-0 mt-0.5" aria-hidden="true">{item.icon}</span>
+              <div>
+                <p class="text-sm font-semibold text-theme-heading leading-snug">{item.titulo}</p>
+                <p class="text-xs text-theme-muted mt-0.5 leading-relaxed">{item.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- No ideal para -->
+      <div class="flex flex-col gap-6">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400" aria-hidden="true">→</span>
+            <h3 class="text-sm font-bold text-theme-heading uppercase tracking-wide">Quizás no es lo que buscas si…</h3>
+          </div>
+          <ul class="flex flex-col gap-3" role="list">
+            {noIdealPara.map((item) => (
+              <li class="flex gap-3 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30">
+                <span class="text-xl shrink-0 mt-0.5" aria-hidden="true">{item.icon}</span>
+                <div>
+                  <p class="text-sm font-semibold text-theme-heading leading-snug">{item.titulo}</p>
+                  <p class="text-xs text-theme-muted mt-0.5 leading-relaxed">{item.desc}</p>
+                  {item.href && (
+                    <a href={item.href} class="inline-block mt-1.5 text-xs font-semibold text-secondary-600 dark:text-secondary-400 hover:underline">
+                      {item.ctaLabel}
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- CTA rápido -->
+        <div class="p-6 rounded-2xl bg-primary-600 text-white">
+          <p class="text-sm font-bold mb-1">¿Te identificas con el primer grupo?</p>
+          <p class="text-xs text-white/70 mb-4 leading-relaxed">
+            Agenda una asesoría gratuita de 30 min. Sin compromiso, sin spam.
+            Te enviamos un análisis de viabilidad y estimado porcentual.
+          </p>
+          <a
+            href={`https://api.whatsapp.com/send/?phone=${NAVIGATION.contact.phone.replace(/\D/g, "")}&text=${encodeURIComponent("Hola BCP Consulting, creo que necesito software a medida para mi empresa. ¿Podemos hablar?")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-500 hover:bg-green-400 text-white font-bold text-sm transition-colors min-h-11"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.103 1.523 5.83L.057 23.5l5.816-1.448A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.726.927.972-3.618-.234-.371A9.818 9.818 0 1112 21.818z" />
+            </svg>
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegación sección siguiente -->
+    <div class="mt-10 text-center">
+      <a
+        href="#tipos-software"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary-100 dark:bg-secondary-900/30 border border-secondary-300 dark:border-secondary-700 text-secondary-700 dark:text-secondary-300 text-sm font-semibold hover:bg-secondary-200 dark:hover:bg-secondary-900/50 transition-colors min-h-11"
+      >
+        Ver tipos de software ↓
+      </a>
+    </div>
+  </div>
+</section>

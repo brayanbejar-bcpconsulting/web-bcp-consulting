@@ -1,0 +1,92 @@
+---
+import { MainContainer, HeadingSection } from "@components/ui";
+
+const razones = [
+  {
+    icon: "📈",
+    titulo: "Optimizado para Conversión",
+    descripcion:
+      "No solo programamos, diseñamos para que tu negocio venda más. Cada funcionalidad está pensada para mejorar la rentabilidad.",
+  },
+  {
+    icon: "🛡️",
+    titulo: "Seguridad Blindada",
+    descripcion:
+      "Protección de datos de nivel bancario. Cifrado en tránsito y en reposo, certificados SSL y copias de seguridad automáticas diarias.",
+  },
+  {
+    icon: "🤝",
+    titulo: "Soporte Experto Continuo",
+    descripcion:
+      "Acompañamiento técnico post-lanzamiento para que nunca te detengas. Tiempos de respuesta garantizados y equipo local en Perú.",
+  },
+  {
+    icon: "⚡",
+    titulo: "Tecnología Escalable",
+    descripcion:
+      "Arquitecturas modernas que crecen contigo. Desde una startup hasta miles de usuarios simultáneos sin cambiar de plataforma.",
+  },
+  {
+    icon: "💳",
+    titulo: "Pagos Fraccionados",
+    descripcion:
+      "Sabemos que los presupuestos tienen límites. Ofrecemos planes de pago flexibles para que puedas iniciar sin compromiso total.",
+  },
+  {
+    icon: "🎯",
+    titulo: "+10 Años de Experiencia",
+    descripcion:
+      "Más de una década desarrollando soluciones para empresas peruanas y latinoamericanas de todos los sectores e industrias.",
+  },
+];
+
+const stats = [
+  { valor: "+10", label: "Años de experiencia" },
+  { valor: "+50", label: "Proyectos entregados" },
+  { valor: "99%", label: "Clientes satisfechos" },
+  { valor: "24h", label: "Tiempo de respuesta" },
+];
+---
+
+<MainContainer id="por-que-nosotros" bgColor="bg-primary-900">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <!-- Columna izquierda -->
+    <div>
+      <HeadingSection
+        tagline="¿Por qué confiar en nosotros?"
+        title="Resultados Medibles, Tecnología sin Fricción"
+        description="No somos solo programadores. Somos tu aliado estratégico para digitalizar y escalar tu empresa con visión de negocio."
+        align="left"
+        titleColor="text-white"
+        descColor="text-white/70"
+      />
+
+      <!-- Stats -->
+      <div class="mt-8 grid grid-cols-2 gap-4">
+        {
+          stats.map((s) => (
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+              <p class="text-2xl font-extrabold text-complementary-300">
+                {s.valor}
+              </p>
+              <p class="text-xs text-white/60 mt-0.5">{s.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Columna derecha: cards de razones -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        razones.map((r) => (
+          <div class="flex flex-col gap-2 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-200">
+            <span class="text-2xl">{r.icon}</span>
+            <h3 class="text-sm font-bold text-white">{r.titulo}</h3>
+            <p class="text-xs text-white/60 leading-relaxed">{r.descripcion}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</MainContainer>
