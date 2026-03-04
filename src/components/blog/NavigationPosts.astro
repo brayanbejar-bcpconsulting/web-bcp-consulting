@@ -40,7 +40,7 @@ const [prevImg, nextImg] = await Promise.all([
     {prev ? (
       <a
         href={`/blog/${prev.slug}`}
-        class="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-primary-700 bg-primary-900/60 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-600 hover:bg-primary-900"
+        class="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-theme-border bg-theme-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-secondary-300 hover:bg-theme-surface"
       >
         {prevImg && (
           <div class="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -55,13 +55,13 @@ const [prevImg, nextImg] = await Promise.all([
           </div>
         )}
 
-        <div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary-600 bg-primary-800 text-primary-400 transition-colors group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
+        <div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-theme-border bg-theme-surface text-theme-muted transition-colors group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
           </svg>
         </div>
         <div class="relative z-10 min-w-0">
-          <p class="mb-0.5 text-xs font-semibold uppercase tracking-widest text-primary-500 transition-colors group-hover:text-white/60">
+          <p class="mb-0.5 text-xs font-semibold uppercase tracking-widest text-theme-subtle transition-colors group-hover:text-white/60">
             Artículo anterior
           </p>
           {prev.category && (
@@ -69,7 +69,7 @@ const [prevImg, nextImg] = await Promise.all([
               {CATEGORY_LABELS[prev.category] ?? prev.category}
             </p>
           )}
-          <p class="line-clamp-2 text-sm font-semibold leading-snug text-primary-100 transition-colors group-hover:text-white">
+          <p class="line-clamp-2 text-sm font-semibold leading-snug text-theme-heading transition-colors group-hover:text-white">
             {prev.title}
           </p>
         </div>
@@ -80,7 +80,7 @@ const [prevImg, nextImg] = await Promise.all([
     {next ? (
       <a
         href={`/blog/${next.slug}`}
-        class="group relative flex items-center justify-end gap-4 overflow-hidden rounded-2xl border border-primary-700 bg-primary-900/60 p-5 text-right transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-600 hover:bg-primary-900"
+        class="group relative flex items-center justify-end gap-4 overflow-hidden rounded-2xl border border-theme-border bg-theme-card p-5 text-right transition-all duration-200 hover:-translate-y-0.5 hover:border-secondary-300 hover:bg-theme-surface"
       >
         {nextImg && (
           <div class="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -96,7 +96,7 @@ const [prevImg, nextImg] = await Promise.all([
         )}
 
         <div class="relative z-10 min-w-0">
-          <p class="mb-0.5 text-xs font-semibold uppercase tracking-widest text-primary-500 transition-colors group-hover:text-white/60">
+          <p class="mb-0.5 text-xs font-semibold uppercase tracking-widest text-theme-subtle transition-colors group-hover:text-white/60">
             Artículo siguiente
           </p>
           {next.category && (
@@ -104,11 +104,11 @@ const [prevImg, nextImg] = await Promise.all([
               {CATEGORY_LABELS[next.category] ?? next.category}
             </p>
           )}
-          <p class="line-clamp-2 text-sm font-semibold leading-snug text-primary-100 transition-colors group-hover:text-white">
+          <p class="line-clamp-2 text-sm font-semibold leading-snug text-theme-heading transition-colors group-hover:text-white">
             {next.title}
           </p>
         </div>
-        <div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary-600 bg-primary-800 text-primary-400 transition-colors group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
+        <div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-theme-border bg-theme-surface text-theme-muted transition-colors group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>

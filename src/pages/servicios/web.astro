@@ -40,7 +40,7 @@ import bgWebDesign from '@images/pages/services/web-design/bg-image-web-design.j
     imageAlt="Diseño y Desarrollo de páginas web empresariales e informativas en Perú."
   />
 
-  <MainContainer bgColor="bg-neutral-50" id="features-web">
+  <MainContainer bgColor="bg-theme-surface" id="features-web">
     <HeadingSection
       tagline={service.tagline}
       title="¿Qué Tipo de Web Necesitas?"
@@ -51,9 +51,9 @@ import bgWebDesign from '@images/pages/services/web-design/bg-image-web-design.j
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
         service.features.map((f) => (
-          <div class="p-6 rounded-xl bg-white border border-neutral-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-            <h3 class="text-primary-700 font-bold text-lg mb-2">{f.title}</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">
+          <div class="p-6 rounded-xl bg-theme-card border border-theme-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+            <h3 class="text-theme-heading font-bold text-lg mb-2">{f.title}</h3>
+            <p class="text-theme-muted text-sm leading-relaxed">
               {f.description}
             </p>
           </div>
@@ -64,7 +64,7 @@ import bgWebDesign from '@images/pages/services/web-design/bg-image-web-design.j
 
   {
     webProjects.length > 0 && (
-      <MainContainer bgColor="bg-white" id="webs-desarrolladas">
+      <MainContainer bgColor="bg-theme-page" id="webs-desarrolladas">
         <HeadingSection
           tagline="Portafolio Web"
           title="Páginas Web que Hemos Desarrollado"

@@ -5,7 +5,7 @@ import { COMPANY_VALUES } from "@data/team";
 
 <MainContainer
   id="valores"
-  bgColor="bg-neutral-50"
+  bgColor="bg-theme-surface"
   ariaLabelledby="valores-titulo"
 >
   <HeadingSection
@@ -36,7 +36,7 @@ import { COMPANY_VALUES } from "@data/team";
 
   .valor-card {
     @apply flex flex-col items-center text-center gap-4 p-8
-           rounded-2xl bg-white border border-neutral-200
+           rounded-2xl bg-theme-card border border-theme-border
            transition-all duration-500 ease-out
            hover:shadow-xl hover:shadow-secondary-500/10
            hover:-translate-y-1 hover:border-secondary-300;
@@ -50,10 +50,10 @@ import { COMPANY_VALUES } from "@data/team";
   }
 
   .valor-card__title {
-    @apply text-primary-700 font-bold text-lg;
+    @apply text-theme-heading font-bold text-lg;
   }
 
   .valor-card__desc {
-    @apply text-neutral-600 text-sm leading-relaxed;
+    @apply text-theme-muted text-sm leading-relaxed;
   }
 </style>

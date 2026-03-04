@@ -5,7 +5,7 @@ import { METHODOLOGY_STEPS } from "@data/team";
 
 <MainContainer
   id="proceso-servicios"
-  bgColor="bg-white"
+  bgColor="bg-theme-page"
   ariaLabelledby="proceso-titulo"
 >
   <HeadingSection
@@ -67,14 +67,14 @@ import { METHODOLOGY_STEPS } from "@data/team";
 
   .proceso-step__icon {
     @apply w-12 h-12 flex items-center justify-center rounded-xl
-           bg-primary-50 text-primary-600;
+           bg-theme-surface text-secondary-600;
   }
 
   .proceso-step__title {
-    @apply text-primary-700 font-bold text-lg;
+    @apply text-theme-heading font-bold text-lg;
   }
 
   .proceso-step__desc {
-    @apply text-neutral-600 text-sm leading-relaxed max-w-xs;
+    @apply text-theme-muted text-sm leading-relaxed max-w-xs;
   }
 </style>

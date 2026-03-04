@@ -70,43 +70,43 @@ const schema = {
   </header>
 
   {/* Contenido a 2 columnas */}
-  <MainContainer bgColor="bg-white">
+  <MainContainer bgColor="bg-theme-page">
     <div class="project-grid">
       {/* Columna Izquierda: Sticky Sidebar "Key Facts" */}
       <aside class="project-sidebar">
         <div class="project-sidebar__sticky text-sm md:text-base">
           <h2
-            class="font-bold text-primary-950 text-xl border-b border-neutral-200 pb-4 mb-6"
+            class="font-bold text-theme-heading text-xl border-b border-theme-border pb-4 mb-6"
           >
             Detalles del Proyecto
           </h2>
 
           <dl class="space-y-6">
             <div>
-              <dt class="text-neutral-500 font-medium mb-1">Cliente</dt>
-              <dd class="font-bold text-neutral-800">{project.data.client}</dd>
+              <dt class="text-theme-muted font-medium mb-1">Cliente</dt>
+              <dd class="font-bold text-theme-heading">{project.data.client}</dd>
             </div>
 
             <div>
-              <dt class="text-neutral-500 font-medium mb-1">Nuestro Rol</dt>
-              <dd class="font-bold text-neutral-800">{project.data.role}</dd>
+              <dt class="text-theme-muted font-medium mb-1">Nuestro Rol</dt>
+              <dd class="font-bold text-theme-heading">{project.data.role}</dd>
             </div>
 
             <div>
-              <dt class="text-neutral-500 font-medium mb-1">Duración</dt>
-              <dd class="font-bold text-neutral-800">
+              <dt class="text-theme-muted font-medium mb-1">Duración</dt>
+              <dd class="font-bold text-theme-heading">
                 {project.data.duration}
               </dd>
             </div>
 
             <div>
-              <dt class="text-neutral-500 font-medium mb-1">Año</dt>
-              <dd class="font-bold text-neutral-800">{project.data.year}</dd>
+              <dt class="text-theme-muted font-medium mb-1">Año</dt>
+              <dd class="font-bold text-theme-heading">{project.data.year}</dd>
             </div>
 
             {
               project.data.url && (
-                <div class="pt-4 mt-6 border-t border-neutral-100">
+                <div class="pt-4 mt-6 border-t border-theme-border">
                   <Button
                     href={project.data.url}
                     target="_blank"
@@ -133,12 +133,12 @@ const schema = {
 
   {/* CTA Final */}
   <section
-    class="py-20 px-[5%] bg-primary-50 border-t border-primary-100 text-center"
+    class="py-20 px-[5%] bg-theme-surface border-t border-theme-border text-center"
   >
-    <h2 class="text-3xl md:text-4xl font-black text-primary-950 mb-4">
+    <h2 class="text-3xl md:text-4xl font-black text-theme-heading mb-4">
       ¿Buscas un impacto similar?
     </h2>
-    <p class="text-neutral-600 text-lg mb-8 max-w-xl mx-auto">
+    <p class="text-theme-muted text-lg mb-8 max-w-xl mx-auto">
       Conversa con nuestro equipo sobre los retos de tu empresa y descubramos
       cómo la tecnología puede resolverlos.
     </p>
@@ -180,7 +180,7 @@ const schema = {
   }
 
   .project-sidebar__sticky {
-    @apply p-8 bg-neutral-50 border border-neutral-200 rounded-3xl lg:sticky lg:top-32;
+    @apply p-8 bg-theme-card border border-theme-border rounded-3xl lg:sticky lg:top-32;
   }
 
   .project-content {

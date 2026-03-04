@@ -2,6 +2,9 @@
 @import "tailwind-animations";
 @plugin "@tailwindcss/typography";
 
+/* Dark mode: activar dark: variants con clase html.dark (no prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Registramos el plugin de animaciones */
 
 /* =====================

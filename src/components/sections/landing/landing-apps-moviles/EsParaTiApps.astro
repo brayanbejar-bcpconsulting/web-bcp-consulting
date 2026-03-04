@@ -1,0 +1,123 @@
+---
+const ideal = [
+  {
+    icon: "🛒",
+    title: "Canal de ventas móvil",
+    desc: "Quieres vender directamente desde una app propia, sin depender de marketplaces.",
+  },
+  {
+    icon: "🚚",
+    title: "Delivery y reservas",
+    desc: "Tu negocio necesita gestionar pedidos, reservas o citas desde el celular del cliente.",
+  },
+  {
+    icon: "👥",
+    title: "Fuerza comercial en campo",
+    desc: "Tienes vendedores o técnicos que necesitan registrar visitas, pedidos o reportes sin papel.",
+  },
+  {
+    icon: "🎁",
+    title: "Fidelización de clientes",
+    desc: "Buscas puntos, recompensas, notificaciones push y club de clientes propio.",
+  },
+  {
+    icon: "⚙️",
+    title: "Procesos internos digitalizados",
+    desc: "Tienes operaciones (logística, inventario, mantenimiento) que aún se hacen en Excel o papel.",
+  },
+];
+
+const noIdeal = [
+  {
+    icon: "🌐",
+    title: "Solo necesitas presencia digital básica",
+    desc: "Para eso basta con un sitio web o landing page. Te orientamos a nuestro servicio web.",
+    href: "/landing-software/",
+  },
+];
+---
+
+<section
+  id="es-para-ti"
+  aria-labelledby="ept-heading"
+  class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900"
+>
+  <div class="max-w-350 mx-auto px-[5%]">
+
+    <header class="mb-10 text-center">
+      <span class="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">
+        ¿Esta app es para ti?
+      </span>
+      <h2 id="ept-heading" class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white leading-tight">
+        Descubre si una app móvil a medida es lo que necesitas
+      </h2>
+      <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+        Antes de cotizar, valida si este servicio realmente resuelve tu problema. Somos directos.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Ideal si... -->
+      <div>
+        <h3 class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          Ideal si…
+        </h3>
+        <ul class="flex flex-col gap-3" role="list">
+          {ideal.map((item) => (
+            <li class="flex items-start gap-3 p-4 rounded-2xl bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800/40">
+              <span class="text-2xl flex-shrink-0 leading-none mt-0.5" aria-hidden="true">{item.icon}</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">{item.title}</p>
+                <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{item.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- No ideal si... -->
+      <div>
+        <h3 class="text-sm font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z" />
+          </svg>
+          No ideal si…
+        </h3>
+        <ul class="flex flex-col gap-3" role="list">
+          {noIdeal.map((item) => (
+            <li class="flex items-start gap-3 p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800/40">
+              <span class="text-2xl flex-shrink-0 leading-none mt-0.5" aria-hidden="true">{item.icon}</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">{item.title}</p>
+                <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{item.desc}</p>
+                {item.href && (
+                  <a href={item.href} class="inline-block mt-2 text-xs font-semibold text-primary-600 dark:text-primary-400 underline underline-offset-2 hover:text-primary-500">
+                    Ver servicio web corporativo →
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Bloque de definición AEO -->
+        <div class="mt-6 p-4 rounded-2xl bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800/40">
+          <p class="text-xs font-semibold text-primary-700 dark:text-primary-300 uppercase tracking-wider mb-2">
+            Definición · App móvil a medida
+          </p>
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            Una <strong>app móvil a medida</strong> es una aplicación nativa (iOS/Android) o multiplataforma
+            desarrollada específicamente para los procesos, usuarios y objetivos de negocio de una empresa,
+            a diferencia de las soluciones genéricas o de plantilla.
+            Incluye diseño UX/UI propio, integraciones específicas y código 100% propiedad del cliente.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

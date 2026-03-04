@@ -1,0 +1,178 @@
+---
+const calidad = [
+  { icon: "🔄", item: "CI/CD automatizado (builds y despliegues sin intervención manual)" },
+  { icon: "📊", item: "Logging + monitoreo de errores (Crashlytics / Sentry)" },
+  { icon: "📈", item: "Analytics integrado (Firebase Analytics / GA4)" },
+  { icon: "🔔", item: "Alertas de degradación de performance en tiempo real" },
+  { icon: "🌿", item: "Control de versiones Git + branching strategy (GitFlow)" },
+  { icon: "🧪", item: "Testing unitario e integración por feature crítica" },
+  { icon: "📱", item: "QA en dispositivos físicos iOS y Android (múltiples versiones OS)" },
+  { icon: "💾", item: "Backups automáticos de datos (si aplica backend)" },
+];
+
+const seguridad = [
+  { icon: "🔐", item: "Autenticación segura: OAuth 2.0, JWT, biometría (FaceID/Huella)" },
+  { icon: "👤", item: "Roles y permisos granulares por tipo de usuario" },
+  { icon: "🔒", item: "Cifrado en tránsito (TLS 1.3) y en reposo (AES-256)" },
+  { icon: "🛡️", item: "Protección de endpoints API (rate limiting, validación, sanitización)" },
+  { icon: "📋", item: "OWASP MASVS aplicado como referencia de seguridad móvil" },
+  { icon: "🚫", item: "Anti-tampering y certificate pinning en apps de alta criticidad" },
+  { icon: "📝", item: "Auditoría de acciones sensibles (logs de acceso)" },
+];
+
+const stacks = [
+  {
+    categoria: "Apps nativas",
+    tecnologias: ["Swift (iOS)", "Kotlin (Android)", "Xcode / Android Studio"],
+    uso: "Máximo rendimiento y acceso total a hardware del dispositivo",
+  },
+  {
+    categoria: "Apps multiplataforma",
+    tecnologias: ["React Native", "Flutter", "Expo"],
+    uso: "Una codebase para iOS y Android. Ideal para MVP y presupuesto optimizado",
+  },
+  {
+    categoria: "PWA",
+    tecnologias: ["Next.js", "Astro + Service Workers", "Workbox"],
+    uso: "App instalable desde el navegador. Sin pasar por stores",
+  },
+  {
+    categoria: "Backend / API",
+    tecnologias: ["Node.js", "Python FastAPI", "Laravel", "Supabase"],
+    uso: "API REST o GraphQL según complejidad y stack existente del cliente",
+  },
+  {
+    categoria: "Base de datos",
+    tecnologias: ["PostgreSQL", "MySQL", "Firebase Firestore", "SQLite offline"],
+    uso: "Relacional para integraciones complejas; NoSQL para datos en tiempo real",
+  },
+  {
+    categoria: "Nube e infraestructura",
+    tecnologias: ["AWS", "Google Cloud", "Azure", "DigitalOcean"],
+    uso: "Hosting, escalado automático, CDN y ambientes staging/producción separados",
+  },
+];
+---
+
+<section
+  id="stack"
+  aria-labelledby="stack-heading"
+  class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900"
+>
+  <div class="max-w-350 mx-auto px-[5%]">
+
+    <header class="mb-12 text-center">
+      <span class="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">
+        Calidad por defecto
+      </span>
+      <h2 id="stack-heading" class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white leading-tight">
+        Lo que incluimos siempre (no opcional)
+      </h2>
+      <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+        Calidad y seguridad son estándar, no extras de pago.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-10">
+
+      <!-- Calidad -->
+      <div class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
+        <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+          <span aria-hidden="true">⚙️</span> Calidad y operaciones
+        </h3>
+        <ul class="flex flex-col gap-2.5" role="list">
+          {calidad.map((c) => (
+            <li class="flex items-start gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
+              <span class="flex-shrink-0 text-base leading-none mt-0.5" aria-hidden="true">{c.icon}</span>
+              {c.item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Seguridad -->
+      <div class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
+        <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+          <span aria-hidden="true">🛡️</span> Seguridad aplicada
+        </h3>
+        <ul class="flex flex-col gap-2.5" role="list">
+          {seguridad.map((s) => (
+            <li class="flex items-start gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
+              <span class="flex-shrink-0 text-base leading-none mt-0.5" aria-hidden="true">{s.icon}</span>
+              {s.item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Acordeón: Ver stack tecnológico -->
+    <div class="rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+      <button
+        type="button"
+        id="acc-stack-btn"
+        aria-expanded="false"
+        aria-controls="acc-stack-panel"
+        class="w-full flex items-center justify-between px-6 py-5 bg-white dark:bg-neutral-800 text-left hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+      >
+        <span class="text-sm font-bold text-neutral-900 dark:text-white flex items-center gap-2">
+          <span aria-hidden="true">🔧</span>
+          Ver stack tecnológico completo
+        </span>
+        <svg
+          id="acc-stack-icon"
+          class="w-5 h-5 text-neutral-400 transition-transform duration-200"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div
+        id="acc-stack-panel"
+        role="region"
+        aria-labelledby="acc-stack-btn"
+        hidden
+        class="px-6 pb-6 bg-white dark:bg-neutral-800"
+      >
+        <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {stacks.map((s) => (
+            <div class="rounded-xl bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-100 dark:border-neutral-700 p-4">
+              <p class="text-xs font-bold text-primary-700 dark:text-primary-300 uppercase tracking-wider mb-2">{s.categoria}</p>
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                {s.tecnologias.map((t) => (
+                  <span class="px-2 py-0.5 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-xs font-medium">{t}</span>
+                ))}
+              </div>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400">{s.uso}</p>
+            </div>
+          ))}
+        </div>
+        <p class="mt-4 text-xs text-neutral-400 dark:text-neutral-500">
+          El stack final se define según el proyecto, integraciones existentes del cliente y objetivos de escalabilidad.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById("acc-stack-btn");
+  const panel = document.getElementById("acc-stack-panel");
+  const icon = document.getElementById("acc-stack-icon");
+
+  btn?.addEventListener("click", () => {
+    const isExpanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!isExpanded));
+    if (isExpanded) {
+      panel?.setAttribute("hidden", "");
+      icon?.classList.remove("rotate-180");
+    } else {
+      panel?.removeAttribute("hidden");
+      icon?.classList.add("rotate-180");
+    }
+  });
+</script>

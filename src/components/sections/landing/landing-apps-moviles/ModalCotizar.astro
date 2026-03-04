@@ -1,0 +1,199 @@
+---
+import { NAVIGATION } from "@utils/navigation";
+---
+
+<!-- Modal Cotizar Apps Móviles (accesible, trap de foco, ESC para cerrar) -->
+<div
+  id="modal-cotizar-apps"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title-apps"
+  aria-describedby="modal-desc-apps"
+  hidden
+  class="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4"
+>
+  <!-- Overlay -->
+  <div
+    id="modal-overlay-apps"
+    class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Panel -->
+  <div
+    id="modal-panel-apps"
+    class="relative w-full sm:max-w-lg bg-white dark:bg-neutral-900 rounded-t-3xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[92dvh] overflow-y-auto"
+  >
+    <!-- Botón cerrar -->
+    <button
+      type="button"
+      id="modal-close-apps"
+      aria-label="Cerrar modal de cotización"
+      class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Handle visual en mobile -->
+    <div class="w-10 h-1 rounded-full bg-neutral-300 dark:bg-neutral-600 mx-auto mb-5 sm:hidden" aria-hidden="true"></div>
+
+    <h2 id="modal-title-apps" class="text-xl font-extrabold text-neutral-900 dark:text-white mb-1">
+      Cotizar con alcance
+    </h2>
+    <p id="modal-desc-apps" class="text-sm text-neutral-500 dark:text-neutral-400 mb-6">
+      Sin compromiso. Te devolvemos alcance por fases en menos de 24 h.
+    </p>
+
+    <form id="modal-form-apps" class="flex flex-col gap-4" novalidate>
+      <div class="flex flex-col gap-1.5">
+        <label for="mf-nombre" class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+          Nombre completo <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="mf-nombre" type="text" name="nombre"
+          autocomplete="name" required aria-required="true"
+          class="w-full px-4 py-3 rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
+          placeholder="Tu nombre"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="mf-whatsapp" class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+          WhatsApp <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="mf-whatsapp" type="tel" name="celular"
+          autocomplete="tel" required aria-required="true"
+          placeholder="+51 9XX XXX XXX"
+          class="w-full px-4 py-3 rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="mf-email" class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+          Correo electrónico <span class="text-neutral-400 font-normal">(opcional)</span>
+        </label>
+        <input
+          id="mf-email" type="email" name="email"
+          autocomplete="email"
+          placeholder="tu@empresa.com"
+          class="w-full px-4 py-3 rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="mf-proyecto" class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+          ¿Qué tipo de app necesitas?
+        </label>
+        <textarea
+          id="mf-proyecto" name="mensaje" rows="3"
+          placeholder="Ej: app de delivery, canal de ventas, app interna para técnicos…"
+          class="w-full px-4 py-3 rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition resize-none"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full px-6 py-3.5 rounded-full bg-primary-600 hover:bg-primary-500 text-white font-bold text-sm transition-colors duration-200 min-h-[48px] flex items-center justify-center gap-2"
+      >
+        Enviar — Asesoría Gratis
+      </button>
+
+      <div id="modal-form-status" role="alert" aria-live="assertive" class="hidden text-xs text-center text-green-600 dark:text-green-400 font-semibold pt-1"></div>
+    </form>
+
+    <p class="mt-5 text-center text-xs text-neutral-400 dark:text-neutral-500">
+      RUC: {NAVIGATION.contact.ruc} · BCP Consulting E.I.R.L. · Lima, Perú
+    </p>
+  </div>
+</div>
+
+<script>
+  // --- Elementos del modal ---
+  const modal = document.getElementById("modal-cotizar-apps");
+  const overlay = document.getElementById("modal-overlay-apps");
+  const closeBtn = document.getElementById("modal-close-apps");
+  const form = document.getElementById("modal-form-apps") as HTMLFormElement | null;
+  const formStatus = document.getElementById("modal-form-status");
+
+  // Todos los botones que abren el modal
+  const openBtns = document.querySelectorAll<HTMLButtonElement>('[data-open-modal="cotizar-apps"]');
+
+  // Elementos focusables dentro del modal (para trap de foco)
+  function getFocusable(): HTMLElement[] {
+    if (!modal) return [];
+    return Array.from(
+      modal.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => !el.hasAttribute("disabled") && !el.closest("[hidden]"));
+  }
+
+  function openModal() {
+    if (!modal) return;
+    modal.removeAttribute("hidden");
+    document.body.style.overflow = "hidden";
+    // Foco al primer elemento focusable
+    setTimeout(() => {
+      const focusable = getFocusable();
+      focusable[0]?.focus();
+    }, 50);
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.setAttribute("hidden", "");
+    document.body.style.overflow = "";
+    // Devolver foco al último botón que abrió el modal
+    (document.activeElement as HTMLElement)?.blur();
+    openBtns[0]?.focus();
+  }
+
+  openBtns.forEach((btn) => btn.addEventListener("click", openModal));
+  closeBtn?.addEventListener("click", closeModal);
+  overlay?.addEventListener("click", closeModal);
+
+  // ESC para cerrar
+  document.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Escape" && modal && !modal.hasAttribute("hidden")) {
+      closeModal();
+    }
+  });
+
+  // Trap de foco dentro del modal
+  modal?.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key !== "Tab") return;
+    const focusable = getFocusable();
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Submit de formulario
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (formStatus) {
+      formStatus.classList.remove("hidden");
+      formStatus.textContent = "✓ Mensaje recibido. Te contactamos en menos de 24 h hábiles.";
+    }
+    setTimeout(() => {
+      form?.reset();
+      closeModal();
+      if (formStatus) formStatus.classList.add("hidden");
+    }, 2000);
+  });
+</script>

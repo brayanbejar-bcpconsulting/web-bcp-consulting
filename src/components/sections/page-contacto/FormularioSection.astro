@@ -36,16 +36,16 @@ const contactChannels = [
 
 <MainContainer
   id="formulario-contacto"
-  bgColor="bg-neutral-50"
+  bgColor="bg-theme-surface"
   ariaLabelledby="formulario-titulo"
 >
   <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
     {/* Formulario - ocupa 3 columnas */}
     <div class="lg:col-span-3">
-      <h2 id="formulario-titulo" class="text-primary-700 mb-2">
+      <h2 id="formulario-titulo" class="text-theme-heading mb-2">
         Envíanos un Mensaje
       </h2>
-      <p class="text-neutral-600 mb-8">
+      <p class="text-theme-muted mb-8">
         Déjanos un mensaje y te brindaremos una asesoría personalizada con las
         mejores promociones disponibles.
       </p>
@@ -54,7 +54,7 @@ const contactChannels = [
 
     {/* Canales de contacto - ocupa 2 columnas */}
     <div class="lg:col-span-2">
-      <h3 class="text-primary-700 font-bold text-xl mb-6">
+      <h3 class="text-theme-heading font-bold text-xl mb-6">
         Otros canales de contacto
       </h3>
       <div class="flex flex-col gap-6">
@@ -118,7 +118,7 @@ const contactChannels = [
   @reference "../../../styles/global.css";
 
   .contact-channel {
-    @apply flex items-start gap-4 p-4 rounded-xl bg-white border border-neutral-200
+    @apply flex items-start gap-4 p-4 rounded-xl bg-theme-card border border-theme-border
            transition-all duration-300 hover:shadow-md hover:border-secondary-300;
   }
 
@@ -128,7 +128,7 @@ const contactChannels = [
   }
 
   .contact-channel__title {
-    @apply text-primary-700 font-bold text-sm;
+    @apply text-theme-heading font-bold text-sm;
   }
 
   .contact-channel__value {
@@ -137,10 +137,10 @@ const contactChannels = [
   }
 
   .contact-channel__value--static {
-    @apply text-neutral-700;
+    @apply text-theme-base;
   }
 
   .contact-channel__desc {
-    @apply text-neutral-500 text-xs mt-0.5;
+    @apply text-theme-subtle text-xs mt-0.5;
   }
 </style>

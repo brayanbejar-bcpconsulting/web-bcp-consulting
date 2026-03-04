@@ -158,8 +158,8 @@ const pathname = Astro.url.pathname;
      Botón hamburguesa
   ───────────────────────────── */
   .nav-mobile-toggle {
-    @apply p-2 rounded-lg text-neutral-200 hover:text-white
-           hover:bg-primary-700/50
+    @apply p-2 rounded-lg text-theme-base hover:text-theme-heading
+           hover:bg-theme-surface
            transition-colors duration-200 cursor-pointer;
   }
 
@@ -184,8 +184,8 @@ const pathname = Astro.url.pathname;
     @apply fixed top-0 right-0 z-50
            w-[85%] max-w-85 h-dvh
            flex flex-col
-           bg-primary-900
-           border-l border-primary-700/50
+           bg-theme-card
+           border-l border-theme-border
            shadow-2xl
            translate-x-full
            transition-transform duration-300 ease-out
@@ -203,15 +203,15 @@ const pathname = Astro.url.pathname;
     @apply sticky top-0 z-10
            flex items-center justify-between
            px-5 py-4
-           bg-primary-900/95 backdrop-blur-md
-           border-b border-primary-700/50;
+           bg-theme-card/95 backdrop-blur-md
+           border-b border-theme-border;
   }
 
   .nav-mobile__close {
     @apply flex items-center justify-center
            w-9 h-9 rounded-lg
-           text-neutral-400 hover:text-white
-           hover:bg-primary-700/60
+           text-theme-muted hover:text-theme-heading
+           hover:bg-theme-surface
            transition-all duration-200 cursor-pointer;
   }
 
@@ -232,14 +232,14 @@ const pathname = Astro.url.pathname;
   .nav-mobile__link {
     @apply flex items-center
            w-full px-3 py-3 rounded-xl
-           text-neutral-300 font-medium text-[0.95rem]
+           text-theme-base font-medium text-[0.95rem]
            no-underline
            transition-all duration-200
-           hover:bg-primary-700/50 hover:text-white;
+           hover:bg-theme-surface hover:text-theme-heading;
   }
 
   .nav-mobile__link.is-active {
-    @apply bg-primary-700/60 text-white;
+    @apply bg-secondary-500/20 text-theme-heading;
   }
 
   .nav-mobile__link-inner {
@@ -252,7 +252,7 @@ const pathname = Astro.url.pathname;
   .nav-mobile__icon {
     @apply flex items-center justify-center
            w-8 h-8 rounded-lg shrink-0
-           bg-primary-700/50 text-secondary-400;
+           bg-theme-surface text-secondary-400;
   }
 
   .nav-mobile__link.is-active .nav-mobile__icon,
@@ -261,7 +261,7 @@ const pathname = Astro.url.pathname;
   }
 
   .nav-mobile__icon--sm {
-    @apply w-7 h-7 rounded-md bg-primary-700/30 text-primary-300;
+    @apply w-7 h-7 rounded-md bg-theme-surface text-theme-muted;
   }
 
   /* ─────────────────────────────
@@ -270,21 +270,21 @@ const pathname = Astro.url.pathname;
   .nav-mobile__accordion-btn {
     @apply flex items-center justify-between
            w-full px-3 py-3 rounded-xl
-           text-neutral-300 font-medium text-[0.95rem]
+           text-theme-base font-medium text-[0.95rem]
            transition-all duration-200 cursor-pointer
-           hover:bg-primary-700/50 hover:text-white;
+           hover:bg-theme-surface hover:text-theme-heading;
   }
 
   .nav-mobile__accordion-btn.is-active {
-    @apply bg-primary-700/60 text-white;
+    @apply bg-secondary-500/20 text-theme-heading;
   }
 
   .nav-mobile__accordion-btn[aria-expanded="true"] {
-    @apply bg-primary-700/40 text-white;
+    @apply bg-theme-surface text-theme-heading;
   }
 
   .nav-mobile__chevron {
-    @apply shrink-0 text-neutral-500
+    @apply shrink-0 text-theme-subtle
            transition-transform duration-300 ease-out;
   }
 
@@ -323,10 +323,10 @@ const pathname = Astro.url.pathname;
   .nav-mobile__sublink {
     @apply flex items-center gap-3
            mx-2 px-3 py-2.5 rounded-xl
-           text-neutral-400 text-sm
+           text-theme-muted text-sm
            no-underline
            transition-all duration-200
-           hover:bg-primary-700/40 hover:text-white;
+           hover:bg-theme-surface hover:text-theme-heading;
   }
 
   .nav-mobile__sublink.is-active {
@@ -346,8 +346,8 @@ const pathname = Astro.url.pathname;
      CTA / Footer del panel
   ───────────────────────────── */
   .nav-mobile__footer {
-    @apply mt-auto p-4 border-t border-primary-700/50
-           bg-primary-900/80;
+    @apply mt-auto p-4 border-t border-theme-border
+           bg-theme-card/80;
   }
 </style>
 

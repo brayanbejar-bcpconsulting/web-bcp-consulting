@@ -1,134 +1,744 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
-import {
-  HeroPage,
-  MainContainer,
-  HeadingSection,
-  FeatureList,
-  Button,
-  Icon,
-} from "@components";
+import { HeroPage, Button } from "@components";
 import { SERVICES } from "@data/services";
+import { NAVIGATION } from "@utils/navigation";
+import bgSoftware from '@assets/images/pages/services/software/bg-image-software.jpg';
 
 const service = SERVICES.find((s) => s.id === "software")!;
 
-const sectors = [
-  {
-    name: "Clínicas y Consultorios",
-    desc: "Citas médicas, historiales clínicos, recetas digitales y telemedicina.",
-  },
-  {
-    name: "Gimnasios y Fitness",
-    desc: "Reserva de clases, seguimiento de rutinas, control de membresías.",
-  },
-  {
-    name: "Restaurantes y Delivery",
-    desc: "Pedidos en línea, menú digital interactivo y sistema de delivery.",
-  },
-  {
-    name: "E-commerce",
-    desc: "Catálogo digital, carrito de compras, pasarelas de pago seguras.",
-  },
-  {
-    name: "Academias y Educación",
-    desc: "Cursos online, evaluaciones automáticas y comunicación con padres.",
-  },
-  {
-    name: "Logística y Transporte",
-    desc: "Trazabilidad, control de almacenes, rutas de despacho y gestión de flotas.",
-  },
+const waPhone = NAVIGATION.contact.phone.replace(/\D/g, "");
+const waMsg = encodeURIComponent("Hola BCP Consulting, vengo desde https://bcpconsulting.pe/servicios/software. Quisiera asesorarme sobre software a medida para mi empresa.");
+
+// ── Tabla AEO ──────────────────────────────────────────────────────────────
+const tiposSoftware = [
+  { tipo: "ERP / Gestión Empresarial", objetivo: "Centralizar finanzas, RRHH, compras y operaciones", modulos: "Contabilidad, nómina, compras, inventario, reportes", tiempo: "3–6 meses", integraciones: "SUNAT, bancos, sistemas contables", recomendado: "Empresa con +10 empleados y múltiples áreas desconectadas" },
+  { tipo: "CRM / Pipeline de Ventas", objetivo: "Gestionar leads, clientes y seguimiento comercial", modulos: "Pipeline, cotizaciones, historial, automatización de correos", tiempo: "4–10 semanas", integraciones: "WhatsApp, email, Google Workspace, Calendly", recomendado: "Equipos de ventas con proceso comercial repetitivo" },
+  { tipo: "Inventarios y Logística", objetivo: "Controlar stock, almacenes, despachos y proveedores", modulos: "Entradas/salidas, trazabilidad, rutas, alertas de stock mínimo", tiempo: "6–12 semanas", integraciones: "Transportistas, SUNAT, ERP, e-commerce", recomendado: "Almacenes, distribuidoras, logística de última milla" },
+  { tipo: "Automatización e Integraciones", objetivo: "Conectar sistemas y eliminar tareas manuales repetitivas", modulos: "Flujos automáticos, webhooks, notificaciones, reglas de negocio", tiempo: "2–8 semanas", integraciones: "REST APIs, n8n, bases de datos", recomendado: "Empresa con múltiples herramientas aisladas" },
+  { tipo: "SaaS / Producto Digital", objetivo: "Lanzar software como servicio vendible a terceros", modulos: "Multi-tenant, pagos recurrentes, onboarding, panel admin, métricas", tiempo: "3–6 meses (MVP)", integraciones: "Stripe / Culqi, OAuth, monitoreo, CDN", recomendado: "Startups o empresas que quieren monetizar software propio" },
+  { tipo: "Software Sectorial a Medida", objetivo: "Solución vertical adaptada al flujo de la industria", modulos: "Variable: clínicas, restaurantes, constructoras, educación", tiempo: "6–16 semanas", integraciones: "SUNAT, POS, laboratorios, sistemas de fidelización", recomendado: "Sector con procesos únicos que productos genéricos no cubren" },
 ];
 
-import bgSoftware from '@images/pages/services/software/bg-image-software.jpg';
+// ── 7 Fases ────────────────────────────────────────────────────────────────
+const fases = [
+  { numero: "01", nombre: "Descubrimiento", duracion: "1–2 sem", desc: "Documentamos requerimientos, mapa de procesos actuales e informe de factibilidad técnica.", entregables: ["Documento de requerimientos (BRD)", "Mapa de procesos actuales", "Informe de factibilidad técnica"] },
+  { numero: "02", nombre: "Alcance y Backlog", duracion: "1 sem", desc: "Priorizamos funcionalidades con criterios de valor/esfuerzo. Definimos MVP y fases de entrega.", entregables: ["Product backlog priorizado", "Roadmap MVP → Completo", "Estimación de tiempos y costos por módulo"] },
+  { numero: "03", nombre: "Diseño UX/UI", duracion: "1–3 sem", desc: "Wireframes, prototipo interactivo en Figma y design system antes de codificar.", entregables: ["Wireframes de pantallas principales", "Prototipo interactivo en Figma", "Design system / guía de estilo"] },
+  { numero: "04", nombre: "Desarrollo", duracion: "Variable", desc: "Sprints de 1–2 semanas con demo funcional al cierre de cada uno. Control de versiones Git.", entregables: ["Código fuente (Git)", "Demo por sprint", "Documentación técnica de APIs"] },
+  { numero: "05", nombre: "QA y Pruebas", duracion: "1–2 sem", desc: "Pruebas funcionales, de carga, seguridad OWASP y usabilidad. Cero bugs críticos antes del deploy.", entregables: ["Reporte de pruebas funcionales", "Informe de seguridad", "Lista de bugs resueltos"] },
+  { numero: "06", nombre: "Despliegue (Deploy)", duracion: "2–5 días", desc: "Pipeline CI/CD, dominio, HTTPS, monitoreo activo y backups automáticos.", entregables: ["Sistema en producción (URL final)", "Panel de monitoreo configurado", "Manual de administrador"] },
+  { numero: "07", nombre: "Soporte y Evolución", duracion: "Continuo", desc: "Soporte post-lanzamiento, correcciones, mejoras y evolución según crecimiento del negocio.", entregables: ["SLA de respuesta definido (según plan)", "Actualizaciones de seguridad", "Reportes mensuales de rendimiento"] },
+];
+
+// ── Casos de estudio ───────────────────────────────────────────────────────
+const casos = [
+  { cliente: "Izajes Massimo", sector: "Industrial · Logística de izajes", contexto: "Empresa con gestión dispersa en hojas de cálculo y WhatsApp. Sin visibilidad de equipos ni proyectos activos.", problema: "Reportes de estado tardaban 2–3 días. Cero trazabilidad de equipos en campo.", solucion: "Plataforma web de gestión operativa: control de equipos, asignación de personal, seguimiento de proyectos y reportes automáticos.", stack: "React · Node.js · PostgreSQL · AWS", tiempo: "12 semanas", kpi: ["Reportes generados al instante (antes: 2–3 días)", "–60% en llamadas de coordinación interna", "Control centralizado de +40 equipos activos"], url: "https://izajesmassimo.com/" },
+  { cliente: "Aquaia SAC", sector: "Servicios acuáticos · RRHH", contexto: "Empresa con múltiples proyectos simultáneos y administración en Excel.", problema: "Imposible hacer seguimiento de proyectos e historial de clientes sin herramienta unificada.", solucion: "Sistema CRM + gestión de proyectos + panel administrativo + reportes por cliente con acceso por roles.", stack: "Vue.js · NestJS · MongoDB · Firebase", tiempo: "10 semanas", kpi: ["Visibilidad completa del pipeline de proyectos", "Historial de cliente accesible en segundos", "Eliminación total de hojas de cálculo"], url: "https://aquaiasac.com/" },
+  { cliente: "Market Dollar", sector: "Fintech · Casa de cambio digital", contexto: "Startup con procesos manuales y sin panel de control en tiempo real.", problema: "Riesgo operativo por falta de trazabilidad en transacciones y ausencia de controles por rol.", solucion: "Plataforma fintech con panel de transacciones en tiempo real, gestión de tipo de cambio, roles de acceso y reportes financieros.", stack: "Next.js · Spring Boot · PostgreSQL · Cloudflare", tiempo: "14 semanas", kpi: ["Trazabilidad del 100% de transacciones desde el primer día", "Cierre diario reducido de 2 h a 15 min", "Cumplimiento de controles para auditoría"], url: null },
+];
+
+// ── Seguridad por defecto ──────────────────────────────────────────────────
+const seguridadItems = [
+  { titulo: "Autenticación y roles", desc: "JWT/OAuth2, roles granulares, 2FA opcional y sesiones seguras." },
+  { titulo: "Cifrado TLS 1.3 + AES-256", desc: "HTTPS obligatorio. Datos sensibles cifrados en base de datos." },
+  { titulo: "Backups automáticos diarios", desc: "Retención configurable. Restauración probada en staging." },
+  { titulo: "Logging y auditoría", desc: "Registro de acciones críticas por usuario con trazabilidad completa." },
+  { titulo: "CI/CD y ambientes separados", desc: "Dev → Staging → Producción. Nunca se despliega sin pruebas." },
+  { titulo: "WAF + protección OWASP Top 10", desc: "Cloudflare o equivalente. Protección ante ataques comunes." },
+  { titulo: "Monitoreo y alertas 24/7", desc: "Uptime monitoring con alertas ante caídas o errores críticos." },
+];
+const stackTecnologias = [
+  { categoria: "Frontend", techs: ["React", "Next.js", "Angular", "Vue.js", "TypeScript", "React Native"] },
+  { categoria: "Backend", techs: ["Node.js", "NestJS", "Spring Boot", "Java", "Python / FastAPI"] },
+  { categoria: "Base de datos", techs: ["PostgreSQL", "MongoDB", "MySQL", "Redis"] },
+  { categoria: "Infraestructura", techs: ["AWS", "Google Cloud", "Azure", "Firebase", "Cloudflare"] },
+  { categoria: "DevOps", techs: ["Docker", "GitHub Actions", "CI/CD pipelines", "Nginx", "PM2"] },
+];
+
+// ── Rangos de inversión ────────────────────────────────────────────────────
+const rangos = [
+  { tipo: "MVP / Módulo base", desde: "S/. 8,000", rango: "S/. 8,000 – S/. 25,000", tiempo: "4–8 semanas", alcance: "1–3 módulos, 1 flujo principal, roles básicos", ideal: "Startups, validación de concepto, módulo de un área puntual", color: "border-blue-500/30 bg-blue-500/5", numColor: "text-blue-600 dark:text-blue-400" },
+  { tipo: "Sistema completo", desde: "S/. 25,000", rango: "S/. 25,000 – S/. 70,000", tiempo: "2–4 meses", alcance: "4–8 módulos, dashboards, integraciones básicas", ideal: "PYMES, sistemas de gestión interna, CRM/ERP", color: "border-complementary-500/30 bg-complementary-500/5", numColor: "text-complementary-600 dark:text-complementary-400" },
+  { tipo: "Plataforma / SaaS avanzado", desde: "S/. 70,000+", rango: "S/. 70,000+", tiempo: "3–6 meses", alcance: "Multi-tenant, pagos, onboarding, analíticas, API pública", ideal: "SaaS, fintech, plataformas educativas, sistemas sectoriales", color: "border-green-500/30 bg-green-500/5", numColor: "text-green-600 dark:text-green-400" },
+];
+const factoresPrecio = [
+  "Número de módulos y pantallas",
+  "Integraciones con sistemas externos (SUNAT, pagos, APIs)",
+  "Complejidad de reglas de negocio y flujos",
+  "Nivel de personalización del diseño UX/UI",
+  "Migración de datos desde sistemas anteriores",
+  "Requisitos de rendimiento y escalabilidad",
+  "Soporte y mantenimiento post-lanzamiento",
+];
+
+// ── Testimonios ────────────────────────────────────────────────────────────
+const testimonios = [
+  { nombre: "Carlos Meléndez", rol: "Gerente de Operaciones", empresa: "Sector logístico", quote: "El sistema que desarrolló BCP Consulting redujo en un 40% los tiempos de gestión de inventario. Ahora tenemos control en tiempo real y menos errores en las entregas.", resultado: "–40% tiempo de gestión de inventario" },
+  { nombre: "Javier López", rol: "Director Académico", empresa: "Plataforma educativa online", quote: "Nos diseñaron una plataforma con aulas virtuales. Los alumnos pueden conectarse desde cualquier dispositivo y nuestras inscripciones aumentaron un 30%.", resultado: "+30% inscripciones" },
+  { nombre: "Ana Rodríguez", rol: "Fundadora", empresa: "E-commerce B2C", quote: "El equipo entendió nuestras necesidades y en pocas semanas ya estábamos vendiendo con pagos totalmente integrados.", resultado: "Ventas online activas desde el primer mes" },
+  { nombre: "Pedro Salas", rol: "CEO", empresa: "Empresa de servicios B2B", quote: "Pasamos de gestionar todo en WhatsApp y Excel a tener un sistema centralizado. El equipo de BCP fue transparente en cada sprint y cumplió los plazos.", resultado: "100% procesos centralizados, cero Excel" },
+];
+
+// ── FAQs completas (12) ────────────────────────────────────────────────────
+const faqs = [
+  { id: "faq-propiedad", q: "¿El código fuente es mío al terminar el proyecto?", a: "Sí, al 100%. Entregamos el repositorio completo con historial de commits. Tienes plena propiedad intelectual: puedes modificarlo, transferirlo o alojarlo donde quieras sin depender de BCP Consulting." },
+  { id: "faq-cambios", q: "¿Puedo pedir cambios durante el desarrollo?", a: "Sí. Trabajamos en sprints de 1–2 semanas con revisiones al finalizar cada uno. Los cambios menores dentro del alcance acordado no tienen costo adicional. Cambios de alcance significativos se evalúan con un adenda y nueva estimación." },
+  { id: "faq-seguridad", q: "¿Qué tan seguro es el software que desarrollan?", a: "Aplicamos seguridad desde el diseño: JWT/OAuth2 con roles, HTTPS/TLS 1.3, cifrado AES-256 en reposo, WAF (Cloudflare), backups automáticos diarios, registro de auditoría y revisión OWASP Top 10 antes de cada deploy." },
+  { id: "faq-integraciones", q: "¿Se puede integrar con mis sistemas actuales (ERP, contabilidad, SUNAT)?", a: "Sí. Integramos con ERPs (SAP, Odoo), contabilidad (Concar, Contasis), facturación SUNAT, pasarelas de pago (Culqi, Izipay, Stripe) y cualquier sistema que exponga API o base de datos accesible." },
+  { id: "faq-plazo", q: "¿En cuánto tiempo estará listo el sistema?", a: "Un MVP con 2–3 módulos puede estar listo en 4–8 semanas. Sistemas complejos toman 2–6 meses. Entregamos cronograma detallado con hitos semanales desde el inicio." },
+  { id: "faq-precio", q: "¿Cuánto cuesta desarrollar software a medida?", a: "MVP: S/. 8,000–25,000. Sistema completo: S/. 25,000–70,000. Plataforma SaaS: S/. 70,000+. El costo varía según módulos, integraciones y personalización. Ofrecemos pagos fraccionados por etapas." },
+  { id: "faq-soporte", q: "¿Ofrecen soporte después del lanzamiento?", a: "Sí. Los primeros 30 días son gratuitos. Luego ofrecemos planes mensuales que incluyen correcciones, actualizaciones de seguridad, monitoreo y mejoras menores." },
+  { id: "faq-sla", q: "¿Qué SLA ofrecen en producción?", a: "SLA estándar: 99.5% de disponibilidad mensual. Bugs críticos (P0): respuesta máxima de 4 h hábiles. No críticos: 24–48 h. Todo incluido en los planes de mantenimiento activo." },
+  { id: "faq-inicio", q: "¿Cuánto tiempo toma iniciar una vez acepto la propuesta?", a: "El kickoff ocurre en los 5 días hábiles siguientes a la firma del contrato y pago del primer hito. Se definen alcance final, accesos, herramientas de colaboración y calendario de sprints." },
+  { id: "faq-fraccionado", q: "¿Hay pagos fraccionados?", a: "Sí. El esquema habitual es 30% al inicio, 40% en etapa media (con entrega parcial funcional) y 30% al cierre. Para proyectos grandes podemos acordar más hitos de pago por fases." },
+  { id: "faq-hosting", q: "¿Incluye el hosting?", a: "No por defecto, pero lo configuramos y asesoramos en la elección. Los costos de hosting dependen del proveedor cloud (AWS, GCP, Azure) y el nivel de tráfico. Te recomendamos la arquitectura más eficiente según tu presupuesto." },
+  { id: "faq-produccion", q: "¿Qué pasa si el sistema falla en producción?", a: "Todos los proyectos cuentan con monitoreo activo de uptime. Ante fallas críticas, respondemos en máx. 4 h laborables. Usamos ambientes separados (staging y prod) para minimizar riesgos en actualizaciones." },
+];
+
+// ── Tabla de contenidos ────────────────────────────────────────────────────
+const toc = [
+  { label: "Tipos de software", href: "#tipos-software" },
+  { label: "Proceso 7 fases", href: "#proceso" },
+  { label: "Casos reales", href: "#casos" },
+  { label: "Seguridad y stack", href: "#seguridad" },
+  { label: "Estimación de costos", href: "#estimacion" },
+  { label: "Testimonios", href: "#testimonios" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Cotizar", href: "#cotizar" },
+];
+
+// ── Schema JSON-LD ─────────────────────────────────────────────────────────
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
+
+const serviceSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo de Software a Medida en Perú",
+  description: "Desarrollamos sistemas de software web a medida: ERP, CRM, SaaS, Logística, Automatización e Integraciones para pymes, startups y grandes empresas en Perú y Latinoamérica.",
+  provider: {
+    "@type": "Organization",
+    name: "BCP Consulting E.I.R.L.",
+    url: "https://bcpconsulting.pe",
+    telephone: "+51929772711",
+    email: "soporte@bcpconsulting.pe",
+    taxID: "20612012475",
+    sameAs: ["https://www.linkedin.com/company/bcp-consulting-sac"],
+  },
+  areaServed: { "@type": "Country", name: "Peru" },
+  serviceType: "Custom Software Development",
+  url: "https://bcpconsulting.pe/servicios/software",
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "PEN",
+    lowPrice: "8000",
+    highPrice: "70000",
+    offerCount: "3",
+  },
+});
+
+const organizationSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "BCP Consulting E.I.R.L.",
+  url: "https://bcpconsulting.pe",
+  telephone: "+51929772711",
+  email: "soporte@bcpconsulting.pe",
+  taxID: "20612012475",
+  address: { "@type": "PostalAddress", addressCountry: "PE", addressRegion: "Lima" },
+  areaServed: { "@type": "Country", name: "Peru" },
+  sameAs: ["https://www.linkedin.com/company/bcp-consulting-sac"],
+});
 ---
 
 <MainLayout
-  title={`${service.title} en Perú`}
-  description={`${service.description} Software empresarial a medida para pymes y startups en Perú.`}
+  title="Desarrollo de Software a Medida en Perú | BCP Consulting"
+  description="Desarrollamos ERP, CRM, SaaS y sistemas web a medida para pymes y startups en Perú. +10 años de experiencia, proceso ágil en sprints y propiedad total del código. Rangos desde S/. 8,000."
 >
+  <Fragment slot="head">
+    <link rel="canonical" href="https://bcpconsulting.pe/servicios/software" />
+    <script type="application/ld+json" set:html={faqSchema} />
+    <script type="application/ld+json" set:html={serviceSchema} />
+    <script type="application/ld+json" set:html={organizationSchema} />
+    <meta property="og:url" content="https://bcpconsulting.pe/servicios/software" />
+    <meta property="og:type" content="website" />
+    <style>
+      :where(section[id]) { scroll-margin-top: 5rem; }
+      @media (prefers-reduced-motion: no-preference) {
+        html { scroll-behavior: smooth; }
+      }
+      /* Acordeones mobile */
+      .toc-details[open] .toc-chevron { transform: rotate(180deg); }
+      .pilar-details[open] .pilar-chevron { transform: rotate(180deg); }
+    </style>
+  </Fragment>
+
+  <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
   <HeroPage
-    title={service.title}
-    description={service.description}
+    title="Desarrollo de software a medida para automatizar procesos y centralizar tu operación"
+    description="Creamos sistemas web empresariales (ERP, CRM, SaaS, Logística) adaptados a tu negocio, con arquitectura escalable, seguridad de nivel bancario y soporte continuo desde Perú."
     breadcrumbs={[
       { label: "Inicio", href: "/" },
       { label: "Servicios", href: "/servicios" },
-      { label: service.title },
+      { label: "Software a Medida" },
     ]}
     image={bgSoftware}
-    imageAlt="Agencia de Software en Perú, desarrollamos sistemas personalizables a medida."
+    imageAlt="Equipo de desarrollo de software a medida en Perú — BCP Consulting"
   />
 
-  <MainContainer bgColor="bg-neutral-50" id="features-software">
-    <HeadingSection
-      tagline={service.tagline}
-      title="¿Qué Podemos Desarrollar para Ti?"
-      description="Cada sistema es diseñado específicamente para tus procesos, integrando las funcionalidades exactas que tu negocio necesita."
-      badgeVariant="secondary"
-    />
+  <main id="main-content">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {
-        service.features.map((f) => (
-          <div class="p-6 rounded-xl bg-white border border-neutral-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-            <h3 class="text-primary-700 font-bold text-lg mb-2">{f.title}</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">
-              {f.description}
-            </p>
-          </div>
-        ))
-      }
-    </div>
-  </MainContainer>
-
-  <MainContainer bgColor="bg-white" id="sectores-software">
-    <HeadingSection
-      tagline="Software por Sector"
-      title="Soluciones Especializadas por Industria"
-      description="Hemos desarrollado software para múltiples sectores. Conocemos los procesos de cada industria y los optimizamos con tecnología."
-      badgeVariant="complementary"
-    />
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {
-        sectors.map((s) => (
-          <div class="p-6 rounded-xl bg-neutral-50 border border-neutral-200 hover:border-secondary-300 hover:shadow-md transition-all duration-300">
-            <h3 class="text-primary-700 font-bold text-base mb-1">{s.name}</h3>
-            <p class="text-neutral-600 text-sm">{s.desc}</p>
-          </div>
-        ))
-      }
-    </div>
-  </MainContainer>
-
-  <section
-    class="py-20 px-[5%]"
-    style="background: linear-gradient(135deg, var(--color-primary-700), var(--color-secondary-800));"
-  >
-    <div class="max-w-200 mx-auto text-center flex flex-col items-center gap-6">
-      <h2
-        class="text-white font-extrabold text-balance"
-        style="font-size: clamp(1.75rem, 3vw + 0.5rem, 2.8rem);"
-      >
-        ¿Necesitas un Sistema a Medida?
-      </h2>
-      <p class="text-white/80 text-lg max-w-xl leading-relaxed">
-        Cuéntanos qué procesos quieres optimizar y diseñamos la solución ideal
-        para tu empresa. Asesoría gratuita.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center gap-4 mt-2">
-        <Button
-          href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20necesito%20un%20software%20a%20medida%20para%20mi%20empresa"
-          target="_blank"
-          variant="whatsapp"
-          size="lg"
-          icon="whatsapp"
-        >
-          Cotizar mi sistema
-        </Button>
-        <Button href="/contacto" variant="secondary" size="lg">
-          Formulario de contacto
-        </Button>
+    <!-- ── Tabla de contenidos ──────────────────────────────────────────── -->
+    <section aria-label="Tabla de contenidos" class="bg-theme-surface border-b border-theme-border">
+      <div class="max-w-350 mx-auto px-[5%] py-4">
+        <!-- Desktop: chips en línea -->
+        <nav aria-label="Navegación de secciones" class="hidden md:flex flex-wrap gap-2 items-center">
+          <span class="text-xs font-semibold text-theme-muted uppercase tracking-wide mr-2">Contenido:</span>
+          {toc.map((item) => (
+            <a
+              href={item.href}
+              class="inline-block px-3 py-1.5 rounded-full text-xs font-semibold bg-theme-page border border-theme-border text-theme-muted hover:border-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-400 transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <!-- Mobile: colapsable -->
+        <details class="toc-details md:hidden">
+          <summary class="flex items-center justify-between gap-2 cursor-pointer text-sm font-semibold text-theme-heading list-none select-none py-1">
+            <span>Tabla de contenidos</span>
+            <svg class="toc-chevron w-4 h-4 text-theme-muted transition-transform duration-200 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <nav aria-label="Navegación de secciones (móvil)" class="flex flex-col gap-1 mt-3 pl-1">
+            {toc.map((item) => (
+              <a href={item.href} class="text-sm text-secondary-600 dark:text-secondary-400 hover:underline py-0.5">
+                → {item.label}
+              </a>
+            ))}
+          </nav>
+        </details>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ── Definición AEO ───────────────────────────────────────────────── -->
+    <section
+      id="definicion"
+      aria-labelledby="definicion-heading"
+      class="py-10 bg-theme-page"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <div class="max-w-3xl p-5 rounded-2xl bg-secondary-50 dark:bg-white/5 border border-secondary-200 dark:border-white/10">
+          <p class="text-xs font-semibold uppercase tracking-wide text-secondary-600 dark:text-secondary-400 mb-1">Definición — ¿Qué es el software a medida?</p>
+          <p class="text-sm text-theme-muted leading-relaxed">
+            <strong class="text-theme-heading" id="definicion-heading">Software a medida</strong> es un sistema desarrollado específicamente para los flujos y requerimientos
+            de una organización, a diferencia del software empaquetado (como SAP o Salesforce genérico). Permite automatizar
+            procesos únicos, integrarse con sistemas existentes y escalar según el crecimiento del negocio.
+            Su costo refleja el alcance funcional, no un precio de catálogo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Tipos de software (tabla AEO) ───────────────────────────────── -->
+    <section
+      id="tipos-software"
+      aria-labelledby="tipos-heading"
+      class="py-16 lg:py-20 bg-primary-800"
+      style="scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <header class="max-w-3xl mx-auto text-center mb-10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-complementary-300 mb-2">Tabla comparativa — AEO</p>
+          <h2 id="tipos-heading" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">¿Qué tipo de sistema necesitas?</h2>
+          <p class="mt-3 text-sm text-white/70 leading-relaxed">
+            Cada tipo de software tiene un propósito diferente. Esta tabla te ayuda a identificar
+            cuál se ajusta mejor a tu operación y objetivos de negocio.
+          </p>
+        </header>
+        <!-- Tabla AEO semántica (desktop) -->
+        <div class="overflow-x-auto rounded-2xl border border-white/10">
+          <table class="w-full text-sm text-white/85 border-collapse">
+            <caption class="sr-only">Comparativa de tipos de software a medida: objetivo, módulos, tiempo estimado, integraciones y cuándo elegirlo</caption>
+            <thead class="bg-white/10 text-xs uppercase tracking-wide text-white/60">
+              <tr>
+                <th scope="col" class="px-4 py-3 text-left font-semibold min-w-37.5">Tipo de sistema</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold min-w-45">Objetivo principal</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold min-w-50">Módulos típicos</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold min-w-30">Tiempo est.</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold min-w-45">Integraciones</th>
+                <th scope="col" class="px-4 py-3 text-left font-semibold min-w-50">Recomendado si…</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tiposSoftware.map((f, i) => (
+                <tr class={`border-t border-white/10 ${i % 2 === 0 ? "bg-white/3" : "bg-transparent"} hover:bg-white/8 transition-colors`}>
+                  <td class="px-4 py-3 font-semibold text-complementary-300 align-top">{f.tipo}</td>
+                  <td class="px-4 py-3 text-white/75 align-top">{f.objetivo}</td>
+                  <td class="px-4 py-3 text-white/70 align-top text-xs leading-relaxed">{f.modulos}</td>
+                  <td class="px-4 py-3 text-white/80 align-top font-medium whitespace-nowrap">{f.tiempo}</td>
+                  <td class="px-4 py-3 text-white/65 align-top text-xs leading-relaxed">{f.integraciones}</td>
+                  <td class="px-4 py-3 text-white/70 align-top text-xs leading-relaxed">{f.recomendado}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-white/35 text-center">* Tiempos estimados para alcances típicos. Proyectos con integraciones complejas o migraciones pueden variar.</p>
+        <!-- Botón sección siguiente -->
+        <div class="mt-8 text-center">
+          <a href="#proceso" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-colors min-h-11">
+            Ver proceso de desarrollo ↓
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Proceso 7 fases ──────────────────────────────────────────────── -->
+    <section
+      id="proceso"
+      aria-labelledby="proceso-heading"
+      class="py-16 lg:py-20 bg-theme-surface"
+      style="scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <header class="max-w-2xl mb-10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-secondary-500 dark:text-secondary-400 mb-2">Proceso de trabajo</p>
+          <h2 id="proceso-heading" class="text-2xl md:text-3xl font-extrabold text-theme-heading leading-tight">Proceso real y entregables por fase</h2>
+          <p class="mt-3 text-sm text-theme-muted leading-relaxed">
+            No trabajamos en caja negra. Cada fase tiene objetivos claros, entregables concretos
+            y puntos de revisión con el cliente antes de avanzar.
+          </p>
+        </header>
+
+        <ol class="relative flex flex-col gap-0" aria-label="7 fases del proceso de desarrollo de software">
+          {fases.map((fase, i) => (
+            <li class="relative flex gap-4 md:gap-6 pb-8 last:pb-0">
+              {i < fases.length - 1 && (
+                <div class="absolute left-6 md:left-7 top-14 bottom-0 w-px bg-theme-border" aria-hidden="true"></div>
+              )}
+              <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl border-2 border-secondary-300/40 bg-secondary-500/5 flex items-center justify-center z-10">
+                <span class="text-xs font-mono font-bold text-secondary-500 dark:text-secondary-400">{fase.numero}</span>
+              </div>
+              <div class="flex-1 p-4 md:p-5 rounded-2xl border border-theme-border bg-theme-page">
+                <div class="flex flex-wrap items-start gap-2 mb-2">
+                  <h3 class="text-sm md:text-base font-bold text-theme-heading leading-snug">{fase.nombre}</h3>
+                  <span class="ml-auto text-xs text-theme-muted bg-theme-surface px-2 py-0.5 rounded-full border border-theme-border whitespace-nowrap">{fase.duracion}</span>
+                </div>
+                <p class="text-sm text-theme-muted leading-relaxed mb-3">{fase.desc}</p>
+                <details class="group pilar-details">
+                  <summary class="cursor-pointer text-xs font-semibold text-secondary-600 dark:text-secondary-400 hover:underline list-none flex items-center gap-1">
+                    <svg class="pilar-chevron w-3.5 h-3.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Ver entregables ({fase.entregables.length})
+                  </summary>
+                  <ul class="mt-2 flex flex-col gap-1.5 pl-2" role="list">
+                    {fase.entregables.map((e) => (
+                      <li class="flex items-start gap-2 text-xs text-theme-muted">
+                        <svg class="w-3.5 h-3.5 text-green-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {e}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div class="mt-8 p-4 rounded-xl bg-primary-50 dark:bg-white/5 border border-primary-200 dark:border-white/10">
+          <p class="text-xs text-theme-muted leading-relaxed">
+            <strong class="text-theme-heading">Propiedad del código:</strong> una vez entregado el proyecto y completado el pago,
+            el código fuente y todos los activos digitales son 100% de tu empresa. Sin licencias adicionales ni dependencia de BCP Consulting para operar.
+          </p>
+        </div>
+        <div class="mt-8 text-center">
+          <a href="#casos" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary-100 dark:bg-secondary-900/30 border border-secondary-300 dark:border-secondary-700 text-secondary-700 dark:text-secondary-300 text-sm font-semibold hover:bg-secondary-200 dark:hover:bg-secondary-900/50 transition-colors min-h-11">
+            Ver casos reales ↓
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Casos de estudio ─────────────────────────────────────────────── -->
+    <section
+      id="casos"
+      aria-labelledby="casos-heading"
+      class="py-16 lg:py-20 bg-primary-800"
+      style="scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <header class="max-w-2xl mb-10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-complementary-300 mb-2">Evidencia — Casos reales</p>
+          <h2 id="casos-heading" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Proyectos entregados y sus resultados</h2>
+          <p class="mt-3 text-sm text-white/70 leading-relaxed">
+            Cada proyecto parte de un problema real. Aquí mostramos el contexto, la solución técnica y los KPIs medibles obtenidos.
+          </p>
+        </header>
+        <div class="flex flex-col gap-6">
+          {casos.map((c) => (
+            <article class="rounded-2xl border border-white/15 bg-white/5 overflow-hidden" aria-label={`Caso de estudio: ${c.cliente}`}>
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+                <div class="lg:col-span-2 p-5 md:p-6 flex flex-col gap-4">
+                  <header>
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                      <h3 class="text-base font-bold text-white">{c.cliente}</h3>
+                      <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-green-500/15 text-green-400 border border-green-500/20">Caso real</span>
+                    </div>
+                    <p class="text-xs text-white/50 uppercase tracking-wide">{c.sector}</p>
+                  </header>
+                  <dl class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <div><dt class="font-semibold text-white/50 uppercase tracking-wide mb-0.5">Contexto</dt><dd class="text-white/75 leading-relaxed">{c.contexto}</dd></div>
+                    <div><dt class="font-semibold text-white/50 uppercase tracking-wide mb-0.5">Problema</dt><dd class="text-white/75 leading-relaxed">{c.problema}</dd></div>
+                    <div><dt class="font-semibold text-white/50 uppercase tracking-wide mb-0.5">Solución</dt><dd class="text-white/75 leading-relaxed">{c.solucion}</dd></div>
+                  </dl>
+                  <div class="flex flex-wrap items-center gap-4 pt-3 border-t border-white/10">
+                    <div><p class="text-[10px] text-white/40 uppercase tracking-wide mb-0.5">Stack</p><p class="text-xs font-mono text-complementary-300">{c.stack}</p></div>
+                    <div><p class="text-[10px] text-white/40 uppercase tracking-wide mb-0.5">Tiempo de entrega</p><p class="text-xs font-semibold text-white">{c.tiempo}</p></div>
+                    {c.url && <a href={c.url} target="_blank" rel="noopener noreferrer" class="ml-auto text-xs font-semibold text-complementary-300 hover:underline">Ver proyecto →</a>}
+                  </div>
+                </div>
+                <div class="lg:border-l border-t lg:border-t-0 border-white/10 p-5 md:p-6 bg-white/3 flex flex-col gap-3">
+                  <p class="text-[10px] font-semibold uppercase tracking-widest text-complementary-300 mb-1">Resultados medibles</p>
+                  <ul class="flex flex-col gap-2.5" role="list">
+                    {c.kpi.map((k) => (
+                      <li class="flex items-start gap-2 text-xs text-white/75 leading-relaxed">
+                        <svg class="w-3.5 h-3.5 text-complementary-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {k}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3 justify-center">
+          <a href="#estimacion" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-colors min-h-11">Ver precios ↓</a>
+          <a href={`https://api.whatsapp.com/send/?phone=${waPhone}&text=${waMsg}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-500 hover:bg-green-400 text-white text-sm font-semibold transition-colors min-h-11">Quiero algo similar →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Seguridad + Stack ────────────────────────────────────────────── -->
+    <section
+      id="seguridad"
+      aria-labelledby="seguridad-heading"
+      class="py-16 lg:py-20 bg-primary-900"
+      style="scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <header class="max-w-2xl mb-10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-complementary-300 mb-2">Seguridad y arquitectura</p>
+          <h2 id="seguridad-heading" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Lo que hacemos por defecto en cada proyecto</h2>
+          <p class="mt-3 text-sm text-white/70 leading-relaxed">No hay extras de seguridad: estas prácticas son estándar en todos nuestros proyectos.</p>
+        </header>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" role="list" aria-label="Prácticas de seguridad por defecto">
+          {seguridadItems.map((item) => (
+            <li class="flex flex-col gap-2 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/8 transition-colors">
+              <h3 class="text-sm font-bold text-white leading-snug">{item.titulo}</h3>
+              <p class="text-xs text-white/60 leading-relaxed">{item.desc}</p>
+            </li>
+          ))}
+        </ul>
+        <!-- Stack colapsable -->
+        <details class="mt-8 group pilar-details rounded-2xl border border-white/15 bg-white/5 overflow-hidden">
+          <summary class="flex items-center justify-between gap-3 cursor-pointer px-5 py-4 text-sm font-semibold text-white/80 hover:text-white list-none select-none">
+            <span>Ver stack tecnológico completo</span>
+            <svg class="pilar-chevron w-4 h-4 shrink-0 transition-transform text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-5 pt-3 border-t border-white/10">
+            <p class="text-xs text-white/50 mb-4 leading-relaxed">Seleccionamos el stack según requerimientos, escalabilidad y ecosistema existente de cada cliente.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {stackTecnologias.map((grupo) => (
+                <div>
+                  <p class="text-xs font-semibold text-complementary-300 uppercase tracking-wide mb-2">{grupo.categoria}</p>
+                  <ul class="flex flex-wrap gap-2" role="list">
+                    {grupo.techs.map((t) => (
+                      <li class="px-2.5 py-1 rounded-lg bg-white/8 border border-white/10 text-xs text-white/75 font-medium">{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </details>
+        <div class="mt-8 text-center">
+          <a href="#estimacion" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-colors min-h-11">Ver estimación de costos ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Estimación de costos ─────────────────────────────────────────── -->
+    <section
+      id="estimacion"
+      aria-labelledby="estimacion-heading"
+      class="py-16 lg:py-20 bg-theme-page"
+      style="scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <header class="max-w-2xl mb-10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-secondary-500 dark:text-secondary-400 mb-2">Inversión orientativa</p>
+          <h2 id="estimacion-heading" class="text-2xl md:text-3xl font-extrabold text-theme-heading leading-tight">¿Cuánto cuesta desarrollar software a medida en Perú?</h2>
+          <p class="mt-3 text-sm text-theme-muted leading-relaxed">
+            No existe un precio fijo porque cada proyecto es diferente. Pero podemos orientarte
+            con rangos reales según el tipo de solución. La propuesta detallada la enviamos tras la asesoría gratuita.
+          </p>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          {rangos.map((r) => (
+            <div class={`flex flex-col gap-3 p-5 rounded-2xl border ${r.color}`}>
+              <h3 class="text-sm font-bold text-theme-heading">{r.tipo}</h3>
+              <dl class="flex flex-col gap-2 text-xs">
+                <div><dt class="font-semibold text-theme-muted/70 uppercase tracking-wide text-[10px]">Desde</dt><dd class={`font-bold text-xl ${r.numColor}`}>{r.desde}</dd></div>
+                <div><dt class="font-semibold text-theme-muted/70 uppercase tracking-wide text-[10px]">Rango completo</dt><dd class="text-theme-muted font-medium">{r.rango}</dd></div>
+                <div><dt class="font-semibold text-theme-muted/70 uppercase tracking-wide text-[10px]">Tiempo estimado</dt><dd class="text-theme-muted font-medium">{r.tiempo}</dd></div>
+                <div><dt class="font-semibold text-theme-muted/70 uppercase tracking-wide text-[10px]">Alcance típico</dt><dd class="text-theme-muted">{r.alcance}</dd></div>
+                <div class="pt-2 border-t border-theme-border"><dt class="font-semibold text-theme-muted/70 uppercase tracking-wide text-[10px]">Ideal para</dt><dd class="text-theme-muted italic">{r.ideal}</dd></div>
+              </dl>
+            </div>
+          ))}
+        </div>
+        <!-- Factores que afectan el precio -->
+        <details class="pilar-details rounded-2xl border border-theme-border bg-theme-surface overflow-hidden">
+          <summary class="flex items-center justify-between gap-3 cursor-pointer px-5 py-4 text-sm font-semibold text-theme-heading list-none select-none group">
+            <span>¿Qué factores afectan el precio final?</span>
+            <svg class="pilar-chevron w-4 h-4 shrink-0 transition-transform text-theme-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-5 pt-2 border-t border-theme-border">
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2" role="list">
+              {factoresPrecio.map((f) => (
+                <li class="flex items-start gap-2 text-sm text-theme-muted">
+                  <svg class="w-4 h-4 text-secondary-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </details>
+        <p class="mt-5 text-xs text-theme-muted/60 text-center">
+          * Rangos en soles peruanos (PEN). Incluyen diseño UX/UI, desarrollo, pruebas y deploy inicial.
+          No incluyen dominio, hosting mensual ni mantenimiento post-entrega.
+        </p>
+        <div class="mt-8 text-center">
+          <a href="#faq" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary-100 dark:bg-secondary-900/30 border border-secondary-300 dark:border-secondary-700 text-secondary-700 dark:text-secondary-300 text-sm font-semibold hover:bg-secondary-200 dark:hover:bg-secondary-900/50 transition-colors min-h-11">Resolver dudas en FAQ ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Testimonios ──────────────────────────────────────────────────── -->
+    <section
+      id="testimonios"
+      aria-labelledby="testimonios-heading"
+      class="py-16 lg:py-20 bg-theme-surface"
+      style="scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <header class="max-w-2xl mx-auto text-center mb-10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-secondary-500 dark:text-secondary-400 mb-2">Lo que dicen nuestros clientes</p>
+          <h2 id="testimonios-heading" class="text-2xl md:text-3xl font-extrabold text-theme-heading leading-tight">Resultados reales de nuestros clientes</h2>
+          <p class="mt-3 text-sm text-theme-muted leading-relaxed">No solo ejecutamos proyectos: ayudamos a resolver problemas reales de negocio.</p>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {testimonios.map((t) => (
+            <article
+              class="flex flex-col gap-4 p-5 rounded-2xl border border-theme-border bg-theme-page hover:border-secondary-300 dark:hover:border-secondary-700 transition-colors"
+              aria-label={`Testimonio de ${t.nombre}`}
+            >
+              <blockquote class="flex-1">
+                <p class="text-sm text-theme-muted leading-relaxed italic">"{t.quote}"</p>
+              </blockquote>
+              <div class="text-xs border-t border-theme-border pt-3">
+                <span class="font-semibold text-secondary-600 dark:text-secondary-400 uppercase tracking-wide">Resultado:</span>
+                <span class="text-theme-muted ml-1 font-medium">{t.resultado}</span>
+              </div>
+              <footer class="flex items-center gap-3 border-t border-theme-border pt-3">
+                <div class="w-9 h-9 rounded-full bg-secondary-100 dark:bg-secondary-900/40 border border-secondary-200 dark:border-secondary-800 flex items-center justify-center text-sm font-bold text-secondary-700 dark:text-secondary-300 shrink-0" aria-hidden="true">
+                  {t.nombre.charAt(0)}
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-theme-heading">{t.nombre}</p>
+                  <p class="text-[10px] text-theme-muted">{t.rol} · {t.empresa}</p>
+                </div>
+              </footer>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ completo (12) ────────────────────────────────────────────── -->
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      class="py-16 lg:py-20 bg-theme-page"
+      style="scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto px-[5%]">
+        <header class="max-w-2xl mx-auto text-center mb-10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-secondary-500 dark:text-secondary-400 mb-2">Preguntas frecuentes</p>
+          <h2 id="faq-heading" class="text-2xl md:text-3xl font-extrabold text-theme-heading leading-tight">Todo lo que necesitas saber antes de empezar</h2>
+          <p class="mt-3 text-sm text-theme-muted leading-relaxed">
+            Propiedad del código, seguridad, plazos, precios, soporte y más.
+          </p>
+        </header>
+        <div class="max-w-3xl mx-auto flex flex-col gap-2" id="faq-list-pilar">
+          {faqs.map((faq) => (
+            <div class="rounded-xl border border-theme-border bg-theme-surface overflow-hidden">
+              <h3>
+                <button
+                  type="button"
+                  id={`pilar-${faq.id}-btn`}
+                  aria-expanded="false"
+                  aria-controls={`pilar-${faq.id}-panel`}
+                  class="pilar-faq-trigger w-full flex items-center justify-between gap-3 px-5 py-4 text-sm font-semibold text-theme-heading text-left hover:bg-theme-page transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-inset"
+                >
+                  <span>{faq.q}</span>
+                  <svg class="pilar-faq-icon w-4 h-4 shrink-0 text-theme-muted transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                id={`pilar-${faq.id}-panel`}
+                role="region"
+                aria-labelledby={`pilar-${faq.id}-btn`}
+                hidden
+                class="pilar-faq-panel px-5 pb-5 pt-1 text-sm text-theme-muted leading-relaxed border-t border-theme-border"
+              >
+                {faq.a}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-8 text-center">
+          <a href="#cotizar" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary-600 dark:bg-secondary-500 hover:bg-secondary-500 dark:hover:bg-secondary-400 text-white text-sm font-semibold transition-colors min-h-11">
+            Cotizar ahora ↓
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Final ────────────────────────────────────────────────────── -->
+    <section
+      id="cotizar"
+      aria-labelledby="cotizar-heading"
+      class="py-20 px-[5%]"
+      style="background: linear-gradient(135deg, var(--color-primary-700), var(--color-secondary-800)); scroll-margin-top: 5rem"
+    >
+      <div class="max-w-350 mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <!-- Columna izquierda -->
+          <div class="flex flex-col gap-6 text-white">
+            <header>
+              <span class="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold uppercase tracking-widest text-white/90 mb-3">Da el siguiente paso</span>
+              <h2 id="cotizar-heading" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">¿Necesitas un sistema a medida?</h2>
+              <p class="mt-3 text-sm text-white/75 leading-relaxed">
+                Cuéntanos qué procesos quieres optimizar y diseñamos la solución ideal para tu empresa.
+                Asesoría gratuita de 30 min sin compromiso.
+              </p>
+            </header>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a
+                href={`https://api.whatsapp.com/send/?phone=${waPhone}&text=${waMsg}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-green-500 hover:bg-green-400 text-white font-bold text-sm transition-colors min-h-11"
+              >
+                <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.103 1.523 5.83L.057 23.5l5.816-1.448A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.726.927.972-3.618-.234-.371A9.818 9.818 0 1112 21.818z"/></svg>
+                Hablar por WhatsApp
+              </a>
+              <a href="/contacto" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/30 hover:bg-white/20 text-white font-bold text-sm transition-colors min-h-11">
+                Formulario de contacto
+              </a>
+            </div>
+            <p class="text-xs text-white/40">RUC: {NAVIGATION.contact.ruc} · {NAVIGATION.contact.email}</p>
+          </div>
+
+          <!-- Columna derecha: formulario -->
+          <div class="bg-white/10 border border-white/20 backdrop-blur-sm rounded-2xl p-6">
+            <h3 class="text-base font-extrabold text-white mb-1">Cuéntanos tu proyecto</h3>
+            <p class="text-xs text-white/65 mb-5">Sin compromiso. Respondemos en menos de 24 h.</p>
+            <form id="pilar-contact-form" class="flex flex-col gap-3" novalidate>
+              <div class="flex flex-col gap-1">
+                <label for="pc-nombre" class="text-xs font-medium text-white/80">Nombre completo <span aria-hidden="true">*</span></label>
+                <input id="pc-nombre" type="text" name="nombre" autocomplete="name" required aria-required="true" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-complementary-400 focus:border-transparent transition" />
+              </div>
+              <div class="flex flex-col gap-1">
+                <label for="pc-wa" class="text-xs font-medium text-white/80">WhatsApp <span aria-hidden="true">*</span></label>
+                <input id="pc-wa" type="tel" name="celular" autocomplete="tel" required aria-required="true" placeholder="+51 9XX XXX XXX" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-complementary-400 focus:border-transparent transition" />
+              </div>
+              <div class="flex flex-col gap-1">
+                <label for="pc-proyecto" class="text-xs font-medium text-white/80">¿Qué necesitas desarrollar?</label>
+                <textarea id="pc-proyecto" name="mensaje" rows="3" placeholder="Ej: sistema de inventarios, CRM, plataforma SaaS…" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-complementary-400 focus:border-transparent transition resize-none"></textarea>
+              </div>
+              <button type="submit" class="w-full mt-1 px-6 py-3.5 rounded-full bg-complementary-500 hover:bg-complementary-400 text-white font-bold text-sm transition-colors min-h-11 flex items-center justify-center gap-2">
+                Enviar — Asesoría Gratis
+              </button>
+              <div id="pc-form-status" role="status" aria-live="polite" class="hidden text-xs text-center text-complementary-300 font-medium pt-1"></div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Back to top -->
+        <div class="mt-12 text-center">
+          <a href="#main-content" class="inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+            Volver al inicio
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </MainLayout>
+
+<script>
+  // ── FAQ acordeón accesible ─────────────────────────────────────────────
+  document.querySelectorAll<HTMLButtonElement>(".pilar-faq-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      const panelId = btn.getAttribute("aria-controls")!;
+      const panel = document.getElementById(panelId);
+      const icon = btn.querySelector<SVGElement>(".pilar-faq-icon");
+      btn.setAttribute("aria-expanded", String(!expanded));
+      if (panel) panel.hidden = expanded;
+      if (icon) icon.style.transform = expanded ? "" : "rotate(180deg)";
+    });
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); btn.click(); }
+    });
+  });
+
+  // ── Formulario contacto ────────────────────────────────────────────────
+  const pcForm = document.getElementById("pilar-contact-form") as HTMLFormElement | null;
+  const pcStatus = document.getElementById("pc-form-status");
+  pcForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (pcStatus) {
+      pcStatus.classList.remove("hidden");
+      pcStatus.textContent = "✓ Mensaje recibido. Te contactamos en menos de 24 h.";
+    }
+    setTimeout(() => pcForm?.reset(), 800);
+  });
+</script>

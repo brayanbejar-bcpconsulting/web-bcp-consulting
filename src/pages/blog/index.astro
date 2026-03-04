@@ -37,7 +37,7 @@ const categories = [
     breadcrumbs={[{ label: "Inicio", href: "/" }, { label: "Blog" }]}
   />
 
-  <MainContainer bgColor="bg-primary-800" class="pt-8!">
+  <MainContainer bgColor="bg-theme-page" class="pt-8!">
     <div class="blog-controls">
       {/* Buscador */}
       <div class="blog-search">
@@ -115,21 +115,21 @@ const categories = [
     {/* Mensaje de no resultados */}
     <div id="noResults" class="hidden text-center py-20">
       <div
-        class="w-16 h-16 bg-primary-700 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-400"
+        class="w-16 h-16 bg-theme-surface rounded-full flex items-center justify-center mx-auto mb-4 text-theme-muted"
       >
         <Icon name="search" size="32" />
       </div>
-      <h3 class="text-xl font-bold text-white mb-2">
+      <h3 class="text-xl font-bold text-theme-heading mb-2">
         No encontramos resultados
       </h3>
-      <p class="text-primary-300">
+      <p class="text-theme-muted">
         Intenta buscar con otros términos o cambia de categoría.
       </p>
     </div>
 
     {/* Contador + Ver más */}
     <div id="loadMoreArea" class="flex flex-col items-center gap-4 mt-12 pb-4">
-      <p id="counterText" class="text-primary-400 text-sm"></p>
+      <p id="counterText" class="text-theme-muted text-sm"></p>
       <button
         id="loadMoreBtn"
         class="hidden px-8 py-3 rounded-full bg-secondary-600 hover:bg-secondary-500 text-white font-semibold transition-colors"
@@ -148,23 +148,23 @@ const categories = [
   }
 
   .blog-search {
-    @apply flex items-center gap-3 bg-primary-900/60 border border-primary-600 rounded-full px-5 py-3 w-full md:w-96 shadow-sm focus-within:border-secondary-500 focus-within:ring-2 focus-within:ring-secondary-500/20 transition-all;
+    @apply flex items-center gap-3 bg-theme-surface border border-theme-border rounded-full px-5 py-3 w-full md:w-96 shadow-sm focus-within:border-secondary-500 focus-within:ring-2 focus-within:ring-secondary-500/20 transition-all;
   }
 
   .blog-search__input {
-    @apply w-full bg-transparent border-none outline-none text-primary-100 placeholder:text-primary-400 disabled:opacity-50;
+    @apply w-full bg-transparent border-none outline-none text-theme-heading placeholder:text-theme-subtle disabled:opacity-50;
   }
 
   .blog-tabs {
-    @apply flex items-center bg-primary-900/60 p-1 rounded-full w-full md:w-auto overflow-x-auto;
+    @apply flex items-center bg-theme-surface p-1 rounded-full w-full md:w-auto overflow-x-auto;
   }
 
   .blog-tab {
-    @apply flex-1 md:flex-none px-6 py-2.5 rounded-full text-sm font-semibold text-primary-300 transition-all;
+    @apply flex-1 md:flex-none px-6 py-2.5 rounded-full text-sm font-semibold text-theme-muted transition-all;
   }
 
   .blog-tab.active {
-    @apply bg-primary-700 text-white shadow-sm pointer-events-none;
+    @apply bg-secondary-500 text-white shadow-sm pointer-events-none;
   }
 
   .blog-categories {
@@ -172,11 +172,11 @@ const categories = [
   }
 
   .blog-category-btn {
-    @apply px-4 py-2 rounded-lg border border-primary-600 bg-primary-900/40 text-primary-300 text-sm font-medium transition-colors hover:border-secondary-500 hover:text-secondary-300 cursor-pointer;
+    @apply px-4 py-2 rounded-lg border border-theme-border bg-theme-card text-theme-muted text-sm font-medium transition-colors hover:border-secondary-500 hover:text-secondary-600 cursor-pointer;
   }
 
   .blog-category-btn.active {
-    @apply bg-primary-700 text-white border-primary-600 pointer-events-none;
+    @apply bg-secondary-500 text-white border-secondary-500 pointer-events-none;
   }
 
   .blog-grid {

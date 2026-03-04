@@ -11,7 +11,7 @@ import { SERVICES } from "@data/services";
 
 <MainContainer
   id="lista-servicios"
-  bgColor="bg-neutral-50"
+  bgColor="bg-theme-surface"
   ariaLabelledby="lista-servicios-titulo"
 >
   {
@@ -68,7 +68,7 @@ import { SERVICES } from "@data/services";
   }
 
   .service-detail__title {
-    @apply text-primary-700 font-extrabold;
+    @apply text-theme-heading font-extrabold;
     font-size: clamp(1.5rem, 2vw + 0.5rem, 2.2rem);
   }
 
@@ -77,19 +77,19 @@ import { SERVICES } from "@data/services";
   }
 
   .service-detail__desc {
-    @apply text-neutral-600 leading-relaxed text-base;
+    @apply text-theme-muted leading-relaxed text-base;
   }
 
   .feature-card {
-    @apply p-6 rounded-xl bg-white border border-neutral-200 transition-all duration-300
+    @apply p-6 rounded-xl bg-theme-card border border-theme-border transition-all duration-300
            hover:shadow-lg hover:shadow-primary-500/5 hover:-translate-y-0.5;
   }
 
   .feature-card__title {
-    @apply text-primary-700 font-bold text-base mb-2;
+    @apply text-theme-heading font-bold text-base mb-2;
   }
 
   .feature-card__desc {
-    @apply text-neutral-600 text-sm leading-relaxed;
+    @apply text-theme-muted text-sm leading-relaxed;
   }
 </style>

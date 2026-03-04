@@ -23,7 +23,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 <MainContainer
   id="galeria-portafolio"
-  bgColor="bg-neutral-50"
+  bgColor="bg-theme-surface"
   ariaLabelledby="galeria-titulo"
 >
   <div class="galeria-header">
@@ -76,7 +76,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 
   .galeria-filter {
     @apply px-5 py-2.5 rounded-full text-sm font-semibold
-           border border-neutral-300 bg-white text-neutral-600
+           border border-theme-border bg-theme-card text-theme-muted
            transition-all duration-300 cursor-pointer
            hover:border-secondary-400 hover:text-secondary-600;
   }

@@ -5,7 +5,7 @@ import { METHODOLOGY_STEPS } from "@data/team";
 
 <MainContainer
   id="metodologia"
-  bgColor="bg-white"
+  bgColor="bg-theme-page"
   ariaLabelledby="metodologia-titulo"
 >
   <HeadingSection
@@ -70,14 +70,14 @@ import { METHODOLOGY_STEPS } from "@data/team";
 
   .metodo-item__icon {
     @apply w-12 h-12 flex items-center justify-center rounded-xl
-           bg-primary-50 text-primary-600;
+           bg-theme-surface text-secondary-600;
   }
 
   .metodo-item__title {
-    @apply text-primary-700 font-bold text-lg;
+    @apply text-theme-heading font-bold text-lg;
   }
 
   .metodo-item__desc {
-    @apply text-neutral-600 leading-relaxed max-w-lg;
+    @apply text-theme-muted leading-relaxed max-w-lg;
   }
 </style>

@@ -7,6 +7,18 @@ interface Props extends HTMLAttributes<'button'> {
   size?: 'sm' | 'md' | 'lg' | 'none';
   href?: string;
   target?: '_blank' | '_self';
+  /** Sobrescribe o complementa el atributo rel del enlace */
+  rel?: string;
+  /** Activa descarga del recurso (solo aplica en enlaces) */
+  download?: string | boolean;
+  /** Tipo del elemento button cuando no es enlace */
+  type?: 'button' | 'submit' | 'reset';
+  /** Abre en nueva pestaña con rel="noopener noreferrer" automático */
+  external?: boolean;
+  /** Añade nofollow al rel (útil para enlaces patrocinados o no confiables) */
+  nofollow?: boolean;
+  /** Desactiva el botón/enlace */
+  disabled?: boolean;
   class?: string;
   withGlow?: boolean;
   icon?: string;
@@ -16,8 +28,14 @@ interface Props extends HTMLAttributes<'button'> {
 const { 
   variant = 'primary', 
   size = 'md', 
-  href, 
+  href,
   target,
+  rel,
+  download,
+  type,
+  external = false,
+  nofollow = false,
+  disabled = false,
   class: className,
   withGlow = false,
   icon,
@@ -70,21 +88,36 @@ const sizes = {
 };
 
 const Tag = href ? 'a' : 'button';
-const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+
+// target resuelto: external fuerza _blank
+const resolvedTarget = href ? (external ? '_blank' : target) : undefined;
+
+// rel compuesto: noopener/noreferrer en nueva pestaña + nofollow opcional + override explícito
+const computedRel = (() => {
+  const parts: string[] = [];
+  if (external || resolvedTarget === '_blank') parts.push('noopener', 'noreferrer');
+  if (nofollow) parts.push('nofollow');
+  return rel ?? (parts.length ? parts.join(' ') : undefined);
+})();
 
 // Efecto "Shine" (brillo que recorre el botón) para variantes con fondo
 const hasShine = ['primary', 'secondary', 'complementary', 'whatsapp'].includes(variant);
 ---
 
 <Tag
-  href={href}
-  target={href ? target : undefined}
-  rel={rel}
+  href={disabled ? undefined : href}
+  target={resolvedTarget}
+  rel={computedRel}
+  download={href ? download : undefined}
+  type={!href ? (type ?? 'button') : undefined}
+  disabled={!href ? disabled : undefined}
+  aria-disabled={href && disabled ? 'true' : undefined}
   class:list={[
     "relative inline-flex items-center justify-center rounded-full overflow-hidden transition-all duration-300 ease-out active:scale-95 cursor-pointer font-heading disabled:opacity-50 disabled:pointer-events-none",
     variants[variant],
     sizes[size],
     { "animate-pulse-glow": withGlow },
+    { "opacity-50 pointer-events-none": href && disabled },
     className
   ]}
   {...rest}

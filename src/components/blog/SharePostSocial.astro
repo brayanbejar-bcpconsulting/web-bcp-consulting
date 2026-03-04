@@ -47,8 +47,8 @@ const shares = [
 ];
 ---
 
-<div class="rounded-2xl border border-primary-700 bg-primary-900/60 p-6">
-  <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-primary-400">
+<div class="rounded-2xl border border-theme-border bg-theme-card p-6">
+  <h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-theme-muted">
     Compartir este artículo
   </h3>
   <div class="flex flex-wrap items-center gap-3">
@@ -59,7 +59,7 @@ const shares = [
         rel="noopener noreferrer"
         aria-label={`Compartir en ${s.label}`}
         class:list={[
-          "group flex items-center gap-2 rounded-full border border-primary-600 bg-primary-800 px-4 py-2 text-sm font-medium text-primary-300 transition-all duration-200",
+          "group flex items-center gap-2 rounded-full border border-theme-border bg-theme-surface px-4 py-2 text-sm font-medium text-theme-base transition-all duration-200",
           s.color,
         ]}
       >
@@ -73,7 +73,7 @@ const shares = [
       id="copy-link-btn"
       data-url={url}
       aria-label="Copiar enlace"
-      class="group flex items-center gap-2 rounded-full border border-primary-600 bg-primary-800 px-4 py-2 text-sm font-medium text-primary-300 transition-all duration-200 hover:border-secondary-500 hover:bg-secondary-900/40 hover:text-secondary-300"
+      class="group flex items-center gap-2 rounded-full border border-theme-border bg-theme-surface px-4 py-2 text-sm font-medium text-theme-base transition-all duration-200 hover:border-secondary-500 hover:bg-secondary-50 hover:text-secondary-600"
     >
       <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>

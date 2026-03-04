@@ -1,0 +1,189 @@
+---
+import { NAVIGATION } from "@utils/navigation";
+
+const waPhone = NAVIGATION.contact.phone.replace(/\D/g, "");
+const waMsg = encodeURIComponent(
+  "Hola BCP Consulting, vengo desde https://bcpconsulting.pe/landing-apps-moviles/. Quiero asesorarme para el desarrollo de una app móvil."
+);
+---
+
+<section
+  id="contacto"
+  aria-labelledby="cta-heading"
+  class="relative py-16 lg:py-24 bg-primary-700 text-white overflow-hidden"
+>
+  <!-- Fondo decorativo -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-complementary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 bg-secondary-500/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative max-w-350 mx-auto px-[5%]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+      <!-- Columna izquierda: copy + contactos rápidos -->
+      <div class="flex flex-col gap-6">
+        <header>
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold uppercase tracking-widest text-white/90 mb-4">
+            Da el siguiente paso
+          </span>
+          <h2 id="cta-heading" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">
+            Hablemos de tu app
+          </h2>
+          <p class="mt-3 text-sm text-white/75 leading-relaxed">
+            Primera asesoría completamente gratis. Analizamos tu idea, definimos el alcance del MVP y
+            te enviamos una propuesta por fases. Sin compromiso.
+          </p>
+        </header>
+
+        <!-- Canales de contacto rápido -->
+        <div class="flex flex-col gap-3">
+          <a
+            href={`https://api.whatsapp.com/send/?phone=${waPhone}&text=${waMsg}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 p-4 rounded-2xl bg-green-500 hover:bg-green-400 transition-colors duration-200 shadow-lg group min-h-[60px]"
+          >
+            <svg class="h-7 w-7 flex-shrink-0 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.103 1.523 5.83L.057 23.5l5.816-1.448A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.726.927.972-3.618-.234-.371A9.818 9.818 0 1112 21.818z" />
+            </svg>
+            <div class="text-left">
+              <p class="text-xs text-white/80">Escríbenos por</p>
+              <p class="text-sm font-bold text-white">WhatsApp — Respuesta rápida</p>
+            </div>
+            <svg class="ml-auto w-4 h-4 text-white/60 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+
+          <div class="grid grid-cols-2 gap-3">
+            <a
+              href={`tel:${NAVIGATION.contact.phone.replace(/\s/g, "")}`}
+              class="flex items-center gap-3 p-4 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/20 transition-colors duration-200 min-h-[56px]"
+            >
+              <svg class="h-5 w-5 flex-shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <div>
+                <p class="text-xs text-white/60">Llámanos</p>
+                <p class="text-xs font-bold text-white">{NAVIGATION.contact.phone}</p>
+              </div>
+            </a>
+            <a
+              href={`mailto:${NAVIGATION.contact.email}?subject=Cotización App Móvil`}
+              class="flex items-center gap-3 p-4 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/20 transition-colors duration-200 min-h-[56px]"
+            >
+              <svg class="h-5 w-5 flex-shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <div>
+                <p class="text-xs text-white/60">Correo</p>
+                <p class="text-xs font-bold text-white truncate">{NAVIGATION.contact.email}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Datos de confianza -->
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <p class="text-xs font-semibold uppercase tracking-widest text-complementary-300 mb-3">¿Qué incluye la asesoría gratuita?</p>
+          <ul class="flex flex-col gap-2" role="list">
+            {[
+              "Análisis de tu idea y público objetivo",
+              "Recomendación de plataforma (nativa, híbrida, PWA)",
+              "Estimado de funcionalidades para el MVP",
+              "Rango orientativo de costo y tiempo",
+              "Propuesta de fases sin compromiso",
+            ].map((item) => (
+              <li class="flex items-start gap-2 text-sm text-white/80">
+                <svg class="w-4 h-4 text-complementary-300 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p class="mt-3 text-xs text-white/35">RUC: {NAVIGATION.contact.ruc} · Lima, Perú</p>
+        </div>
+      </div>
+
+      <!-- Columna derecha: formulario corto embebido -->
+      <div>
+        <div class="bg-white/10 border border-white/20 backdrop-blur-sm rounded-2xl p-6 md:p-8">
+          <h3 class="text-lg font-extrabold text-white mb-1">Cotizar con alcance</h3>
+          <p class="text-xs text-white/65 mb-5">Sin compromiso. Te devolvemos alcance por fases en menos de 24 h.</p>
+
+          <form id="cta-form-apps" class="flex flex-col gap-3" novalidate>
+            <div class="flex flex-col gap-1">
+              <label for="cf-nombre" class="text-xs font-medium text-white/80">
+                Nombre completo <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="cf-nombre" type="text" name="nombre"
+                autocomplete="name" required aria-required="true"
+                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-complementary-400 focus:border-transparent transition"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label for="cf-whatsapp" class="text-xs font-medium text-white/80">
+                WhatsApp <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="cf-whatsapp" type="tel" name="celular"
+                autocomplete="tel" required aria-required="true"
+                placeholder="+51 9XX XXX XXX"
+                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-complementary-400 focus:border-transparent transition"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label for="cf-email" class="text-xs font-medium text-white/80">
+                Correo electrónico <span class="text-white/40">(opcional)</span>
+              </label>
+              <input
+                id="cf-email" type="email" name="email"
+                autocomplete="email"
+                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-complementary-400 focus:border-transparent transition"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label for="cf-proyecto" class="text-xs font-medium text-white/80">
+                ¿Qué necesitas desarrollar?
+              </label>
+              <textarea
+                id="cf-proyecto" name="mensaje" rows="4"
+                placeholder="Ej: app de reservas para clínica, app de ventas con catálogo y pagos, app interna para técnicos…"
+                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-complementary-400 focus:border-transparent transition resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full mt-1 px-6 py-3.5 rounded-full bg-complementary-500 hover:bg-complementary-400 text-white font-bold text-sm transition-colors duration-200 min-h-[44px] flex items-center justify-center gap-2"
+            >
+              Enviar — Asesoría Gratis
+            </button>
+
+            <div id="cta-form-status" role="status" aria-live="polite" class="hidden text-xs text-center text-complementary-300 font-medium pt-1"></div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("cta-form-apps") as HTMLFormElement | null;
+  const status = document.getElementById("cta-form-status");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (status) {
+      status.classList.remove("hidden");
+      status.textContent = "✓ Recibido. Te contactamos en menos de 24 h hábiles.";
+    }
+    setTimeout(() => form?.reset(), 1000);
+  });
+</script>

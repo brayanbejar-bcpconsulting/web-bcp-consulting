@@ -12,7 +12,7 @@ const { stack } = Astro.props;
 ---
 
 <div class="tech-stack my-12">
-  <h3 class="mb-6 font-bold text-xl text-primary-700">
+  <h3 class="mb-6 font-bold text-xl text-theme-heading">
     Por qué elegimos esta tecnología
   </h3>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -31,14 +31,14 @@ const { stack } = Astro.props;
   @reference "../../../styles/global.css";
 
   .tech-card {
-    @apply p-5 rounded-xl border border-neutral-200 bg-white shadow-sm;
+    @apply p-5 rounded-xl border border-theme-border bg-theme-card shadow-sm;
   }
 
   .tech-card__name {
-    @apply inline-block px-3 py-1 bg-primary-50 text-primary-700 rounded-lg text-sm font-bold mb-3;
+    @apply inline-block px-3 py-1 bg-theme-surface text-theme-heading rounded-lg text-sm font-bold mb-3;
   }
 
   .tech-card__desc {
-    @apply text-sm text-neutral-600 leading-relaxed m-0;
+    @apply text-sm text-theme-muted leading-relaxed m-0;
   }
 </style>

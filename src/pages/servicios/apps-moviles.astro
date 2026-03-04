@@ -52,7 +52,7 @@ import bgAppsMobiles from '@images/pages/services/apps-mobiles/bg-image-apps-mob
     imageAlt="Aplicaciones móviles para negocios y empresas que necesitan automatizar los procesos."
   />
 
-  <MainContainer bgColor="bg-neutral-50" id="features-apps">
+  <MainContainer bgColor="bg-theme-surface" id="features-apps">
     <HeadingSection
       tagline={service.tagline}
       title="¿Qué Incluye el Desarrollo de tu App?"
@@ -63,9 +63,9 @@ import bgAppsMobiles from '@images/pages/services/apps-mobiles/bg-image-apps-mob
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
         service.features.map((f) => (
-          <div class="p-6 rounded-xl bg-white border border-neutral-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-            <h3 class="text-primary-700 font-bold text-lg mb-2">{f.title}</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">
+          <div class="p-6 rounded-xl bg-theme-card border border-theme-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+            <h3 class="text-theme-heading font-bold text-lg mb-2">{f.title}</h3>
+            <p class="text-theme-muted text-sm leading-relaxed">
               {f.description}
             </p>
           </div>
@@ -74,7 +74,7 @@ import bgAppsMobiles from '@images/pages/services/apps-mobiles/bg-image-apps-mob
     </div>
   </MainContainer>
 
-  <MainContainer bgColor="bg-white" id="sectores-apps">
+  <MainContainer bgColor="bg-theme-page" id="sectores-apps">
     <HeadingSection
       tagline="Apps por Sector"
       title="Apps Móviles Diseñadas para tu Industria"
@@ -85,9 +85,9 @@ import bgAppsMobiles from '@images/pages/services/apps-mobiles/bg-image-apps-mob
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {
         appTypes.map((t) => (
-          <div class="p-6 rounded-xl bg-neutral-50 border border-neutral-200 hover:border-secondary-300 hover:shadow-md transition-all duration-300">
-            <h3 class="text-primary-700 font-bold text-base mb-1">{t.name}</h3>
-            <p class="text-neutral-600 text-sm">{t.desc}</p>
+          <div class="p-6 rounded-xl bg-theme-card border border-theme-border hover:border-secondary-300 hover:shadow-md transition-all duration-300">
+            <h3 class="text-theme-heading font-bold text-base mb-1">{t.name}</h3>
+            <p class="text-theme-muted text-sm">{t.desc}</p>
           </div>
         ))
       }

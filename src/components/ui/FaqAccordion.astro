@@ -62,7 +62,7 @@ const { faqs, class: className } = Astro.props;
   }
 
   .faq-accordion__item {
-    @apply rounded-xl border border-neutral-200 bg-white
+    @apply rounded-xl border border-theme-border bg-theme-card
            transition-all duration-300
            hover:border-secondary-300;
   }
@@ -73,7 +73,7 @@ const { faqs, class: className } = Astro.props;
 
   .faq-accordion__question {
     @apply flex items-center justify-between gap-4 px-6 py-5
-           cursor-pointer font-semibold text-primary-700
+           cursor-pointer font-semibold text-theme-heading
            list-none select-none;
     font-size: clamp(0.95rem, 1vw + 0.3rem, 1.1rem);
   }
@@ -83,7 +83,7 @@ const { faqs, class: className } = Astro.props;
   }
 
   .faq-accordion__chevron {
-    @apply flex-shrink-0 text-neutral-400 transition-transform duration-300;
+    @apply flex-shrink-0 text-theme-subtle transition-transform duration-300;
   }
 
   .faq-accordion__item[open] .faq-accordion__chevron {
@@ -92,6 +92,6 @@ const { faqs, class: className } = Astro.props;
   }
 
   .faq-accordion__answer {
-    @apply px-6 pb-5 text-neutral-600 leading-relaxed text-base;
+    @apply px-6 pb-5 text-theme-muted leading-relaxed text-base;
   }
 </style>

@@ -163,29 +163,41 @@ const jsonLd = {
   </section>
 
   <!-- ── Article body ───────────────────────────────────────────── -->
-  <div class="bg-primary-800 py-20">
+  <div class="bg-theme-page py-20">
     <div class="mx-auto max-w-4xl px-6">
 
       <!-- Article card -->
       <article
-        class="relative bg-primary-800 ring-1 ring-primary-900/10"
+        class="relative"
       >
         <div
           class="prose prose-lg max-w-none
-            prose-headings:font-heading prose-headings:font-bold prose-headings:text-white
+            prose-headings:font-heading prose-headings:font-bold
+            prose-headings:text-primary-900 dark:prose-headings:text-white
             prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-2xl md:prose-h2:text-3xl
             prose-h3:mt-8 prose-h3:mb-3
-            prose-p:text-slate-300 prose-p:leading-relaxed
-            prose-a:text-secondary-400 prose-a:no-underline hover:prose-a:text-secondary-300 hover:prose-a:underline
-            prose-strong:text-slate-100
-            prose-ul:text-slate-300 prose-ol:text-slate-300
+            prose-p:text-neutral-700 dark:prose-p:text-slate-300 prose-p:leading-relaxed
+            prose-a:text-secondary-600 dark:prose-a:text-secondary-400 prose-a:no-underline hover:prose-a:text-secondary-500 dark:hover:prose-a:text-secondary-300 hover:prose-a:underline
+            prose-strong:text-primary-950 dark:prose-strong:text-slate-100
+            prose-ul:text-neutral-700 dark:prose-ul:text-slate-300
+            prose-ol:text-neutral-700 dark:prose-ol:text-slate-300
             prose-li:my-1
-            prose-blockquote:border-l-secondary-500 prose-blockquote:text-slate-300 prose-blockquote:bg-primary-900/60 prose-blockquote:not-italic prose-blockquote:rounded-r-lg prose-blockquote:py-2 prose-blockquote:pr-4
-            prose-code:text-secondary-300 prose-code:bg-primary-900 prose-code:rounded prose-code:px-1 prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
-            prose-pre:bg-primary-950 prose-pre:text-slate-200 prose-pre:ring-1 prose-pre:ring-white/10
+            prose-blockquote:border-l-secondary-500
+            prose-blockquote:text-neutral-700 dark:prose-blockquote:text-slate-300
+            prose-blockquote:bg-neutral-50 dark:prose-blockquote:bg-primary-900/60
+            prose-blockquote:not-italic prose-blockquote:rounded-r-lg prose-blockquote:py-2 prose-blockquote:pr-4
+            prose-code:text-secondary-600 dark:prose-code:text-secondary-300
+            prose-code:bg-neutral-100 dark:prose-code:bg-primary-900
+            prose-code:rounded prose-code:px-1 prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+            prose-pre:bg-neutral-50 dark:prose-pre:bg-primary-950
+            prose-pre:text-neutral-800 dark:prose-pre:text-slate-200
+            prose-pre:ring-1 prose-pre:ring-black/10 dark:prose-pre:ring-white/10
             prose-img:rounded-xl prose-img:shadow-md prose-img:my-6
-            prose-hr:border-primary-700
-            prose-table:text-slate-300 prose-th:text-slate-100 prose-th:border-primary-700 prose-td:border-primary-700"
+            prose-hr:border-neutral-200 dark:prose-hr:border-primary-700
+            prose-table:text-neutral-700 dark:prose-table:text-slate-300
+            prose-th:text-primary-900 dark:prose-th:text-slate-100
+            prose-th:border-neutral-200 dark:prose-th:border-primary-700
+            prose-td:border-neutral-200 dark:prose-td:border-primary-700"
         >
           <slot />
         </div>
@@ -200,7 +212,7 @@ const jsonLd = {
       <div class="mt-10 flex justify-center">
         <a
           href="/blog"
-          class="inline-flex items-center gap-2 rounded-full border border-primary-600 bg-primary-700/50 px-6 py-2.5 text-sm font-medium text-primary-200 shadow-sm transition-all hover:bg-primary-700 hover:text-white hover:border-primary-500 hover:shadow-lg"
+          class="inline-flex items-center gap-2 rounded-full border border-theme-border bg-theme-card px-6 py-2.5 text-sm font-medium text-theme-base shadow-sm transition-all hover:bg-theme-surface hover:text-theme-heading hover:border-secondary-500 hover:shadow-lg"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>

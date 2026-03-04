@@ -5,7 +5,7 @@ import { COMPANY_INFO } from "@data/team";
 
 <MainContainer
   id="mision-vision"
-  bgColor="bg-white"
+  bgColor="bg-theme-page"
   ariaLabelledby="mision-vision-titulo"
 >
   <HeadingSection
@@ -31,12 +31,12 @@ import { COMPANY_INFO } from "@data/team";
   @reference "../../../styles/global.css";
 
   .mv-card {
-    @apply p-8 rounded-2xl border border-neutral-200 bg-neutral-50
+    @apply p-8 rounded-2xl border border-theme-border bg-theme-card
            transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
   }
 
   .mv-card--vision {
-    @apply bg-primary-950 border-primary-800;
+    @apply bg-theme-surface border-theme-border;
   }
 
   .mv-card__label {
@@ -44,10 +44,10 @@ import { COMPANY_INFO } from "@data/team";
   }
 
   .mv-card__text {
-    @apply text-neutral-600 leading-relaxed;
+    @apply text-theme-muted leading-relaxed;
   }
 
   .mv-card--vision .mv-card__text {
-    @apply text-neutral-300;
+    @apply text-theme-muted;
   }
 </style>

@@ -1,0 +1,162 @@
+---
+const rangos = [
+  {
+    tipo: "App interna / operaciones",
+    rango: "$4,000 – $10,000",
+    descripcion: "Formularios offline, gestión de visitas, reportes. Uso interno (no requiere publicación en store).",
+    tiempo: "8–12 semanas",
+    incluye: ["Android o iOS", "Panel web admin básico", "API REST", "Hasta 3 roles de usuario"],
+    color: "border-secondary-300 dark:border-secondary-700",
+    badge: "bg-secondary-100 dark:bg-secondary-900/40 text-secondary-700 dark:text-secondary-300",
+  },
+  {
+    tipo: "App de reservas / citas",
+    rango: "$5,000 – $15,000",
+    descripcion: "Agenda online, disponibilidad en tiempo real, pagos y recordatorios automáticos.",
+    tiempo: "10–14 semanas",
+    incluye: ["iOS + Android", "Notificaciones push", "Integración de pagos", "Panel de gestión web"],
+    color: "border-primary-400 dark:border-primary-600",
+    badge: "bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300",
+  },
+  {
+    tipo: "App de ventas / e-commerce",
+    rango: "$8,000 – $22,000",
+    descripcion: "Catálogo, carrito, pasarela de pagos, tracking y fidelización. Publicación en App Store y Play Store.",
+    tiempo: "12–18 semanas",
+    incluye: ["iOS + Android", "Pasarela de pagos", "Gestión de pedidos", "Push + analytics"],
+    color: "border-complementary-400 dark:border-complementary-600",
+    badge: "bg-complementary-100 dark:bg-complementary-900/40 text-complementary-700 dark:text-complementary-300",
+    destacado: true,
+  },
+  {
+    tipo: "Marketplace / Plataforma SaaS",
+    rango: "$20,000 – $60,000+",
+    descripcion: "Multi-vendor, perfiles dobles, pagos con split, suscripciones recurrentes. Alta complejidad técnica.",
+    tiempo: "20–32 semanas",
+    incluye: ["iOS + Android + Web", "Multi-tenant", "Billing recurrente", "Analytics avanzado"],
+    color: "border-neutral-300 dark:border-neutral-600",
+    badge: "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300",
+  },
+];
+
+const factores = [
+  "Número de plataformas (iOS, Android, ambas)",
+  "Autenticación (email, social login, biometría, SSO)",
+  "Integración de pagos (Culqi, Stripe, Mercado Pago, Yape/Plin)",
+  "Modo offline y sincronización de datos",
+  "Roles y permisos complejos (3+ tipos de usuario)",
+  "Panel de administración web incluido",
+  "Notificaciones push + SMS + email transaccional",
+  "Integraciones con ERP/CRM/SAP existentes",
+  "Analytics y dashboards avanzados",
+  "Multi-idioma / multi-moneda",
+  "Funciones de IA (recomendaciones, chatbot, reconocimiento)",
+  "Publicación y aprobación en App Store / Play Store",
+];
+
+const reducirCosto = [
+  "Definir el MVP mínimo viable: lanzar con las 3–5 funciones que generan el 80% del valor.",
+  "Elegir React Native o Flutter para compartir codebase iOS/Android (ahorro 30–40% vs nativas separadas).",
+  "Usar backend-as-a-service (Firebase/Supabase) para auth, base de datos y storage en fases iniciales.",
+  "Postergar el panel admin web al MVP+1 si los usuarios son internos con acceso directo.",
+  "Diseño basado en un sistema de componentes existente (Material / iOS HIG) para reducir horas de UX.",
+];
+---
+
+<section
+  id="precios"
+  aria-labelledby="precios-heading"
+  class="py-16 lg:py-24 bg-white dark:bg-neutral-950"
+>
+  <div class="max-w-350 mx-auto px-[5%]">
+
+    <header class="mb-12 text-center">
+      <span class="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">
+        Estimación orientativa · AEO
+      </span>
+      <h2 id="precios-heading" class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white leading-tight">
+        ¿Cuánto cuesta una app móvil a medida?
+      </h2>
+      <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+        Rangos reales por tipo de proyecto. Sin el clásico "depende" vacío.
+        Los precios varían según funcionalidades, integraciones, plataformas y calidad esperada.
+      </p>
+    </header>
+
+    <!-- Tabla de rangos por tipo -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 mb-12">
+      {rangos.map((r) => (
+        <div class={`relative flex flex-col rounded-2xl border-2 ${r.color} ${r.destacado ? "shadow-lg scale-[1.02]" : ""} bg-white dark:bg-neutral-900 overflow-hidden transition-shadow duration-300 hover:shadow-md`}>
+          {r.destacado && (
+            <div class="bg-complementary-500 text-white text-xs font-bold text-center py-1.5 tracking-wider uppercase">
+              Más solicitado
+            </div>
+          )}
+          <div class="flex flex-col gap-3 p-5 flex-1">
+            <span class={`self-start px-2 py-0.5 rounded-full text-xs font-semibold ${r.badge}`}>
+              {r.tipo}
+            </span>
+            <p class="text-2xl font-extrabold text-neutral-900 dark:text-white leading-none">{r.rango}</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 font-medium">⏱ {r.tiempo}</p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{r.descripcion}</p>
+            <ul class="flex flex-col gap-1.5 mt-auto pt-3 border-t border-neutral-100 dark:border-neutral-800" role="list">
+              {r.incluye.map((inc) => (
+                <li class="flex items-center gap-2 text-xs text-neutral-700 dark:text-neutral-300">
+                  <svg class="w-3.5 h-3.5 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  {inc}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+
+      <!-- Factores que afectan el precio -->
+      <div class="bg-neutral-50 dark:bg-neutral-800/60 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
+        <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+          <span aria-hidden="true">🎚️</span>
+          Factores que afectan el costo
+        </h3>
+        <ul class="flex flex-col gap-2" role="list">
+          {factores.map((f) => (
+            <li class="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+              <span class="flex-shrink-0 text-neutral-400 mt-1" aria-hidden="true">·</span>
+              {f}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Cómo reducir costo sin perder valor -->
+      <div class="bg-green-50 dark:bg-green-900/10 rounded-2xl border border-green-100 dark:border-green-800/40 p-6">
+        <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+          <span aria-hidden="true">💡</span>
+          Cómo reducir costo sin perder valor
+        </h3>
+        <ul class="flex flex-col gap-3" role="list">
+          {reducirCosto.map((r) => (
+            <li class="flex items-start gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              {r}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="mt-6 text-xs text-neutral-400 dark:text-neutral-500 text-center">
+      Los rangos son orientativos en USD y no incluyen IVP/IGV peruano.
+      El precio final depende del alcance definido en la etapa de Descubrimiento.
+      Ofrecemos pagos fraccionados por fases aprobadas.
+    </p>
+
+  </div>
+</section>
