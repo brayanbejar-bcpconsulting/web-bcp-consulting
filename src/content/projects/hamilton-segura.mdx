@@ -1,33 +1,124 @@
 ---
 title: "Hamilton Segura"
-description: "Web profesional para marca personal con portafolio, blog y sistema de contacto integrado."
+description: "Sitio web de marca personal para profesional y consultor especializado: presentación de trayectoria, servicios, experiencia y contacto directo con clientes potenciales."
+tagline: "Tu expertise, visible y posicionado. Una web profesional que genera confianza y atrae clientes de alto valor."
 category: "web"
 client: "Hamilton Segura"
-role: "Branding Web"
+role: "Estrategia de Marca Personal, Diseño UX/UI & Desarrollo Web"
 duration: "2 semanas"
 year: 2023
-technologies: ["WordPress", "Elementor", "SEO"]
+technologies: ["WordPress", "Elementor", "PHP"]
 coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop"
 url: "https://hamiltonsegura.com/"
 results:
-  - "Posicionamiento de marca personal"
+  - "Presencia digital profesional que posiciona al consultor como experto en su sector"
+  - "Canal propio de captación de clientes independiente de redes sociales"
+features:
+  - title: "Presentación profesional"
+    description: "Sección de perfil y trayectoria con un diseño que transmite autoridad, credibilidad y experiencia desde el primer segundo de visita."
+    icon: "user"
+  - title: "Sección de servicios"
+    description: "Descripción clara y estructurada de cada servicio ofrecido para que el cliente potencial entienda exactamente en qué puede ayudarle el consultor."
+    icon: "star"
+  - title: "Contenido informativo"
+    description: "Espacio para compartir artículos, casos de estudio o reflexiones del sector que refuerzan el posicionamiento como experto y mejoran el SEO."
+    icon: "newspaper"
+  - title: "Contacto directo con clientes"
+    description: "Formulario de contacto y canales directos integrados para que los clientes potenciales puedan iniciar una conversación sin fricciones."
+    icon: "mail"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  projectTitle="Hamilton Segura"
+  websiteUrl="https://hamiltonsegura.com/"
+>
+  Hamilton Segura es un profesional y consultor especializado que necesitaba trasladar su reputación y experiencia del entorno presencial al digital. El objetivo no era solo tener una web, sino construir un **activo de marca personal** que comunicara su nivel de expertise y generara confianza antes de la primera llamada.
+
+  Diseñamos y desarrollamos un sitio web profesional de alto impacto visual centrado en tres pilares: demostrar autoridad en su sector, presentar sus servicios con claridad y facilitar el contacto con clientes de alto valor. Todo ello con un diseño minimalista y typografía de gran presencia que proyecta la imagen correcta.
+
+  El resultado es una **plataforma digital propia** — independiente de los algoritmos de LinkedIn o Instagram — que posiciona a Hamilton en búsquedas de Google y funciona como carta de presentación permanente ante cualquier oportunidad profesional o propuesta de colaboración.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
   <div slot="problem">
-    <p>
-      Hamilton buscaba establecer un portafolio de marca personal para atraer
-      propuestas como Freelancer de alto valor e invitaciones a conferencias,
-      escapando de las redes sociales genéricas.
-    </p>
+    Los profesionales y consultores con gran experiencia suelen enfrentarse a una paradoja: cuanto más trabajan, menos tiempo tienen para construir la presencia digital que les permitiría atraer mejores oportunidades de forma pasiva.
+
+    - Sin web propia, la única presencia digital disponible son redes sociales genéricas donde el profesional compite en el mismo algoritmo que cualquier usuario, dificultando diferenciarse como experto.
+    - La falta de un espacio controlado y propio impide mostrar la trayectoria completa, los casos de éxito y los servicios con el nivel de detalle y diseño que una propuesta de consultoría de alto valor requiere.
+    - Los clientes potenciales no pueden encontrarle en Google cuando buscan su especialidad, lo que limita el crecimiento a la red de contactos existente sin capacidad de escalar.
+    - Sin formulario de captación integrado, cada oportunidad depende de que el cliente dé el primer paso en un canal externo, generando fricción y pérdida de leads cualificados.
   </div>
+
   <div slot="solution">
-    <p>
-      Trabajamos un Look & Feel hiperminimalista centrado 100% en sus logros
-      (Casos de estudio, Testimonios e historial visual en el rubro) usando
-      micro interacciones y grandes titulares asimétricos para generar impacto.
-    </p>
+    Desarrollamos un **sitio web de marca personal estratégico** con diseño minimalista de alto impacto que posiciona a Hamilton como el referente que ya es en su sector:
+
+    - Diseño hiperminimalista con tipografía de gran presencia, asimetría visual calculada y microinteracciones que proyectan profesionalismo y diferencian del estándar de webs genéricas.
+    - Sección de servicios estructurada para comunicar la propuesta de valor de cada oferta con claridad, respondiendo las preguntas que el cliente tiene antes incluso de pedirlas.
+    - Espacio de contenido propio (artículos, casos de estudio, reflexiones de sector) que refuerza el posicionamiento como experto y genera tráfico orgánico en Google de forma continua.
+    - Arquitectura SEO on-page optimizada para que el sitio aparezca en búsquedas relevantes a su especialidad, generando oportunidades de contacto sin depender de publicidad.
+    - Formulario de contacto directo que convierte el interés del visitante en una conversación real, minimizando la fricción entre el descubrimiento y el primer mensaje.
   </div>
 </ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "24 / 7", label: "Presencia digital activa e independiente" },
+    { value: "SEO",    label: "Posicionamiento en búsquedas de su especialidad" },
+    { value: "100%",   label: "Control total de la narrativa de marca" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades Principales"
+  features={[
+    {
+      title: "Presentación profesional",
+      description: "Sección de perfil y trayectoria que transmite autoridad, credibilidad y experiencia desde el primer segundo de visita.",
+      icon: "user",
+    },
+    {
+      title: "Sección de servicios",
+      description: "Descripción clara y estructurada de cada servicio para que el cliente potencial entienda exactamente cómo puede ayudarle el consultor.",
+      icon: "star",
+    },
+    {
+      title: "Contenido informativo",
+      description: "Espacio para artículos, casos de estudio o reflexiones que refuerzan el posicionamiento como experto y mejoran el SEO orgánico.",
+      icon: "newspaper",
+    },
+    {
+      title: "Contacto directo con clientes",
+      description: "Formulario y canales directos integrados para que los clientes potenciales inicien una conversación sin fricciones.",
+      icon: "mail",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "WordPress",
+      description:
+        "CMS que permite a Hamilton actualizar su contenido, publicar nuevos artículos y mantener sus servicios al día sin depender de un desarrollador para cada cambio.",
+    },
+    {
+      name: "Elementor",
+      description:
+        "Constructor visual que hace posible el diseño asimétrico de alto impacto, las microinteracciones y los layouts personalizados que diferencian la web del estándar corporativo genérico.",
+    },
+    {
+      name: "PHP + SEO On-page",
+      description:
+        "Base técnica sólida con metadatos optimizados, estructura semántica y velocidad de carga que garantiza un posicionamiento correcto en Google desde el primer día.",
+    },
+  ]}
+/>

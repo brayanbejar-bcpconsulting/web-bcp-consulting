@@ -1,61 +1,44 @@
 ---
+import Icon from "@components/ui/Icon.astro";
+
 interface Props {
   problemTitle?: string;
   solutionTitle?: string;
 }
 
-const { problemTitle = "El Reto", solutionTitle = "Nuestra Solución" } =
-  Astro.props;
+const {
+  problemTitle = "El Reto",
+  solutionTitle = "Nuestra Solución",
+} = Astro.props;
 ---
 
-<div class="problem-solution">
-  <div class="problem-solution__col problem-solution__col--problem">
-    <div class="problem-solution__header">
-      <div class="problem-solution__icon">
-        <svg
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          width="24"
-          height="24"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-          ></path></svg
-        >
+<section class="problem-solution" aria-label="Problema y solución del proyecto">
+  <!-- Columna Problema -->
+  <article class="ps-col ps-col--problem">
+    <header class="ps-col__header">
+      <div class="ps-col__icon" aria-hidden="true">
+        <Icon name="alert-triangle" size={22} />
       </div>
-      <h3>{problemTitle}</h3>
-    </div>
-    <div class="problem-solution__content">
+      <h3 class="ps-col__heading">{problemTitle}</h3>
+    </header>
+    <div class="ps-col__content">
       <slot name="problem" />
     </div>
-  </div>
+  </article>
 
-  <div class="problem-solution__col problem-solution__col--solution">
-    <div class="problem-solution__header">
-      <div class="problem-solution__icon">
-        <svg
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          width="24"
-          height="24"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
-        >
+  <!-- Columna Solución -->
+  <article class="ps-col ps-col--solution">
+    <header class="ps-col__header">
+      <div class="ps-col__icon" aria-hidden="true">
+        <Icon name="check-circle" size={22} />
       </div>
-      <h3>{solutionTitle}</h3>
-    </div>
-    <div class="problem-solution__content">
+      <h3 class="ps-col__heading">{solutionTitle}</h3>
+    </header>
+    <div class="ps-col__content">
       <slot name="solution" />
     </div>
-  </div>
-</div>
+  </article>
+</section>
 
 <style>
   @reference "../../../styles/global.css";
@@ -64,43 +47,45 @@ const { problemTitle = "El Reto", solutionTitle = "Nuestra Solución" } =
     @apply grid grid-cols-1 md:grid-cols-2 gap-8 my-12;
   }
 
-  .problem-solution__col {
+  .ps-col {
     @apply p-6 lg:p-8 rounded-2xl border-2;
   }
 
-  .problem-solution__col--problem {
-    @apply bg-red-50/50 border-red-100;
+  /* Problema */
+  .ps-col--problem {
+    @apply bg-red-50/50 border-red-100 dark:bg-red-950/20 dark:border-red-900/40;
   }
-  .problem-solution__col--problem .problem-solution__icon {
-    @apply bg-red-100 text-red-600;
+  .ps-col--problem .ps-col__icon {
+    @apply bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-400;
   }
-  .problem-solution__col--problem h3 {
-    @apply text-red-900;
-  }
-
-  .problem-solution__col--solution {
-    @apply bg-success-50/50 border-success-100;
-  }
-  .problem-solution__col--solution .problem-solution__icon {
-    @apply bg-success-100 text-success-600;
-  }
-  .problem-solution__col--solution h3 {
-    @apply text-success-900;
+  .ps-col--problem .ps-col__heading {
+    @apply text-red-900 dark:text-red-300;
   }
 
-  .problem-solution__header {
+  /* Solución */
+  .ps-col--solution {
+    @apply bg-success-50/50 border-success-100 dark:bg-success-950/20 dark:border-success-900/40;
+  }
+  .ps-col--solution .ps-col__icon {
+    @apply bg-success-100 text-success-600 dark:bg-success-900/40 dark:text-success-400;
+  }
+  .ps-col--solution .ps-col__heading {
+    @apply text-success-900 dark:text-success-300;
+  }
+
+  .ps-col__header {
     @apply flex items-center gap-4 mb-4;
   }
 
-  .problem-solution__icon {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0;
+  .ps-col__icon {
+    @apply w-11 h-11 rounded-xl flex items-center justify-center shrink-0;
   }
 
-  .problem-solution__header h3 {
+  .ps-col__heading {
     @apply font-bold text-xl m-0;
   }
 
-  .problem-solution__content {
+  .ps-col__content {
     @apply text-theme-muted leading-relaxed space-y-4;
   }
 </style>

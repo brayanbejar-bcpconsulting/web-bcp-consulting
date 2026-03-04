@@ -1,35 +1,118 @@
 ---
 title: "Vivir Travel Adventure"
-description: "Web de agencia de viajes con sistema de reservas, galería de destinos y blog de contenidos para SEO internacional."
+description: "Plataforma web turística para agencia de viajes y experiencias de aventura: catálogo de destinos, paquetes detallados, contenido visual inspirador y contacto directo para reservas desde España y el mundo."
+tagline: "Convierte la inspiración en reserva. Una plataforma turística que muestra destinos y lleva al viajero desde el sueño hasta el pago."
 category: "web"
 client: "Vivir Travel"
-role: "Desarrollo E-Commerce y Blog"
+role: "Estrategia Digital, Diseño UX/UI & Desarrollo Web Turístico"
 duration: "3 meses"
 year: 2024
-technologies: ["WordPress", "WooCommerce", "SEO"]
+technologies: ["WordPress", "WooCommerce", "PHP", "MySQL"]
 coverImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&h=600&fit=crop"
 url: "https://vivirtraveladventure.es/"
 results:
-  - "Generación de reservas internacionales en automático"
+  - "Canal de ventas directo al turista internacional eliminando dependencia de intermediarios"
+  - "Blog posicionado en búsquedas de viajeros españoles que buscan destinos en Perú"
+features:
+  - title: "Catálogo de destinos y experiencias"
+    description: "Presentación visual y detallada de cada destino y experiencia disponible, con fotografía de alta calidad que inspira al viajero y le ayuda a visualizar el viaje antes de reservar."
+    icon: "globe"
+  - title: "Paquetes turísticos completos"
+    description: "Fichas de cada paquete con itinerario, incluidos, duración y precio, diseñadas con la lógica de un producto de e-commerce para facilitar la decisión de compra."
+    icon: "layout"
+  - title: "Contacto y gestión de reservas"
+    description: "Formulario de reserva y canales de contacto directo para que el viajero interesado pueda consultar disponibilidad e iniciar su proceso de reserva sin intermediarios."
+    icon: "calendar-check"
+  - title: "Contenido visual de experiencias"
+    description: "Galería fotográfica y contenido inmersivo que transmite la emoción de cada aventura, reduciendo la fricción entre la curiosidad y la decisión de contratar."
+    icon: "trending-up"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  projectTitle="Vivir Travel Adventure"
+  websiteUrl="https://vivirtraveladventure.es/"
+>
+  Vivir Travel Adventure es una agencia especializada en experiencias turísticas de aventura con destinos en Perú orientada al mercado europeo, especialmente España. Su modelo de negocio dependía casi por completo de intermediarios —agentes de viaje B2B— que se quedaban con una parte importante del margen en cada venta.
+
+  El objetivo del proyecto fue construir un **canal de venta directa al viajero final**: una plataforma web que funcionara con la lógica de un e-commerce turístico, donde cada destino y paquete tuviera su propia ficha detallada con itinerario, incluidos, precio y formulario de reserva, eliminando la fricción entre el viajero que sueña y la agencia que puede llevarlo.
+
+  Complementamos la plataforma con una estrategia de contenido SEO orientada a capturar tráfico orgánico de búsquedas de alta intención en el mercado español — viajeros que ya tienen el destino en mente y buscan la mejor forma de hacerlo realidad.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
   <div slot="problem">
-    <p>
-      La dependencia casi total en Agentes de Viajes (intermediarios B2B) minaba
-      los márgenes de ganancia de esta agencia perucha. Querían vender los
-      "Paquetes de Cusco" directo a los turistas españoles.
-    </p>
+    Las agencias de turismo con destinos en Perú orientadas al mercado internacional enfrentan dos problemas estructurales que frenan su crecimiento y erosionan sus márgenes:
+
+    - Dependencia total de intermediarios (agentes de viaje, OTAs y plataformas de terceros) que se quedan entre el 15% y el 30% del precio de cada paquete vendido, haciendo insostenible competir en precio sin sacrificar rentabilidad.
+    - Sin presencia web propia optimizada, la agencia es invisible para el viajero que investiga destinos directamente en Google antes de decidir con quién ir, que es la mayoría del mercado objetivo en España y Europa.
+    - Los catálogos disponibles en plataformas genéricas no permiten comunicar la identidad, los valores y la propuesta diferencial de la agencia, uniformando la oferta y eliminando cualquier ventaja competitiva basada en experiencia o especialización.
+    - Sin canal de reserva directa, cada lead captado en redes sociales o por referidos terminaba derivado a otro canal, generando pérdidas en la conversión final.
   </div>
+
   <div slot="solution">
-    <p>
-      Instauramos un Portal de Turismo tipo E-Commerce. Cada 'tour' funciona con
-      la lógica UX de un "Producto", incluyendo fechas seleccionables y cupos.
-      El Blog incorporado comenzó a rankear en España ("*Cuál es la mejor fecha
-      para visitar Machu Picchu*") atrayendo leads orgánicamente para posterior
-      conversión.
-    </p>
+    Diseñamos y desarrollamos una **plataforma turística de venta directa con motor de contenidos SEO** que transforma el modelo comercial de la agencia:
+
+    - Portal de turismo con lógica de e-commerce donde cada paquete o experiencia funciona como un producto con ficha propia, fotografías de alta calidad, itinerario detallado, lista de incluidos, precio y formulario de reserva integrado.
+    - Catálogo de destinos organizado visualmente para que el viajero explore la oferta, compare opciones y encuentre el paquete que encaja con su perfil de viaje sin necesidad de solicitar presupuesto previo.
+    - Blog de contenido turístico optimizado para SEO internacional, diseñado para posicionar en búsquedas de alta intención del mercado español: "mejor época para visitar Machu Picchu", "tour Cusco 5 días", "experiencias en el Amazonas peruano".
+    - Contacto directo y formulario de reserva que eliminan al intermediario del proceso, manteniendo el 100% del margen en la agencia y la relación directa con el cliente desde el primer momento.
   </div>
 </ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "0",     label: "Intermediarios en el proceso de reserva" },
+    { value: "SEO",   label: "Posicionado en búsquedas del mercado español" },
+    { value: "24 / 7", label: "Plataforma de reservas activa sin intervención" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades Principales"
+  features={[
+    {
+      title: "Catálogo de destinos y experiencias",
+      description: "Presentación visual con fotografía de alta calidad que inspira al viajero y le ayuda a visualizar el viaje antes de reservar.",
+      icon: "globe",
+    },
+    {
+      title: "Paquetes turísticos completos",
+      description: "Fichas con itinerario, incluidos, duración y precio diseñadas con lógica e-commerce para facilitar la decisión de compra.",
+      icon: "layout",
+    },
+    {
+      title: "Contacto y gestión de reservas",
+      description: "Formulario de reserva y canales de contacto directo para consultar disponibilidad e iniciar el proceso sin intermediarios.",
+      icon: "calendar-check",
+    },
+    {
+      title: "Contenido visual de experiencias",
+      description: "Galería fotográfica e inmersiva que transmite la emoción de cada aventura y reduce la fricción hacia la decisión de contratar.",
+      icon: "trending-up",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "WordPress + WooCommerce",
+      description:
+        "Motor del portal turístico que gestiona el catálogo de paquetes, las fichas de destinos, el sistema de reservas y el blog de contenidos SEO desde un único panel de administración manejable por el equipo de la agencia.",
+    },
+    {
+      name: "PHP + MySQL",
+      description:
+        "Backend que soporta la lógica de gestión de paquetes y disponibilidad, con una base de datos estructurada para escalar el catálogo de destinos sin pérdida de rendimiento.",
+    },
+  ]}
+/>

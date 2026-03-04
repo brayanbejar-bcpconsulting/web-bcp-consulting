@@ -1,70 +1,146 @@
 ---
 title: "Market Dollar"
-description: "Sistema de tipo de cambio en tiempo real con operaciones seguras, seguimiento de transacciones y notificaciones automáticas."
+description: "Plataforma digital de cambio de divisas con marketplace en tiempo real, gestión de órdenes, control de saldos y generación automática de comprobantes."
+tagline: "Compra y vende dólares en línea. Tipo de cambio en tiempo real, operaciones transparentes y al instante."
 category: "software"
-client: "Casa de Cambio Privada"
-role: "Despliegue e Integración Financiera"
+client: "Market Dollar"
+role: "Desarrollo Full-Stack & Integración Financiera"
 duration: "4 meses"
 year: 2023
 technologies: ["Next.js", "Node.js", "PostgreSQL"]
 coverImage: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=600&fit=crop"
-url: "https://marketdollar.com/"
+url: "https://market-dollar.com/"
+videoUrl: "https://youtu.be/v2Nt1PKFcg8"
 results:
   - "Más de 10,000 operaciones procesadas"
   - "$50M+ intercambiados en el primer año"
+features:
+  - title: "Marketplace de divisas"
+    description: "Compradores y vendedores interactúan directamente en un mercado digital con tipo de cambio visible en tiempo real."
+    icon: "trending-up"
+  - title: "Visualización de operaciones recientes"
+    description: "Panel de actividad del mercado con las últimas transacciones ejecutadas para que el usuario tenga contexto antes de operar."
+    icon: "chart-bar"
+  - title: "Gestión de órdenes de cambio"
+    description: "Crea, consulta y cancela órdenes de compra o venta con control total sobre cada operación."
+    icon: "file-text"
+  - title: "Control de saldos"
+    description: "Visualiza el saldo disponible en soles y dólares dentro de la plataforma antes y después de cada operación."
+    icon: "coins"
+  - title: "Historial de transacciones"
+    description: "Registro completo y ordenado de todas las operaciones realizadas, con filtros por fecha y tipo."
+    icon: "clock-check"
+  - title: "Generación de comprobantes"
+    description: "Cada operación genera un comprobante descargable para respaldo contable y financiero del usuario."
+    icon: "credit-card"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
 import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
 import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  videoUrl="https://youtu.be/v2Nt1PKFcg8"
+  websiteUrl="https://market-dollar.com/"
+  projectTitle="Market Dollar"
+>
+  Market Dollar es una **plataforma digital de cambio de divisas** diseñada para facilitar la compra y venta de dólares entre usuarios mediante un sistema automatizado, transparente y con visibilidad del mercado en tiempo real.
+
+  A diferencia de las casas de cambio tradicionales, el sistema conecta directamente a compradores y vendedores en un entorno digital seguro, permitiendo visualizar operaciones recientes, el tipo de cambio vigente y ejecutar transacciones sin necesidad de desplazamientos ni llamadas.
+
+  El objetivo fue construir una plataforma que democratice el acceso a un **tipo de cambio competitivo**, eliminando intermediarios y dando al usuario control total sobre sus operaciones desde cualquier dispositivo.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
   <div slot="problem">
-    <p>
-      El mercado de cambio de divisas es altamente sensible al tiempo y la
-      seguridad. El cliente operaba mediante transferencias manuales validadas
-      por WhatsApp, lo cual era lento y susceptible a errores humanos o fraude.
-    </p>
+    Las personas que necesitan cambiar divisas enfrentan fricciones reales en cada operación:
+
+    - Tipos de cambio poco competitivos impuestos por bancos y casas de cambio sin posibilidad de negociación.
+    - Procesos manuales dependientes de horarios comerciales, turnos y desplazamientos físicos.
+    - Falta de transparencia: el usuario no sabe cómo se forma el tipo de cambio ni puede comparar en tiempo real.
+    - Tiempos largos para completar transacciones, especialmente en montos elevados que requieren múltiples validaciones.
+
+    Un mercado que mueve millones de soles al día operando aún con lógica analógica.
   </div>
+
   <div slot="solution">
-    <p>
-      Desarrollamos un <strong>Core Bancario ligero</strong> para automatizar el
-      100% de las operativas cambiarias:
-    </p>
-    <ul>
-      <li>
-        Integración de Webhooks con bancos principales (BCP, Interbank) para
-        verificación automática de depósitos.
-      </li>
-      <li>
-        Módulo de Anti-Lavado de Activos (AML/KYC) con biometría integrada.
-      </li>
-      <li>
-        Cotizador dinámico conectado a la SBS y Reuters con spread configurable
-        por el administrador.
-      </li>
-    </ul>
+    Desarrollamos una **plataforma de exchange de divisas** que replica la lógica de un mercado financiero real en un entorno digital accesible:
+
+    - Marketplace donde compradores y vendedores interactúan directamente, formando el tipo de cambio de manera orgánica.
+    - Visualización de operaciones recientes para que el usuario entienda el comportamiento del mercado antes de operar.
+    - Gestión completa de órdenes, saldos e historial desde un único panel intuitivo.
+    - Generación automática de comprobantes por cada transacción para respaldo contable.
+
+    El resultado: operaciones más rápidas, un tipo de cambio determinado por el mercado y transparencia total en cada paso del proceso.
   </div>
 </ProblemSolution>
 
 <MetricsHighlight
   metrics={[
-    { value: "0%", label: "Fraudes en 18 meses" },
-    { value: "< 5m", label: "Tiempo promedio de operación" },
+    { value: "10K+",   label: "Operaciones procesadas" },
+    { value: "$50M+",  label: "Intercambiados en el primer año" },
+    { value: "< 5min", label: "Tiempo promedio por operación" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades del Sistema"
+  features={[
+    {
+      title: "Marketplace de divisas",
+      description: "Compradores y vendedores interactúan directamente en un mercado digital con tipo de cambio visible en tiempo real.",
+      icon: "trending-up",
+    },
+    {
+      title: "Visualización de operaciones recientes",
+      description: "Panel de actividad del mercado con las últimas transacciones ejecutadas para que el usuario tenga contexto antes de operar.",
+      icon: "chart-bar",
+    },
+    {
+      title: "Gestión de órdenes de cambio",
+      description: "Crea, consulta y cancela órdenes de compra o venta con control total sobre cada operación.",
+      icon: "file-text",
+    },
+    {
+      title: "Control de saldos",
+      description: "Visualiza el saldo disponible en soles y dólares dentro de la plataforma antes y después de cada operación.",
+      icon: "coins",
+    },
+    {
+      title: "Historial de transacciones",
+      description: "Registro completo y ordenado de todas las operaciones realizadas, con filtros por fecha y tipo.",
+      icon: "clock-check",
+    },
+    {
+      title: "Generación de comprobantes",
+      description: "Cada operación genera un comprobante descargable para respaldo contable y financiero del usuario.",
+      icon: "credit-card",
+    },
   ]}
 />
 
 <TechStack
   stack={[
     {
-      name: "PostgreSQL",
-      description:
-        "Esquema robusto y transacciones ACID que garantizan la integridad contable en cada décima de centavo.",
-    },
-    {
       name: "Next.js",
       description:
-        "Permitió un frontend muy reactivo y optimizado en SEO para captar tráfico orgánico de 'tipo de cambio hoy'.",
+        "Renderizado híbrido que entrega páginas SEO críticas desde el servidor y mantiene el panel transaccional completamente reactivo en el cliente.",
+    },
+    {
+      name: "Node.js",
+      description:
+        "Backend asíncrono de alta concurrencia para procesar múltiples órdenes simultáneas sin degradar el tiempo de respuesta del sistema.",
+    },
+    {
+      name: "PostgreSQL",
+      description:
+        "Transacciones ACID que garantizan la integridad contable en cada operación de cambio, con esquema optimizado para auditoría financiera.",
     },
   ]}
 />
+

@@ -1,0 +1,247 @@
+---
+import Icon from "@components/ui/Icon.astro";
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: string[] | GalleryImage[];
+  title?: string;
+  projectTitle?: string;
+}
+
+const { images, title = "Galería del Proyecto", projectTitle = "el proyecto" } = Astro.props;
+
+if (!images || images.length === 0) return;
+
+const normalizedImages: GalleryImage[] = (images as (string | GalleryImage)[]).map((img, i) =>
+  typeof img === "string"
+    ? { src: img, alt: `Captura de pantalla ${i + 1} del sistema ${projectTitle}` }
+    : img
+);
+---
+
+<section class="gallery-section" aria-labelledby="gallery-heading">
+  <h3 id="gallery-heading" class="gallery-section__title">{title}</h3>
+
+  <ul
+    class="gallery-grid"
+    role="list"
+    aria-label={`Galería de imágenes de ${projectTitle}`}
+  >
+    {normalizedImages.map((image, index) => (
+      <li>
+        <button
+          class="gallery-thumb"
+          type="button"
+          aria-label={`Ver imagen ampliada: ${image.alt}`}
+          data-gallery-open
+          data-index={index}
+        >
+          <img
+            src={image.src}
+            alt={image.alt}
+            loading="lazy"
+            decoding="async"
+            class="gallery-thumb__img"
+          />
+          <span class="gallery-thumb__overlay" aria-hidden="true">
+            <Icon name="maximize-2" size={20} />
+          </span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<!-- Lightbox dialog -->
+<dialog
+  class="gallery-dialog"
+  id="gallery-lightbox"
+  aria-modal="true"
+  aria-label={`Visor de imágenes: ${projectTitle}`}
+>
+  <button
+    class="gallery-dialog__close"
+    type="button"
+    id="gallery-close"
+    aria-label="Cerrar visor de imágenes"
+  >
+    <Icon name="x" size={22} />
+  </button>
+
+  <figure class="gallery-dialog__figure">
+    <img
+      id="gallery-lightbox-img"
+      src=""
+      alt=""
+      class="gallery-dialog__img"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption id="gallery-lightbox-caption" class="gallery-dialog__caption"></figcaption>
+  </figure>
+
+  <nav class="gallery-dialog__nav" aria-label="Navegación entre imágenes">
+    <button
+      type="button"
+      id="gallery-prev"
+      class="gallery-dialog__nav-btn"
+      aria-label="Imagen anterior"
+    >
+      <Icon name="chevron-left" size={24} />
+    </button>
+    <button
+      type="button"
+      id="gallery-next"
+      class="gallery-dialog__nav-btn"
+      aria-label="Imagen siguiente"
+    >
+      <Icon name="chevron-right" size={24} />
+    </button>
+  </nav>
+</dialog>
+
+<script define:vars={{ normalizedImages }}>
+  const dialog = document.getElementById("gallery-lightbox");
+  const img = document.getElementById("gallery-lightbox-img");
+  const caption = document.getElementById("gallery-lightbox-caption");
+  const closeBtn = document.getElementById("gallery-close");
+  const prevBtn = document.getElementById("gallery-prev");
+  const nextBtn = document.getElementById("gallery-next");
+  let currentIndex = 0;
+
+  function showImage(index) {
+    currentIndex = (index + normalizedImages.length) % normalizedImages.length;
+    const item = normalizedImages[currentIndex];
+    img.src = item.src;
+    img.alt = item.alt;
+    caption.textContent = item.alt;
+    prevBtn.disabled = normalizedImages.length <= 1;
+    nextBtn.disabled = normalizedImages.length <= 1;
+  }
+
+  document.querySelectorAll("[data-gallery-open]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      showImage(Number(btn.dataset.index));
+      dialog.showModal();
+    });
+  });
+
+  closeBtn?.addEventListener("click", () => dialog.close());
+  prevBtn?.addEventListener("click", () => showImage(currentIndex - 1));
+  nextBtn?.addEventListener("click", () => showImage(currentIndex + 1));
+
+  // Cerrar al hacer clic en el backdrop
+  dialog?.addEventListener("click", (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+
+  // Navegación por teclado
+  dialog?.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+    if (e.key === "ArrowRight") showImage(currentIndex + 1);
+  });
+</script>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .gallery-section {
+    @apply my-12;
+  }
+
+  .gallery-section__title {
+    @apply text-xl font-bold text-theme-heading mb-6;
+  }
+
+  .gallery-grid {
+    @apply grid grid-cols-2 md:grid-cols-3 gap-4;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gallery-thumb {
+    @apply relative w-full overflow-hidden rounded-xl cursor-zoom-in
+           border border-theme-border bg-theme-surface;
+    aspect-ratio: 16 / 10;
+  }
+
+  .gallery-thumb__img {
+    @apply w-full h-full object-cover transition-transform duration-300;
+  }
+
+  .gallery-thumb:hover .gallery-thumb__img {
+    @apply scale-105;
+  }
+
+  .gallery-thumb__overlay {
+    @apply absolute inset-0 bg-primary-950/40 text-white
+           flex items-center justify-center
+           opacity-0 transition-opacity duration-200;
+  }
+
+  .gallery-thumb:hover .gallery-thumb__overlay,
+  .gallery-thumb:focus-visible .gallery-thumb__overlay {
+    @apply opacity-100;
+  }
+
+  .gallery-thumb:focus-visible {
+    @apply outline-2 outline-offset-2 outline-secondary-500;
+  }
+
+  /* === Dialog Lightbox === */
+  .gallery-dialog {
+    @apply fixed inset-0 m-auto w-full max-w-5xl
+           bg-primary-950/95 backdrop-blur-md
+           rounded-2xl border border-white/10
+           p-6 shadow-2xl;
+    max-height: 90dvh;
+  }
+
+  .gallery-dialog::backdrop {
+    @apply bg-primary-950/80 backdrop-blur-sm;
+  }
+
+  .gallery-dialog[open] {
+    @apply flex flex-col gap-4;
+    animation: dialog-in 0.2s ease-out;
+  }
+
+  @keyframes dialog-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .gallery-dialog__close {
+    @apply self-end text-white/70 hover:text-white transition-colors
+           p-1.5 rounded-lg hover:bg-white/10
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
+  }
+
+  .gallery-dialog__figure {
+    @apply flex-1 flex flex-col items-center gap-3 overflow-hidden;
+  }
+
+  .gallery-dialog__img {
+    @apply max-h-[65dvh] w-auto max-w-full object-contain rounded-xl;
+  }
+
+  .gallery-dialog__caption {
+    @apply text-sm text-white/60 text-center;
+  }
+
+  .gallery-dialog__nav {
+    @apply flex justify-between items-center gap-4;
+  }
+
+  .gallery-dialog__nav-btn {
+    @apply text-white/70 hover:text-white p-2 rounded-xl hover:bg-white/10
+           transition-colors
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white
+           disabled:opacity-30 disabled:pointer-events-none;
+  }
+</style>

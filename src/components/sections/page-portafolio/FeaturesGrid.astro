@@ -1,0 +1,76 @@
+---
+import Icon from "@components/ui/Icon.astro";
+
+interface Feature {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+interface Props {
+  features: Feature[];
+  title?: string;
+}
+
+const { features, title = "Funcionalidades del Sistema" } = Astro.props;
+---
+
+<section class="features-section" aria-labelledby="features-heading">
+  <h3 id="features-heading" class="features-section__title">{title}</h3>
+
+  <ul class="features-grid" role="list">
+    {features.map((feature) => (
+      <li class="feature-card">
+        <div class="feature-card__icon" aria-hidden="true">
+          <Icon name={feature.icon ?? "check-circle"} size={22} />
+        </div>
+        <div class="feature-card__body">
+          <h4 class="feature-card__title">{feature.title}</h4>
+          <p class="feature-card__desc">{feature.description}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .features-section {
+    @apply my-12;
+  }
+
+  .features-section__title {
+    @apply font-bold text-theme-heading mb-6;
+  }
+
+  .features-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .feature-card {
+    @apply flex gap-4 p-5 rounded-2xl border border-theme-border bg-theme-card
+           shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .feature-card__icon {
+    @apply shrink-0 w-11 h-11 rounded-xl bg-secondary-50 text-secondary-600
+           flex items-center justify-center
+           dark:bg-secondary-950 dark:text-secondary-400;
+  }
+
+  .feature-card__body {
+    @apply flex flex-col gap-1;
+  }
+
+  .feature-card__title {
+    @apply font-bold text-sm text-theme-heading leading-snug m-0;
+  }
+
+  .feature-card__desc {
+    @apply text-sm text-theme-muted leading-relaxed m-0;
+  }
+</style>

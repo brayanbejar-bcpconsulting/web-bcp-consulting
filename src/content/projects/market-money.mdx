@@ -1,0 +1,150 @@
+---
+title: "Market Money"
+description: "Plataforma digital de intercambio de divisas con mercado en tiempo real, matching automático de órdenes y gestión segura de transacciones financieras."
+tagline: "Cambia dólares al mejor tipo de cambio. Rápido, transparente y 100% en línea."
+category: "software"
+client: "Market Money"
+role: "Desarrollo Full-Stack & Arquitectura Financiera"
+duration: "5 meses"
+year: 2024
+technologies: ["Next.js", "Node.js", "PostgreSQL", "WebSockets", "Redis"]
+coverImage: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=600&fit=crop"
+url: "https://marketmoney.pe/"
+videoUrl: "https://youtu.be/YA7kzJUStPs"
+results:
+  - "Más de 10,000 operaciones procesadas en los primeros 3 meses"
+  - "S/ 50M+ intercambiados desde el lanzamiento"
+features:
+  - title: "Mercado de divisas en tiempo real"
+    description: "Órdenes activas de compra y venta visibles al instante con ejecución inmediata."
+    icon: "trending-up"
+  - title: "Gestión completa de órdenes"
+    description: "Crea, cancela o modifica órdenes pendientes con control total sobre cada operación."
+    icon: "file-text"
+  - title: "Precio de mercado o precio fijo"
+    description: "Ejecuta al mejor precio disponible o publica órdenes esperando un tipo de cambio específico."
+    icon: "chart-bar"
+  - title: "División automática de operaciones"
+    description: "Las órdenes grandes se ejecutan parcialmente entre múltiples contrapartes para mayor liquidez."
+    icon: "coins"
+  - title: "Gestión de saldo y transferencias"
+    description: "Deposita, mantén saldo en la plataforma y retira a tus cuentas bancarias automáticamente."
+    icon: "credit-card"
+  - title: "Historial y comprobantes"
+    description: "Cada operación genera un registro descargable para control financiero y auditoría."
+    icon: "clock-check"
+---
+
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<DescripcionVideo
+  videoUrl="https://youtu.be/YA7kzJUStPs"
+  websiteUrl="https://marketmoney.pe/"
+  projectTitle="Market Money"
+>
+  Market Money es una **plataforma digital de intercambio de divisas** que permite a personas y empresas comprar o vender dólares de forma rápida, segura y con un tipo de cambio competitivo en tiempo real.
+
+  El sistema funciona como un marketplace financiero donde múltiples usuarios publican órdenes de compra o venta y realizan operaciones directamente dentro de la plataforma, sin intermediarios tradicionales.
+
+  El objetivo central fue automatizar por completo el proceso de cambio de moneda, eliminando fricciones operativas y brindando **transparencia total en la formación del tipo de cambio**.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Reto"
+  solutionTitle="Nuestra Solución"
+>
+  <div slot="problem">
+    El mercado tradicional de cambio de divisas presenta barreras reales para usuarios frecuentes:
+
+    - Tipos de cambio poco competitivos en bancos y casas de cambio físicas.
+    - Procesos manuales que exigen desplazamientos y tiempos de espera.
+    - Falta de transparencia en cómo se forma el tipo de cambio.
+    - Operaciones lentas para montos elevados sin fragmentación disponible.
+
+    Además, las plataformas existentes no ofrecían un **mercado dinámico** donde compradores y vendedores interactuaran directamente.
+  </div>
+
+  <div slot="solution">
+    Desarrollamos una plataforma de mercado digital de divisas con **motor de matching en tiempo real**:
+
+    - Publicación de órdenes de compra y venta con tipo de cambio personalizado.
+    - Ejecución automática y división de grandes órdenes entre múltiples contrapartes.
+    - Integración con entidades bancarias para verificación automática de depósitos.
+    - Panel administrativo para gestión de usuarios, operaciones y spread configurable.
+
+    El resultado: operaciones más rápidas, completamente transparentes y con mejores tasas que el mercado convencional.
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "10K+",   label: "Operaciones procesadas" },
+    { value: "S/50M+", label: "Intercambiados desde el lanzamiento" },
+    { value: "< 5min", label: "Tiempo promedio por operación" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades del Sistema"
+  features={[
+    {
+      title: "Mercado de divisas en tiempo real",
+      description: "Órdenes activas de compra y venta visibles al instante con ejecución inmediata.",
+      icon: "trending-up",
+    },
+    {
+      title: "Gestión completa de órdenes",
+      description: "Crea, cancela o modifica órdenes pendientes con control total sobre cada operación.",
+      icon: "file-text",
+    },
+    {
+      title: "Precio de mercado o precio fijo",
+      description: "Ejecuta al mejor precio disponible o publica órdenes esperando un tipo de cambio específico.",
+      icon: "chart-bar",
+    },
+    {
+      title: "División automática de operaciones",
+      description: "Las órdenes grandes se ejecutan parcialmente entre múltiples contrapartes para mayor liquidez.",
+      icon: "coins",
+    },
+    {
+      title: "Gestión de saldo y transferencias",
+      description: "Deposita, mantén saldo en la plataforma y retira a tus cuentas bancarias automáticamente.",
+      icon: "credit-card",
+    },
+    {
+      title: "Historial y comprobantes",
+      description: "Cada operación genera un registro descargable para control financiero y auditoría.",
+      icon: "clock-check",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "Next.js",
+      description:
+        "Renderizado híbrido para un frontend altamente reactivo, con SSR en páginas SEO críticas y CSR en el panel transaccional en tiempo real.",
+    },
+    {
+      name: "Node.js + WebSockets",
+      description:
+        "Motor de matching asíncrono con conexiones persistentes para actualizar el libro de órdenes sin recargar la página.",
+    },
+    {
+      name: "PostgreSQL",
+      description:
+        "Transacciones ACID que garantizan integridad contable en cada operación, con esquema optimizado para auditoría financiera.",
+    },
+    {
+      name: "Redis",
+      description:
+        "Cache de tipo de cambio en tiempo real y gestión de sesiones de alta concurrencia sin degradar la base de datos principal.",
+    },
+  ]}
+/>

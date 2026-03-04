@@ -1,10 +1,11 @@
 import { z, defineCollection } from 'astro:content';
 
 const projectsCollection = defineCollection({
-  type: 'content', // v2.5+ uses 'content', Astro 5 uses modern config but this is safe
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    tagline: z.string().max(160).optional(),
     category: z.enum(['web', 'app', 'software']),
     client: z.string(),
     role: z.string(),
@@ -13,6 +14,19 @@ const projectsCollection = defineCollection({
     technologies: z.array(z.string()),
     coverImage: z.string(),
     url: z.string().url().optional(),
+    videoUrl: z.string().url().optional(),
+    playStoreUrl: z.string().url().optional(),
+    appStoreUrl: z.string().url().optional(),
+    gallery: z.array(z.string()).optional(),
+    features: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          icon: z.string().optional(),
+        })
+      )
+      .optional(),
     results: z.array(z.string()).optional(),
   }),
 });

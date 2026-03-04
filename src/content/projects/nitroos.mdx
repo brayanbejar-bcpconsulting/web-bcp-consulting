@@ -1,52 +1,136 @@
 ---
 title: "Nitroos — BarberShop"
-description: "App de reserva de turnos para barberías con gestión de clientes, historial de servicios y pagos integrados."
+description: "App móvil para gestión de barberías y centros de estética: reserva de citas online, agenda digital, recordatorios automáticos y gestión de clientes."
+tagline: "Tu barbería siempre organizada. Reservas online, recordatorios automáticos y cero llamadas perdidas."
 category: "app"
 client: "Nitroos"
-role: "Desarrollo Móvil y Panel Admin Web"
+role: "Desarrollo Móvil & Panel Administrativo Web"
 duration: "2 meses"
 year: 2023
 technologies: ["React Native", "Express", "MongoDB"]
 coverImage: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&h=600&fit=crop"
-url: "https://nitrosbarberia.com/"
+playStoreUrl: "https://play.google.com/store/apps/details?id=com.bcpconsulting.barbershopnitroapp"
+appStoreUrl: "https://apps.apple.com/pe/app/nitroos/id6746941708"
 results:
   - "Reducción de no-shows en un 35%"
-  - "Optimización de agenda de los barberos"
+  - "Agenda 100% digital sin llamadas ni mensajes manuales"
+features:
+  - title: "Reserva de citas online"
+    description: "Los clientes seleccionan el servicio, el profesional y el horario disponible desde la app, cualquier día a cualquier hora."
+    icon: "calendar-check"
+  - title: "Catálogo de servicios"
+    description: "Visualización clara de todos los servicios ofrecidos con descripción, duración y precio para que el cliente elija con confianza."
+    icon: "layout"
+  - title: "Agenda digital para profesionales"
+    description: "Cada barbero o estilista gestiona su disponibilidad y visualiza su agenda del día ordenada, sin conflictos de horario."
+    icon: "clock-check"
+  - title: "Notificaciones y recordatorios"
+    description: "Alertas automáticas al cliente antes de su cita para reducir ausencias y al negocio ante nuevas reservas o cancelaciones."
+    icon: "rocket"
+  - title: "Gestión de clientes"
+    description: "Historial de servicios, preferencias y frecuencia de visita de cada cliente para personalizar la atención y fidelizar."
+    icon: "users-group"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
 import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  projectTitle="Nitroos"
+>
+  Nitroos es una **aplicación móvil para la gestión de barberías y centros de cuidado personal** que digitaliza por completo el proceso de reservas, eliminando las llamadas perdidas, los WhatsApps sin respuesta y la agenda en papel que caracteriza a la mayoría de estos negocios.
+
+  El sistema conecta a los clientes con el negocio en un entorno digital: el cliente reserva su cita en segundos desde el teléfono, recibe un recordatorio automático antes de la hora y el negocio gestiona toda su operativa desde un panel centralizado sin depender de ninguna persona para agendar.
+
+  El objetivo fue transformar una barbería moderna en un **negocio que trabaja mientras duerme**: reservas entrando a toda hora, agenda perfectamente organizada y clientes que regresan porque la experiencia digital refuerza su confianza en el servicio.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
   <div slot="problem">
-    <p>
-      Antes de la app, los clientes llamaban repetidamente o escribían por redes
-      sociales. Esta falta de automatización causaba errores en las agendas y
-      una alta tasa de *no-shows* (clientes que faltan a su cita).
-    </p>
+    Las barberías y centros de estética gestionan sus citas de forma caótica y reactiva:
+
+    - Agenda manual en papel o grupos de WhatsApp que generan confusión, dobles reservas y olvidos.
+    - Alta tasa de no-shows: sin recordatorios automáticos, los clientes olvidan sus citas con frecuencia.
+    - El dueño o recepcionista dedica horas al día a confirmar y reagendar citas por teléfono en lugar de enfocarse en el negocio.
+    - Imposibilidad de recibir reservas fuera del horario de atención, perdiendo clientes que prefieren autogestionar su tiempo.
+
+    Un negocio con gran potencial de fidelización atrapado en una operativa predigital.
   </div>
+
   <div slot="solution">
-    <p>Implementamos un ecosistema completo:</p>
-    <ul>
-      <li>
-        <strong>App para el cliente:</strong> Donde puede ver barberos
-        disponibles, reservar turnos 24/7 y recibir recordatorios automáticos.
-      </li>
-      <li>
-        <strong>Panel Web Administrativo:</strong> Donde el dueño del local
-        controla inventario, ingresos diarios y comisiones por barbero.
-      </li>
-    </ul>
+    Desarrollamos un **ecosistema digital completo** compuesto por app móvil para clientes y panel administrativo web para el negocio:
+
+    - App iOS y Android donde el cliente ve servicios, elige profesional, selecciona horario y confirma su reserva en menos de un minuto, las 24 horas.
+    - Recordatorios push automáticos que reducen drásticamente la tasa de ausencias sin que nadie tenga que enviar un solo mensaje.
+    - Panel web administrativo donde el negocio gestiona la agenda, los profesionales, los servicios y el historial de clientes desde un único lugar.
+    - Historial de visitas por cliente para identificar a los más frecuentes, personalizar la atención y ejecutar estrategias de fidelización.
+
+    El resultado: una barbería que opera con la eficiencia de una franquicia, con la calidez de un negocio de barrio.
   </div>
 </ProblemSolution>
 
 <MetricsHighlight
   metrics={[
-    { value: "-35%", label: "Tasa de ausencias" },
-    { value: "24/7", label: "Recepción de citas automáticas" },
+    { value: "-35%",  label: "Reducción en tasa de no-shows" },
+    { value: "24 / 7", label: "Reservas recibidas sin intervención humana" },
+    { value: "100%",  label: "Agenda digital sin papel ni WhatsApp" },
   ]}
 />
 
-## Resultado Impactante
+<FeaturesGrid
+  title="Funcionalidades Principales"
+  features={[
+    {
+      title: "Reserva de citas online",
+      description: "Los clientes seleccionan el servicio, el profesional y el horario disponible desde la app, cualquier día a cualquier hora.",
+      icon: "calendar-check",
+    },
+    {
+      title: "Catálogo de servicios",
+      description: "Visualización clara de todos los servicios con descripción, duración y precio para que el cliente elija con confianza.",
+      icon: "layout",
+    },
+    {
+      title: "Agenda digital para profesionales",
+      description: "Cada barbero gestiona su disponibilidad y visualiza su agenda del día ordenada, sin conflictos de horario.",
+      icon: "clock-check",
+    },
+    {
+      title: "Notificaciones y recordatorios",
+      description: "Alertas automáticas al cliente antes de su cita y al negocio ante nuevas reservas o cancelaciones.",
+      icon: "rocket",
+    },
+    {
+      title: "Gestión de clientes",
+      description: "Historial de servicios, preferencias y frecuencia de visita para personalizar la atención y fidelizar.",
+      icon: "users-group",
+    },
+  ]}
+/>
 
-La aplicación no solo modernizó la imagen del salón, sino que al introducir un pequeño botón para dejar _reviews_ post-corte, la calificación de Google Maps de la empresa explotó, atrayendo aún más flujo presencial.
+<TechStack
+  stack={[
+    {
+      name: "React Native",
+      description:
+        "Código único para iOS y Android que garantiza una experiencia nativa fluida en ambas plataformas, reduciendo tiempo de desarrollo y mantenimiento.",
+    },
+    {
+      name: "Express (Node.js)",
+      description:
+        "API REST ligera y de alto rendimiento que gestiona la lógica de reservas, verificación de disponibilidad en tiempo real y envío de notificaciones.",
+    },
+    {
+      name: "MongoDB",
+      description:
+        "Base de datos flexible que almacena perfiles de clientes, historiales de servicios y configuraciones del negocio con esquemas adaptables a distintos tipos de establecimientos.",
+    },
+  ]}
+/>
+

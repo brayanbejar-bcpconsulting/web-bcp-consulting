@@ -1,0 +1,135 @@
+---
+title: "Mass Soluciones"
+description: "Plataforma web de cambio de divisas con cotización en tiempo real, registro de clientes, gestión de operaciones y panel administrativo centralizado."
+tagline: "Cambia divisas de forma rápida, transparente y 100% digital. Sin filas, sin esperas."
+category: "software"
+client: "Mass Soluciones"
+role: "Desarrollo Web Full-Stack"
+duration: "3 meses"
+year: 2024
+technologies: ["React", "Node.js", "PostgreSQL"]
+coverImage: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=1200&h=600&fit=crop"
+url: "https://cambiosmass.com/"
+results:
+  - "Proceso de cambio 100% digital sin intervención manual"
+  - "Panel administrativo con visibilidad total de operaciones"
+features:
+  - title: "Cotización de tipo de cambio"
+    description: "Los clientes consultan el tipo de cambio vigente al instante antes de iniciar cualquier operación, con total transparencia."
+    icon: "trending-up"
+  - title: "Registro de clientes"
+    description: "Onboarding digital con validación de identidad para operar de forma segura y cumplir con los requisitos regulatorios."
+    icon: "user"
+  - title: "Solicitud de cambio de moneda"
+    description: "Flujo guiado para que el cliente indique el monto, la dirección de la operación y confirme su solicitud en segundos."
+    icon: "coins"
+  - title: "Gestión de operaciones"
+    description: "Seguimiento del estado de cada transacción en tiempo real, desde la solicitud hasta la confirmación del cambio."
+    icon: "clock-check"
+  - title: "Panel administrativo"
+    description: "Dashboard centralizado para supervisar operaciones, gestionar clientes, ajustar el tipo de cambio y generar reportes."
+    icon: "database"
+---
+
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<DescripcionVideo
+  websiteUrl="https://cambiosmass.com/"
+  projectTitle="Mass Soluciones"
+>
+  Mass Soluciones es una **plataforma web especializada en operaciones de cambio de divisas** que digitaliza por completo el proceso de compra y venta de moneda extranjera, ofreciendo a los clientes una alternativa rápida, transparente y segura frente a las casas de cambio tradicionales.
+
+  El sistema centraliza todo el ciclo operativo: desde que el cliente consulta el tipo de cambio y registra su solicitud, hasta que el operador gestiona y confirma la transacción desde el panel administrativo, sin depender de llamadas, formularios en papel ni procesos manuales intermedios.
+
+  El objetivo fue construir una herramienta que le dé a Mass Soluciones una **ventaja competitiva real en el mercado digital**, con visibilidad total de sus operaciones y una experiencia de usuario que genera confianza desde el primer clic.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
+  <div slot="problem">
+    El mercado tradicional de cambio de moneda arrastra fricciones que alejan a los clientes más exigentes:
+
+    - Tipos de cambio opacos que el cliente no puede verificar antes de comprometerse con la operación.
+    - Procesos manuales vía llamada o WhatsApp que generan errores, demoras y dependencia del operador disponible.
+    - Falta de trazabilidad: el cliente no sabe en qué estado está su operación hasta que alguien le responde.
+    - Nula presencia digital que limita el alcance del negocio al radio físico de la oficina.
+
+    Un negocio viable atrapado en una operativa que no escala.
+  </div>
+
+  <div slot="solution">
+    Desarrollamos una **plataforma web transaccional** que digitaliza el proceso de cambio de extremo a extremo:
+
+    - Cotizador en tiempo real con el tipo de cambio actualizado, visible para el cliente antes de iniciar cualquier gestión.
+    - Flujo de solicitud estructurado: el cliente ingresa el monto, selecciona la operación y confirma en segundos desde cualquier dispositivo.
+    - Panel administrativo completo para que el operador gestione, apruebe y haga seguimiento de cada transacción sin hojas de cálculo.
+    - Registro de clientes con historial de operaciones para construir relaciones comerciales duraderas.
+
+    El resultado: un negocio de cambio de divisas que opera con la eficiencia de una fintech, disponible las 24 horas.
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "100%",  label: "Proceso de cambio digitalizado de inicio a fin" },
+    { value: "24 / 7", label: "Plataforma disponible sin depender de un operador" },
+    { value: "0",     label: "Llamadas o mensajes necesarios para cotizar" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades del Sistema"
+  features={[
+    {
+      title: "Cotización de tipo de cambio",
+      description: "Los clientes consultan el tipo de cambio vigente al instante antes de iniciar cualquier operación, con total transparencia.",
+      icon: "trending-up",
+    },
+    {
+      title: "Registro de clientes",
+      description: "Onboarding digital con validación de identidad para operar de forma segura y cumplir con los requisitos regulatorios.",
+      icon: "user",
+    },
+    {
+      title: "Solicitud de cambio de moneda",
+      description: "Flujo guiado para que el cliente indique el monto, la dirección de la operación y confirme su solicitud en segundos.",
+      icon: "coins",
+    },
+    {
+      title: "Gestión de operaciones",
+      description: "Seguimiento del estado de cada transacción en tiempo real, desde la solicitud hasta la confirmación del cambio.",
+      icon: "clock-check",
+    },
+    {
+      title: "Panel administrativo",
+      description: "Dashboard centralizado para supervisar operaciones, gestionar clientes, ajustar el tipo de cambio y generar reportes.",
+      icon: "database",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "React",
+      description:
+        "Interfaz dinámica y reactiva que actualiza el cotizador y el estado de operaciones en tiempo real sin recargar la página, mejorando la confianza del usuario.",
+    },
+    {
+      name: "Node.js",
+      description:
+        "Backend asíncrono que procesa las solicitudes de cambio, gestiona la lógica de negocio y expone la API que consume tanto el frontend de cliente como el panel administrativo.",
+    },
+    {
+      name: "PostgreSQL",
+      description:
+        "Base de datos relacional con transacciones ACID para garantizar la integridad de cada operación financiera y mantener un historial auditado de todas las transacciones.",
+    },
+  ]}
+/>

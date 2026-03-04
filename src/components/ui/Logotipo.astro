@@ -1,18 +1,35 @@
 ---
 import { Image } from "astro:assets";
-
 import logo from "@assets/images/logo-bcp.png";
+
+interface Props {
+  className?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+  alt?: string;
+  width?: number;
+  height?: number;
+}
+
+const { 
+  className = "w-24 lg:w-32 h-auto", // Clases por defecto
+  loading = "eager", 
+  fetchpriority = "high",
+  alt = "Logo BCP",
+  width = 250,
+  height = 250
+} = Astro.props;
 ---
 
-<a href="/">
+<a href="/" class="inline-block shrink-0">
   <Image
     src={logo}
-    alt="Logo"
-    width={250}
-    height={250}
+    alt={alt}
+    width={width}
+    height={height}
     format="webp"
-    loading={"eager"}
-    fetchpriority={"high"}
-    class="w-24 lg:w-32 h-auto object-cover"
+    loading={loading}
+    fetchpriority={fetchpriority}
+    class={className}
   />
 </a>

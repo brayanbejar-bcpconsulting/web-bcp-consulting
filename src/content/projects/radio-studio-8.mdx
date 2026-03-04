@@ -1,0 +1,124 @@
+---
+title: "Radio Studio 8"
+description: "Plataforma web para emisora radial con streaming online en vivo, programación detallada, contenido multimedia y canal de contacto directo con la emisora."
+tagline: "Tu radio favorita, ahora en línea. Escúchala, conoce su programación y conecta con su equipo desde cualquier dispositivo."
+category: "web"
+client: "Radio Studio 8"
+role: "Diseño UX/UI & Desarrollo Web Multimedia"
+duration: "2 meses"
+year: 2024
+technologies: ["WordPress", "Elementor", "PHP", "Streaming API"]
+coverImage: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=1200&h=600&fit=crop"
+url: "https://radiostudio8.com/"
+results:
+  - "Emisora accesible desde cualquier dispositivo y ubicación sin necesidad de sintonizador físico"
+  - "Audiencia digital ampliada más allá de la cobertura geográfica de la señal FM"
+features:
+  - title: "Streaming de radio online"
+    description: "Reproductor de audio integrado que transmite la señal de la emisora en tiempo real, permitiendo escucharla desde cualquier parte del mundo con conexión a internet."
+    icon: "rocket"
+  - title: "Programación radial"
+    description: "Grilla de programas con horarios, descripción de cada espacio y conductores, para que el oyente planifique cuándo conectarse a sus programas favoritos."
+    icon: "clock-check"
+  - title: "Noticias y contenido multimedia"
+    description: "Sección de noticias, entrevistas y contenido complementario que extiende la experiencia de la emisora más allá del audio en vivo."
+    icon: "newspaper"
+  - title: "Contacto con la emisora"
+    description: "Canales de comunicación directa para anunciantes, oyentes y colaboradores que quieran conectarse con el equipo de Radio Studio 8."
+    icon: "mail"
+---
+
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<DescripcionVideo
+  projectTitle="Radio Studio 8"
+  websiteUrl="https://radiostudio8.com/"
+>
+  Radio Studio 8 es una emisora radial que buscaba trascender los límites geográficos de su señal FM y llevar su programación a cualquier oyente conectado a internet, sin importar dónde se encuentre.
+
+  En la era del consumo digital de contenidos, una emisora sin presencia web con streaming integrado pierde competitividad frente a plataformas de audio en streaming que capturan la atención de la audiencia joven. La web no es solo un complemento: es el canal que mantiene viva la relación entre la emisora y sus oyentes fuera del alcance de la antena.
+
+  Desarrollamos una **plataforma web multimedia completa** que integra el streaming en vivo, la parrilla de programación, contenido informativo y los canales de contacto para anunciantes y oyentes, convirtiendo la presencia digital de Radio Studio 8 en una extensión real de su identidad radial.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
+  <div slot="problem">
+    Las emisoras radiales tradicionales enfrentan una paradoja creciente: tienen audiencia fiel y contenido de calidad, pero su alcance queda limitado por la cobertura física de la señal en un mundo que consume medios principalmente a través de internet:
+
+    - Sin plataforma web con streaming online, la emisora solo existe dentro del radio de cobertura de su frecuencia FM, perdiendo oyentes que se encuentran fuera de ese rango o que escuchan desde el móvil.
+    - La audiencia joven no sintoniza radios en aparatos físicos tradicionales: si la emisora no tiene presencia digital, simplemente no existe para ese segmento del mercado.
+    - Los anunciantes potenciales no encuentran información sobre la emisora, su audiencia ni sus formatos publicitarios en Google, reduciendo el flujo de ingresos comerciales.
+    - Sin web propia, la comunicación con oyentes y la publicación de contenido complementario (noticias, entrevistas, programación) depende de redes sociales con algoritmos impredecibles.
+  </div>
+
+  <div slot="solution">
+    Construimos una **plataforma web multimedia** que lleva Radio Studio 8 al entorno digital con todo lo que una emisora moderna necesita:
+
+    - Reproductor de streaming integrado que transmite la señal en vivo con alta calidad de audio, accesible desde cualquier navegador y dispositivo sin instalación adicional.
+    - Parrilla de programación con descripción de cada espacio, horarios y perfil de conductores, que facilita que el oyente planifique su consumo y descubra programas que aún no conoce.
+    - Sección de contenido multimedia con noticias, entrevistas destacadas y material complementario que genera tráfico orgánico en Google y extiende la vida útil del contenido producido en antena.
+    - Canales de contacto diferenciados para oyentes, anunciantes y colaboradores, con formularios específicos que facilitan la gestión comercial y la relación con la comunidad.
+    - Diseño alineado con la identidad visual de la emisora que proyecta profesionalismo y refuerza el reconocimiento de marca en el entorno digital.
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "24 / 7", label: "Streaming en vivo disponible desde cualquier lugar" },
+    { value: "Global", label: "Alcance más allá de la cobertura FM" },
+    { value: "SEO",    label: "Contenido indexable que genera tráfico orgánico" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades Principales"
+  features={[
+    {
+      title: "Streaming de radio online",
+      description: "Reproductor integrado que transmite la señal en tiempo real desde cualquier parte del mundo con conexión a internet.",
+      icon: "rocket",
+    },
+    {
+      title: "Programación radial",
+      description: "Grilla de programas con horarios y conductores para que el oyente planifique cuándo conectarse a sus espacios favoritos.",
+      icon: "clock-check",
+    },
+    {
+      title: "Noticias y contenido multimedia",
+      description: "Sección editorial que extiende la experiencia de la emisora más allá del audio en vivo y genera tráfico orgánico en Google.",
+      icon: "newspaper",
+    },
+    {
+      title: "Contacto con la emisora",
+      description: "Canales directos para anunciantes, oyentes y colaboradores que quieran conectarse con el equipo de Radio Studio 8.",
+      icon: "mail",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "WordPress",
+      description:
+        "CMS que permite al equipo de la emisora actualizar la programación, publicar noticias y gestionar el contenido multimedia de forma autónoma, en tiempo real y sin conocimientos técnicos.",
+    },
+    {
+      name: "Streaming API",
+      description:
+        "Integración con servidor de streaming de audio que garantiza la transmisión en vivo con baja latencia y compatibilidad con todos los navegadores y dispositivos, desde desktop hasta móvil.",
+    },
+    {
+      name: "Elementor + PHP",
+      description:
+        "Constructor visual y backend que hacen posible el diseño dinámico de la plataforma, la gestión de la parrilla de programación y los formularios de contacto diferenciados por tipo de usuario.",
+    },
+  ]}
+/>

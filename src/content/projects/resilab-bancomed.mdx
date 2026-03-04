@@ -1,0 +1,141 @@
+---
+title: "Resilab / Bancomed"
+description: "Plataforma digital de salud con app móvil para gestión de servicios médicos, acceso a resultados clínicos, administración de pacientes y reportes."
+tagline: "La salud digital al alcance del paciente. Resultados, citas y servicios médicos desde tu móvil."
+category: "app"
+client: "Bancomed"
+role: "Diseño UX/UI & Desarrollo Full-Stack"
+duration: "4 meses"
+year: 2024
+technologies: ["Flutter", "Node.js", "PostgreSQL", "Firebase"]
+coverImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=600&fit=crop"
+url: "https://bancomed.pe/"
+playStoreUrl: "https://play.google.com/store/apps/details?id=com.bcastrop1990.appresilabexam"
+results:
+  - "Acceso digital a resultados sin desplazamiento al centro"
+  - "Procesos administrativos del laboratorio completamente digitalizados"
+features:
+  - title: "App móvil para pacientes"
+    description: "Aplicación nativa para Android que permite acceder a todos los servicios médicos desde el móvil, en cualquier momento y lugar."
+    icon: "smartphone"
+  - title: "Gestión de servicios médicos"
+    description: "Los pacientes pueden consultar, solicitar y dar seguimiento a los servicios disponibles en el centro de salud o laboratorio."
+    icon: "clipboard-medical"
+  - title: "Acceso a información clínica"
+    description: "Visualización de historial clínico, estudios e información médica del paciente de forma segura y en tiempo real."
+    icon: "file-text"
+  - title: "Administración de pacientes"
+    description: "Panel para el personal médico donde gestiona el registro, seguimiento y datos de cada paciente de forma centralizada."
+    icon: "users-group"
+  - title: "Gestión de resultados y reportes"
+    description: "Los pacientes reciben y consultan sus resultados de laboratorio digitalmente, eliminando la espera y los traslados físicos."
+    icon: "chart-bar"
+---
+
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<DescripcionVideo
+  websiteUrl="https://bancomed.pe/"
+  projectTitle="Resilab / Bancomed"
+>
+  Resilab / Bancomed es una **plataforma digital orientada al sector salud** que centraliza la gestión de servicios médicos, información clínica y procesos de laboratorio en una sola solución: una app móvil nativa y un sistema de administración web.
+
+  El sistema está diseñado para reducir la fricción entre pacientes, personal médico y centros de salud, permitiendo que cada actor acceda a la información y servicios que necesita sin depender de procesos manuales ni desplazamientos innecesarios.
+
+  El objetivo central fue llevar la **experiencia del paciente al entorno digital**: desde solicitar un servicio hasta recibir sus resultados de laboratorio, todo gestionado desde el teléfono.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
+  <div slot="problem">
+    La operativa de muchos centros de salud y laboratorios sigue anclada en procesos físicos que penalizan al paciente:
+
+    - Resultados de laboratorio disponibles solo en papel, obligando al paciente a desplazarse para recogerlos.
+    - Agendamiento de citas y servicios por teléfono o en persona, sin disponibilidad fuera de horario comercial.
+    - Escasa digitalización de la información médica, lo que dificulta el seguimiento y la continuidad del tratamiento.
+    - Personal administrativo desbordado con tareas manuales que podrían automatizarse.
+
+    Una brecha tecnológica que afecta directamente la calidad y accesibilidad de la atención médica.
+  </div>
+
+  <div slot="solution">
+    Desarrollamos una **plataforma integrada de salud digital** compuesta por app móvil y panel de administración web:
+
+    - App Android que centraliza el acceso a servicios médicos, historial clínico y resultados de laboratorio desde el teléfono del paciente.
+    - Módulo de administración de pacientes para el personal del centro: registro, seguimiento y gestión de información clínica en tiempo real.
+    - Entrega digital de resultados y reportes, eliminando completamente la dependencia del papel y los traslados.
+    - Arquitectura segura con autenticación robusta para proteger datos médicos sensibles según estándares del sector.
+
+    El resultado: un centro de salud más eficiente, pacientes mejor informados y una experiencia de atención alineada con las expectativas digitales actuales.
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "100%",   label: "Procesos administrativos digitalizados" },
+    { value: "0",      label: "Desplazamientos necesarios para obtener resultados" },
+    { value: "24 / 7", label: "Acceso del paciente a su información clínica" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades del Sistema"
+  features={[
+    {
+      title: "App móvil para pacientes",
+      description: "Aplicación nativa para Android que permite acceder a todos los servicios médicos desde el móvil, en cualquier momento y lugar.",
+      icon: "smartphone",
+    },
+    {
+      title: "Gestión de servicios médicos",
+      description: "Los pacientes pueden consultar, solicitar y dar seguimiento a los servicios disponibles en el centro de salud o laboratorio.",
+      icon: "clipboard-medical",
+    },
+    {
+      title: "Acceso a información clínica",
+      description: "Visualización de historial clínico, estudios e información médica del paciente de forma segura y en tiempo real.",
+      icon: "file-text",
+    },
+    {
+      title: "Administración de pacientes",
+      description: "Panel para el personal médico donde gestiona el registro, seguimiento y datos de cada paciente de forma centralizada.",
+      icon: "users-group",
+    },
+    {
+      title: "Gestión de resultados y reportes",
+      description: "Los pacientes reciben y consultan sus resultados de laboratorio digitalmente, eliminando la espera y los traslados físicos.",
+      icon: "chart-bar",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "Flutter",
+      description:
+        "Desarrollo nativo multiplataforma con un único código base, garantizando una experiencia fluida en Android con potencial de expansión inmediato a iOS.",
+    },
+    {
+      name: "Node.js",
+      description:
+        "Backend asíncrono para gestionar las consultas de información clínica, autenticación de usuarios y comunicación en tiempo real con la app.",
+    },
+    {
+      name: "PostgreSQL",
+      description:
+        "Base de datos relacional robusta para el almacenamiento seguro de información médica sensible, con controles de acceso por rol.",
+    },
+    {
+      name: "Firebase",
+      description:
+        "Notificaciones push para alertar al paciente cuando sus resultados están disponibles, mejorando la experiencia sin requerir acceso activo a la app.",
+    },
+  ]}
+/>

@@ -1,79 +1,150 @@
 ---
 title: "Mercado Pesado"
-description: "Plataforma de cotización masiva: una solicitud llega a múltiples proveedores. Compara precios, plazos y lleva historial completo de pedidos."
+description: "Marketplace B2B de repuestos para maquinaria pesada: publica una solicitud y recibe cotizaciones de múltiples proveedores verificados en minutos."
+tagline: "El marketplace de repuestos para maquinaria pesada. Una solicitud, múltiples cotizaciones, la mejor decisión."
 category: "app"
 client: "Mercado Pesado SAC"
-role: "Diseño UX/UI y Desarrollo End-to-End"
+role: "Diseño UX/UI & Desarrollo End-to-End"
 duration: "5 meses"
 year: 2024
-technologies: ["Flutter", "Django", "PostgreSQL"]
+technologies: ["Flutter", "Django", "PostgreSQL", "Firebase"]
 coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=600&fit=crop"
 url: "https://mercadopesado.com/"
+playStoreUrl: "https://play.google.com/store/apps/details?id=com.rafarth1.heavymachineryapp"
+appStoreUrl: "https://apps.apple.com/pe/app/mercado-pesado/id6748595083"
 results:
   - "Decisiones de compra más rápidas y transparentes"
   - "Más de 500 proveedores registrados"
+features:
+  - title: "Publicación de solicitudes de repuestos"
+    description: "Ingresa el nombre, código de producto y categoría de maquinaria en segundos."
+    icon: "file-text"
+  - title: "Cotizaciones múltiples automáticas"
+    description: "El sistema envía la solicitud a proveedores verificados que compiten por ofrecer el mejor precio."
+    icon: "users-group"
+  - title: "Comparación inteligente de ofertas"
+    description: "Evalúa precio, tiempo de entrega, reputación del proveedor y disponibilidad en un solo lugar."
+    icon: "chart-bar"
+  - title: "Perfil verificado de proveedores"
+    description: "Cada proveedor cuenta con información empresarial, historial de ventas y calificaciones de clientes."
+    icon: "shield-check"
+  - title: "Gestión de pedidos"
+    description: "Selecciona la mejor oferta, confirma el pedido y coordina la entrega desde la misma plataforma."
+    icon: "calendar-check"
+  - title: "App móvil iOS y Android"
+    description: "Realiza todas las operaciones desde campo con la app nativa disponible en Google Play y App Store."
+    icon: "smartphone"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
 import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
 import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  websiteUrl="https://mercadopesado.com/"
+  projectTitle="Mercado Pesado"
+>
+  Mercado Pesado es un **marketplace B2B especializado en repuestos para maquinaria pesada** que conecta a compradores y proveedores del sector en una sola plataforma digital.
+
+  El sistema permite publicar solicitudes de repuestos y recibir cotizaciones competitivas de múltiples proveedores verificados en cuestión de minutos, eliminando los interminables mensajes de WhatsApp, correos y llamadas que caracterizan al mercado tradicional.
+
+  El objetivo fue digitalizar y centralizar un proceso crítico para industrias como construcción, minería, transporte pesado y maquinaria agrícola, donde **cada hora de máquina parada representa pérdidas directas**.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Reto"
+  solutionTitle="Nuestra Solución"
+>
   <div slot="problem">
-    <p>
-      La industria pesada enfrentaba un proceso de cotización fragmentado en
-      decenas de correos electrónicos y mensajes de WhatsApp. Las empresas
-      constructoras y logísticas demoraban días en conseguir una cotización
-      competitiva.
-    </p>
+    El sector de maquinaria pesada arrastra ineficiencias estructurales en su cadena de abastecimiento:
+
+    - Repuestos específicos difíciles de encontrar sin contactar a docenas de proveedores manualmente.
+    - Procesos de cotización lentos basados en correos y WhatsApp que tardían días.
+    - Imposibilidad de comparar proveedores: precios, tiempos de entrega y reputación en un solo lugar.
+    - Poca transparencia de precios que favorece a intermediarios en detrimento del comprador final.
+
+    El resultado: retrasos operativos que paralizan obras, minas y flotas enteras en industrias de alta dependencia temporal.
   </div>
+
   <div slot="solution">
-    <p>
-      Creamos el primer <strong>marketplace de licitación inversa (B2B)</strong>{" "}
-      para maquinaria y equipos en la región:
-    </p>
-    <ul>
-      <li>
-        Un usuario sube un requerimiento y este dispara alertas push a todos los
-        proveedores compatibles.
-      </li>
-      <li>
-        Dashboard consolidado donde el comprador compara cotizaciones lado a
-        lado.
-      </li>
-      <li>Sistema de rating de proveedores para asegurar la confianza.</li>
-    </ul>
+    Desarrollamos un **marketplace de licitación inversa B2B** con app nativa para iOS y Android:
+
+    - Una solicitud publicada activa alertas push instantáneas a todos los proveedores compatibles de la red.
+    - Dashboard de comparación lado a lado: precio, disponibilidad, plazo y reputación del proveedor.
+    - Red de proveedores verificados con historial de transacciones y sistema de calificaciones.
+    - Gestión completa del pedido dentro de la plataforma, desde la oferta hasta la confirmación de entrega.
+
+    El resultado: decisiones de compra más rápidas, más informadas y con mejores condiciones comerciales.
   </div>
 </ProblemSolution>
 
 <MetricsHighlight
   metrics={[
-    { value: "-75%", label: "Reducción de tiempo cotizando" },
-    { value: "500+", label: "Proveedores integrados" },
+    { value: "-75%",  label: "Reducción en tiempo de cotización" },
+    { value: "500+",  label: "Proveedores verificados en la red" },
     { value: "S/2M+", label: "Transaccionados el primer mes" },
   ]}
 />
 
-## Arquitectura de Alta Disponibilidad
-
-El sistema requiere manejar miles de transacciones, presupuestos e historiales de precios. Se diseñó en un entorno en la nube usando balanceadores de carga para mantener estabilidad bajo demanda.
+<FeaturesGrid
+  title="Funcionalidades del Sistema"
+  features={[
+    {
+      title: "Publicación de solicitudes de repuestos",
+      description: "Ingresa el nombre, código de producto y categoría de maquinaria en segundos.",
+      icon: "file-text",
+    },
+    {
+      title: "Cotizaciones múltiples automáticas",
+      description: "El sistema envía la solicitud a proveedores verificados que compiten por ofrecer el mejor precio.",
+      icon: "users-group",
+    },
+    {
+      title: "Comparación inteligente de ofertas",
+      description: "Evalúa precio, tiempo de entrega, reputación del proveedor y disponibilidad en un solo lugar.",
+      icon: "chart-bar",
+    },
+    {
+      title: "Perfil verificado de proveedores",
+      description: "Cada proveedor cuenta con información empresarial, historial de ventas y calificaciones de clientes.",
+      icon: "shield-check",
+    },
+    {
+      title: "Gestión de pedidos",
+      description: "Selecciona la mejor oferta, confirma el pedido y coordina la entrega desde la misma plataforma.",
+      icon: "calendar-check",
+    },
+    {
+      title: "App móvil iOS y Android",
+      description: "Realiza todas las operaciones desde campo con la app nativa disponible en Google Play y App Store.",
+      icon: "smartphone",
+    },
+  ]}
+/>
 
 <TechStack
   stack={[
     {
       name: "Flutter",
       description:
-        "Código único para Web, iOS y Android, vital para un modelo B2B donde conviven gerentes en escritorio e ingenieros en campo.",
+        "Un único código base para Web, iOS y Android: clave para un modelo B2B donde conviven gerentes en escritorio e ingenieros en campo.",
     },
     {
       name: "Django (Python)",
       description:
-        "Backend robusto que nos permitió construir un motor de búsqueda y notificaciones complejo de forma madura y rápida.",
+        "Backend maduro que permitió construir el motor de búsqueda, el sistema de notificaciones push y las reglas de licitación inversa de forma rápida y robusta.",
     },
     {
       name: "PostgreSQL",
       description:
-        "Base de datos relacional para garantizar la integridad ACID en transacciones B2B con altos volúmenes de datos financieros.",
+        "Base de datos relacional con transacciones ACID para garantizar la integridad en operaciones B2B de alto volumen y valor financiero.",
+    },
+    {
+      name: "Firebase",
+      description:
+        "Notificaciones push en tiempo real hacia la app móvil, garantizando que los proveedores reciban cada solicitud de repuesto al instante.",
     },
   ]}
 />

@@ -1,0 +1,140 @@
+---
+title: "Gorepa"
+description: "App móvil de gestión de incidentes operativos con registro en tiempo real, notificaciones push automáticas, filtros avanzados y seguimiento del estado de resolución."
+tagline: "Reporta incidentes al instante desde tu móvil. Notificaciones automáticas, seguimiento en tiempo real y cero papeles."
+category: "app"
+client: "Gorepa"
+role: "Diseño UX/UI & Desarrollo Móvil Full-Stack"
+duration: "4 meses"
+year: 2024
+technologies: ["Flutter", "Firebase", "Node.js", "PostgreSQL"]
+coverImage: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=600&fit=crop"
+playStoreUrl: "https://play.google.com/store/apps/details?id=com.bcpconsulting.barbershopnitroapp"
+appStoreUrl: "https://apps.apple.com/pe/app/nitroos/id6746941708"
+results:
+  - "Reducción significativa en tiempos de respuesta ante incidentes"
+  - "Historial centralizado y trazable de todas las incidencias reportadas"
+features:
+  - title: "Registro de incidentes en campo"
+    description: "Los usuarios reportan eventos directamente desde la app con toda la información del incidente: descripción, área afectada, evidencia fotográfica y prioridad."
+    icon: "clipboard-medical"
+  - title: "Gestión por sistema o área"
+    description: "Los incidentes se organizan según el sistema o departamento afectado, facilitando la asignación de responsabilidades y el análisis por área."
+    icon: "database"
+  - title: "Notificaciones push en tiempo real"
+    description: "Alertas automáticas a los responsables en el momento en que se registra un nuevo incidente o se actualiza su estado de resolución."
+    icon: "rocket"
+  - title: "Filtros avanzados de búsqueda"
+    description: "Localiza incidentes por tipo, estado, sistema afectado, fecha o responsable asignado para una gestión ágil y sin fricciones."
+    icon: "search"
+  - title: "Seguimiento del estado de atención"
+    description: "Visibilidad completa del ciclo de vida de cada incidente: desde el reporte inicial hasta la resolución y el cierre confirmado."
+    icon: "clock-check"
+---
+
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
+import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
+
+<DescripcionVideo
+  projectTitle="Gorepa"
+>
+  Gorepa es una **aplicación móvil de gestión de incidentes operativos** diseñada para que cualquier miembro de una organización pueda reportar eventos, fallos o situaciones críticas directamente desde su smartphone, asegurando que la información llegue de forma inmediata a los responsables de resolverla.
+
+  El sistema conecta al personal de campo con los equipos de gestión a través de una plataforma centralizada: cada incidente reportado genera una notificación automática, queda registrado con su historial completo y puede ser seguido en tiempo real hasta su resolución.
+
+  El objetivo fue eliminar el cuello de botella de los reportes manuales en operaciones donde **cada minuto de retraso tiene un impacto directo** en la continuidad del negocio o la seguridad del entorno.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
+  <div slot="problem">
+    Las organizaciones con operaciones en campo enfrentan un problema estructural en la gestión de incidencias:
+
+    - Registro manual de incidentes en formularios físicos o correos que llegan tarde, incompletos o se pierden.
+    - Falta de comunicación inmediata: los responsables se enteran de los problemas con horas de retraso.
+    - Sin sistema de clasificación ni priorización, todos los incidentes parecen urgentes y ninguno recibe atención diferenciada.
+    - Imposibilidad de hacer seguimiento: una vez reportado el incidente nadie sabe en qué estado está ni quién lo está atendiendo.
+
+    El resultado: tiempos de respuesta lentos, problemas que escalan innecesariamente y una operación que no puede aprender de sus propios incidentes.
+  </div>
+
+  <div slot="solution">
+    Desarrollamos una **app móvil nativa para iOS y Android** con sistema de gestión central integrado:
+
+    - Formulario de reporte guiado desde la app: el usuario documenta el incidente con descripción, área, prioridad y evidencia fotográfica en menos de un minuto.
+    - Notificaciones push instantáneas a los responsables asignados para cada tipo o área de incidente.
+    - Panel de gestión web donde los equipos clasifican, asignan y actualizan el estado de cada incidencia con trazabilidad completa.
+    - Historial organizado y filtrable que permite analizar patrones de incidencias por área, tipo y frecuencia para prevención proactiva.
+
+    El resultado: ciclos de resolución más cortos, equipos siempre informados y una base de datos de incidentes que convierte los problemas en aprendizaje organizacional.
+  </div>
+</ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "< 1min", label: "Tiempo para registrar un incidente desde la app" },
+    { value: "0",      label: "Reportes perdidos o sin asignar" },
+    { value: "100%",   label: "Trazabilidad del ciclo de vida de cada incidente" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades Principales"
+  features={[
+    {
+      title: "Registro de incidentes en campo",
+      description: "Los usuarios reportan eventos directamente desde la app con descripción, área afectada, evidencia fotográfica y nivel de prioridad.",
+      icon: "clipboard-medical",
+    },
+    {
+      title: "Gestión por sistema o área",
+      description: "Los incidentes se organizan según el sistema o departamento afectado, facilitando la asignación de responsabilidades.",
+      icon: "database",
+    },
+    {
+      title: "Notificaciones push en tiempo real",
+      description: "Alertas automáticas a los responsables en el momento en que se registra un nuevo incidente o se actualiza su estado.",
+      icon: "rocket",
+    },
+    {
+      title: "Filtros avanzados de búsqueda",
+      description: "Localiza incidentes por tipo, estado, sistema afectado, fecha o responsable asignado para una gestión ágil.",
+      icon: "search",
+    },
+    {
+      title: "Seguimiento del estado de atención",
+      description: "Visibilidad completa del ciclo de vida de cada incidente: desde el reporte inicial hasta su resolución y cierre confirmado.",
+      icon: "clock-check",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "Flutter",
+      description:
+        "Un único código base para iOS y Android que garantiza una experiencia nativa en ambas plataformas, clave para organizaciones con equipos de campo heterogéneos.",
+    },
+    {
+      name: "Firebase",
+      description:
+        "Motor de notificaciones push en tiempo real y autenticación segura de usuarios, asegurando que cada alerta llegue al responsable correcto al instante.",
+    },
+    {
+      name: "Node.js",
+      description:
+        "Backend que orquesta la lógica de clasificación, asignación y notificación de incidentes, procesando múltiples reportes simultáneos sin degradación del servicio.",
+    },
+    {
+      name: "PostgreSQL",
+      description:
+        "Historial auditado y estructurado de todas las incidencias, con relaciones entre reportes, asignaciones y resoluciones para análisis de patrones operativos.",
+    },
+  ]}
+/>

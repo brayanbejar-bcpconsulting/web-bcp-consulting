@@ -1,55 +1,126 @@
 ---
 title: "Cirugía 24 Horas"
-description: "Plataforma de telemedicina y gestión de citas médicas para centros de salud con monitoreo continuo de pacientes."
+description: "App móvil para el sector salud que centraliza información médica, servicios quirúrgicos y contacto directo con profesionales especializados desde cualquier dispositivo."
+tagline: "Información médica confiable y contacto con especialistas, disponible en tu bolsillo las 24 horas."
 category: "app"
-client: "Clínica Privada"
-role: "Consultoría, UX/UI y Desarrollo Híbrido"
+client: "Cirugía 24 Horas"
+role: "Consultoría, UX/UI y Desarrollo Móvil"
 duration: "6 meses"
 year: 2023
 technologies: ["Flutter", "Firebase", "Node.js"]
 coverImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=600&fit=crop"
+playStoreUrl: "https://play.google.com/store/apps/details?id=com.bcpconsulting.barbershopnitroapp"
 results:
-  - "Atención remota disponible 24/7"
+  - "Acceso a información médica y servicios disponible 24/7"
+  - "Comunicación directa entre pacientes y profesionales de salud"
+features:
+  - title: "Información médica confiable"
+    description: "Catálogo completo de servicios y procedimientos quirúrgicos con descripciones claras y accesibles para pacientes sin conocimiento técnico."
+    icon: "clipboard-medical"
+  - title: "Contacto con especialistas"
+    description: "Canal directo para comunicarse con profesionales de salud o centros médicos, reduciendo la fricción entre el paciente y la atención que necesita."
+    icon: "users"
+  - title: "Consulta de servicios disponibles"
+    description: "Exploración sencilla de todos los servicios ofrecidos, con filtros por especialidad y disponibilidad para que el paciente encuentre lo que busca de inmediato."
+    icon: "search"
+  - title: "Plataforma informativa centralizada"
+    description: "Un único punto de acceso para toda la información relevante: procedimientos, especialistas, costos y formas de contacto, organizada de forma clara y estructurada."
+    icon: "file-text"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
 import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
 import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  projectTitle="Cirugía 24 Horas"
+>
+  Cirugía 24 Horas es una **aplicación móvil para el sector salud** que nace de una necesidad concreta: los pacientes no deberían tener que buscar en decenas de páginas web, llamar a múltiples consultorios o esperar días para obtener información sobre un procedimiento médico o quirúrgico.
+
+  La plataforma centraliza en un solo lugar toda la información que un paciente necesita para tomar decisiones informadas sobre su salud: descripciones de servicios, especialidades disponibles, datos de contacto de profesionales y acceso directo a los canales de comunicación del centro médico.
+
+  El resultado es una **herramienta de confianza digital** que reduce la distancia entre el paciente y la atención que necesita, especialmente en situaciones donde la urgencia y la claridad de la información marcan la diferencia.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
   <div slot="problem">
-    <p>
-      La clínica necesitaba digitalizar sus atenciones post-operatorias para
-      pacientes de áreas remotas que no podían viajar regularmente a controles
-      físicos, colapsando su call-center con emergencias menores.
-    </p>
+    Los pacientes que necesitan servicios médicos especializados enfrentan una barrera invisible pero paralizante: la desinformación y la falta de acceso directo.
+
+    - Dificultad para encontrar servicios quirúrgicos especializados de forma rápida y confiable en un entorno digital fragmentado.
+    - Información médica dispersa en múltiples sitios web, redes sociales y números de teléfono desactualizados que generan desconfianza.
+    - Sin un canal digital claro, el paciente no sabe cómo ni a quién contactar cuando necesita actuar con rapidez.
+    - La distancia geográfica o la falta de tiempo impide a muchos pacientes acudir físicamente a informarse antes de tomar una decisión médica.
+
+    Un sector crítico para la salud pública que operaba sin la presencia digital que sus pacientes necesitaban.
   </div>
+
   <div slot="solution">
-    <p>
-      Diseñamos una plataforma que conecta pacientes con los cirujanos
-      directamente:
-    </p>
-    <ul>
-      <li>Integración con videoconsultas cifradas end-to-end.</li>
-      <li>Módulo de carga de foto-evolución (heridas post-quirúrgicas).</li>
-      <li>
-        Integración completa con el ERP y la historia clínica electrónica de la
-        clínica matriz.
-      </li>
-    </ul>
+    Desarrollamos una **aplicación móvil multiplataforma** (Android) que actúa como la puerta de entrada digital del centro médico hacia sus pacientes:
+
+    - Catálogo estructurado de servicios y procedimientos quirúrgicos con información clara, comprensible y actualizable en tiempo real.
+    - Directorio de especialistas con perfiles, áreas de atención y canales de contacto directo desde la propia app.
+    - Navegación por especialidades y filtros que permiten al paciente localizar lo que necesita en segundos, sin curva de aprendizaje.
+    - Plataforma informativa centralizada que funciona como tarjeta de presentación digital permanente, disponible las 24 horas del día.
+
+    Una solución que convierte la incertidumbre del paciente en confianza hacia el centro médico.
   </div>
 </ProblemSolution>
 
-## Videollamadas seguras
+<MetricsHighlight
+  metrics={[
+    { value: "24 / 7", label: "Disponibilidad de información y contacto" },
+    { value: "1 app",  label: "Todo centralizado en un solo lugar" },
+    { value: "100%",   label: "Acceso digital sin barreras geográficas" },
+  ]}
+/>
 
-Para asegurar la continuidad del servicio incluso con bajo acho de banda en zonas rurales, integramos algoritmos de compresión de video.
+<FeaturesGrid
+  title="Funcionalidades Principales"
+  features={[
+    {
+      title: "Información médica confiable",
+      description: "Catálogo completo de servicios y procedimientos quirúrgicos con descripciones claras y accesibles para cualquier paciente.",
+      icon: "clipboard-medical",
+    },
+    {
+      title: "Contacto con especialistas",
+      description: "Canal directo para comunicarse con profesionales de salud o centros médicos, reduciendo la fricción entre el paciente y la atención que necesita.",
+      icon: "users",
+    },
+    {
+      title: "Consulta de servicios disponibles",
+      description: "Exploración sencilla de todos los servicios con filtros por especialidad para que el paciente encuentre lo que busca de inmediato.",
+      icon: "search",
+    },
+    {
+      title: "Plataforma informativa centralizada",
+      description: "Un único punto de acceso para toda la información relevante: procedimientos, especialistas, costos y formas de contacto.",
+      icon: "file-text",
+    },
+  ]}
+/>
 
 <TechStack
   stack={[
     {
-      name: "Node.js + WebRTC",
+      name: "Flutter",
       description:
-        "Manejo eficiente de conexiones de videollamada y chat garantizando muy baja latencia.",
+        "Framework multiplataforma que garantiza una experiencia visual consistente y de alto rendimiento en Android, con un único código base mantenible a largo plazo.",
+    },
+    {
+      name: "Firebase",
+      description:
+        "Backend gestionado que proporciona base de datos en tiempo real, autenticación segura y hosting del contenido dinámico sin infraestructura propia.",
+    },
+    {
+      name: "Node.js",
+      description:
+        "API del servidor que gestiona la lógica de negocio, las actualizaciones de contenido médico y la integración con canales de comunicación externos.",
     },
   ]}
 />

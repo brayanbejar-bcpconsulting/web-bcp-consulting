@@ -1,0 +1,121 @@
+---
+import Icon from "@components/ui/Icon.astro";
+
+interface Props {
+  videoUrl?: string;
+  projectTitle?: string;
+  websiteUrl?: string;
+}
+
+const { videoUrl, projectTitle = "el proyecto", websiteUrl } = Astro.props;
+
+function getEmbedUrl(url: string): string {
+  const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?]+)/);
+  if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}`;
+  const vimeo = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}`;
+  return url;
+}
+
+const embedUrl = videoUrl ? getEmbedUrl(videoUrl) : null;
+---
+
+<section class="desc-video" aria-labelledby="desc-video-heading">
+  <h2 id="desc-video-heading" class="sr-only">Descripción del proyecto</h2>
+
+  <div class:list={["desc-video__grid", { "desc-video__grid--full": !embedUrl }]}>
+
+    <!-- Descripción (slot) -->
+    <div class="desc-video__text">
+      <div class="desc-video__prose">
+        <slot />
+      </div>
+
+      {websiteUrl && (
+        <a
+          href={websiteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="desc-video__link"
+          aria-label={`Visitar el sitio web oficial de ${projectTitle} (abre en nueva pestaña)`}
+        >
+          <Icon name="link-chain" size={18} aria-hidden="true" />
+          Visitar sitio web
+        </a>
+      )}
+    </div>
+
+    <!-- Video embed -->
+    {embedUrl && (
+      <figure class="desc-video__media">
+        <div
+          class="desc-video__embed"
+          role="region"
+          aria-label={`Video de demostración de ${projectTitle}`}
+        >
+          <iframe
+            src={embedUrl}
+            title={`Video de presentación: ${projectTitle}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <figcaption class="desc-video__caption">
+          <Icon name="play" size={14} aria-hidden="true" />
+          Demostración en video del sistema
+        </figcaption>
+      </figure>
+    )}
+
+  </div>
+</section>
+
+<style>
+  @reference "../../../styles/global.css";
+
+  .desc-video {
+    @apply my-12;
+  }
+
+  .desc-video__grid {
+    @apply grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start;
+  }
+
+  /* Si no hay video, el texto ocupa el ancho completo */
+  .desc-video__grid--full .desc-video__text {
+    @apply lg:col-span-5;
+  }
+
+  .desc-video__text {
+    @apply lg:col-span-3 flex flex-col gap-6;
+  }
+
+  .desc-video__prose {
+    @apply text-theme-muted leading-relaxed space-y-4 text-base md:text-lg;
+  }
+
+  .desc-video__link {
+    @apply inline-flex items-center gap-2 text-sm font-semibold text-secondary-600
+           hover:text-secondary-700 underline underline-offset-4 transition-colors duration-200
+           dark:text-secondary-400 dark:hover:text-secondary-300;
+  }
+
+  .desc-video__media {
+    @apply lg:col-span-2 flex flex-col gap-3;
+  }
+
+  .desc-video__embed {
+    @apply relative w-full overflow-hidden rounded-2xl shadow-xl;
+    /* aspect-ratio 16/9 con padding-trick para compatibilidad */
+    padding-block-end: 56.25%;
+  }
+
+  .desc-video__embed iframe {
+    @apply absolute inset-0 w-full h-full border-0;
+  }
+
+  .desc-video__caption {
+    @apply flex items-center gap-1.5 text-xs text-theme-muted justify-center;
+  }
+</style>

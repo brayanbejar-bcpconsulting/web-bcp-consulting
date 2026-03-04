@@ -1,34 +1,124 @@
 ---
-title: "Aquaia SAC"
-description: "Página corporativa para empresa de servicios con diseño profesional y optimización de conversiones."
+title: "AquaIA SAC"
+description: "Sitio web corporativo para empresa especializada en tratamiento de agua y soluciones hidráulicas industriales: presentación de servicios, proyectos realizados y contacto B2B directo."
+tagline: "Soluciones de agua con respaldo técnico y presencia digital que genera confianza en decisores industriales."
 category: "web"
-client: "Aquaia SAC"
-role: "Desarrollo Frontend"
+client: "AquaIA SAC"
+role: "Diseño UX/UI & Desarrollo Web Corporativo"
 duration: "1 mes"
 year: 2024
-technologies: ["WordPress", "SEO", "Analytics"]
+technologies: ["WordPress", "Elementor", "PHP"]
 coverImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=600&fit=crop"
 url: "https://aquaiasac.com/"
 results:
-  - "Captación fluida de clientes B2B"
+  - "Presencia digital que respalda y valida las ventas B2B del equipo comercial"
+  - "Decisores industriales que llegan informados a la primera reunión"
+features:
+  - title: "Presentación de soluciones"
+    description: "Exposición clara de todas las soluciones de tratamiento de agua y sistemas hidráulicos disponibles, con el nivel técnico que un comprador industrial necesita para evaluar al proveedor."
+    icon: "shield-check"
+  - title: "Servicios especializados"
+    description: "Detalle de cada servicio ofrecido —instalación, mantenimiento, consultoría técnica— con especificaciones que demuestran capacidad operativa y generan confianza antes de la primera llamada."
+    icon: "layout"
+  - title: "Proyectos realizados"
+    description: "Portafolio de casos de uso reales que valida la experiencia de la empresa ante gerentes de compras y decisores que necesitan referencias antes de contratar."
+    icon: "trending-up"
+  - title: "Contacto corporativo"
+    description: "Formulario y canales de contacto directo para que clientes industriales y gerentes de compras puedan iniciar una conversación comercial sin fricciones."
+    icon: "mail"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  projectTitle="AquaIA SAC"
+  websiteUrl="https://aquaiasac.com/"
+>
+  AquaIA SAC es una empresa especializada en tratamiento de agua y soluciones hidráulicas para el sector industrial que contaba con trayectoria y capacidad técnica, pero sin la presencia digital que le permitiera cerrar ventas B2B con plena confianza del cliente.
+
+  En mercados industriales y corporativos, el primer filtro de cualquier proceso de homologación de proveedores pasa por una búsqueda en Google. Si la empresa no tiene un sitio web que respalde sus credenciales técnicas, su experiencia y sus proyectos realizados, simplemente no supera ese primer filtro independientemente de su calidad real.
+
+  Desarrollamos un **sitio web corporativo estratégico** que funciona como el respaldo digital del equipo comercial: un espacio donde los decisores pueden validar a la empresa antes de la primera reunión, reducir sus objeciones y llegar a la negociación con la confianza necesaria para avanzar.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
   <div slot="problem">
-    <p>
-      No existía una presencia online profesional que respaldara las ventas B2B
-      que el equipo comercial realizaba. Los decisores (gerentes de compras)
-      desconfiaban al no poder validar sus antecedentes online.
-    </p>
+    AquaIA llegaba a reuniones comerciales con gerentes de compras y decisores industriales que, antes de aceptarles como proveedores, hacían una búsqueda rápida en Google para validar su existencia y trayectoria:
+
+    - Sin presencia web profesional, la empresa no superaba ese primer filtro digital, perdiendo oportunidades frente a competidores con menor experiencia pero mejor posicionamiento online.
+    - Los decisores industriales no podían verificar de forma independiente las credenciales técnicas, los proyectos completados ni la capacidad operativa de la empresa antes de la reunión, lo que generaba desconfianza y alargaba los ciclos de venta.
+    - El equipo comercial tenía que dedicar tiempo valioso de cada reunión a presentar desde cero la empresa en lugar de centrarse en la propuesta técnica y económica.
+    - Sin portafolio de proyectos visible online, no existía prueba social que demostrara la experiencia acumulada en tratamiento de agua y soluciones industriales.
   </div>
+
   <div slot="solution">
-    <p>
-      Creamos una <strong>Digital Hub</strong> de confianza: mostramos
-      credenciales, políticas de sostenibilidad, experiencia de la empresa y
-      licencias ISO de modo visible para calmar cualquier objeción de los
-      prospectos.
-    </p>
+    Creamos un **hub digital de confianza corporativa** que resuelve la objeción de validación antes de que el decisor llegue a la reunión:
+
+    - Diseño profesional de alto impacto que proyecta solidez técnica y empresarial desde el primer vistazo, alineado con el estándar visual que los compradores industriales esperan de sus proveedores.
+    - Sección de soluciones y servicios con el nivel de detalle técnico suficiente para que un gerente de compras evalúe si AquaIA puede cubrir sus necesidades sin necesitar hablar primero con nadie.
+    - Portafolio de proyectos realizados que actúa como prueba social industrial: casos reales, sectores atendidos y resultados que validan la experiencia de la empresa ante cualquier proceso de homologación.
+    - Presentación de credenciales, capacidades técnicas y diferenciadores que eliminan las objeciones más comunes antes de la primera conversación comercial.
+    - Estructura SEO que posiciona el sitio en búsquedas B2B del sector, generando visibilidad ante empresas que buscan activamente proveedores de tratamiento de agua.
   </div>
 </ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "B2B",    label: "Validación automática ante decisores industriales" },
+    { value: "24 / 7", label: "Credenciales visibles antes de cada reunión" },
+    { value: "SEO",    label: "Posicionado en búsquedas del sector industrial" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades Principales"
+  features={[
+    {
+      title: "Presentación de soluciones",
+      description: "Exposición clara de todas las soluciones de tratamiento de agua e hidráulicas con el nivel técnico que un comprador industrial necesita para evaluar al proveedor.",
+      icon: "shield-check",
+    },
+    {
+      title: "Servicios especializados",
+      description: "Detalle de cada servicio —instalación, mantenimiento, consultoría técnica— con especificaciones que demuestran capacidad operativa.",
+      icon: "layout",
+    },
+    {
+      title: "Proyectos realizados",
+      description: "Portafolio de casos reales que valida la experiencia de la empresa ante gerentes de compras que necesitan referencias antes de contratar.",
+      icon: "trending-up",
+    },
+    {
+      title: "Contacto corporativo",
+      description: "Formulario y canales directos para que clientes industriales inicien una conversación comercial sin fricciones.",
+      icon: "mail",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "WordPress",
+      description:
+        "CMS que permite al equipo de AquaIA actualizar el portafolio de proyectos, agregar nuevos servicios y mantener el contenido técnico al día sin depender de soporte externo para cada cambio.",
+    },
+    {
+      name: "Elementor",
+      description:
+        "Constructor visual que hace posible un diseño corporativo de alto nivel con secciones técnicas personalizadas, adaptadas al estándar visual del sector industrial y optimizadas para todos los dispositivos.",
+    },
+    {
+      name: "PHP + SEO On-page",
+      description:
+        "Backend robusto con arquitectura semántica y metadatos optimizados para posicionar el sitio en búsquedas B2B del sector de tratamiento de agua y soluciones industriales.",
+    },
+  ]}
+/>

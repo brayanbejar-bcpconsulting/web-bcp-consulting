@@ -1,42 +1,142 @@
 ---
 title: "Games Center"
-description: "Plataforma de gestión para centros de entretenimiento con control de máquinas, membresías y reportes de ingresos."
-category: "software"
+description: "E-commerce especializado en productos digitales para videojuegos: recargas, tarjetas de regalo y juegos con entrega automática e inmediata tras el pago."
+tagline: "Compra recargas, tarjetas de regalo y juegos digitales. Entrega automática, al instante."
+category: "web"
 client: "Games Center"
-role: "Desarrollo Intranet"
+role: "Desarrollo E-commerce Full-Stack"
 duration: "3 meses"
 year: 2024
-technologies: ["React", "Node.js", "MySQL"]
+technologies: ["React", "Node.js", "MySQL", "Pasarela de Pagos"]
 coverImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=600&fit=crop"
+url: "https://gamescenter.club/"
+videoUrl: "https://youtu.be/a7AfpZtwRiE"
 results:
-  - "Eliminación completa del robo de tokens"
-  - "Aumento en fidelidad mensual mediante planes VIP"
+  - "Entrega 100% automatizada sin intervención manual"
+  - "Eliminación del riesgo de fraude en ventas informales"
+features:
+  - title: "Tienda digital especializada"
+    description: "Catálogo completo de juegos digitales, tarjetas de regalo y recargas para las principales plataformas gaming."
+    icon: "layout"
+  - title: "Entrega automática inmediata"
+    description: "El producto digital se entrega al comprador de forma automática en el mismo instante en que se confirma el pago."
+    icon: "rocket"
+  - title: "Sistema de recargas"
+    description: "Recarga saldo para diferentes plataformas de videojuegos de forma segura y sin intermediarios."
+    icon: "credit-card"
+  - title: "Gestión de usuarios"
+    description: "Registro e inicio de sesión para realizar compras, consultar historial de pedidos y gestionar la cuenta."
+    icon: "user"
+  - title: "Panel administrativo completo"
+    description: "Administra productos, inventario digital, pedidos y usuarios desde un dashboard centralizado."
+    icon: "database"
 ---
 
+import DescripcionVideo from "@components/sections/page-portafolio/DescripcionVideo.astro";
 import ProblemSolution from "@components/sections/page-portafolio/ProblemSolution.astro";
+import FeaturesGrid from "@components/sections/page-portafolio/FeaturesGrid.astro";
+import MetricsHighlight from "@components/sections/page-portafolio/MetricsHighlight.astro";
+import TechStack from "@components/sections/page-portafolio/TechStack.astro";
 
-<ProblemSolution>
+<DescripcionVideo
+  videoUrl="https://youtu.be/a7AfpZtwRiE"
+  websiteUrl="https://gamescenter.club/"
+  projectTitle="Games Center"
+>
+  Games Center es una **plataforma de comercio electrónico especializada en productos digitales para videojuegos**, donde los usuarios pueden comprar recargas, tarjetas de regalo y juegos de forma rápida, segura y completamente automatizada.
+
+  A diferencia de las tiendas genéricas, el sistema está diseñado exclusivamente para el ecosistema gaming: desde el catálogo de productos hasta el proceso de entrega, todo está optimizado para que el jugador reciba su código o recarga en segundos, sin esperas ni intermediarios.
+
+  El objetivo fue crear una alternativa confiable al mercado informal de códigos digitales, con **automatización completa del ciclo de compra** y protección contra fraude desde el primer día.
+</DescripcionVideo>
+
+<ProblemSolution
+  problemTitle="El Problema"
+  solutionTitle="La Solución"
+>
   <div slot="problem">
-    <p>
-      La operación mediante tokens físicos generaba diferencias de caja
-      constantes, fraude y desgaste de inventario, además de imposibilitar la
-      analítica: el dueño no sabía qué máquina generaba más facturación y a qué
-      hora.
-    </p>
+    El mercado de productos digitales para videojuegos operaba de forma caótica e insegura:
+
+    - Entrega manual de códigos que generaba demoras de horas o incluso días.
+    - Dependencia del vendedor para procesar cada pedido individualmente.
+    - Ausencia de plataformas especializadas: los compradores recurrían a canales informales.
+    - Alto riesgo de fraude tanto para compradores como para vendedores en transacciones peer-to-peer.
+
+    El resultado: una experiencia de compra frustrante en un mercado que crece aceleradamente y exige inmediatez.
   </div>
+
   <div slot="solution">
-    <p>Construimos un ERP enfocado al mundo arcade:</p>
-    <ul>
-      <li>
-        Migración a tarjetas RFID vinculadas al saldo y cuenta del cliente.
-      </li>
-      <li>
-        Dashboard analítico que reporta el uso de cada máquina por minuto.
-      </li>
-      <li>
-        Módulo de promociones automáticas en "horas valle" para incentivar el
-        flujo peatonal.
-      </li>
-    </ul>
+    Desarrollamos un **e-commerce especializado con motor de entrega automática**:
+
+    - Integración con pasarelas de pago que disparan la entrega del producto digital al instante tras confirmar el cobro.
+    - Gestión de inventario digital con control de stock de códigos y recargas en tiempo real.
+    - Catálogo organizado por plataformas y categorías para facilitar la búsqueda del producto correcto.
+    - Panel administrativo centralizado para gestionar productos, pedidos y usuarios sin fricción operativa.
+
+    El resultado: cero intervención manual en el ciclo de compra, entregas inmediatas y un negocio que escala sin incrementar el equipo operativo.
   </div>
 </ProblemSolution>
+
+<MetricsHighlight
+  metrics={[
+    { value: "100%",    label: "Entregas automatizadas sin intervención manual" },
+    { value: "0 min",   label: "Tiempo de espera tras confirmar el pago" },
+    { value: "24 / 7",  label: "Operativa completamente autónoma" },
+  ]}
+/>
+
+<FeaturesGrid
+  title="Funcionalidades del Sistema"
+  features={[
+    {
+      title: "Tienda digital especializada",
+      description: "Catálogo completo de juegos digitales, tarjetas de regalo y recargas para las principales plataformas gaming.",
+      icon: "layout",
+    },
+    {
+      title: "Entrega automática inmediata",
+      description: "El producto digital se entrega al comprador de forma automática en el mismo instante en que se confirma el pago.",
+      icon: "rocket",
+    },
+    {
+      title: "Sistema de recargas",
+      description: "Recarga saldo para diferentes plataformas de videojuegos de forma segura y sin intermediarios.",
+      icon: "credit-card",
+    },
+    {
+      title: "Gestión de usuarios",
+      description: "Registro e inicio de sesión para realizar compras, consultar historial de pedidos y gestionar la cuenta.",
+      icon: "user",
+    },
+    {
+      title: "Panel administrativo completo",
+      description: "Administra productos, inventario digital, pedidos y usuarios desde un dashboard centralizado.",
+      icon: "database",
+    },
+  ]}
+/>
+
+<TechStack
+  stack={[
+    {
+      name: "React",
+      description:
+        "Interfaz de usuario dinámica y reactiva que permite navegar el catálogo, filtrar productos y completar el checkout sin recargar la página.",
+    },
+    {
+      name: "Node.js",
+      description:
+        "Backend asíncrono que procesa los webhooks de la pasarela de pagos y dispara la entrega automática del producto digital en milisegundos.",
+    },
+    {
+      name: "MySQL",
+      description:
+        "Base de datos relacional para gestionar el inventario de códigos digitales con control de stock preciso y registro completo de pedidos.",
+    },
+    {
+      name: "Pasarela de Pagos",
+      description:
+        "Integración con proveedores de pago certificados para procesar transacciones de forma segura y disparar la automatización de entrega.",
+    },
+  ]}
+/>
