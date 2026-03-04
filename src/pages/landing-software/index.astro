@@ -1,0 +1,188 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroSoftware,
+  EsParaTiSoftware,
+  TiposSoftware,
+  ProcesoPhaseSoftware,
+  ProyectosSoftware,
+  TechStackSoftware,
+  EstimacionSoftware,
+  TestimoniosSoftware,
+  FaqSoftware,
+  CtaSoftware,
+  StickyBarSoftware,
+  SectionNavSoftware,
+} from "@components/sections/landing/landing-software";
+
+const navItems = [
+  { label: "¿Es para ti?", href: "#es-para-ti" },
+  { label: "Tipos de Sistema", href: "#tipos-software" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Estimación", href: "#estimacion" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  {
+    title: "Software para Clínicas",
+    href: "/landing/software-clinicas",
+    tagline: "Historia clínica electrónica, agenda médica y facturación SUNAT",
+  },
+  {
+    title: "Software para E-commerce",
+    href: "/landing/software-ecommerce",
+    tagline: "Tienda online, pasarela de pagos y gestión de pedidos",
+  },
+  {
+    title: "Software de Logística",
+    href: "/landing/software-logistica",
+    tagline: "Control de inventarios, rutas de despacho y trazabilidad",
+  },
+];
+
+// Schema FAQPage para SEO enriquecido (actualizado con FAQs anti-objeción)
+const faqs = [
+  {
+    question: "¿El código fuente es mío al terminar el proyecto?",
+    answer:
+      "Sí, al 100%. Entregamos el repositorio completo con historial de commits. Tienes plena propiedad intelectual del código: puedes modificarlo, transferirlo o alojarlo donde quieras sin depender de BCP Consulting.",
+  },
+  {
+    question: "¿Puedo pedir cambios durante el desarrollo?",
+    answer:
+      "Sí. Trabajamos en sprints de 2 semanas con entregables parciales. Cada sprint incluye una ronda de revisión y ajustes sin costo adicional. Los cambios de alcance mayores se presupuestan por separado con total transparencia.",
+  },
+  {
+    question: "¿Qué tan seguro es el software que desarrollan?",
+    answer:
+      "Aplicamos seguridad desde el diseño: autenticación con roles, cifrado en tránsito (TLS 1.3) y en reposo, backups automáticos diarios, registro de auditoría, pruebas OWASP Top 10 antes de cada deploy y WAF en infraestructura cloud.",
+  },
+  {
+    question: "¿Se puede integrar con mis sistemas actuales (ERP, contabilidad, SUNAT)?",
+    answer:
+      "Sí. Integramos con ERPs (SAP, Odoo), contabilidad (Concar, Contasis), facturación electrónica SUNAT, pasarelas de pago (Culqi, Izipay, Stripe) y cualquier sistema que exponga una API o base de datos accesible.",
+  },
+  {
+    question: "¿En cuánto tiempo tendrán mi sistema listo?",
+    answer:
+      "Un MVP funcional está listo en 4–8 semanas. Un sistema completo toma 2–4 meses. Plataformas SaaS o ERP complejos, 3–6 meses. Te entregamos un cronograma con hitos semanales desde el inicio del proyecto.",
+  },
+  {
+    question: "¿Cuánto cuesta desarrollar software a medida?",
+    answer:
+      "Los rangos orientativos son: MVP S/. 8 000–25 000; sistema completo S/. 25 000–70 000; plataforma SaaS S/. 70 000+. El costo varía según módulos, integraciones y nivel de personalización. Ofrecemos opciones de pago fraccionado por etapas.",
+  },
+  {
+    question: "¿Ofrecen soporte y mantenimiento después del lanzamiento?",
+    answer:
+      "Sí. Los primeros 30 días de garantía son sin costo. Luego ofrecemos planes de mantenimiento mensual que incluyen correcciones, actualizaciones de dependencias, monitoreo y mejoras menores.",
+  },
+  {
+    question: "¿Qué SLA ofrecen para el sistema en producción?",
+    answer:
+      "El SLA estándar garantiza 99.5% de disponibilidad mensual para clientes con plan de mantenimiento activo. Incidentes críticos (P0) tienen tiempo de respuesta máximo de 4 horas hábiles y restauración en 8 horas.",
+  },
+  {
+    question: "¿Cuánto tiempo toma iniciar el proyecto una vez que acepto la propuesta?",
+    answer:
+      "El kickoff ocurre en los 5 días hábiles siguientes a la firma del contrato y pago del primer hito. En esa reunión se definen alcance final, accesos, herramientas de colaboración y calendario de sprints.",
+  },
+];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.answer,
+    },
+  })),
+});
+
+const serviceSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo de Software Web a Medida",
+  description:
+    "Desarrollamos sistemas de software web innovadores y escalables: ERP, CRM, SaaS, Logística y Automatización para empresas en Perú y Latinoamérica.",
+  provider: {
+    "@type": "Organization",
+    name: "BCP Consulting E.I.R.L.",
+    url: "https://bcpconsulting.pe",
+    telephone: "+51929772711",
+    email: "soporte@bcpconsulting.pe",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Peru",
+  },
+  serviceType: "Software Development",
+  offers: {
+    "@type": "Offer",
+    description: "20% de descuento en el primer proyecto",
+    availability: "https://schema.org/InStock",
+  },
+});
+
+const organizationSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "BCP Consulting E.I.R.L.",
+  url: "https://bcpconsulting.pe",
+  telephone: "+51929772711",
+  email: "soporte@bcpconsulting.pe",
+  taxID: "20612012475",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "PE",
+    addressRegion: "Lima",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Peru",
+  },
+  sameAs: ["https://www.linkedin.com/company/bcp-consulting-sac"],
+});
+---
+
+<LandingLayout
+  title="Desarrollo de Software Web a Medida en Perú | BCP Consulting"
+  description="Desarrollamos sistemas de software web innovadores a medida: ERP, CRM, SaaS, Logística y más. +10 años de experiencia, tecnología de vanguardia y 20% de descuento en tu primer proyecto."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+  ctaLabel="Solicitar Propuesta Gratis"
+  ctaHref="#contacto"
+>
+  <!-- Schema markup para SEO enriquecido -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={faqSchema} />
+    <script type="application/ld+json" set:html={serviceSchema} />
+    <script type="application/ld+json" set:html={organizationSchema} />
+    <link rel="canonical" href="https://bcpconsulting.pe/landing-software/" />
+    <meta property="og:url" content="https://bcpconsulting.pe/landing-software/" />
+    <style>
+      @media (prefers-reduced-motion: no-preference) {
+        html { scroll-behavior: smooth; }
+      }
+    </style>
+  </Fragment>
+
+  <SectionNavSoftware />
+  <HeroSoftware />
+  <EsParaTiSoftware />
+  <TiposSoftware />
+  <ProcesoPhaseSoftware />
+  <ProyectosSoftware />
+  <TechStackSoftware />
+  <EstimacionSoftware />
+  <TestimoniosSoftware />
+  <FaqSoftware />
+  <CtaSoftware />
+  <StickyBarSoftware />
+</LandingLayout>
