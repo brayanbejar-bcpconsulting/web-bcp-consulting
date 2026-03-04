@@ -1,0 +1,273 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import {
+  HeroAppsMoviles,
+  EsParaTiApps,
+  TablaApps,
+  ProcesoApps,
+  CasosApps,
+  StackApps,
+  PreciosApps,
+  TestimoniosApps,
+  FaqApps,
+  CtaApps,
+  StickyBarApps,
+  ModalCotizar,
+} from "@components/sections/landing/landing-apps-moviles";
+
+const navItems = [
+  { label: "¿Es para ti?", href: "#es-para-ti" },
+  { label: "Tipos de App", href: "#tipos-apps" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "Casos", href: "#casos" },
+  { label: "Stack", href: "#stack" },
+  { label: "Precios", href: "#precios" },
+  { label: "Testimonios", href: "#testimonios" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const pagesInteres = [
+  {
+    title: "Software Web a Medida",
+    href: "/landing-software/",
+    tagline: "ERP, CRM, SaaS, logística y automatización de procesos empresariales",
+  },
+  {
+    title: "Software para Clínicas",
+    href: "/landing/software-clinicas/",
+    tagline: "Historia clínica electrónica, agenda médica y facturación SUNAT",
+  },
+  {
+    title: "Software para E-commerce",
+    href: "/landing/software-ecommerce/",
+    tagline: "Tienda online, pasarela de pagos y gestión de pedidos",
+  },
+];
+
+// ── JSON-LD: FAQPage ─────────────────────────────────────────────
+const faqData = [
+  {
+    question: "¿Quién publica la app? ¿Necesito cuentas de App Store y Play Store?",
+    answer: "Nosotros gestionamos y te orientamos en la creación de las cuentas de desarrollador de Apple (USD 99/año) y Google (USD 25 pago único), que son de tu propiedad. Publicamos bajo tu cuenta. Tú eres el dueño de la app en los stores.",
+  },
+  {
+    question: "¿Soy dueño del código fuente?",
+    answer: "Sí. Al completar el proyecto, te entregamos el repositorio Git con el código completo. Puedes llevarlo a cualquier equipo de desarrollo. No hay lock-in de plataforma ni de proveedor.",
+  },
+  {
+    question: "¿Ofrecen soporte y mantenimiento tras el lanzamiento? ¿Tienen SLA?",
+    answer: "Sí. Ofrecemos planes de mantenimiento mensual que incluyen actualizaciones de compatibilidad (nuevas versiones de iOS/Android), corrección de bugs, mejoras menores y monitoreo de errores. El SLA estándar es resolución de bugs críticos en 24 h hábiles.",
+  },
+  {
+    question: "¿Qué pasa si el alcance cambia durante el desarrollo?",
+    answer: "Trabajamos con alcance firmado y backlogs en Notion/Jira. Los cambios de alcance se evalúan, se documentan como cambios de requerimiento (CR) y se presupuestan por separado. Nunca absorbemos cambios de alcance sin comunicación y aprobación previa del cliente.",
+  },
+  {
+    question: "¿Cómo manejan la seguridad de los datos?",
+    answer: "Aplicamos cifrado TLS 1.3 en tránsito y AES-256 en reposo. Usamos autenticación OAuth 2.0/JWT, roles y permisos granulares, y seguimos el estándar OWASP MASVS como referencia de seguridad móvil.",
+  },
+  {
+    question: "¿Pueden integrar pagos, ERP, CRM, WhatsApp y otras APIs?",
+    answer: "Sí. Tenemos experiencia integrando Culqi, Mercado Pago, Stripe, Yape/Plin; ERP como SAP y Odoo; WhatsApp Business API; Google Maps y Firebase. Si tienes un sistema existente con API REST o SOAP, podemos conectarlo.",
+  },
+  {
+    question: "¿La analítica (Firebase/GA4) está incluida?",
+    answer: "Sí, configuramos Firebase Analytics o GA4 como parte del proceso de desarrollo. Incluimos eventos clave, conversiones y un dashboard básico.",
+  },
+  {
+    question: "¿Desarrollan para iOS, Android o ambas plataformas?",
+    answer: "Las tres opciones. Podemos desarrollar nativas (Swift/Kotlin), multiplataforma (React Native/Flutter) o PWA. Lo recomendado depende de tu presupuesto, audiencia y requerimientos de rendimiento.",
+  },
+  {
+    question: "¿Cómo es el proceso de pago del proyecto?",
+    answer: "Trabajamos con hitos de pago alineados a entregas concretas: usualmente 30% al inicio, 30% al entregar el prototipo aprobado, 30% al completar el desarrollo y 10% al publicar. Ofrecemos fraccionamiento según el alcance.",
+  },
+];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqData.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.answer,
+    },
+  })),
+});
+
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo de Aplicaciones Móviles a Medida",
+  alternateName: "Desarrollo de Apps iOS y Android para Empresas",
+  description:
+    "Desarrollamos aplicaciones móviles nativas e híbridas a medida (iOS/Android) para vender más, automatizar procesos y fidelizar clientes. React Native, Flutter, Swift, Kotlin. Desde Lima, Perú.",
+  provider: {
+    "@type": "Organization",
+    "@id": "https://bcpconsulting.pe/#organization",
+    name: "BCP Consulting E.I.R.L.",
+    url: "https://bcpconsulting.pe",
+    telephone: "+51929772711",
+    email: "soporte@bcpconsulting.pe",
+    taxID: "20612012475",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Lima",
+      addressCountry: "PE",
+    },
+    sameAs: [
+      "https://www.linkedin.com/company/bcp-consulting-pe",
+    ],
+  },
+  areaServed: [
+    { "@type": "Country", name: "Peru" },
+    { "@type": "Country", name: "Colombia" },
+    { "@type": "Country", name: "Chile" },
+  ],
+  serviceType: "Mobile Application Development",
+  category: "Software Development",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Tipos de Apps Móviles a Medida",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "App de ventas / e-commerce móvil",
+          description: "Catálogo, carrito, pagos, tracking y programa de fidelización.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "App de reservas y citas",
+          description: "Agenda online, disponibilidad en tiempo real, pagos y recordatorios.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "App interna para operaciones de campo",
+          description: "Formularios offline, GPS, firma digital, sincronización automática.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "App marketplace",
+          description: "Multi-vendedor, pagos split, chat interno, ratings y búsqueda avanzada.",
+        },
+      },
+    ],
+  },
+});
+
+// ── JSON-LD: Organization ────────────────────────────────────────
+const orgSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://bcpconsulting.pe/#organization",
+  name: "BCP Consulting E.I.R.L.",
+  url: "https://bcpconsulting.pe",
+  logo: "https://bcpconsulting.pe/icons/icon-192.png",
+  telephone: "+51929772711",
+  email: "soporte@bcpconsulting.pe",
+  taxID: "20612012475",
+  foundingDate: "2013",
+  description: "Empresa de desarrollo de software y aplicaciones móviles a medida con más de 10 años de experiencia en Perú y Latinoamérica.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Lima",
+    addressCountry: "PE",
+  },
+  areaServed: "PE",
+  knowsAbout: [
+    "Desarrollo de aplicaciones móviles iOS y Android",
+    "React Native",
+    "Flutter",
+    "Software a medida",
+    "Transformación digital empresarial",
+  ],
+});
+---
+
+<LandingLayout
+  title="Desarrollo de Apps Móviles a Medida (iOS/Android) en Perú | BCP Consulting"
+  description="Desarrollamos apps móviles a medida para vender más, automatizar y fidelizar: ventas, reservas, operaciones de campo y marketplaces. React Native, Flutter, Swift, Kotlin. +10 años de experiencia. Lima, Perú."
+  navItems={navItems}
+  pagesInteres={pagesInteres}
+  ctaLabel="Cotizar App Móvil"
+  ctaHref="#contacto"
+>
+  <!-- JSON-LD Schemas para SEO/AEO -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={orgSchema} />
+    <script type="application/ld+json" set:html={serviceSchema} />
+    <script type="application/ld+json" set:html={faqSchema} />
+    <!-- Canonical -->
+    <link rel="canonical" href="https://bcpconsulting.pe/landing-apps-moviles/" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Desarrollo de Apps Móviles a Medida (iOS/Android) | BCP Consulting" />
+    <meta property="og:description" content="Apps para vender más, automatizar y fidelizar. React Native, Flutter, Swift, Kotlin. +10 años en Perú. Cotiza sin compromiso." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bcpconsulting.pe/landing-apps-moviles/" />
+    <!-- Preconnect para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  </Fragment>
+
+  <!--
+    Arquitectura: Pain → Solution → Proof → Risk reversal → CTA
+    A: Hero (above the fold)
+    B: ¿Es para ti? (filtro de lead)
+    C: Tabla AEO (tipos de apps)
+    D: Proceso + Entregables (EEAT)
+    E: Casos / Evidencia (EEAT)
+    F: Stack + Calidad
+    G: Precios orientativos (AEO)
+    H: Testimonios verificables
+    I: FAQ anti-objeciones (AEO)
+    J: CTA + Formulario
+  -->
+
+  <!-- A: Hero -->
+  <HeroAppsMoviles />
+
+  <!-- B: ¿Es para ti? (filtro de lead + definición AEO) -->
+  <EsParaTiApps />
+
+  <!-- C: Tabla comparativa AEO -->
+  <TablaApps />
+
+  <!-- D: Proceso real + entregables (EEAT) -->
+  <ProcesoApps />
+
+  <!-- E: Mini-casos con KPIs (EEAT) -->
+  <CasosApps />
+
+  <!-- F: Stack + Calidad + Seguridad -->
+  <StackApps />
+
+  <!-- G: Precios orientativos (AEO) -->
+  <PreciosApps />
+
+  <!-- H: Testimonios verificables -->
+  <TestimoniosApps />
+
+  <!-- I: FAQ anti-objeciones (AEO + accesibilidad) -->
+  <FaqApps />
+
+  <!-- J: CTA + Formulario corto (embebido) -->
+  <CtaApps />
+
+  <!-- Sticky Bottom Bar (móvil) + Modal Cotizar (global) -->
+  <StickyBarApps />
+  <ModalCotizar />
+</LandingLayout>
