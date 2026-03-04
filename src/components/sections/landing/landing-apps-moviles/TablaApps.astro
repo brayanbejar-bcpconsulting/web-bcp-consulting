@@ -1,0 +1,133 @@
+---
+const tipos = [
+  {
+    tipo: "App de ventas / e-commerce",
+    objetivo: "Vender productos o servicios directamente desde móvil",
+    funciones: "Catálogo, carrito, pasarela de pagos, tracking de pedidos, notificaciones push",
+    tiempoMvp: "10–14 semanas",
+    integraciones: "Culqi, Mercado Pago, Stripe, Yape/Plin, API de inventario",
+    recomendado: "Retail, moda, restaurantes, tiendas especializadas",
+  },
+  {
+    tipo: "App de reservas / citas",
+    objetivo: "Gestionar agendas, citas y disponibilidad en tiempo real",
+    funciones: "Calendario, disponibilidad, pagos anticipados, recordatorios, reseñas",
+    tiempoMvp: "8–12 semanas",
+    integraciones: "Google Calendar, pasarelas de pago, WhatsApp API, SMS",
+    recomendado: "Clínicas, salones, spas, canchas deportivas, consultoras",
+  },
+  {
+    tipo: "App interna / operaciones",
+    objetivo: "Digitalizar procesos de campo, logística o mantenimiento",
+    funciones: "Formularios offline, GPS/tracking, cámara, firma digital, sincronización",
+    tiempoMvp: "8–12 semanas",
+    integraciones: "ERP interno, Google Maps, Firebase, APIs propietarias",
+    recomendado: "Empresas con personal en campo, logística, mantenimiento industrial",
+  },
+  {
+    tipo: "App marketplace",
+    objetivo: "Conectar oferta y demanda (multi-vendedor o multi-proveedor)",
+    funciones: "Perfiles dobles, búsqueda avanzada, pagos con split, chat interno, ratings",
+    tiempoMvp: "16–24 semanas",
+    integraciones: "Pasarelas multi-party, Firebase, notificaciones, mapas",
+    recomendado: "Plataformas de servicios, alquiler, freelancers, distribución",
+  },
+  {
+    tipo: "App SaaS / plataforma",
+    objetivo: "Ofrecer un servicio de software como suscripción",
+    funciones: "Multi-tenant, roles y permisos, billing recurrente, analytics, onboarding",
+    tiempoMvp: "20–28 semanas",
+    integraciones: "Stripe Billing, auth OAuth, APIs externas, webhooks",
+    recomendado: "Startups tech, empresas que quieren monetizar un proceso propio",
+  },
+];
+---
+
+<section
+  id="tipos-apps"
+  aria-labelledby="tipos-heading"
+  class="py-16 lg:py-24 bg-white dark:bg-neutral-950"
+>
+  <div class="max-w-350 mx-auto px-[5%]">
+
+    <header class="mb-10 text-center">
+      <span class="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-xs font-semibold uppercase tracking-widest mb-3">
+        Referencia AEO
+      </span>
+      <h2 id="tipos-heading" class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white leading-tight">
+        Tipos de apps móviles y cuál te conviene
+      </h2>
+      <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+        Compara los tipos más comunes de apps de negocio: objetivos, funcionalidades típicas, tiempos MVP e integraciones clave.
+      </p>
+    </header>
+
+    <!-- Tabla AEO para desktop -->
+    <div class="hidden md:block overflow-x-auto rounded-2xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+      <table class="w-full text-sm text-left border-collapse">
+        <caption class="sr-only">
+          Comparativa de tipos de aplicaciones móviles a medida: objetivo, funcionalidades, tiempo MVP, integraciones y sector recomendado.
+        </caption>
+        <thead class="bg-primary-600 text-white">
+          <tr>
+            <th scope="col" class="px-5 py-4 font-semibold text-xs uppercase tracking-wider whitespace-nowrap">Tipo de app</th>
+            <th scope="col" class="px-5 py-4 font-semibold text-xs uppercase tracking-wider">Objetivo</th>
+            <th scope="col" class="px-5 py-4 font-semibold text-xs uppercase tracking-wider">Funcionalidades típicas</th>
+            <th scope="col" class="px-5 py-4 font-semibold text-xs uppercase tracking-wider whitespace-nowrap">Tiempo MVP*</th>
+            <th scope="col" class="px-5 py-4 font-semibold text-xs uppercase tracking-wider">Integraciones comunes</th>
+            <th scope="col" class="px-5 py-4 font-semibold text-xs uppercase tracking-wider">Recomendado para…</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tipos.map((row, i) => (
+            <tr class={i % 2 === 0 ? "bg-white dark:bg-neutral-900" : "bg-neutral-50 dark:bg-neutral-800/60"}>
+              <td class="px-5 py-4 font-semibold text-primary-700 dark:text-primary-300 whitespace-nowrap align-top">{row.tipo}</td>
+              <td class="px-5 py-4 text-neutral-700 dark:text-neutral-300 align-top">{row.objetivo}</td>
+              <td class="px-5 py-4 text-neutral-600 dark:text-neutral-400 text-xs align-top">{row.funciones}</td>
+              <td class="px-5 py-4 font-semibold text-complementary-700 dark:text-complementary-300 whitespace-nowrap align-top">{row.tiempoMvp}</td>
+              <td class="px-5 py-4 text-neutral-600 dark:text-neutral-400 text-xs align-top">{row.integraciones}</td>
+              <td class="px-5 py-4 text-neutral-600 dark:text-neutral-400 text-xs align-top">{row.recomendado}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards para mobile (en lugar de tabla) -->
+    <div class="md:hidden flex flex-col gap-4">
+      {tipos.map((row) => (
+        <div class="rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+          <div class="bg-primary-600 text-white px-4 py-3">
+            <p class="font-bold text-sm">{row.tipo}</p>
+            <p class="text-xs text-white/80 mt-0.5">{row.objetivo}</p>
+          </div>
+          <div class="p-4 flex flex-col gap-2.5 bg-white dark:bg-neutral-900">
+            <div>
+              <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-1">Funciones</p>
+              <p class="text-xs text-neutral-700 dark:text-neutral-300">{row.funciones}</p>
+            </div>
+            <div class="flex gap-4">
+              <div>
+                <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-1">MVP</p>
+                <p class="text-xs font-bold text-complementary-700 dark:text-complementary-300">{row.tiempoMvp}</p>
+              </div>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-1">Integraciones</p>
+              <p class="text-xs text-neutral-700 dark:text-neutral-300">{row.integraciones}</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-1">Recomendado</p>
+              <p class="text-xs text-neutral-700 dark:text-neutral-300">{row.recomendado}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-4 text-xs text-neutral-400 dark:text-neutral-500 text-center">
+      * Tiempos orientativos para MVP con equipo dedicado. Varían según funcionalidades, integraciones y aprobaciones en stores.
+    </p>
+
+  </div>
+</section>

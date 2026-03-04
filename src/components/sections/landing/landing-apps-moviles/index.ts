@@ -1,0 +1,12 @@
+export { default as HeroAppsMoviles } from "./HeroAppsMoviles.astro";
+export { default as EsParaTiApps } from "./EsParaTiApps.astro";
+export { default as TablaApps } from "./TablaApps.astro";
+export { default as ProcesoApps } from "./ProcesoApps.astro";
+export { default as CasosApps } from "./CasosApps.astro";
+export { default as StackApps } from "./StackApps.astro";
+export { default as PreciosApps } from "./PreciosApps.astro";
+export { default as TestimoniosApps } from "./TestimoniosApps.astro";
+export { default as FaqApps } from "./FaqApps.astro";
+export { default as CtaApps } from "./CtaApps.astro";
+export { default as StickyBarApps } from "./StickyBarApps.astro";
+export { default as ModalCotizar } from "./ModalCotizar.astro";
