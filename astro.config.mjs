@@ -23,14 +23,20 @@ export default defineConfig({
           // @ts-ignore
           item.changefreq = 'daily';
         }
-        // 2. Prioridad Alta: Páginas estáticas principales
+        // 2. Prioridad Alta: Páginas estáticas principales (excepto /portafolio/*)
         else if (
           item.url.includes('/servicios') || 
           item.url.includes('/nosotros') || 
-          item.url.includes('/portafolio') || 
-          item.url.includes('/contacto')
+          item.url.includes('/contacto') ||
+          item.url === 'https://bcpconsulting.pe/portafolio'
         ) {
           item.priority = 0.9;
+          // @ts-ignore
+          item.changefreq = 'monthly';
+        }
+        // 3. Prioridad Media-Alta: Páginas individuales de portafolio
+        else if (item.url.includes('/portafolio/')) {
+          item.priority = 0.6;
           // @ts-ignore
           item.changefreq = 'monthly';
         }

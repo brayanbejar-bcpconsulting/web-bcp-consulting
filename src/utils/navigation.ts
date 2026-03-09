@@ -30,7 +30,7 @@ export const NAVIGATION = {
         { title: 'Diseño Web', path: '/servicios/web', icon: 'monitor' },
         { title: 'Software a Medida', path: '/servicios/software', icon: 'code' },
         { title: 'Aplicaciones Móviles', path: '/servicios/apps-moviles', icon: 'smartphone' },
-        { title: 'Consultoría', path: '/servicios/apps-consultoria', icon: 'lightbulb' },
+        { title: 'Consultoría', path: '/consultoria', icon: 'lightbulb' },
       ]
     },
     { title: 'Portafolio', path: '/portafolio', icon: 'folder-open' },

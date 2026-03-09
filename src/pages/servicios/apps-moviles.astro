@@ -2,8 +2,32 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import { HeroPage, MainContainer, HeadingSection, Button } from "@components";
 import { SERVICES } from "@data/services";
+import { getBreadcrumbSchema } from "@utils/seo";
+import { SITE_INFO } from "@utils/site-config";
 
 const service = SERVICES.find((s) => s.id === "apps-moviles")!;
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: "Inicio", url: SITE_INFO.url + "/" },
+  { name: "Servicios", url: SITE_INFO.url + "/servicios" },
+  { name: service.title, url: SITE_INFO.url + "/servicios/apps-moviles" },
+]);
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo de Aplicaciones Móviles en Perú",
+  description:
+    "Desarrollamos aplicaciones móviles nativas para Android e iOS: apps de negocio, delivery, salud, educación y más. Diseño UX/UI premium y publicación en stores incluida.",
+  provider: {
+    "@type": "Organization",
+    name: SITE_INFO.title,
+    url: SITE_INFO.url,
+  },
+  areaServed: { "@type": "Country", name: "Perú" },
+  serviceType: "Mobile App Development",
+  url: `${SITE_INFO.url}/servicios/apps-moviles`,
+};
 
 const appTypes = [
   {
@@ -39,6 +63,10 @@ import bgAppsMobiles from '@images/pages/services/apps-mobiles/bg-image-apps-mob
   title={`${service.title} para Android e iOS`}
   description={`Desarrollo de aplicaciones móviles nativas para Android e iOS en Perú. ${service.tagline}. Apps de alto rendimiento y diseño UX premium.`}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
   <HeroPage
     title={service.title}
     description={service.description}

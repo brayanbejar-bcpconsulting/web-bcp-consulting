@@ -9,6 +9,8 @@ import {
 } from "@components";
 import { SERVICES } from "@data/services";
 import { getCollection } from "astro:content";
+import { getBreadcrumbSchema } from "@utils/seo";
+import { SITE_INFO } from "@utils/site-config";
 
 const service = SERVICES.find((s) => s.id === "web")!;
 const allProjects = await getCollection("projects");
@@ -20,6 +22,28 @@ const CATEGORY_LABELS: Record<string, string> = {
   software: "Software",
 };
 
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: "Inicio", url: SITE_INFO.url + "/" },
+  { name: "Servicios", url: SITE_INFO.url + "/servicios" },
+  { name: service.title, url: SITE_INFO.url + "/servicios/web" },
+]);
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Diseño y Desarrollo Web Empresarial en Perú",
+  description:
+    "Diseñamos y desarrollamos sitios web corporativos, tiendas online y landing pages optimizadas para SEO. Sitios rápidos, seguros y con diseño premium para empresas en Perú.",
+  provider: {
+    "@type": "Organization",
+    name: SITE_INFO.title,
+    url: SITE_INFO.url,
+  },
+  areaServed: { "@type": "Country", name: "Perú" },
+  serviceType: "Web Design & Development",
+  url: `${SITE_INFO.url}/servicios/web`,
+};
+
 import bgWebDesign from '@images/pages/services/web-design/bg-image-web-design.jpg'
 ---
 
@@ -27,6 +51,10 @@ import bgWebDesign from '@images/pages/services/web-design/bg-image-web-design.j
   title={`${service.title} para Empresas`}
   description={`Diseño y desarrollo de páginas web empresariales en Perú. ${service.tagline}. Sitios rápidos, seguros y optimizados para SEO.`}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
   <HeroPage
     title={service.title}
     description={service.description}
