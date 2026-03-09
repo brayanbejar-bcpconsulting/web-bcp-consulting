@@ -3,6 +3,8 @@ import MainLayout from "./MainLayout.astro";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { CATEGORY_LABELS, formatDate } from "@utils/blog";
+import { getBreadcrumbSchema } from "@utils/seo";
+import { SITE_INFO } from "@utils/site-config";
 
 interface Props {
   title: string;
@@ -42,7 +44,7 @@ const siteOrigin = Astro.url.origin;
 // OG image: URL absoluta si la imagen local cargó, luego externa, luego fallback
 const ogResolved = imgData
   ? `${siteOrigin}${imgData.src}`
-  : (isExternalUrl ? coverImage : null) ?? "/og-image.jpg";
+  : (isExternalUrl ? coverImage : null) ?? "/og-image.webp";
 
 const categoryLabel = category ? (CATEGORY_LABELS[category] ?? category) : null;
 
@@ -71,10 +73,25 @@ const jsonLd = {
     url: siteOrigin,
   },
 };
+
+// BreadcrumbList JSON-LD
+const bcItems: Array<{ name: string; url: string }> = [
+  { name: "Inicio", url: SITE_INFO.url + "/" },
+  { name: "Blog", url: SITE_INFO.url + "/blog" },
+];
+if (categoryLabel && category) {
+  bcItems.push({
+    name: categoryLabel,
+    url: `${SITE_INFO.url}/blog/categoria/${category}`,
+  });
+}
+bcItems.push({ name: title, url: Astro.url.href });
+const breadcrumbSchema = getBreadcrumbSchema(bcItems);
 ---
 
 <MainLayout title={`${title} | Blog BCP Consulting`} description={description} image={ogResolved}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <!-- ── Hero ─────────────────────────────────────────────────────── -->
   <section class="relative w-full overflow-hidden" aria-label="Portada del artículo" style="min-height: 520px;">
     {imgData ? (

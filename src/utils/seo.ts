@@ -24,6 +24,7 @@ export function getOrganizationSchema() {
     },
     sameAs: [
       'https://www.facebook.com/profile.php?id=61555629673170',
+      'https://www.linkedin.com/company/bcp-consulting-sac',
     ],
   };
 }

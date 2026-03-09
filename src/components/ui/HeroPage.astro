@@ -1,12 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import Breadcrumbs from "./Breadcrumbs.astro";
+import { getBreadcrumbSchema } from "@utils/seo";
+import { SITE_INFO } from "@utils/site-config";
 
 /**
  * Hero interno para páginas internas.
  * Soporta fondo degradado (bgClass) o imagen de fondo optimizada (image).
  * Cuando se pasa `image`, se renderiza sobre un overlay oscuro para
  * mantener la legibilidad del texto.
+ * Emite automáticamente BreadcrumbList JSON-LD cuando se pasan breadcrumbs con href.
  */
 interface Props {
   title: string;
@@ -35,12 +38,27 @@ const {
   imageOverlay = 'medium',
 } = Astro.props;
 
+// Genera BreadcrumbList schema cuando hay breadcrumbs con al menos un href
+const bcItems = breadcrumbs
+  ? breadcrumbs.map((b) => ({
+      name: b.label,
+      url: b.href ? `${SITE_INFO.url}${b.href === '/' ? '' : b.href}` : Astro.url.href,
+    }))
+  : null;
+const breadcrumbSchema = bcItems && bcItems.length > 0
+  ? getBreadcrumbSchema(bcItems)
+  : null;
+
 const overlayMap = {
   light:  'bg-black/40',
   medium: 'bg-black/60',
   dark:   'bg-black/80',
 } as const;
 ---
+
+{breadcrumbSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+)}
 
 <section class:list={["hero-page", !image && bgClass]}>
 

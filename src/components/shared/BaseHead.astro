@@ -22,6 +22,22 @@ const fullTitle = title ? `${title} | ${SITE_INFO.title}` : SITE_INFO.title;
 
 const orgSchema = getOrganizationSchema();
 const localSchema = getLocalBusinessSchema();
+
+// SearchAction schema para habilitar el sitelinks searchbox en Google
+const searchActionSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_INFO.title,
+  url: SITE_INFO.url,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_INFO.url}/blog?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
 ---
 
 <meta charset="UTF-8" />
@@ -38,6 +54,9 @@ const localSchema = getLocalBusinessSchema();
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={new URL(image, SITE_INFO.url)} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={fullTitle} />
 <meta property="og:site_name" content={SITE_INFO.title} />
 <meta property="og:locale" content={SITE_INFO.language} />
 
@@ -67,3 +86,4 @@ const localSchema = getLocalBusinessSchema();
 {/* JSON-LD Schemas */}
 <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(localSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(searchActionSchema)} />
