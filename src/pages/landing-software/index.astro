@@ -1,5 +1,6 @@
 ---
 import LandingLayout from "@layouts/LandingLayout.astro";
+import { SITE_INFO } from "@utils/site-config";
 import {
   HeroSoftware,
   EsParaTiSoftware,
@@ -28,17 +29,17 @@ const navItems = [
 const pagesInteres = [
   {
     title: "Software para Clínicas",
-    href: "/landing/software-clinicas",
+    href: "/landing/software-clinicas/",
     tagline: "Historia clínica electrónica, agenda médica y facturación SUNAT",
   },
   {
     title: "Software para E-commerce",
-    href: "/landing/software-ecommerce",
+    href: "/landing/software-ecommerce/",
     tagline: "Tienda online, pasarela de pagos y gestión de pedidos",
   },
   {
     title: "Software de Logística",
-    href: "/landing/software-logistica",
+    href: "/landing/software-logistica/",
     tagline: "Control de inventarios, rutas de despacho y trazabilidad",
   },
 ];
@@ -113,8 +114,10 @@ const serviceSchema = JSON.stringify({
     "Desarrollamos sistemas de software web innovadores y escalables: ERP, CRM, SaaS, Logística y Automatización para empresas en Perú y Latinoamérica.",
   provider: {
     "@type": "Organization",
+    "@id": "https://bcpconsulting.pe/#organization",
     name: "BCP Consulting E.I.R.L.",
     url: "https://bcpconsulting.pe",
+    taxID: "20612012475",
     telephone: "+51929772711",
     email: "soporte@bcpconsulting.pe",
   },
@@ -123,21 +126,18 @@ const serviceSchema = JSON.stringify({
     name: "Peru",
   },
   serviceType: "Software Development",
-  offers: {
-    "@type": "Offer",
-    description: "20% de descuento en el primer proyecto",
-    availability: "https://schema.org/InStock",
-  },
+  url: `${SITE_INFO.url}/landing-software/`,
 });
 
 const organizationSchema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "Organization",
+  "@id": "https://bcpconsulting.pe/#organization",
   name: "BCP Consulting E.I.R.L.",
   url: "https://bcpconsulting.pe",
+  taxID: "20612012475",
   telephone: "+51929772711",
   email: "soporte@bcpconsulting.pe",
-  taxID: "20612012475",
   address: {
     "@type": "PostalAddress",
     addressCountry: "PE",
@@ -153,7 +153,7 @@ const organizationSchema = JSON.stringify({
 
 <LandingLayout
   title="Desarrollo de Software Web a Medida en Perú | BCP Consulting"
-  description="Desarrollamos sistemas de software web innovadores a medida: ERP, CRM, SaaS, Logística y más. +10 años de experiencia, tecnología de vanguardia y 20% de descuento en tu primer proyecto."
+  description="Desarrollamos sistemas de software web a medida: ERP, CRM, SaaS, logística y automatización para empresas en Perú. +10 años de experiencia, sprints ágiles y código 100% tuyo. Cotiza sin compromiso."
   navItems={navItems}
   pagesInteres={pagesInteres}
   ctaLabel="Solicitar Propuesta Gratis"
@@ -164,8 +164,6 @@ const organizationSchema = JSON.stringify({
     <script type="application/ld+json" set:html={faqSchema} />
     <script type="application/ld+json" set:html={serviceSchema} />
     <script type="application/ld+json" set:html={organizationSchema} />
-    <link rel="canonical" href="https://bcpconsulting.pe/landing-software/" />
-    <meta property="og:url" content="https://bcpconsulting.pe/landing-software/" />
     <style>
       @media (prefers-reduced-motion: no-preference) {
         html { scroll-behavior: smooth; }

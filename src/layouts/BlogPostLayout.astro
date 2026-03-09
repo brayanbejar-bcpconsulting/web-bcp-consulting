@@ -63,21 +63,30 @@ const jsonLd = {
   "@type": "BlogPosting",
   headline: title,
   description,
+  url: Astro.url.href,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": Astro.url.href,
+  },
   ...(schemaImage ? { image: schemaImage } : {}),
   author: { "@type": "Person", name: author },
   datePublished: date.toISOString(),
   ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
   publisher: {
     "@type": "Organization",
-    name: "BCP Consulting",
+    name: "BCP Consulting E.I.R.L.",
     url: siteOrigin,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteOrigin}/favicon.svg`,
+    },
   },
 };
 
 // BreadcrumbList JSON-LD
 const bcItems: Array<{ name: string; url: string }> = [
   { name: "Inicio", url: SITE_INFO.url + "/" },
-  { name: "Blog", url: SITE_INFO.url + "/blog" },
+  { name: "Blog", url: SITE_INFO.url + "/blog/" },
 ];
 if (categoryLabel && category) {
   bcItems.push({
@@ -89,9 +98,13 @@ bcItems.push({ name: title, url: Astro.url.href });
 const breadcrumbSchema = getBreadcrumbSchema(bcItems);
 ---
 
-<MainLayout title={`${title} | Blog BCP Consulting`} description={description} image={ogResolved}>
+<MainLayout title={title} description={description} image={ogResolved} ogType="article">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <meta slot="head" property="article:published_time" content={date.toISOString()} />
+  {updatedDate && <meta slot="head" property="article:modified_time" content={updatedDate.toISOString()} />}
+  <meta slot="head" property="article:author" content={author} />
+  {category && <meta slot="head" property="article:section" content={category} />}
   <!-- ── Hero ─────────────────────────────────────────────────────── -->
   <section class="relative w-full overflow-hidden" aria-label="Portada del artículo" style="min-height: 520px;">
     {imgData ? (

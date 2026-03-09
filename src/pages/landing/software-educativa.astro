@@ -9,6 +9,7 @@ import {
   FaqEducativa,
   CtaEducativa,
 } from "@components/sections/landing/software-educativa";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -20,10 +21,46 @@ const navItems = [
 ];
 
 const pagesInteres = [
-  { label: "Software de Gestión de RRHH", href: "/landing/software-rrhh/" },
-  { label: "Software Financiero para Empresas", href: "/landing/software-financiero/" },
-  { label: "Software para Logística y Transporte", href: "/landing/software-logistica/" },
+  {
+    title: "Software de Gestión de RRHH",
+    href: "/landing/software-rrhh/",
+    tagline: "Planillas, asistencia, contratos y evaluaciones automatizadas",
+  },
+  {
+    title: "Software Financiero",
+    href: "/landing/software-financiero/",
+    tagline: "Gestión de créditos, cartera, riesgo crediticio y reportes regulatorios",
+  },
+  {
+    title: "Software para Logística",
+    href: "/landing/software-logistica/",
+    tagline: "Gestión de flotas, rutas, órdenes de transporte y reportes operativos",
+  },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software para Colegios e Instituciones Educativas',
+  description: 'Plataforma integral para colegios: gestión académica, comunicación con padres, control de matrículas y pagos, y reportes directivos.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'Educational Software Development',
+  url: `${SITE_INFO.url}/landing/software-educativa/`,
+});
 ---
 
 <LandingLayout
@@ -32,6 +69,10 @@ const pagesInteres = [
   navItems={navItems}
   pagesInteres={pagesInteres}
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroEducativa />
   <ProblemasEducativa />
   <FuncionalidadesMVPEducativa />

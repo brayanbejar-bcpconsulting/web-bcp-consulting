@@ -9,6 +9,7 @@ import {
   FaqLogistica,
   CtaLogistica,
 } from "@components/sections/landing/software-logistica";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -20,10 +21,46 @@ const navItems = [
 ];
 
 const pagesInteres = [
-  { label: "Software para Constructoras", href: "/landing/software-constructoras/" },
-  { label: "Software de Control de Inventarios", href: "/landing/software-inventarios/" },
-  { label: "Software para Inmobiliarias", href: "/landing/software-inmobiliarias/" },
+  {
+    title: "Software para Constructoras",
+    href: "/landing/software-constructoras/",
+    tagline: "Control presupuestal, avance de obra y materiales en tiempo real",
+  },
+  {
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios/",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
+  },
+  {
+    title: "Software para Inmobiliarias",
+    href: "/landing/software-inmobiliarias/",
+    tagline: "CRM inmobiliario, pipeline de ventas y disponibilidad de unidades",
+  },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software para Logística y Transporte',
+  description: 'Plataforma integral para empresas de logística: gestión de flotas, planificación de rutas, control de órdenes de transporte y reportes de desempeño operativo.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'Logistics Management Software Development',
+  url: `${SITE_INFO.url}/landing/software-logistica/`,
+});
 ---
 
 <LandingLayout
@@ -32,6 +69,10 @@ const pagesInteres = [
   navItems={navItems}
   pagesInteres={pagesInteres}
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroLogistica />
   <ProblemasLogistica />
   <FuncionalidadesMVPLogistica />

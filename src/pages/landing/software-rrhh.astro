@@ -9,6 +9,7 @@ import {
   FaqRRHH,
   CtaRRHH,
 } from "@components/sections/landing/software-rrhh";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -31,11 +32,35 @@ const pagesInteres = [
     tagline: "Control integral de ventas, inventarios y operación gastronómica",
   },
   {
-    title: "Software para Retail",
-    href: "/landing/software-retail",
-    tagline: "Punto de venta, stock y cadena de tiendas bajo control",
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios/",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
   },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software de Gestión de RRHH',
+  description: 'Sistema para automatizar recursos humanos: control de asistencia, planillas, gestión documentaria y evaluación de desempeño. Cumplimiento MINTRA.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'HR Software Development',
+  url: `${SITE_INFO.url}/landing/software-rrhh/`,
+});
 ---
 
 <LandingLayout
@@ -46,6 +71,10 @@ const pagesInteres = [
   ctaLabel="Solicitar Demo"
   ctaHref="#contacto"
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroRRHH />
   <ProblemasRRHH />
   <FuncionalidadesMVPRRHH />

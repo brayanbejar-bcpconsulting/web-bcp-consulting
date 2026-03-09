@@ -9,6 +9,7 @@ import {
   FaqInmobiliarias,
   CtaInmobiliarias,
 } from "@components/sections/landing/software-inmobiliarias";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -20,10 +21,46 @@ const navItems = [
 ];
 
 const pagesInteres = [
-  { label: "Software para Constructoras", href: "/landing/software-constructoras/" },
-  { label: "Software de Control de Inventarios", href: "/landing/software-inventarios/" },
-  { label: "Software de Gestión de RRHH", href: "/landing/software-rrhh/" },
+  {
+    title: "Software para Constructoras",
+    href: "/landing/software-constructoras/",
+    tagline: "Control presupuestal, avance de obra y materiales en tiempo real",
+  },
+  {
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios/",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
+  },
+  {
+    title: "Software de Gestión de RRHH",
+    href: "/landing/software-rrhh/",
+    tagline: "Planillas, asistencia, contratos y evaluaciones automatizadas",
+  },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software CRM para Inmobiliarias',
+  description: 'CRM y software integral para inmobiliarias: gestión de prospectos, pipeline de ventas, disponibilidad de unidades y seguimiento comercial por asesor.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'Real Estate CRM Software Development',
+  url: `${SITE_INFO.url}/landing/software-inmobiliarias/`,
+});
 ---
 
 <LandingLayout
@@ -32,6 +69,10 @@ const pagesInteres = [
   navItems={navItems}
   pagesInteres={pagesInteres}
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroInmobiliarias />
   <ProblemasInmobiliarias />
   <FuncionalidadesMVPInmobiliarias />

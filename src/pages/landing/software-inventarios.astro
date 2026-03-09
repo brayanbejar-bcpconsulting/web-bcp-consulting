@@ -9,6 +9,7 @@ import {
   FaqInventarios,
   CtaInventarios,
 } from "@components/sections/landing/software-inventarios";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -36,6 +37,30 @@ const pagesInteres = [
     tagline: "Control integral de ventas, inventarios y operación gastronómica",
   },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software de Control de Inventarios',
+  description: 'Sistema avanzado de control de inventarios: gestión multialmacén, kardex automatizado, alertas de reposición y trazabilidad por lotes.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'Inventory Management Software Development',
+  url: `${SITE_INFO.url}/landing/software-inventarios/`,
+});
 ---
 
 <LandingLayout
@@ -46,6 +71,10 @@ const pagesInteres = [
   ctaLabel="Solicitar Demo"
   ctaHref="#contacto"
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroInventarios />
   <ProblemasInventarios />
   <FuncionalidadesMVPInventarios />

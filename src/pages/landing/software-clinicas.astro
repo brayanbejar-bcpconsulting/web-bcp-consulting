@@ -9,6 +9,7 @@ import {
   FaqClinicas,
   CtaClinicas,
 } from "@components/sections/landing/software-clinicas";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -26,16 +27,40 @@ const pagesInteres = [
     tagline: "Control total de ventas, inventarios y operación gastronómica",
   },
   {
-    title: "Software para Hoteles",
-    href: "/landing/software-hoteles",
-    tagline: "Gestión de reservas, huéspedes y ocupación hotelera",
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios/",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
   },
   {
-    title: "Software para Retail",
-    href: "/landing/software-retail",
-    tagline: "Punto de venta, inventarios y cadena de tiendas bajo control",
+    title: "Software de RRHH",
+    href: "/landing/software-rrhh/",
+    tagline: "Planillas, asistencia, contratos y evaluaciones automatizadas",
   },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software para Clínicas y Centros Médicos',
+  description: 'Plataforma integral para clínicas: historia clínica electrónica, agenda médica, facturación SUNAT y gestión de pacientes.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'Healthcare Software Development',
+  url: `${SITE_INFO.url}/landing/software-clinicas/`,
+});
 ---
 
 <LandingLayout
@@ -46,6 +71,10 @@ const pagesInteres = [
   ctaLabel="Solicitar Demo"
   ctaHref="#contacto"
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroClinicas />
   <ProblemasClinicas />
   <FuncionalidadesMVPClinicas />

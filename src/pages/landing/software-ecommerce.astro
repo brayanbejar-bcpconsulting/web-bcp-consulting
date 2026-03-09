@@ -9,6 +9,7 @@ import {
   FaqEcommerce,
   CtaEcommerce,
 } from "@components/sections/landing/software-ecommerce";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -20,10 +21,46 @@ const navItems = [
 ];
 
 const pagesInteres = [
-  { label: "Software para Restaurantes", href: "/landing/software-restaurantes/" },
-  { label: "Software para Inmobiliarias", href: "/landing/software-inmobiliarias/" },
-  { label: "Software de Control de Inventarios", href: "/landing/software-inventarios/" },
+  {
+    title: "Software para Restaurantes",
+    href: "/landing/software-restaurantes/",
+    tagline: "Control integral de ventas, inventarios y operación gastronómica",
+  },
+  {
+    title: "Software para Inmobiliarias",
+    href: "/landing/software-inmobiliarias/",
+    tagline: "CRM inmobiliario, pipeline de ventas y disponibilidad de unidades",
+  },
+  {
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios/",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
+  },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Ecommerce Personalizado para Empresas',
+  description: 'Plataforma ecommerce empresarial a medida: catálogo personalizado, inventario integrado, pasarela de pago local y panel comercial.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'E-commerce Software Development',
+  url: `${SITE_INFO.url}/landing/software-ecommerce/`,
+});
 ---
 
 <LandingLayout
@@ -32,6 +69,10 @@ const pagesInteres = [
   navItems={navItems}
   pagesInteres={pagesInteres}
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroEcommerce />
   <ProblemasEcommerce />
   <FuncionalidadesMVPEcommerce />

@@ -9,6 +9,7 @@ import {
   FaqRestaurantes,
   CtaRestaurantes
 } from "@components/sections/landing/software-restaurantes";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -21,14 +22,14 @@ const navItems = [
 
 const pagesInteres = [
   {
-    title: "Software para Hoteles",
-    href: "/landing/software-hoteles",
-    tagline: "Control total de habitaciones y reservas.",
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios/",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
   },
   {
-    title: "Software para Retail",
-    href: "/landing/software-retail",
-    tagline: "Gestión eficiente de tiendas y stock.",
+    title: "Software de E-commerce",
+    href: "/landing/software-ecommerce/",
+    tagline: "Tienda online, pasarela de pagos y gestión de pedidos",
   },
   {
     title: "Software para Clínicas",
@@ -36,6 +37,30 @@ const pagesInteres = [
     tagline: "Administra citas, pacientes y facturación.",
   },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software para Restaurantes',
+  description: 'Software para restaurantes en Perú que controla mermas, inventarios, caja y personal. Decisiones basadas en datos reales.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'Restaurant Management Software Development',
+  url: `${SITE_INFO.url}/landing/software-restaurantes/`,
+});
 ---
 
 <LandingLayout
@@ -46,6 +71,10 @@ const pagesInteres = [
   ctaLabel="Solicitar Demo Gratis"
   ctaHref="#contacto"
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroRestaurantes />
   <ProblemasRestaurantes />
   <FuncionalidadesMVP />

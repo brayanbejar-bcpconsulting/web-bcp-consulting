@@ -9,6 +9,7 @@ import {
   FaqFinanciero,
   CtaFinanciero,
 } from "@components/sections/landing/software-financiero";
+import { SITE_INFO } from "@utils/site-config";
 
 const navItems = [
   { label: "Problemas", href: "#problemas" },
@@ -20,10 +21,46 @@ const navItems = [
 ];
 
 const pagesInteres = [
-  { label: "Software de Gestión de RRHH", href: "/landing/software-rrhh/" },
-  { label: "Software de Control de Inventarios", href: "/landing/software-inventarios/" },
-  { label: "Software para Logística y Transporte", href: "/landing/software-logistica/" },
+  {
+    title: "Software de Gestión de RRHH",
+    href: "/landing/software-rrhh/",
+    tagline: "Planillas, asistencia, contratos y evaluaciones automatizadas",
+  },
+  {
+    title: "Software de Inventarios",
+    href: "/landing/software-inventarios/",
+    tagline: "Control multialmacén, kardex automatizado y alertas de reposición",
+  },
+  {
+    title: "Software para Logística",
+    href: "/landing/software-logistica/",
+    tagline: "Gestión de flotas, rutas, órdenes de transporte y reportes operativos",
+  },
 ];
+// ── JSON-LD: Service ─────────────────────────────────────────────
+const serviceSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Software Financiero para Empresas y Cajas Municipales',
+  description: 'Sistema financiero para gestión de créditos, control de cartera, evaluación de riesgo crediticio y reportes regulatorios.',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://bcpconsulting.pe/#organization',
+    name: 'BCP Consulting E.I.R.L.',
+    url: 'https://bcpconsulting.pe',
+    telephone: '+51929772711',
+    email: 'soporte@bcpconsulting.pe',
+    taxID: '20612012475',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Lima',
+      addressCountry: 'PE',
+    },
+  },
+  areaServed: { '@type': 'Country', name: 'Peru' },
+  serviceType: 'Financial Software Development',
+  url: `${SITE_INFO.url}/landing/software-financiero/`,
+});
 ---
 
 <LandingLayout
@@ -32,6 +69,10 @@ const pagesInteres = [
   navItems={navItems}
   pagesInteres={pagesInteres}
 >
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={serviceSchema} />
+  </Fragment>
   <HeroFinanciero />
   <ProblemasFinanciero />
   <FuncionalidadesMVPFinanciero />

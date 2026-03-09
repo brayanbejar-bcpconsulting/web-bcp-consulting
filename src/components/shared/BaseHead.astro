@@ -7,6 +7,10 @@ interface Props {
   description?: string;
   canonical?: string;
   image?: string;
+  /** Override og:type (default: "website"). Use "article" for blog posts. */
+  ogType?: string;
+  /** Override robots meta (default: "index, follow"). Use "noindex, follow" for legal pages. */
+  robots?: string;
 }
 
 const {
@@ -14,29 +18,30 @@ const {
   description = SITE_INFO.description,
   canonical = Astro.url.href,
   image = SITE_INFO.image,
+  ogType = "website",
+  robots = "index, follow",
 } = Astro.props;
 
-// Lógica de título: Si no hay title o es "Inicio", usa el base.
-// Si hay title, concatena "Título | Empresa"
-const fullTitle = title ? `${title} | ${SITE_INFO.title}` : SITE_INFO.title;
+// Title logic:
+// - If no title provided → use base title (home/default)
+// - If title already ends with the brand suffix → use as-is (avoids duplication)
+// - Otherwise → append brand suffix
+const brandSuffix = ` | ${SITE_INFO.title}`;
+const fullTitle = !title
+  ? SITE_INFO.title
+  : title.endsWith(brandSuffix) || title === SITE_INFO.title
+    ? title
+    : `${title}${brandSuffix}`;
 
 const orgSchema = getOrganizationSchema();
 const localSchema = getLocalBusinessSchema();
 
-// SearchAction schema para habilitar el sitelinks searchbox en Google
-const searchActionSchema = {
+// WebSite schema (no SearchAction — search is client-side only)
+const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: SITE_INFO.title,
   url: SITE_INFO.url,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${SITE_INFO.url}/blog?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
 };
 ---
 
@@ -47,9 +52,9 @@ const searchActionSchema = {
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 
-<meta name="robots" content="index, follow" />
+<meta name="robots" content={robots} />
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
@@ -64,6 +69,8 @@ const searchActionSchema = {
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, SITE_INFO.url)} />
+<meta name="twitter:image:alt" content={fullTitle} />
+<meta name="twitter:site" content="@bcpconsulting" />
 
 <link
   rel="preload"
@@ -81,9 +88,11 @@ const searchActionSchema = {
 />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+<meta name="theme-color" content="#0f172a" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 {/* JSON-LD Schemas */}
 <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(localSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(searchActionSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
