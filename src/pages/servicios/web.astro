@@ -36,14 +36,63 @@ const serviceSchema = {
     "Diseñamos y desarrollamos sitios web corporativos, tiendas online y landing pages optimizadas para SEO. Sitios rápidos, seguros y con diseño premium para empresas en Perú.",
   provider: {
     "@type": "Organization",
+    "@id": `${SITE_INFO.url}/#organization`,
     name: SITE_INFO.title,
     url: SITE_INFO.url,
+    taxID: "20612012475",
   },
   areaServed: { "@type": "Country", name: "Perú" },
   serviceType: "Web Design & Development",
   url: `${SITE_INFO.url}/servicios/web`,
 };
 
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Cuánto cuesta una página web para empresas en Perú?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "El costo varía según el tipo y complejidad del sitio. Un sitio corporativo básico parte desde S/ 1,500, mientras que una tienda online o sitio con integraciones puede superar los S/ 5,000. Contáctanos para una cotización personalizada sin compromisos.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuánto tiempo tarda el desarrollo de una página web?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Un sitio corporativo estándar toma entre 3 y 6 semanas. Una tienda online o sitio con funcionalidades avanzadas puede tomar entre 6 y 12 semanas. El plazo exacto depende de la cantidad de páginas y la disponibilidad del cliente para aprobar contenido.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Las páginas web que desarrollan están optimizadas para SEO?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí. Todos nuestros sitios incluyen SEO técnico base: estructura semántica, metaetiquetas, velocidad de carga optimizada, diseño responsivo y datos estructurados. El posicionamiento orgánico avanzado puede complementarse con una estrategia de contenidos.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Puedo actualizar el contenido de mi web después de entregado el proyecto?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí. Entregamos capacitación básica para gestionar el contenido de tu sitio. También ofrecemos planes de mantenimiento mensual que incluyen actualizaciones, backups y soporte técnico.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Desarrollan páginas web en Astro, WordPress o con otras tecnologías?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Trabajamos con múltiples tecnologías según las necesidades del proyecto: Astro para sitios estáticos de alto rendimiento, Next.js para aplicaciones web dinámicas y WordPress para sitios que requieren gestión de contenido frecuente. Recomendamos la tecnología más adecuada para cada caso.",
+      },
+    },
+  ],
+};
 import bgWebDesign from '@images/pages/services/web-design/bg-image-web-design.jpg'
 ---
 

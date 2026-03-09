@@ -21,8 +21,10 @@ const serviceSchema = {
     "Desarrollamos aplicaciones móviles nativas para Android e iOS: apps de negocio, delivery, salud, educación y más. Diseño UX/UI premium y publicación en stores incluida.",
   provider: {
     "@type": "Organization",
+    "@id": `${SITE_INFO.url}/#organization`,
     name: SITE_INFO.title,
     url: SITE_INFO.url,
+    taxID: "20612012475",
   },
   areaServed: { "@type": "Country", name: "Perú" },
   serviceType: "Mobile App Development",
@@ -56,6 +58,53 @@ const appTypes = [
   },
 ];
 
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Cuánto cuesta desarrollar una aplicación móvil en Perú?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "El costo depende de la plataforma (Android, iOS o ambas), la complejidad de las funcionalidades y las integraciones requeridas. Una app de gestión básica puede partir desde S/ 8,000, mientras que una app con funcionalidades avanzadas, pagos en línea o integraciones de terceros puede superar los S/ 30,000. Solicitanos una cotización personalizada.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuánto tiempo tarda el desarrollo de una app móvil?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Una app con funcionalidades básicas toma entre 8 y 16 semanas. Las apps con módulos complejos, integraciones o múltiples roles de usuario pueden tomar entre 4 y 8 meses. Entregamos un cronograma detallado tras el análisis de requerimientos.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Desarrollan apps nativas o híbridas?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Desarrollamos apps nativas para Android (Kotlin/Java) e iOS (Swift), y también apps multiplataforma con Flutter o React Native cuando el proyecto lo justifica. Recomendamos la tecnología más adecuada según el presupuesto, el rendimiento requerido y los plazos del cliente.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Incluyen la publicación en Google Play y App Store?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí. El proceso de publicación en Google Play Store y Apple App Store está incluido en nuestros proyectos. Te orientamos en la creación de cuentas de desarrollador si aún no las tienes y gestionamos todo el proceso de envío y aprobación.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Qué soporte ofrecen después de lanzar la app?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ofrecemos planes de mantenimiento post-lanzamiento que incluyen corrección de bugs, actualizaciones de compatibilidad con nuevas versiones de Android e iOS, y soporte técnico. También podemos implementar nuevas funcionalidades de forma incremental.",
+      },
+    },
+  ],
+};
 import bgAppsMobiles from '@images/pages/services/apps-mobiles/bg-image-apps-mobile.jpg';
 ---
 

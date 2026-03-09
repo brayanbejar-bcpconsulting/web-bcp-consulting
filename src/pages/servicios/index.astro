@@ -1,17 +1,27 @@
 ---
-import MainLayout from "@layouts/MainLayout.astro";
+import MainLayout from '@layouts/MainLayout.astro';
 import {
   HeroServicios,
   ListaServicios,
   ProcesoSection,
   CtaServicios,
-} from "@page-servicios";
+} from '@page-servicios';
+import { getBreadcrumbSchema } from '@utils/seo';
+import { SITE_INFO } from '@utils/site-config';
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Inicio', url: SITE_INFO.url + '/' },
+  { name: 'Servicios', url: SITE_INFO.url + '/servicios/' },
+]);
 ---
 
 <MainLayout
   title="Servicios de Desarrollo de Software"
   description="Desarrollo de software a medida, aplicaciones móviles y diseño web en Perú. Soluciones digitales que impulsan el crecimiento de tu empresa."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
   <HeroServicios />
   <ListaServicios />
   <ProcesoSection />

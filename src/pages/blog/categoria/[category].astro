@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import MainLayout from "@layouts/MainLayout.astro";
 import { MainContainer, HeroPage, BlogCard, Icon } from "@components";
 import { CATEGORY_LABELS } from "@utils/blog";
+import { getBreadcrumbSchema } from "@utils/seo";
+import { SITE_INFO } from "@utils/site-config";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -22,15 +24,27 @@ const { posts } = Astro.props;
 
 const title = CATEGORY_LABELS[category] ?? category;
 
+const canonicalUrl = `${SITE_INFO.url}/blog/categoria/${category}/`;
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Inicio', url: SITE_INFO.url + '/' },
+  { name: 'Blog', url: SITE_INFO.url + '/blog/' },
+  { name: title, url: canonicalUrl },
+]);
+
 const sortedPosts = [...posts].sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---
 
 <MainLayout
-  title={`Artículos sobre ${title} | BCP Consulting`}
+  title={`Artículos sobre ${title}`}
   description={`Descubre los mejores artículos, noticias y guías sobre ${title} en el blog de BCP Consulting.`}
 >
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
   <HeroPage
     title={`Explora: ${title}`}
     description={`Todo lo que necesitas saber sobre ${title} y cómo impacta en las empresas modernas.`}
@@ -42,7 +56,7 @@ const sortedPosts = [...posts].sort(
     ]}
   />
 
-  <MainContainer bgColor="bg-white">
+  <MainContainer bgColor="bg-theme-page">
     <div
       class="mb-12 flex justify-between items-center border-b border-neutral-200 pb-4"
     >

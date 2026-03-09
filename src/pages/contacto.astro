@@ -1,12 +1,22 @@
 ---
-import MainLayout from "@layouts/MainLayout.astro";
-import { HeroContacto, FormularioSection, FaqSection } from "@page-contacto";
+import MainLayout from '@layouts/MainLayout.astro';
+import { HeroContacto, FormularioSection, FaqSection } from '@page-contacto';
+import { getBreadcrumbSchema } from '@utils/seo';
+import { SITE_INFO } from '@utils/site-config';
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Inicio', url: SITE_INFO.url + '/' },
+  { name: 'Contacto', url: SITE_INFO.url + '/contacto/' },
+]);
 ---
 
 <MainLayout
   title="Contacto — Hablemos de tu Proyecto"
   description="Contáctanos para una asesoría gratuita. Desarrollamos software, apps móviles y páginas web en Perú. WhatsApp, teléfono y formulario de contacto."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
   <HeroContacto />
   <FormularioSection />
   <FaqSection />

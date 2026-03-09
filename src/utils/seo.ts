@@ -4,6 +4,8 @@
 import { SITE_INFO } from './site-config';
 import { NAVIGATION } from './navigation';
 
+const ORG_ID = `${SITE_INFO.url}/#organization`;
+
 /**
  * Schema Organization para el sitio
  */
@@ -11,9 +13,15 @@ export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORG_ID,
     name: SITE_INFO.title,
     url: SITE_INFO.url,
-    logo: `${SITE_INFO.url}/favicon.svg`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_INFO.url}/favicon.svg`,
+    },
+    taxID: NAVIGATION.contact.ruc,
+    foundingDate: '2009',
     description: SITE_INFO.description,
     contactPoint: {
       '@type': 'ContactPoint',
@@ -36,8 +44,14 @@ export function getLocalBusinessSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
+    '@id': `${SITE_INFO.url}/#localbusiness`,
     name: SITE_INFO.title,
     url: SITE_INFO.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_INFO.url}/favicon.svg`,
+    },
+    taxID: NAVIGATION.contact.ruc,
     telephone: NAVIGATION.contact.phone,
     email: NAVIGATION.contact.email,
     address: {
@@ -53,6 +67,7 @@ export function getLocalBusinessSchema() {
       opens: '09:00',
       closes: '18:00',
     },
+    parentOrganization: { '@id': ORG_ID },
   };
 }
 

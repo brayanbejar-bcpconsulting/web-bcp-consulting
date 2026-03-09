@@ -1,16 +1,45 @@
 ---
-import MainLayout from "@layouts/MainLayout.astro";
+import MainLayout from '@layouts/MainLayout.astro';
 import {
   HeroPortafolio,
   GaleriaProyectos,
   CtaPortafolio,
-} from "@page-portafolio";
+} from '@page-portafolio';
+import { getCollection } from 'astro:content';
+import { getBreadcrumbSchema } from '@utils/seo';
+import { SITE_INFO } from '@utils/site-config';
+
+const allProjects = await getCollection('projects');
+const publishedProjects = allProjects.filter((p) => !p.data.draft);
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Inicio', url: SITE_INFO.url + '/' },
+  { name: 'Portafolio', url: SITE_INFO.url + '/portafolio/' },
+]);
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Portafolio de Proyectos — BCP Consulting',
+  description: 'Software a medida, aplicaciones móviles y páginas web empresariales desarrollados por BCP Consulting en Perú.',
+  numberOfItems: publishedProjects.length,
+  itemListElement: publishedProjects.map((project, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: project.data.title,
+    url: SITE_INFO.url + '/portafolio/' + project.slug + '/',
+  })),
+};
 ---
 
 <MainLayout
   title="Portafolio de Proyectos"
   description="Explora nuestro portafolio: software a medida, apps móviles y páginas web empresariales. Proyectos que generan resultados reales para negocios en Perú."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  </Fragment>
   <HeroPortafolio />
   <GaleriaProyectos />
   <CtaPortafolio />

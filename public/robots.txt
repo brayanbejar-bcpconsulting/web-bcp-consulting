@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /legal/
 
 Sitemap: https://bcpconsulting.pe/sitemap-index.xml

@@ -14,6 +14,28 @@ const featuredPosts = sortedPosts
   .filter((post) => post.data.isFeatured)
   .sort((a, b) => (a.data.featuredOrder || 99) - (b.data.featuredOrder || 99));
 
+import { SITE_INFO } from '@utils/site-config';
+import { getBreadcrumbSchema } from '@utils/seo';
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Inicio', url: SITE_INFO.url + '/' },
+  { name: 'Blog', url: SITE_INFO.url + '/blog/' },
+]);
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Blog BCP Consulting — Tecnología, IA y Software',
+  description: 'Artículos, guías y noticias sobre desarrollo de software, inteligencia artificial y tecnología empresarial.',
+  numberOfItems: sortedPosts.length,
+  itemListElement: sortedPosts.slice(0, 20).map((post, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: post.data.title,
+    url: SITE_INFO.url + '/blog/' + post.slug + '/',
+  })),
+};
+
 const categories = [
   { id: "all", label: "Todas las categorías" },
   { id: "inteligencia-artificial", label: "Inteligencia Artificial" },
@@ -30,6 +52,10 @@ const categories = [
   title="Blog | Tecnología, IA y Software"
   description="Noticias, guías y tendencias sobre el desarrollo de software, inteligencia artificial y tecnología empresarial en el Perú."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  </Fragment>
   <HeroPage
     title="Recursos, Tendencias y Guías"
     description="Mantente a la vanguardia. Aprende cómo la tecnología, la Inteligencia Artificial y el Software a medida están transformando los negocios."
@@ -45,6 +71,7 @@ const categories = [
         <input
           type="text"
           id="searchInput"
+          aria-label="Buscar artículos por título o término"
           placeholder="Buscar artículos por título o término..."
           class="blog-search__input"
         />

@@ -1,5 +1,5 @@
 ---
-import MainLayout from "@layouts/MainLayout.astro";
+import MainLayout from '@layouts/MainLayout.astro';
 import {
   HeroNosotros,
   HistoriaSection,
@@ -7,13 +7,23 @@ import {
   ValoresSection,
   MetodologiaSection,
   CtaNosotros,
-} from "@page-nosotros";
+} from '@page-nosotros';
+import { getBreadcrumbSchema } from '@utils/seo';
+import { SITE_INFO } from '@utils/site-config';
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Inicio', url: SITE_INFO.url + '/' },
+  { name: 'Nosotros', url: SITE_INFO.url + '/nosotros/' },
+]);
 ---
 
 <MainLayout
   title="Nosotros — Tu Socio Tecnológico"
   description="Conoce a BCP Consulting: más de 15 años desarrollando software a medida en Perú. Nuestra misión, valores y metodología de trabajo."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
   <HeroNosotros />
   <HistoriaSection />
   <MisionVisionSection />

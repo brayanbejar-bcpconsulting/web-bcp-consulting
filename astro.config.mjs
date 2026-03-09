@@ -17,6 +17,9 @@ export default defineConfig({
     mdx(),
     sitemap({
       serialize(item) {
+        // Exclude noindex pages from sitemap
+        if (item.url.includes('/legal/')) return undefined;
+
         // 1. Prioridad Máxima: Home
         if (item.url === 'https://bcpconsulting.pe/') {
           item.priority = 1.0;
@@ -25,9 +28,10 @@ export default defineConfig({
         }
         // 2. Prioridad Alta: Páginas estáticas principales (excepto /portafolio/*)
         else if (
-          item.url.includes('/servicios') || 
-          item.url.includes('/nosotros') || 
+          item.url.includes('/servicios') ||
+          item.url.includes('/nosotros') ||
           item.url.includes('/contacto') ||
+          item.url.includes('/consultoria') ||
           item.url === 'https://bcpconsulting.pe/portafolio'
         ) {
           item.priority = 0.9;
