@@ -1,0 +1,303 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import { HeroPage, MainContainer, HeadingSection, Button } from "@components";
+import { getBreadcrumbSchema } from "@utils/seo";
+import { SITE_INFO } from "@utils/site-config";
+
+const breadcrumbItems = [
+  { name: "Inicio", url: SITE_INFO.url + "/" },
+  { name: "Consultoría Tecnológica", url: SITE_INFO.url + "/consultoria" },
+];
+const breadcrumbSchema = getBreadcrumbSchema(breadcrumbItems);
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Consultoría Tecnológica",
+  provider: {
+    "@type": "Organization",
+    name: SITE_INFO.title,
+    url: SITE_INFO.url,
+  },
+  areaServed: { "@type": "Country", name: "Perú" },
+  description:
+    "Servicios de consultoría tecnológica para empresas peruanas: diagnóstico digital, transformación tecnológica, auditoría de sistemas y asesoría estratégica en TI.",
+  serviceType: "Consultoría Tecnológica",
+};
+
+const pilares = [
+  {
+    icon: "🔍",
+    titulo: "Diagnóstico Digital",
+    desc: "Analizamos tus sistemas, procesos y herramientas tecnológicas actuales para identificar cuellos de botella, brechas de eficiencia y oportunidades de mejora que impactan directamente tu rentabilidad.",
+  },
+  {
+    icon: "🗺️",
+    titulo: "Hoja de Ruta Tecnológica",
+    desc: "Diseñamos un plan de acción personalizado con prioridades claras, presupuesto estimado y plazos realistas. Sin jerga técnica: solo decisiones accionables alineadas con tus objetivos de negocio.",
+  },
+  {
+    icon: "⚙️",
+    titulo: "Optimización de Procesos",
+    desc: "Mapeamos y rediseñamos flujos operativos para eliminar tareas manuales repetitivas, reducir errores humanos y liberar tiempo de tu equipo para actividades de mayor valor.",
+  },
+  {
+    icon: "🔒",
+    titulo: "Auditoría de Seguridad",
+    desc: "Evaluamos vulnerabilidades en tus sistemas, políticas de acceso y protección de datos. Te entregamos un informe con hallazgos priorizados y acciones correctivas concretas.",
+  },
+  {
+    icon: "☁️",
+    titulo: "Estrategia Cloud",
+    desc: "Evaluamos si la migración a la nube es viable para tu empresa, qué proveedor se adapta mejor a tu escala y presupuesto, y diseñamos la arquitectura óptima para tu operación.",
+  },
+  {
+    icon: "📊",
+    titulo: "Selección de Software",
+    desc: "¿No sabes qué herramienta elegir? Te ayudamos a comparar opciones (ERP, CRM, plataformas SaaS) considerando costo total, integraciones, soporte local y curva de adopción.",
+  },
+];
+
+const sectores = [
+  {
+    nombre: "Salud y Clínicas",
+    detalle:
+      "Digitalización de historias clínicas, telemedicina, gestión de citas y facturación electrónica.",
+  },
+  {
+    nombre: "Educación y Academias",
+    detalle:
+      "Plataformas LMS, aulas virtuales, control de asistencia y gestión académica integral.",
+  },
+  {
+    nombre: "Retail y E-commerce",
+    detalle:
+      "Omnicanalidad, gestión de inventarios, fidelización de clientes y analítica de ventas.",
+  },
+  {
+    nombre: "Construcción e Inmobiliarias",
+    detalle:
+      "Control de proyectos, cotizadores digitales, CRM inmobiliario y reportes en tiempo real.",
+  },
+  {
+    nombre: "Restaurantes y Gastronomía",
+    detalle:
+      "Comandas digitales, delivery integrado, costeo de recetas y gestión de proveedores.",
+  },
+  {
+    nombre: "Logística y Distribución",
+    detalle:
+      "Trazabilidad de carga, optimización de rutas, control de almacenes y facturación automatizada.",
+  },
+];
+
+const pasos = [
+  {
+    num: "01",
+    titulo: "Reunión de Diagnóstico",
+    desc: "Conversamos contigo para entender tu negocio, tus procesos actuales y tus objetivos. Sin compromisos.",
+  },
+  {
+    num: "02",
+    titulo: "Análisis y Evaluación",
+    desc: "Nuestro equipo revisa tu infraestructura tecnológica, identifica brechas y documenta hallazgos clave.",
+  },
+  {
+    num: "03",
+    titulo: "Entrega del Informe",
+    desc: "Recibes un informe ejecutivo con recomendaciones priorizadas, estimaciones de inversión y un plan de acción.",
+  },
+  {
+    num: "04",
+    titulo: "Acompañamiento",
+    desc: "Si decides implementar, te acompañamos en cada fase: selección de proveedores, gestión del cambio y seguimiento.",
+  },
+];
+---
+
+<MainLayout
+  title="Consultoría Tecnológica para Empresas en Perú"
+  description="Consultoría tecnológica especializada para empresas peruanas. Diagnóstico digital, hoja de ruta TI, auditoría de sistemas y transformación tecnológica con más de 15 años de experiencia."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
+
+  <HeroPage
+    title="Consultoría Tecnológica"
+    description="¿Tu tecnología frena el crecimiento de tu empresa? Te ayudamos a tomar las decisiones correctas: qué implementar, cuándo y cómo. Sin improvisaciones."
+    bgClass="hero-page--secondary"
+    breadcrumbs={[
+      { label: "Inicio", href: "/" },
+      { label: "Consultoría" },
+    ]}
+  />
+
+  {/* ── Propuesta de valor ─────────────────────────────────────────── */}
+  <MainContainer bgColor="bg-theme-surface" id="propuesta-valor">
+    <HeadingSection
+      tagline="¿Por qué BCP Consulting?"
+      title="Decisiones Tecnológicas que Mueven tu Negocio"
+      description="Muchas empresas en el Perú invierten en tecnología sin una estrategia clara y terminan con sistemas que no se usan, integraciones rotas y equipos frustrados. Nosotros cambiamos eso."
+      badgeVariant="secondary"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        pilares.map((pilar) => (
+          <div class="p-6 rounded-xl bg-theme-card border border-theme-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group">
+            <div class="text-3xl mb-4">{pilar.icon}</div>
+            <h3 class="text-theme-heading font-bold text-lg mb-2 group-hover:text-secondary-600 transition-colors">
+              {pilar.titulo}
+            </h3>
+            <p class="text-theme-muted text-sm leading-relaxed">{pilar.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </MainContainer>
+
+  {/* ── Sectores ───────────────────────────────────────────────────── */}
+  <MainContainer bgColor="bg-theme-page" id="sectores">
+    <HeadingSection
+      tagline="Experiencia Sectorial"
+      title="Consultoría con Conocimiento de tu Industria"
+      description="No somos consultores genéricos. Entendemos los desafíos específicos de cada sector en el contexto peruano: regulaciones, mercado local y realidad operativa."
+      badgeVariant="complementary"
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        sectores.map((sector) => (
+          <div class="p-6 rounded-xl bg-theme-card border border-theme-border hover:border-secondary-300 hover:shadow-md transition-all duration-300">
+            <h3 class="text-theme-heading font-bold text-base mb-2">
+              {sector.nombre}
+            </h3>
+            <p class="text-theme-muted text-sm leading-relaxed">
+              {sector.detalle}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </MainContainer>
+
+  {/* ── Proceso de trabajo ─────────────────────────────────────────── */}
+  <MainContainer bgColor="bg-theme-surface" id="proceso">
+    <HeadingSection
+      tagline="Cómo trabajamos"
+      title="Un Proceso Claro, Sin Sorpresas"
+      description="Nuestro método de consultoría está diseñado para generar claridad desde el primer día. Cada paso tiene un entregable concreto y resultados medibles."
+      badgeVariant="secondary"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+      {
+        pasos.map((paso) => (
+          <div class="relative p-6 rounded-xl bg-theme-card border border-theme-border text-center group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+            <div
+              class="text-5xl font-extrabold mb-4 opacity-10 group-hover:opacity-20 transition-opacity select-none"
+              style="font-family: var(--font-heading); color: var(--color-secondary-500);"
+              aria-hidden="true"
+            >
+              {paso.num}
+            </div>
+            <h3 class="text-theme-heading font-bold text-base mb-2">
+              {paso.titulo}
+            </h3>
+            <p class="text-theme-muted text-sm leading-relaxed">{paso.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </MainContainer>
+
+  {/* ── Cifras de credibilidad ─────────────────────────────────────── */}
+  <section
+    class="py-16 px-[5%]"
+    style="background: linear-gradient(135deg, var(--color-primary-800), var(--color-primary-950));"
+  >
+    <div class="max-w-350 mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <p
+            class="font-extrabold text-secondary-400 mb-1"
+            style="font-size: clamp(2rem, 4vw, 3rem); font-family: var(--font-heading);"
+          >
+            +15
+          </p>
+          <p class="text-white/70 text-sm font-medium uppercase tracking-wider">
+            Años de experiencia
+          </p>
+        </div>
+        <div>
+          <p
+            class="font-extrabold text-secondary-400 mb-1"
+            style="font-size: clamp(2rem, 4vw, 3rem); font-family: var(--font-heading);"
+          >
+            +80
+          </p>
+          <p class="text-white/70 text-sm font-medium uppercase tracking-wider">
+            Proyectos entregados
+          </p>
+        </div>
+        <div>
+          <p
+            class="font-extrabold text-secondary-400 mb-1"
+            style="font-size: clamp(2rem, 4vw, 3rem); font-family: var(--font-heading);"
+          >
+            6+
+          </p>
+          <p class="text-white/70 text-sm font-medium uppercase tracking-wider">
+            Sectores atendidos
+          </p>
+        </div>
+        <div>
+          <p
+            class="font-extrabold text-secondary-400 mb-1"
+            style="font-size: clamp(2rem, 4vw, 3rem); font-family: var(--font-heading);"
+          >
+            Lima
+          </p>
+          <p class="text-white/70 text-sm font-medium uppercase tracking-wider">
+            Base en Perú
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA final ──────────────────────────────────────────────────── */}
+  <section
+    class="py-20 px-[5%]"
+    style="background: linear-gradient(135deg, var(--color-primary-700), var(--color-secondary-800));"
+  >
+    <div class="max-w-200 mx-auto text-center flex flex-col items-center gap-6">
+      <h2
+        class="text-white font-extrabold text-balance"
+        style="font-size: clamp(1.75rem, 3vw + 0.5rem, 2.8rem);"
+      >
+        Toma el Control de tu Tecnología
+      </h2>
+      <p class="text-white/80 text-lg max-w-xl leading-relaxed">
+        Agenda una reunión de diagnóstico gratuita. En 45 minutos identificamos
+        tus mayores oportunidades de mejora tecnológica.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center gap-4 mt-2">
+        <Button
+          href="https://api.whatsapp.com/send/?phone=51929772711&text=Hola%2C%20quiero%20una%20consultor%C3%ADa%20tecnol%C3%B3gica%20para%20mi%20empresa"
+          target="_blank"
+          variant="whatsapp"
+          size="lg"
+          icon="whatsapp"
+        >
+          Agendar Diagnóstico Gratis
+        </Button>
+        <Button href="/contacto" variant="secondary" size="lg">
+          Formulario de contacto
+        </Button>
+      </div>
+    </div>
+  </section>
+</MainLayout>

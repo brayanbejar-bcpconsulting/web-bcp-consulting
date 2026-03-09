@@ -1,0 +1,247 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import { HeroPage, MainContainer } from "@components";
+import { getBreadcrumbSchema } from "@utils/seo";
+import { SITE_INFO } from "@utils/site-config";
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: "Inicio", url: SITE_INFO.url + "/" },
+  { name: "Términos y Condiciones", url: SITE_INFO.url + "/legal/terminos-condiciones" },
+]);
+
+const fechaActualizacion = "1 de enero de 2025";
+---
+
+<MainLayout
+  title="Términos y Condiciones"
+  description="Términos y condiciones de uso de los servicios de BCP Consulting E.I.R.L. Lee nuestras condiciones para el desarrollo de software, consultoría y diseño web en Perú."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
+
+  <HeroPage
+    title="Términos y Condiciones"
+    description="Lee atentamente las condiciones que rigen la contratación y uso de los servicios de BCP Consulting E.I.R.L."
+    bgClass="hero-page--primary"
+    breadcrumbs={[
+      { label: "Inicio", href: "/" },
+      { label: "Términos y Condiciones" },
+    ]}
+  />
+
+  <MainContainer bgColor="bg-theme-page" id="terminos-contenido">
+    <div class="max-w-4xl mx-auto">
+
+      <div class="mb-8 p-4 rounded-xl bg-theme-surface border border-theme-border text-theme-muted text-sm">
+        <strong class="text-theme-heading">Última actualización:</strong> {fechaActualizacion}
+      </div>
+
+      <div class="prose prose-lg max-w-none
+        prose-headings:font-heading prose-headings:font-bold
+        prose-headings:text-primary-900 dark:prose-headings:text-white
+        prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-2xl
+        prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-xl
+        prose-p:text-neutral-700 dark:prose-p:text-slate-300 prose-p:leading-relaxed
+        prose-a:text-secondary-600 dark:prose-a:text-secondary-400
+        prose-strong:text-primary-950 dark:prose-strong:text-slate-100
+        prose-ul:text-neutral-700 dark:prose-ul:text-slate-300
+        prose-li:my-1">
+
+        <h2>1. Identificación de las Partes</h2>
+        <p>
+          Los presentes Términos y Condiciones regulan la relación contractual entre
+          <strong>BCP Consulting E.I.R.L.</strong>, con RUC N.° 20612012475, con domicilio en Lima,
+          Perú (en adelante, "BCP Consulting" o "el Proveedor"), y el cliente o usuario que
+          contrate o utilice sus servicios (en adelante, "el Cliente").
+        </p>
+        <p>
+          Al contratar cualquiera de nuestros servicios o al utilizar nuestro sitio web, el
+          Cliente declara haber leído, comprendido y aceptado íntegramente estos Términos y
+          Condiciones.
+        </p>
+
+        <h2>2. Descripción de Servicios</h2>
+        <p>BCP Consulting ofrece los siguientes servicios profesionales de tecnología:</p>
+        <ul>
+          <li>Desarrollo de software a medida (sistemas ERP, CRM, plataformas SaaS y aplicaciones web).</li>
+          <li>Desarrollo de aplicaciones móviles nativas para Android e iOS.</li>
+          <li>Diseño y desarrollo de sitios web corporativos, tiendas online y landing pages.</li>
+          <li>Consultoría tecnológica estratégica y diagnóstico digital para empresas.</li>
+          <li>Mantenimiento, soporte y actualización de software previamente desarrollado.</li>
+        </ul>
+        <p>
+          Las características, alcance y precio de cada servicio se definen en la propuesta
+          comercial o contrato específico suscrito con el Cliente.
+        </p>
+
+        <h2>3. Formación del Contrato</h2>
+        <p>
+          La relación contractual se perfecciona cuando el Cliente acepta formalmente la propuesta
+          comercial emitida por BCP Consulting (mediante firma, confirmación escrita por correo
+          electrónico o pago inicial) y BCP Consulting confirma la aceptación del proyecto.
+        </p>
+        <p>
+          El uso del formulario de contacto o la comunicación por WhatsApp no genera por sí sola
+          obligación contractual alguna para ninguna de las partes.
+        </p>
+
+        <h2>4. Obligaciones del Cliente</h2>
+        <p>El Cliente se compromete a:</p>
+        <ul>
+          <li>Proporcionar de forma oportuna la información, accesos, contenidos y materiales necesarios para la ejecución del proyecto.</li>
+          <li>Designar a un representante autorizado para tomar decisiones sobre el proyecto.</li>
+          <li>Revisar y aprobar o rechazar (con observaciones detalladas) los entregables dentro de los plazos acordados.</li>
+          <li>Realizar los pagos en los plazos y condiciones establecidos en el contrato.</li>
+          <li>No utilizar los servicios para actividades ilegales, fraudulentas o que infrinjan derechos de terceros.</li>
+        </ul>
+
+        <h2>5. Obligaciones de BCP Consulting</h2>
+        <p>BCP Consulting se compromete a:</p>
+        <ul>
+          <li>Ejecutar los servicios con la diligencia y profesionalismo propios de una empresa especializada en tecnología.</li>
+          <li>Mantener la confidencialidad de la información del Cliente.</li>
+          <li>Cumplir con los plazos acordados, salvo causa imputable al Cliente o fuerza mayor.</li>
+          <li>Informar oportunamente sobre cualquier contingencia que pueda afectar el avance del proyecto.</li>
+          <li>Entregar el código fuente desarrollado específicamente para el Cliente, una vez completado el pago total.</li>
+        </ul>
+
+        <h2>6. Pagos y Facturación</h2>
+        <p>
+          Los precios de los servicios se expresan en <strong>soles peruanos (PEN)</strong> o en
+          la moneda acordada en la propuesta comercial, e incluyen el <strong>Impuesto General
+          a las Ventas (IGV)</strong> cuando corresponda.
+        </p>
+        <p>
+          Salvo acuerdo en contrario, el esquema de pagos estándar es:
+        </p>
+        <ul>
+          <li><strong>50%</strong> al inicio del proyecto (pago de conformidad y arranque).</li>
+          <li><strong>50%</strong> a la entrega del producto final y aprobación del Cliente.</li>
+        </ul>
+        <p>
+          El retraso en los pagos faculta a BCP Consulting a suspender el avance del proyecto
+          sin responsabilidad alguna. Se emitirá la factura electrónica correspondiente conforme
+          a la normativa de SUNAT.
+        </p>
+
+        <h2>7. Plazos de Entrega</h2>
+        <p>
+          Los plazos indicados en la propuesta comercial son estimados y se calculan sobre la
+          base de que el Cliente cumple oportunamente con sus obligaciones de información y
+          aprobación. Los plazos se extienden automáticamente en los siguientes supuestos:
+        </p>
+        <ul>
+          <li>Demoras en la entrega de contenidos, accesos o información por parte del Cliente.</li>
+          <li>Cambios en el alcance del proyecto acordados por escrito.</li>
+          <li>Causas de fuerza mayor o caso fortuito (fallas de terceros proveedores, interrupciones de internet, etc.).</li>
+        </ul>
+
+        <h2>8. Cambios en el Alcance</h2>
+        <p>
+          Cualquier modificación al alcance original del proyecto (nuevas funcionalidades, cambios
+          de diseño sustanciales, integraciones adicionales) debe acordarse por escrito y puede
+          generar un ajuste en el precio y/o plazo. BCP Consulting no está obligada a ejecutar
+          trabajos fuera del alcance sin la correspondiente aprobación y presupuesto adicional.
+        </p>
+
+        <h2>9. Propiedad Intelectual</h2>
+        <p>
+          Salvo disposición expresa en contrario en el contrato:
+        </p>
+        <ul>
+          <li>El <strong>código fuente desarrollado a medida</strong> para el Cliente pasa a ser propiedad del Cliente una vez realizado el pago total.</li>
+          <li>Las <strong>herramientas, frameworks, librerías y componentes de terceros</strong> utilizados en el desarrollo están sujetos a sus respectivas licencias de uso (MIT, Apache, GPL, etc.).</li>
+          <li>Los <strong>contenidos, logos, imágenes y textos</strong> proporcionados por el Cliente son de su exclusiva propiedad.</li>
+          <li>BCP Consulting se reserva el derecho de incluir el proyecto en su portafolio, salvo acuerdo de confidencialidad específico.</li>
+        </ul>
+
+        <h2>10. Confidencialidad</h2>
+        <p>
+          Ambas partes se comprometen a mantener la confidencialidad de la información comercial,
+          técnica y operativa intercambiada durante la relación contractual. Esta obligación
+          subsiste durante 3 años tras la finalización del proyecto. Si se requiere mayor
+          protección, el Cliente puede solicitar la firma de un acuerdo de confidencialidad (NDA)
+          específico.
+        </p>
+
+        <h2>11. Garantía y Soporte Post-Entrega</h2>
+        <p>
+          BCP Consulting ofrece una garantía de <strong>30 días calendario</strong> posterior a la
+          entrega final, durante la cual corregirá gratuitamente los errores de funcionamiento
+          (bugs) directamente imputables al desarrollo. Esta garantía no cubre:
+        </p>
+        <ul>
+          <li>Modificaciones realizadas por el Cliente o terceros sin autorización de BCP Consulting.</li>
+          <li>Fallos derivados de infraestructura del Cliente (hosting, bases de datos, dominio).</li>
+          <li>Nuevas funcionalidades o cambios de diseño.</li>
+        </ul>
+        <p>
+          Vencida la garantía, el soporte continuo puede contratarse mediante un plan de
+          mantenimiento mensual acordado por separado.
+        </p>
+
+        <h2>12. Limitación de Responsabilidad</h2>
+        <p>
+          BCP Consulting no será responsable por daños indirectos, pérdida de beneficios,
+          pérdida de datos o perjuicios consecuentes derivados del uso o imposibilidad de uso
+          del software entregado, salvo dolo o culpa grave acreditada.
+        </p>
+        <p>
+          La responsabilidad máxima de BCP Consulting frente al Cliente, por cualquier causa,
+          quedará limitada al monto total facturado y cobrado por el proyecto específico en cuestión.
+        </p>
+
+        <h2>13. Resolución del Contrato</h2>
+        <p>
+          Cualquiera de las partes puede resolver el contrato por incumplimiento grave de la
+          otra, mediante comunicación escrita con un plazo de preaviso de <strong>15 días
+          hábiles</strong>. En caso de resolución:
+        </p>
+        <ul>
+          <li>BCP Consulting entregará los avances hasta la fecha de resolución.</li>
+          <li>Los pagos realizados por trabajos ya ejecutados no son reembolsables.</li>
+          <li>Si la resolución es por causa imputable a BCP Consulting, se devolverá la parte proporcional no ejecutada.</li>
+        </ul>
+
+        <h2>14. Uso del Sitio Web</h2>
+        <p>
+          El usuario se compromete a utilizar el sitio web <a href="https://bcpconsulting.pe">bcpconsulting.pe</a> de
+          conformidad con la ley peruana y estas condiciones. Queda prohibido:
+        </p>
+        <ul>
+          <li>Realizar accesos no autorizados a los sistemas del sitio.</li>
+          <li>Enviar comunicaciones no solicitadas (spam) a través de los formularios de contacto.</li>
+          <li>Reproducir, distribuir o modificar los contenidos del sitio sin autorización expresa.</li>
+        </ul>
+
+        <h2>15. Ley Aplicable y Jurisdicción</h2>
+        <p>
+          Los presentes Términos y Condiciones se rigen por las leyes de la República del Perú.
+          Para la resolución de cualquier controversia derivada de los mismos, las partes se
+          someten expresamente a la jurisdicción de los Juzgados y Tribunales de la ciudad de
+          <strong>Lima</strong>, renunciando a cualquier otro fuero que pudiera corresponderles.
+        </p>
+
+        <h2>16. Actualizaciones</h2>
+        <p>
+          BCP Consulting se reserva el derecho a modificar estos Términos y Condiciones en
+          cualquier momento. Los cambios serán publicados en esta página con su nueva fecha de
+          vigencia. La continuación del uso de los servicios tras la publicación implica la
+          aceptación de los cambios.
+        </p>
+
+        <h2>17. Contacto</h2>
+        <p>
+          Para cualquier consulta sobre estos Términos y Condiciones:
+        </p>
+        <ul>
+          <li><strong>Correo:</strong> <a href="mailto:soporte@bcpconsulting.pe">soporte@bcpconsulting.pe</a></li>
+          <li><strong>Teléfono / WhatsApp:</strong> +51 929 772 711</li>
+        </ul>
+
+      </div>
+    </div>
+  </MainContainer>
+</MainLayout>
