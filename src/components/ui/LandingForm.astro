@@ -1,0 +1,388 @@
+---
+// LandingForm.astro
+// Formulario directo para landing pages con tracking UTM + Google Ads
+// Uso: <LandingForm service="software" /> | <LandingForm service="apps-moviles" />
+
+interface Props {
+  service?: "software" | "apps-moviles" | "ninguno";
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  class?: string;
+}
+
+const {
+  service = "ninguno",
+  title = "¿Listo para empezar?",
+  subtitle = "Cuéntanos tu idea y te respondemos en menos de 24 horas.",
+  ctaText = "Quiero una propuesta gratis",
+  class: className,
+} = Astro.props;
+---
+
+<div class:list={["lf-wrapper", className]} data-landing-form data-service={service}>
+  <!-- Encabezado -->
+  <div class="lf-header">
+    <span class="lf-badge">Respuesta en &lt; 24 hrs</span>
+    <h2 class="lf-title">{title}</h2>
+    <p class="lf-subtitle">{subtitle}</p>
+  </div>
+
+  <!-- Formulario -->
+  <form id="landing-form" novalidate>
+    <div class="lf-fields">
+
+      <div class="lf-field">
+        <label for="lf-name" class="lf-label">Tu nombre *</label>
+        <input
+          type="text"
+          id="lf-name"
+          name="nombre"
+          required
+          placeholder="María García"
+          class="lf-input"
+          autocomplete="name"
+        />
+        <span class="lf-error" data-error="nombre"></span>
+      </div>
+
+      <div class="lf-field">
+        <label for="lf-phone" class="lf-label">WhatsApp *</label>
+        <input
+          type="tel"
+          id="lf-phone"
+          name="telefono"
+          required
+          placeholder="+51 999 999 999"
+          class="lf-input"
+          autocomplete="tel"
+        />
+        <span class="lf-error" data-error="telefono"></span>
+      </div>
+
+      <div class="lf-field lf-field--full">
+        <label for="lf-email" class="lf-label">Correo electrónico *</label>
+        <input
+          type="email"
+          id="lf-email"
+          name="email"
+          required
+          placeholder="tu@empresa.com"
+          class="lf-input"
+          autocomplete="email"
+        />
+        <span class="lf-error" data-error="email"></span>
+      </div>
+
+      <div class="lf-field lf-field--full">
+        <label for="lf-message" class="lf-label">¿Qué necesitas? *</label>
+        <textarea
+          id="lf-message"
+          name="mensaje"
+          rows="3"
+          required
+          placeholder="Describe brevemente tu proyecto o idea..."
+          class="lf-input lf-textarea"
+        ></textarea>
+        <span class="lf-error" data-error="mensaje"></span>
+      </div>
+
+    </div>
+
+    <button type="submit" class="lf-cta" id="lf-submit">
+      <span class="lf-cta__text">{ctaText}</span>
+      <span class="lf-cta__loading hidden">Enviando...</span>
+      <svg class="lf-cta__arrow" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+
+    <p class="lf-trust">
+      🔒 Tus datos están seguros. Sin spam, te lo prometemos.
+    </p>
+
+    <div id="lf-response" class="lf-response hidden"></div>
+  </form>
+</div>
+
+<style>
+  @reference "../../styles/global.css";
+
+  /* ── Wrapper ── */
+  .lf-wrapper {
+    @apply relative rounded-3xl overflow-hidden;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    box-shadow: 0 25px 60px -15px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  /* Decoración de fondo */
+  .lf-wrapper::before {
+    content: "";
+    @apply absolute inset-0 pointer-events-none;
+    background:
+      radial-gradient(ellipse 60% 50% at 90% 10%, rgba(99,102,241,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 10% 90%, rgba(139,92,246,0.12) 0%, transparent 70%);
+  }
+
+  /* ── Header ── */
+  .lf-header {
+    @apply relative px-8 pt-8 pb-6 text-center;
+  }
+
+  .lf-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4;
+    background: rgba(99,102,241,0.2);
+    color: #a5b4fc;
+    border: 1px solid rgba(99,102,241,0.35);
+    letter-spacing: 0.03em;
+  }
+
+  .lf-title {
+    @apply text-2xl md:text-3xl font-bold text-white leading-tight mb-2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .lf-subtitle {
+    @apply text-sm text-slate-400 leading-relaxed max-w-sm mx-auto;
+  }
+
+  /* ── Form ── */
+  form {
+    @apply relative px-8 pb-8;
+  }
+
+  .lf-fields {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 mb-5;
+  }
+
+  .lf-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .lf-field--full {
+    @apply md:col-span-2;
+  }
+
+  .lf-label {
+    @apply text-xs font-semibold uppercase tracking-wider text-slate-400;
+  }
+
+  .lf-input {
+    @apply w-full px-4 py-3 rounded-xl text-sm text-white
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-indigo-500/60;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .lf-input::placeholder {
+    @apply text-slate-500;
+  }
+
+  .lf-input:focus {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(99,102,241,0.6);
+  }
+
+  .lf-textarea {
+    @apply resize-none min-h-[88px];
+  }
+
+  .lf-error {
+    @apply text-xs text-red-400 min-h-[1rem];
+  }
+
+  /* ── CTA ── */
+  .lf-cta {
+    @apply w-full flex items-center justify-center gap-2.5
+           px-6 py-4 rounded-2xl font-bold text-base text-white
+           transition-all duration-300
+           active:scale-95 cursor-pointer
+           disabled:opacity-50 disabled:pointer-events-none;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    box-shadow: 0 8px 30px -8px rgba(99,102,241,0.6);
+  }
+
+  .lf-cta:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    box-shadow: 0 12px 35px -8px rgba(99,102,241,0.75);
+    transform: translateY(-1px);
+  }
+
+  .lf-cta__arrow {
+    @apply w-5 h-5 transition-transform duration-300;
+  }
+
+  .lf-cta:hover .lf-cta__arrow {
+    transform: translateX(3px);
+  }
+
+  /* ── Trust ── */
+  .lf-trust {
+    @apply text-center text-xs text-slate-500 mt-3;
+  }
+
+  /* ── Response ── */
+  .lf-response {
+    @apply mt-4 p-4 rounded-xl text-sm text-center font-medium;
+  }
+
+  .lf-response.success {
+    background: rgba(16,185,129,0.12);
+    color: #6ee7b7;
+    border: 1px solid rgba(16,185,129,0.25);
+  }
+
+  .lf-response.error {
+    background: rgba(239,68,68,0.1);
+    color: #fca5a5;
+    border: 1px solid rgba(239,68,68,0.2);
+  }
+</style>
+
+<script>
+  // ──────────────────────────────────────────────
+  //  Lee parámetros UTM y GCLID de la URL actual
+  // ──────────────────────────────────────────────
+  function getUTMParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      utm_source:   params.get("utm_source")   || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_medium:   params.get("utm_medium")   || "",
+      gclid:        params.get("gclid")        || "",
+      // Detecta landing desde query param o desde el data-service del componente
+      landing:      params.get("utm_landing")  || "",
+    };
+  }
+
+  // ──────────────────────────────────────────────
+  //  Inicializa el formulario
+  // ──────────────────────────────────────────────
+  const initLandingForm = () => {
+    const wrapper = document.querySelector<HTMLElement>("[data-landing-form]");
+    const form    = document.querySelector<HTMLFormElement>("#landing-form");
+    if (!form || !wrapper || form.dataset.init === "1") return;
+    form.dataset.init = "1";
+
+    // TODO: reemplaza con tu URL de Google Apps Script desplegado
+    const SCRIPT_URL = "";
+
+    // El "service" viene del atributo data-service del componente
+    // pero puede ser sobreescrito por el query param utm_landing
+    const componentService = wrapper.dataset.service || "ninguno";
+
+    const utms = getUTMParams();
+    const landing = utms.landing || componentService;
+
+    // ── Validación ──
+    const showError = (field: string, msg: string) => {
+      const el = form.querySelector<HTMLElement>(`[data-error="${field}"]`);
+      if (el) el.textContent = msg;
+    };
+
+    const clearErrors = () => {
+      form.querySelectorAll<HTMLElement>("[data-error]").forEach(el => el.textContent = "");
+    };
+
+    const validate = (): boolean => {
+      clearErrors();
+      let valid = true;
+
+      const nombre   = (form.elements.namedItem("nombre")   as HTMLInputElement)?.value.trim();
+      const telefono = (form.elements.namedItem("telefono") as HTMLInputElement)?.value.trim();
+      const email    = (form.elements.namedItem("email")    as HTMLInputElement)?.value.trim();
+      const mensaje  = (form.elements.namedItem("mensaje")  as HTMLTextAreaElement)?.value.trim();
+
+      if (!nombre) {
+        showError("nombre", "El nombre es obligatorio");
+        valid = false;
+      }
+      if (!telefono) {
+        showError("telefono", "El WhatsApp es obligatorio");
+        valid = false;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError("email", "Ingresa un correo válido");
+        valid = false;
+      }
+      if (!mensaje) {
+        showError("mensaje", "Cuéntanos qué necesitas");
+        valid = false;
+      }
+
+      return valid;
+    };
+
+    // ── Submit ──
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!validate()) return;
+
+      const submitBtn  = form.querySelector<HTMLButtonElement>("#lf-submit");
+      const textEl     = form.querySelector<HTMLElement>(".lf-cta__text");
+      const loadingEl  = form.querySelector<HTMLElement>(".lf-cta__loading");
+      const arrowEl    = form.querySelector<HTMLElement>(".lf-cta__arrow");
+      const responseEl = form.querySelector<HTMLElement>("#lf-response");
+
+      if (submitBtn) submitBtn.disabled = true;
+      if (textEl)    textEl.classList.add("hidden");
+      if (loadingEl) loadingEl.classList.remove("hidden");
+      if (arrowEl)   arrowEl.classList.add("hidden");
+
+      const formData = new FormData(form);
+      const payload = {
+        ...Object.fromEntries(formData.entries()),
+        // Campos extra de tracking
+        servicio:     landing === "software"     ? "Software a Medida"
+                    : landing === "apps-moviles" ? "Aplicación Móvil"
+                    : "Otro",
+        landing,
+        utm_source:   utms.utm_source,
+        utm_campaign: utms.utm_campaign,
+        utm_medium:   utms.utm_medium,
+        gclid:        utms.gclid,
+        origin_url:   window.location.href,
+      };
+
+      try {
+        if (!SCRIPT_URL) {
+          // Simulación sin endpoint
+          await new Promise(r => setTimeout(r, 1200));
+          if (responseEl) {
+            responseEl.textContent = "🎉 ¡Recibido! Te contactaremos en menos de 24 horas.";
+            responseEl.className = "lf-response success";
+          }
+          form.reset();
+        } else {
+          await fetch(SCRIPT_URL, {
+            method:  "POST",
+            mode:    "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body:    JSON.stringify(payload),
+          });
+
+          if (responseEl) {
+            responseEl.textContent = "🎉 ¡Recibido! Te contactaremos en menos de 24 horas.";
+            responseEl.className = "lf-response success";
+          }
+          form.reset();
+        }
+      } catch {
+        if (responseEl) {
+          responseEl.textContent = "Error al enviar. Escríbenos directamente por WhatsApp.";
+          responseEl.className = "lf-response error";
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (textEl)    textEl.classList.remove("hidden");
+        if (loadingEl) loadingEl.classList.add("hidden");
+        if (arrowEl)   arrowEl.classList.remove("hidden");
+        if (responseEl) responseEl.classList.remove("hidden");
+      }
+    });
+  };
+
+  initLandingForm();
+  document.addEventListener("astro:after-swap", initLandingForm);
+</script>
